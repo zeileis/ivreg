@@ -44,18 +44,18 @@ na.remove <- function(x){
 #' @export
 #'
 #' @description The work-horse 2SLS function, not normally meant to be called directly
-#' but rather via \code{\link{ivreg}}.
+#' but rather via \code{\link{ivreg2}}.
 #'
 #' @author John Fox \email{jfox@mcmaster.ca}
 #'
-#' @seealso \code{\link{ivreg}}
+#' @seealso \code{\link{ivreg2}}
 #'
 #' @examples
-#' m <- with(Kmenta, fitivreg(Q, cbind(1, P, D), cbind(1, D, F, A)))
+#' m <- with(Kmenta, fitivreg2(Q, cbind(1, P, D), cbind(1, D, F, A)))
 #' names(m)
 #' m$coefficients # estimates
 #' sqrt(diag(m$vcov)) # standard errors
-fitivreg <- function(y, X, Z, wt=NULL, singular.ok=FALSE, qr=TRUE){
+fitivreg2 <- function(y, X, Z, wt=NULL, singular.ok=FALSE, qr=TRUE){
 
   # handle NAs
 
@@ -153,8 +153,8 @@ fitivreg <- function(y, X, Z, wt=NULL, singular.ok=FALSE, qr=TRUE){
 #' @param qr Include the QR decompositions for the two stages in the returned object.
 #' @param ... Not used.
 #'
-#' @return An object of class \code{"ivreg"}, with the following elements in addition to
-#' those returned by \code{\link{fitivreg}}:
+#' @return An object of class \code{"ivreg2"}, with the following elements in addition to
+#' those returned by \code{\link{fitivreg2}}:
 #' \describe{
 #'   \item{\code{response.name}}{a character string with the name of the response
 #'   variable or possibly the character representation of an expression evaluating
@@ -181,23 +181,23 @@ fitivreg <- function(y, X, Z, wt=NULL, singular.ok=FALSE, qr=TRUE){
 #'   }
 #'
 #' @description   Provides a formula-based interface for 2SLS estimation of
-#' a linear model. Computations are done by \code{\link{fitivreg}}. The returned object has
+#' a linear model. Computations are done by \code{\link{fitivreg2}}. The returned object has
 #' the necessary information for computing a variety of
 #' \link[=2SLS_Diagnostics]{regression diagnostics}.
 #'
 #' @author John Fox \email{jfox@mcmaster.ca}
 #'
-#' @seealso \code{\link{fitivreg}}, \code{\link[stats]{lm}}, \code{\link[stats]{formula}}, \code{\link{2SLS_Methods}},
+#' @seealso \code{\link{fitivreg2}}, \code{\link[stats]{lm}}, \code{\link[stats]{formula}}, \code{\link{2SLS_Methods}},
 #' \code{\link{2SLS_Diagnostics}}
 #'
 #' @importFrom stats model.weights .getXlevels
 #' @export
 #'
 #' @examples
-#'summary(ivreg(Q ~ P + D, ~ D + F + A, data=Kmenta))     # demand equation
-#'summary(ivreg(Q ~ P + F + A, ~ D + F + A, data=Kmenta)) # supply equation
+#'summary(ivreg2(Q ~ P + D, ~ D + F + A, data=Kmenta))     # demand equation
+#'summary(ivreg2(Q ~ P + F + A, ~ D + F + A, data=Kmenta)) # supply equation
 #'
-ivreg <- function (formula, instruments=rhs(formula), data, subset, weights,
+ivreg2 <- function (formula, instruments=rhs(formula), data, subset, weights,
                     na.action=getOption("na.action"), contrasts = NULL,
                     singular.ok=FALSE, model=TRUE, x=TRUE, y=TRUE, qr=TRUE, ...){
   rhs <- function(formula) if (length(formula) == 3) formula[-2] else formula
@@ -226,7 +226,7 @@ ivreg <- function (formula, instruments=rhs(formula), data, subset, weights,
   y. <- mf[, response.name]
   X <- model.matrix(formula, data = mf, contrasts)
   names(y.) <- rownames(X)
-  result <- fitivreg(y., X, Z, w, singular.ok=singular.ok, qr=qr)
+  result <- fitivreg2(y., X, Z, w, singular.ok=singular.ok, qr=qr)
   result <- c(result, list(
     response.name            = response.name,
     formula                  = formula,
@@ -245,16 +245,16 @@ ivreg <- function (formula, instruments=rhs(formula), data, subset, weights,
     terms.instruments        = mt.instruments,
     model                    = if (model) mf else NULL
   ))
-  class(result) <- c("ivreg", "lm")
+  class(result) <- c("ivreg2", "lm")
   result
 }
 
 
-#' Methods for \code{"ivreg"} Objects
+#' Methods for \code{"ivreg2"} Objects
 #' @aliases 2SLS_Methods
-#' @description Various methods for processing \code{"ivreg"} objects; for diagnostic methods,
+#' @description Various methods for processing \code{"ivreg2"} objects; for diagnostic methods,
 #'   see \link{2SLS_Diagnostics}.
-#' @param object An object of class \code{"ivreg"}.
+#' @param object An object of class \code{"ivreg2"}.
 #' @param type Type of object desired, varies by method:
 #' \describe{
 #'   \item{\code{model.matrix}}{\code{"model"} (the default), \code{"instruments"}, or
@@ -268,17 +268,17 @@ ivreg <- function (formula, instruments=rhs(formula), data, subset, weights,
 #'
 #' @importFrom stats model.matrix
 #' @export
-#' @method model.matrix ivreg
-#' @seealso \code{\link{ivreg}}, \link{2SLS_Diagnostics},
+#' @method model.matrix ivreg2
+#' @seealso \code{\link{ivreg2}}, \link{2SLS_Diagnostics},
 #'   \code{\link[sandwich]{sandwich}}
 #' @examples
-#' kmenta.eq1 <- ivreg(Q ~ P + D, ~ D + F + A, data=Kmenta)
+#' kmenta.eq1 <- ivreg2(Q ~ P + D, ~ D + F + A, data=Kmenta)
 #' coef(kmenta.eq1) # estimates
 #' sqrt(diag(vcov(kmenta.eq1))) # std. errors
 #' summary(kmenta.eq1)
 #' summary(kmenta.eq1, vcov.=sandwich::sandwich) # sandwich SEs
 #' plot(fitted(kmenta.eq1), residuals(kmenta.eq1)) # residuals vs fitted values
-model.matrix.ivreg <- function(object, type=c("model", "instruments", "stage2"), ...){
+model.matrix.ivreg2 <- function(object, type=c("model", "instruments", "stage2"), ...){
   type <- match.arg(type)
   switch(type,
          model = object$model.matrix,
@@ -286,26 +286,26 @@ model.matrix.ivreg <- function(object, type=c("model", "instruments", "stage2"),
          stage2 = object$fitted.1)
 }
 
-#' @rdname model.matrix.ivreg
-#' @param model An object of class \code{"ivreg"} or \code{"influence.ivreg"}.
+#' @rdname model.matrix.ivreg2
+#' @param model An object of class \code{"ivreg2"} or \code{"influence.ivreg2"}.
 #' @importFrom car avPlot
 #' @export
-avPlot.ivreg <- function(model, ...){
+avPlot.ivreg2 <- function(model, ...){
   model$model.matrix <- model.matrix(model, type="stage2")
   NextMethod()
 }
 
-#' @rdname model.matrix.ivreg
+#' @rdname model.matrix.ivreg2
 #' @importFrom stats vcov
 #' @export
-vcov.ivreg <- function(object, ...) {
+vcov.ivreg2 <- function(object, ...) {
   object$vcov
 }
 
-#' @rdname model.matrix.ivreg
+#' @rdname model.matrix.ivreg2
 #' @importFrom stats residuals predict
 #' @export
-residuals.ivreg <- function(object, type=c("response", "stage1", "stage2", "working",
+residuals.ivreg2 <- function(object, type=c("response", "stage1", "stage2", "working",
                                           "deviance", "pearson", "partial"), ...){
   type <- match.arg(type)
   w <- object$weights
@@ -321,10 +321,10 @@ residuals.ivreg <- function(object, type=c("response", "stage1", "stage2", "work
   naresid(object$na.action, res)
 }
 
-#' @rdname model.matrix.ivreg
+#' @rdname model.matrix.ivreg2
 #' @importFrom stats fitted
 #' @export
-fitted.ivreg <- function(object, type=c("model", "stage1", "stage2"), ...){
+fitted.ivreg2 <- function(object, type=c("model", "stage1", "stage2"), ...){
   type <- match.arg(type)
   switch(type,
          model  = napredict(object$na.action, object$fitted),
@@ -332,12 +332,12 @@ fitted.ivreg <- function(object, type=c("model", "stage1", "stage2"), ...){
          stage2 = napredict(object$na.action, object$fitted.2))
 }
 
-#' @rdname model.matrix.ivreg
-#' @param x An object of class \code{"ivreg"}.
+#' @rdname model.matrix.ivreg2
+#' @param x An object of class \code{"ivreg2"}.
 #' @param digits Digits to print.
 #' @importFrom stats coef
 #' @export
-print.ivreg <- function (x, digits = getOption("digits") - 2, ...) {
+print.ivreg2 <- function (x, digits = getOption("digits") - 2, ...) {
   cat("Call:\n")
   print(x$call)
   cat("\n")
@@ -347,14 +347,14 @@ print.ivreg <- function (x, digits = getOption("digits") - 2, ...) {
   invisible(x)
 }
 
-#' @rdname model.matrix.ivreg
+#' @rdname model.matrix.ivreg2
 #' @param vcov. Function to compute the coefficient covariance matrix or the matrix itself;
 #'   the default is the function \code{vcov}; set, e.g., to \code{\link[sandwich]{sandwich}}
 #'   (from the \pkg{sandwich} package) to get robust coefficient standard errors.
 #'
 #' @importFrom stats pt getCall formula
 #' @export
-summary.ivreg <- function (object, digits = getOption("digits") - 2, vcov.=vcov, ...){
+summary.ivreg2 <- function (object, digits = getOption("digits") - 2, vcov.=vcov, ...){
   df <- df.residual(object)
   std.errors <- if (is.function(vcov.)) {
     sqrt(diag(V <- vcov.(object)))
@@ -380,15 +380,15 @@ summary.ivreg <- function (object, digits = getOption("digits") - 2, vcov.=vcov,
                  coefficients = table, digits = digits, sigma = object$s,
                  df = df, dfn=length(b), na.action=object$na.action, r2=Rsq(object),
                  r2adj=Rsq(object, adjust=TRUE), F=F, pval=pval)
-  class(result) <- "summary.ivreg"
+  class(result) <- "summary.ivreg2"
   result
 }
 
-#' @rdname model.matrix.ivreg
-#' @method print summary.ivreg
+#' @rdname model.matrix.ivreg2
+#' @method print summary.ivreg2
 #' @importFrom stats printCoefmat
 #' @export
-print.summary.ivreg <- function (x, ...) {
+print.summary.ivreg2 <- function (x, ...) {
   digits <- x$digits
   cat("Call:\n")
   print(x$call)
@@ -410,16 +410,16 @@ print.summary.ivreg <- function (x, ...) {
   invisible(x)
 }
 
-#' @rdname model.matrix.ivreg
-#' @param model.2 A second object of class \code{"ivreg"}.
+#' @rdname model.matrix.ivreg2
+#' @param model.2 A second object of class \code{"ivreg2"}.
 #' @param s2 the estimated error variance (optional);
 #'   if not specified, taken from the larger model.
 #' @param dfe the degrees of freedom for error (optional);
 #'   if not specified, taken from the larger model.
 #' @importFrom stats anova pf
 #' @export
-anova.ivreg <- function(object, model.2, s2, dfe, ...){
-  if (!inherits(model.2, "ivreg")) stop('requires two models of class ivreg')
+anova.ivreg2 <- function(object, model.2, s2, dfe, ...){
+  if (!inherits(model.2, "ivreg2")) stop('requires two models of class ivreg2')
   s2.1 <- object$s^2
   dfe.1 <- df.residual(object)
   s2.2 <- model.2$s^2
@@ -460,14 +460,14 @@ anova.ivreg <- function(object, model.2, s2, dfe, ...){
             class = c("anova", "data.frame"))
 }
 
-#' @rdname model.matrix.ivreg
+#' @rdname model.matrix.ivreg2
 #' @param formula. Updated model formula.
 #' @param instruments. Updated one-sided formula for the instrumental variables.
 #' @param evaluate If \code{TRUE} (the default) evaluate the updated model;
 #'   if \code{FALSE} simply generate the updated call.
 #' @importFrom stats update
 #' @export
-update.ivreg <- function (object, formula., instruments., ..., evaluate=TRUE){
+update.ivreg2 <- function (object, formula., instruments., ..., evaluate=TRUE){
   # adapted from stats::update.default()
   if (is.null(call <- getCall(object)))
     stop("need an object with call component")
@@ -489,10 +489,10 @@ update.ivreg <- function (object, formula., instruments., ..., evaluate=TRUE){
   else call
 }
 
-#' @rdname model.matrix.ivreg
+#' @rdname model.matrix.ivreg2
 #' @importFrom sandwich bread
 #' @export
-bread.ivreg <- function(x, ...){
+bread.ivreg2 <- function(x, ...){
   x$vcov*x$n/x$sigma^2
 }
 
@@ -504,10 +504,10 @@ diagprod <- function(d, X){
   d*X
 }
 
-#' @rdname model.matrix.ivreg
+#' @rdname model.matrix.ivreg2
 #' @importFrom sandwich estfun
 #' @export
-estfun.ivreg <- function (x, ...) {
+estfun.ivreg2 <- function (x, ...) {
   if (x$rank < x$p) stop("second stage model matrix is of deficient rank")
   w <- weights(x)
   if (is.null(w)) w <- 1
@@ -522,7 +522,7 @@ estfun.ivreg <- function (x, ...) {
 #' @export
 #'
 #' @examples
-#' Rsq(ivreg(Q ~ P + D, ~ D + F + A, data=Kmenta))
+#' Rsq(ivreg2(Q ~ P + D, ~ D + F + A, data=Kmenta))
 Rsq <- function(model, ...){
   UseMethod("Rsq")
 }

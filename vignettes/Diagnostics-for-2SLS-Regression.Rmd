@@ -1,7 +1,7 @@
 ---
 title: "Diagnostics for 2SLS Regression"
 author: "John Fox"
-date: "2019-08-17"
+date: "2019-10-14"
 bibliography: Diagnostics-for-2SLS-Regression.bib
 biblio-style: "apalike"
 output: rmarkdown::html_vignette
@@ -17,9 +17,9 @@ knitr::opts_chunk$set(echo = TRUE, comment=NA, prompt=TRUE, fig.height=4, fig.wi
 
 ## Introduction
 
-The **ivreg** package extends a variety of standard numeric and graphical regression  diagnostics to linear models fit by *two-stage least-squares (2SLS)* regression, a commonly employed method of instrumental-variables estimation for potentially overidentified structural equations in which there are endogenous regressors. The `fitivreg()` function in the package computes the 2SLS estimator employing a low-level interface not generally intended for direct use, and returns a list containing quantities that faciliate the computation of various diagnostics. The `ivreg()` function provides a user-friendly formula-based interface to `fitivreg()`.
+The **ivreg** package extends a variety of standard numeric and graphical regression  diagnostics to linear models fit by *two-stage least-squares (2SLS)* regression, a commonly employed method of instrumental-variables estimation for potentially overidentified structural equations in which there are endogenous regressors. The `fitivreg2()` function in the package computes the 2SLS estimator employing a low-level interface not generally intended for direct use, and returns a list containing quantities that faciliate the computation of various diagnostics. The `ivreg2()` function provides a user-friendly formula-based interface to `fitivreg2()`.
 
-`ivreg()` is broadly similar in its usage to the `tsls()` function in the **sem** package and the `ivreg()` function in the **AER** package. Its raison-d'etre therefore is the provision of regression diagnostics. The subject of this vignette is the rationale for the various diagnostics and the use of functions in the **ivreg** package to compute them, along with functions in other packages, specifically the base-R **stats** package and the **car** and **effects** packages [@FoxWeisberg2019], that work with the `"ivreg"` objects produced by `ivreg()`.
+`ivreg2()` is broadly similar in its usage to the `tsls()` function in the **sem** package and the `ivreg()` function in the **AER** package. Its raison-d'etre therefore is the provision of regression diagnostics. The subject of this vignette is the rationale for the various diagnostics and the use of functions in the **ivreg** package to compute them, along with functions in other packages, specifically the base-R **stats** package and the **car** and **effects** packages [@FoxWeisberg2019], that work with the `"ivreg2"` objects produced by `ivreg2()`.
 
 
 ## Review of 2SLS Estimation
@@ -101,7 +101,7 @@ As mentioned, @BelsleyKuhWelsch1980 recommend using hatvalues from the second-st
 
 ### Unusual-Data Diagnosics in the **ivreg** Package
 
-The **ivreg** package implements unusual-data diagnostics for 2SLS regression (i.e., class `"ivreg"` objects produced by `ivreg()`) as methods for various generic functions in the **stats** and **car** packages; these functions include `cooks.distance()`, `dfbeta()`, `hatvalues()`, `influence()`, and `rstudent()` in **stats**, and `avPlot()` and `qqPlot()` in **car**. In particular, `influence.ivreg()` returns an object containing several diagnostic statistics, and it is thus more efficient to use the `influence()` function than to compute the various diagnostics separately. Methods provided for class `"influence.ivreg"` objects include `cooks.distance()`, `dfbeta()`, `hatvalues()`, `qqPlot()`, and `rstudent()`.
+The **ivreg** package implements unusual-data diagnostics for 2SLS regression (i.e., class `"ivreg2"` objects produced by `ivreg2()`) as methods for various generic functions in the **stats** and **car** packages; these functions include `cooks.distance()`, `dfbeta()`, `hatvalues()`, `influence()`, and `rstudent()` in **stats**, and `avPlot()` and `qqPlot()` in **car**. In particular, `influence.ivreg2()` returns an object containing several diagnostic statistics, and it is thus more efficient to use the `influence()` function than to compute the various diagnostics separately. Methods provided for class `"influence.ivreg2"` objects include `cooks.distance()`, `dfbeta()`, `hatvalues()`, `qqPlot()`, and `rstudent()`.
 
 The package also provides methods for various standard R regression-model generics, including `anova()` (for model comparison), `fitted()` (for computing fitted values for the model or for the first- or second-stage regression), `model.matrix()` (again, for the model or for the first- or second-stage regression), `print()`, `residuals()` (of several kinds), `summary()`, `update()`, and `vcov()`. The `summary()` method makes provision for a user-specified coefficient covariance matrix or for a function to compute the coefficient covariance matrix, such as `sandwich()` in the **sandwich** package, to compute robust coefficient covariances. The latter is supported by methods for the `bread()` and `estfun()` generics defined in **sandwich**.
 
@@ -146,17 +146,17 @@ P &= 85.00 + 0.75 D - 0.50 F - 0.90 A + \nu_2
 
 Kmenta independently sampled 20 values of $\delta_1$ and $\delta_2$, each from $N(0, 1)$, and then set $\nu_1 = 2 \delta_1$ and $\nu_2 = -0.5 \nu_1 + \delta_2$.
 
-The structural equations are estimated as follows by the `ivreg()` function [compare @Kmenta1986, p. 686]:
+The structural equations are estimated as follows by the `ivreg2()` function [compare @Kmenta1986, p. 686]:
 ```{r}
-deq <- ivreg(Q ~ P + D, ~ D + F + A, data=Kmenta)     # demand equation
+deq <- ivreg2(Q ~ P + D, ~ D + F + A, data=Kmenta)     # demand equation
 summary(deq)
 ```
 ```{r}
-seq <- ivreg(Q ~ P + F + A, ~ D + F + A, data=Kmenta) # supply equation
+seq <- ivreg2(Q ~ P + F + A, ~ D + F + A, data=Kmenta) # supply equation
 summary(seq)
 ```
 
-`"ivreg"` objects inherit from class `"lm"`, and many methods for `"lm"` objects work properly for `"ivreg"` objects. For example, the `plot()` method for `"lm"` objects produces interpretable plots, here for the 2SLS fit for the demand equation in Kmenta's model:
+`"ivreg2"` objects inherit from class `"lm"`, and many methods for `"lm"` objects work properly for `"ivreg2"` objects. For example, the `plot()` method for `"lm"` objects produces interpretable plots, here for the 2SLS fit for the demand equation in Kmenta's model:
 ```{r fig.height=8, fig.width=8}
 par(mfrow=c(2, 2))
 plot(deq)
@@ -240,7 +240,7 @@ in our case by 2SLS regression, obtaining estimated regression coefficients $a^\
 
 ### Diagnosing Nonlinearity: An Example
 
-I turn once more to the demand equation for Kmenta's data and model to illustrate component-plus-residual plots, and once more the data are well behaved. `"ivreg"` objects inherit the `"lm"` class, and the `"lm"` method for the `crPlot()` function in the **car** package works with these objects. In particular, `crPlots()` constructs component-plus-residual plots for all of the numeric explanatory variables in an additive regression equation. For example,
+I turn once more to the demand equation for Kmenta's data and model to illustrate component-plus-residual plots, and once more the data are well behaved. `"ivreg2"` objects inherit the `"lm"` class, and the `"lm"` method for the `crPlot()` function in the **car** package works with these objects. In particular, `crPlots()` constructs component-plus-residual plots for all of the numeric explanatory variables in an additive regression equation. For example,
 ```{r fig.height=4, fig.width=8}
 crPlots(deq, smooth=list(span=1))
 ```
@@ -308,7 +308,7 @@ Remedies for nonconstant variance in 2SLS regression are similar to those in lea
 
 * I've already suggested that if the error variance increases (or decreases) with the level of the response, and if the response is positive, then we might be able to stabilize the error variance by power-transforming the response. 
 
-* If, alternatively, we know the variance of the errors up to a constant of proportionality, then we can use inverse-variance weights for the 2SLS estimator. The `ivreg()` function supports weighted 2SLS regression, and the diagnostics in the **ivreg** package work with weighted 2SLS fits  (see the next section).
+* If, alternatively, we know the variance of the errors up to a constant of proportionality, then we can use inverse-variance weights for the 2SLS estimator. The `ivreg2()` function supports weighted 2SLS regression, and the diagnostics in the **ivreg** package work with weighted 2SLS fits  (see the next section).
 
 * Finally, we can employ a *"sandwich" estimator* of the coefficient covariance matrix in 2SLS to correct standard errors for nonconstant error variance, much as in least-squares regression as proposed by @Huber1967 and @White1980 [also see @LongErvin2000]. 
 
@@ -366,7 +366,7 @@ Then the *weighted 2SLS* estimator is
 $$
 b_{\mathrm{W2SLS}} = [X^T W Z(Z^T W Z)^{-1} Z^T W X]^{-1} X^T W Z (Z^T W Z)^{-1} Z^{T} W y
 $$
-Alternatively, we can treat the two stages of 2SLS as *weighted least squares (WLS)* problems, in each stage minimizing the weighted sum of squared residuals. The `ivreg()` function computes the weighted 2SLS estimator in this manner.
+Alternatively, we can treat the two stages of 2SLS as *weighted least squares (WLS)* problems, in each stage minimizing the weighted sum of squared residuals. The `ivreg2()` function computes the weighted 2SLS estimator in this manner.
 
 Phillips's updating formulas for 2SLS regression could also be modified for the weighted case, but a simpler approach (which is evident in the formula for $b_{\mathrm{W2SLS}}$ above) is to convert the weighted 2SLS problem into an unweighted problem, by transforming the data to constant variance using $W^{1/2} = \mathrm{diag}\{\sqrt{w_i}\}$, the Cholesky square root of $W$. The square root of $W$ is particularly simple because $W$ is diagonal. Then in Phillips's updating formulas, we replace $y$ with $y^* = W^{1/2}y$, $X$ with $X^* = W^{1/2}X$, and $Z$ with $Z^* = W^{1/2}Z$.
 

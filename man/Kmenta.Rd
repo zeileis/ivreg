@@ -24,6 +24,6 @@ to illustrate estimation of a simultaneous-equation econometric model. The data
 are an annual time-series for the U.S. economy from 1922 to 1941. The values of the
 exogenous variables `D`, and `F`, and `A` are real, while those of the endogenous
 variables are simulated according to the linear simultaneous equation model fit in the help
-page for \code{link{ivreg}}.
+page for \code{link{ivreg2}}.
 }
 \keyword{datasets}

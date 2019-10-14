@@ -1,8 +1,8 @@
 
-#' Deletion Diagnostic Methods for \code{"ivreg"} Objects
+#' Deletion Diagnostic Methods for \code{"ivreg2"} Objects
 #'
 #' @aliases 2SLS_Diagnostics
-#' @param model A \code{"ivreg"} or \code{"influence.ivreg"} object.
+#' @param model A \code{"ivreg2"} or \code{"influence.ivreg2"} object.
 #' @param sigma. If \code{TRUE} (the default for 1000 or fewer cases), the deleted value
 #' of the residual standard deviation is computed for each case; if \code{FALSE}, the
 #' overall residual standard deviation is used to compute other deletion diagnostics.
@@ -15,7 +15,7 @@
 #' multiplied by the average hatvalue from the second stage.
 #' @param ... arguments to be passed down.
 #'
-#' @return In the case of \code{influence.ivreg}, an object of class \code{"influence.ivreg"}
+#' @return In the case of \code{influence.ivreg2}, an object of class \code{"influence.ivreg2"}
 #' with the following components:
 #' \describe{
 #' \item{\code{coefficients}}{the estimated regression coefficients}
@@ -28,13 +28,13 @@
 #' \item{\code{rstudent}}{Studentized residuals}
 #' \item{\code{df.residual}}{residual degrees of freedom}
 #' }
-#' In the case of other methods, such as \code{rstudent.ivreg} or
-#' \code{rstudent.influence.ivreg}, the corresponding diagnostic statistics.
+#' In the case of other methods, such as \code{rstudent.ivreg2} or
+#' \code{rstudent.influence.ivreg2}, the corresponding diagnostic statistics.
 #'
 #' @description Methods for computing deletion diagnostics for 2SLS regression.
 #' It's generally more efficient to compute the diagnostics via the \code{influence}
 #' method and then to extract the various specific diagnostics with the methods for
-#' \code{"influence.ivreg"} objects. Other diagnostics for linear models, such as
+#' \code{"influence.ivreg2"} objects. Other diagnostics for linear models, such as
 #' added-variable plots (\code{\link[car]{avPlots}}) and component-plus-residual
 #' plots (\code{\link[car]{crPlots}}), also work, as do effect plots
 #' (e.g., \code{\link[effects]{predictorEffects}}) with residuals (see the examples below).
@@ -45,12 +45,12 @@
 #'
 #' @importFrom stats influence
 #' @export
-#' @seealso \code{\link{ivreg}}, \link{2SLS_Methods}, \code{\link[car]{avPlots}},
+#' @seealso \code{\link{ivreg2}}, \link{2SLS_Methods}, \code{\link[car]{avPlots}},
 #'   \code{\link[car]{crPlots}}, \code{\link[effects]{predictorEffects}},
 #'   \code{\link[car]{qqPlot}}, \code{\link[car]{influencePlot}},
 #'   \code{\link[car]{infIndexPlot}}
 #' @examples
-#' kmenta.eq1 <- ivreg(Q ~ P + D, ~ D + F + A, data=Kmenta)
+#' kmenta.eq1 <- ivreg2(Q ~ P + D, ~ D + F + A, data=Kmenta)
 #' car::avPlots(kmenta.eq1)
 #' car::crPlots(kmenta.eq1)
 #' car::influencePlot(kmenta.eq1)
@@ -59,7 +59,7 @@
 #' if (require(effects)){
 #'   plot(effects::predictorEffects(kmenta.eq1, residuals=TRUE))
 #' }
-influence.ivreg <- function(model, sigma. = n <= 1e3, type=c("stage2", "both"), ...){
+influence.ivreg2 <- function(model, sigma. = n <= 1e3, type=c("stage2", "both"), ...){
 
   type <- match.arg(type)
 
@@ -144,42 +144,42 @@ influence.ivreg <- function(model, sigma. = n <= 1e3, type=c("stage2", "both"), 
                  hatvalues = naresid(na.action, hatvalues),
                  rstudent = naresid(na.action, rstudent),
                  df.residual = df.residual(model))
-  class(result) <- "influence.ivreg"
+  class(result) <- "influence.ivreg2"
   result
 }
 
-#' @rdname influence.ivreg
+#' @rdname influence.ivreg2
 #' @importFrom stats rstudent
 #' @export
-rstudent.ivreg <- function(model, ...) {
+rstudent.ivreg2 <- function(model, ...) {
   influence(model)$rstudent
 }
 
-#' @rdname influence.ivreg
+#' @rdname influence.ivreg2
 #' @importFrom stats cooks.distance
-#' @method cooks.distance ivreg
+#' @method cooks.distance ivreg2
 #' @export
-cooks.distance.ivreg <- function(model, ...) {
+cooks.distance.ivreg2 <- function(model, ...) {
   influence(model)$cookd
 }
 
-#' @rdname influence.ivreg
+#' @rdname influence.ivreg2
 #' @export
-dfbeta.influence.ivreg <- function(model, ...) {
+dfbeta.influence.ivreg2 <- function(model, ...) {
   model$dfbeta
 }
 
-#' @rdname influence.ivreg
+#' @rdname influence.ivreg2
 #' @importFrom stats dfbeta
 #' @export
-dfbeta.ivreg <- function(model, ...) {
+dfbeta.ivreg2 <- function(model, ...) {
   influence(model)$dfbeta
 }
 
-#' @rdname influence.ivreg
+#' @rdname influence.ivreg2
 #' @importFrom stats hatvalues lm.influence
 #' @export
-hatvalues.ivreg <- function(model, type=c("stage2", "both", "maximum"), ...){
+hatvalues.ivreg2 <- function(model, type=c("stage2", "both", "maximum"), ...){
   type <- match.arg(type)
   hatvalues <- if (type == "stage2") NextMethod() else {
     n <- model$n
@@ -203,32 +203,32 @@ hatvalues.ivreg <- function(model, type=c("stage2", "both", "maximum"), ...){
   hatvalues
 }
 
-#' @rdname influence.ivreg
-#' @method rstudent influence.ivreg
+#' @rdname influence.ivreg2
+#' @method rstudent influence.ivreg2
 #' @export
-rstudent.influence.ivreg <- function(model, ...) {
+rstudent.influence.ivreg2 <- function(model, ...) {
   model$rstudent
 }
 
-#' @rdname influence.ivreg
-#' @method hatvalues influence.ivreg
+#' @rdname influence.ivreg2
+#' @method hatvalues influence.ivreg2
 #' @export
-hatvalues.influence.ivreg <- function(model, ...) {
+hatvalues.influence.ivreg2 <- function(model, ...) {
   model$hatvalues
 }
 
-#' @rdname influence.ivreg
+#' @rdname influence.ivreg2
 #' @export
-#' @method cooks.distance influence.ivreg
-cooks.distance.influence.ivreg <- {
+#' @method cooks.distance influence.ivreg2
+cooks.distance.influence.ivreg2 <- {
   function(model, ...) model$cookd
 }
 
-#' @rdname influence.ivreg
+#' @rdname influence.ivreg2
 #' @importFrom car qqPlot
 #' @importFrom graphics par
 #' @export
-qqPlot.ivreg <- function(x,
+qqPlot.ivreg2 <- function(x,
                         ylab=paste("Studentized Residuals(",deparse(substitute(x)), ")", sep=""),
                         distribution=c("t", "norm"), ...){
   distribution <- match.arg(distribution)
@@ -240,13 +240,13 @@ qqPlot.ivreg <- function(x,
   }
 }
 
-#' @rdname influence.ivreg
-#' @method qqPlot influence.ivreg
-#' @param x A \code{"ivreg"} or \code{"influence.ivreg"} object.
+#' @rdname influence.ivreg2
+#' @method qqPlot influence.ivreg2
+#' @param x A \code{"ivreg2"} or \code{"influence.ivreg2"} object.
 #' @param distribution \code{"t"} (the default) or \code{"norm"}.
 #' @param ylab The vertical axis label.
 #' @export
-qqPlot.influence.ivreg <- function(x,
+qqPlot.influence.ivreg2 <- function(x,
                                   ylab=paste("Studentized Residuals(",deparse(substitute(x)), ")", sep=""),
                                   distribution=c("t", "norm"), ...){
   distribution <- match.arg(distribution)
@@ -258,18 +258,18 @@ qqPlot.influence.ivreg <- function(x,
   }
 }
 
-#' @rdname influence.ivreg
-#' @method influencePlot ivreg
+#' @rdname influence.ivreg2
+#' @method influencePlot ivreg2
 #' @importFrom car influencePlot
 #' @export
-influencePlot.ivreg <- function(model, ...){
+influencePlot.ivreg2 <- function(model, ...){
   influencePlot(influence(model), ...)
 }
 
-#' @rdname influence.ivreg
-#' @method influencePlot influence.ivreg
+#' @rdname influence.ivreg2
+#' @method influencePlot influence.ivreg2
 #' @export
-influencePlot.influence.ivreg <- function(model, ...){
+influencePlot.influence.ivreg2 <- function(model, ...){
   if (length(class(model)) == 1) {
     class(model) <- c(class(model), "lm")
     influencePlot(model)
@@ -277,18 +277,18 @@ influencePlot.influence.ivreg <- function(model, ...){
   else NextMethod()
 }
 
-#' @rdname influence.ivreg
-#' @method infIndexPlot ivreg
+#' @rdname influence.ivreg2
+#' @method infIndexPlot ivreg2
 #' @export
-infIndexPlot.ivreg <- function(model, ...){
+infIndexPlot.ivreg2 <- function(model, ...){
   infIndexPlot(influence(model), ...)
 }
 
-#' @rdname influence.ivreg
-#' @method infIndexPlot influence.ivreg
+#' @rdname influence.ivreg2
+#' @method infIndexPlot influence.ivreg2
 #' @importFrom car infIndexPlot
 #' @export
-infIndexPlot.influence.ivreg <- function(model, ...){
+infIndexPlot.influence.ivreg2 <- function(model, ...){
   if (length(class(model)) == 1) {
     class(model) <- c(class(model), "lm")
     infIndexPlot(model, ...)
@@ -296,10 +296,10 @@ infIndexPlot.influence.ivreg <- function(model, ...){
   else NextMethod()
 }
 
-#' @rdname influence.ivreg
-#' @method model.matrix influence.ivreg
-#' @param object An \code{"influence.ivreg"} object.
+#' @rdname influence.ivreg2
+#' @method model.matrix influence.ivreg2
+#' @param object An \code{"influence.ivreg2"} object.
 #' @export
-model.matrix.influence.ivreg <- function(object, ...){
+model.matrix.influence.ivreg2 <- function(object, ...){
   object$model
 }
