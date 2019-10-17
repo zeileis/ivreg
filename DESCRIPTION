@@ -1,17 +1,20 @@
 Package: ivreg
 Type: Package
 Title: Two-Stage Least-Squares Regression With Diagnostics
-Version: 0.1-0
-Author: John Fox
+Version: 0.2-0
+Author: John Fox and Achim Zeileis
 Maintainer: John Fox <jfox@mcmaster.ca>
 Description: Two-stage least-squares regression for linear models, and related functions for computing and graphing a wide variety of standard regression diagnostics.
 License: GPL (>= 2)
 Depends: R (>= 3.5.0)
 Imports: car, 
+    Formula,
+    lmtest,
     sandwich, 
     stats,
     utils
 Suggests: 
+    AER,
     effects,
     testthat,
     knitr,
