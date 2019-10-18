@@ -83,6 +83,7 @@ ivreg.fit <- function(x, y, z, weights, offset, ...)
     # pz <- z %*% chol2inv(auxreg$qr$qr) %*% t(z)
     colnames(xz) <- colnames(x)
   } else {
+    auxreg <- NULL
     xz <- x
     # pz <- diag(NROW(x))
     # colnames(pz) <- rownames(pz) <- rownames(x)
@@ -112,6 +113,8 @@ ivreg.fit <- function(x, y, z, weights, offset, ...)
     weights = weights,
     offset = if(identical(offset, rep(0, n))) NULL else offset,
     n = n,
+    p = p,
+    q = ncol(z),
     nobs = if(is.null(weights)) n else sum(weights > 0),
     rank = fit$rank,
     df.residual = fit$df.residual,
@@ -119,7 +122,10 @@ ivreg.fit <- function(x, y, z, weights, offset, ...)
     sigma = sqrt(rss/fit$df.residual), ## NOTE: Stata divides by n here and uses z tests rather than t tests...
     # hatvalues = hat,
     x = xz,
-    qr = fit$qr
+    qr = fit$qr,
+    qr.1 = auxreg$qr,
+    rank.1 = auxreg$rank,
+    coefficients.1 = coef(auxreg)
   )
   
   return(rval)

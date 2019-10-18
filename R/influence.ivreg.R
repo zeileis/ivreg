@@ -108,7 +108,7 @@ influence.ivreg <- function(model, sigma. = n <= 1e3, type=c("stage2", "both"), 
   r <- XtZ %*% ZtZinv %*% t(Z)
   XfXfinv <- solve(crossprod(X.fit))
 
-  n <- model$nobs
+  n <- model$n
   p <- length(b)  # model$p
   dfbeta <- matrix(0, n, p)
   rownames(dfbeta) <- rnames
@@ -199,7 +199,8 @@ hatvalues.ivreg <- function(model, type=c("stage2", "both", "maximum"), ...){
     mean2 <- p/n
     hat.2 <- lm.influence(model)$hat/mean2
     model[c("qr", "rank", "residuals", "coefficients")] <-
-      list(model$qr.1, model$rank.1, model$residuals.1, model$coefficients.1)
+      list(model$qr.1, model$rank.1, na.omit(residuals(model, type="projected")), 
+           model$coefficients.1)
     hat.1 <- lm.influence(model)$hat/mean1
     hat <- if (type == "both") {
       sqrt(hat.1*hat.2)
