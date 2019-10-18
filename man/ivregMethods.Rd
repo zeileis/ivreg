@@ -5,7 +5,6 @@
 \alias{ivregMethods}
 \alias{bread.ivreg}
 \alias{estfun.ivreg}
-\alias{hatvalues.ivreg}
 \alias{terms.ivreg}
 \alias{model.matrix.ivreg}
 \alias{predict.ivreg}
@@ -14,6 +13,9 @@
 \alias{print.summary.ivreg}
 \alias{anova.ivreg}
 \alias{update.ivreg}
+\alias{residuals.ivreg}
+\alias{Effect.ivreg}
+\alias{formula.ivreg}
 \title{Methods for \code{"ivreg"} Objects}
 \usage{
 \method{vcov}{ivreg}(object, ...)
@@ -22,14 +24,13 @@
 
 \method{estfun}{ivreg}(x, ...)
 
-\method{hatvalues}{ivreg}(model, ...)
-
 \method{terms}{ivreg}(x, component = c("regressors", "instruments"), ...)
 
-\method{model.matrix}{ivreg}(object, component = c("projected",
-  "regressors", "instruments"), ...)
+\method{model.matrix}{ivreg}(object, component = c("regressors",
+  "projected", "instruments"), ...)
 
-\method{predict}{ivreg}(object, newdata, na.action = na.pass, ...)
+\method{predict}{ivreg}(object, newdata, type = c("response", "terms"),
+  na.action = na.pass, ...)
 
 \method{print}{ivreg}(x, digits = max(3, getOption("digits") - 3), ...)
 
@@ -42,6 +43,14 @@
 \method{anova}{ivreg}(object, object2, test = "F", vcov. = NULL, ...)
 
 \method{update}{ivreg}(object, formula., ..., evaluate = TRUE)
+
+\method{residuals}{ivreg}(object, type = c("response", "projected",
+  "regressors", "working", "deviance", "pearson", "partial"), ...)
+
+\method{Effect}{ivreg}(focal.predictors, mod, ...)
+
+\method{formula}{ivreg}(x, component = c("regressors", "projected",
+  "instruments"), ...)
 }
 \arguments{
 \item{object, object2, model}{An object of class \code{"ivreg"}.}
@@ -54,6 +63,10 @@
 for \code{model.matrix}, \code{"projected"}, \code{"regressors"}, or \code{"instruments"}.}
 
 \item{newdata}{Values of predictors for which to obtain predicted values.}
+
+\item{type}{For \code{predict}, one of \code{"response"} (the default)  or \code{"terms"};
+for \code{residuals}, one of \code{"response"} (the default), \code{"projected"}, \code{"regressors"},
+\code{"working"}, \code{"deviance"}, \code{"pearson"}, or \code{"partial"}.}
 
 \item{na.action}{\code{na} method to apply to predictor values for predictions; default is \code{\link{na.pass}}.}
 
@@ -72,6 +85,10 @@ for \code{model.matrix}, \code{"projected"}, \code{"regressors"}, or \code{"inst
 \item{formula.}{To update model.}
 
 \item{evaluate}{If \code{TRUE}, the default, the updated model is evaluated; if \code{FALSE} the updated call is returned.}
+
+\item{focal.predictors}{Focal predictors for effect plot, see \code{\link[effects]{Effect}}.}
+
+\item{mod}{An object of class \code{"ivreg"}.}
 }
 \description{
 Various methods for processing \code{"ivreg"} objects; for diagnostic methods,

@@ -161,6 +161,6 @@ ivreg <- function(formula, instruments, data, subset, na.action, weights, offset
   if(x) rval$x <- list(regressors = X, instruments = Z, projected = rval$x)
     else rval$x <- NULL
       
-  class(rval) <- "ivreg"
+  class(rval) <- c("ivreg", "lm")
   return(rval)
 }

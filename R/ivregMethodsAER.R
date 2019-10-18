@@ -1,5 +1,7 @@
 #' Methods for \code{"ivreg"} Objects
-#' @aliases ivregMethods
+#' @aliases ivregMethods vcov.ivreg bread.ivreg estfun.ivreg terms.ivreg model.matrix.ivreg predict.ivreg
+#' print.ivreg summary.ivreg print.summary.ivreg anova.ivreg update.ivreg residuals.ivreg Effect.ivreg 
+#' formula.ivreg
 #' @description Various methods for processing \code{"ivreg"} objects; for diagnostic methods,
 #'   see ivregDiagnostics.
 #' @param object,object2,model An object of class \code{"ivreg"}.
@@ -23,17 +25,17 @@
 #' @importFrom car linearHypothesis
 #' @import Formula sandwich
 
-#' @rdname ivregMethodsAER
+#' @rdname ivregMethods
 #' @export
 vcov.ivreg <- function(object, ...)
   object$sigma^2 * object$cov.unscaled
 
-#' @rdname ivregMethodsAER
+#' @rdname ivregMethods
 #' @export    
 bread.ivreg <- function (x, ...) 
     x$cov.unscaled * x$nobs
 
-#' @rdname ivregMethodsAER
+#' @rdname ivregMethods
 #' @export
 estfun.ivreg <- function (x, ...) 
 {
@@ -48,25 +50,25 @@ estfun.ivreg <- function (x, ...)
     return(rval)
 }
 
-#' @rdname ivregMethodsAER
-#' @export
-hatvalues.ivreg <- function(model, ...) {
-  xz <- model.matrix(model, component = "projected")
-  x  <- model.matrix(model, component = "regressors")
-  z  <- model.matrix(model, component = "instruments")
-  solve_qr <- function(x) chol2inv(qr.R(qr(x)))
-  diag(x %*% solve_qr(xz) %*% t(x) %*% z %*% solve_qr(z) %*% t(z))
-}
+#' #' @rdname ivregMethods
+#' #' @export
+#' hatvalues.ivreg <- function(model, ...) {
+#'   xz <- model.matrix(model, component = "projected")
+#'   x  <- model.matrix(model, component = "regressors")
+#'   z  <- model.matrix(model, component = "instruments")
+#'   solve_qr <- function(x) chol2inv(qr.R(qr(x)))
+#'   diag(x %*% solve_qr(xz) %*% t(x) %*% z %*% solve_qr(z) %*% t(z))
+#' }
 
-#' @rdname ivregMethodsAER
+#' @rdname ivregMethods
 #' @export
 terms.ivreg <- function(x, component = c("regressors", "instruments"), ...)
   x$terms[[match.arg(component)]]
 
-#' @rdname ivregMethodsAER
+#' @rdname ivregMethods
 #' @export
-model.matrix.ivreg <- function(object, component = c("projected", "regressors", "instruments"), ...) {
-  component <- match.arg(component, c("projected", "regressors", "instruments"))
+model.matrix.ivreg <- function(object, component = c("regressors", "projected", "instruments"), ...) {
+  component <- match.arg(component)
   if(!is.null(object$x)) rval <- object$x[[component]]
     else if(!is.null(object$model)) {
       X <- model.matrix(object$terms$regressors, object$model, contrasts = object$contrasts$regressors)
@@ -92,22 +94,30 @@ model.matrix.ivreg <- function(object, component = c("projected", "regressors", 
   return(rval)
 }
 
-#' @rdname ivregMethodsAER
+#' @rdname ivregMethods
+#' @param type For \code{predict}, one of \code{"response"} (the default)  or \code{"terms"};
+#' for \code{residuals}, one of \code{"response"} (the default), \code{"projected"}, \code{"regressors"},
+#' \code{"working"}, \code{"deviance"}, \code{"pearson"}, or \code{"partial"}.
 #' @export
-predict.ivreg <- function(object, newdata, na.action = na.pass, ...)
+predict.ivreg <- function(object, newdata, type = c("response", "terms"), na.action = na.pass,  ...)
 {
-  if(missing(newdata)) fitted(object)
-  else {
-    mf <- model.frame(delete.response(object$terms$full), newdata,
-      na.action = na.action, xlev = object$levels)
-    X <- model.matrix(delete.response(object$terms$regressors), mf,
-      contrasts = object$contrasts$regressors)
-    ok <- !is.na(object$coefficients)
-    drop(X[, ok, drop = FALSE] %*% object$coefficients[ok])
+  type <- match.arg(type)
+  if (type == "response"){
+    if(missing(newdata)) fitted(object)
+    else {
+      mf <- model.frame(delete.response(object$terms$full), newdata,
+                        na.action = na.action, xlev = object$levels)
+      X <- model.matrix(delete.response(object$terms$regressors), mf,
+                        contrasts = object$contrasts$regressors)
+      ok <- !is.na(object$coefficients)
+      drop(X[, ok, drop = FALSE] %*% object$coefficients[ok])
+    } 
+  } else {
+    NextMethod()
   }
 }
 
-#' @rdname ivregMethodsAER
+#' @rdname ivregMethods
 #' @export
 print.ivreg <- function(x, digits = max(3, getOption("digits") - 3), ...)
 {
@@ -118,7 +128,7 @@ print.ivreg <- function(x, digits = max(3, getOption("digits") - 3), ...)
   invisible(x)
 }
 
-#' @rdname ivregMethodsAER
+#' @rdname ivregMethods
 #' @export
 summary.ivreg <- function(object, vcov. = NULL, df = NULL, diagnostics = FALSE, ...)
 {
@@ -189,7 +199,7 @@ summary.ivreg <- function(object, vcov. = NULL, df = NULL, diagnostics = FALSE, 
   return(rval)
 }
 
-#' @rdname ivregMethodsAER
+#' @rdname ivregMethods
 #' @export
 #' @method print summary.ivreg
 print.summary.ivreg <- function(x, digits = max(3, getOption("digits") - 3), 
@@ -232,7 +242,7 @@ print.summary.ivreg <- function(x, digits = max(3, getOption("digits") - 3),
   invisible(x)
 }
 
-#' @rdname ivregMethodsAER
+#' @rdname ivregMethods
 #' @export    
 anova.ivreg <- function(object, object2, test = "F", vcov. = NULL, ...)
 {
@@ -249,7 +259,7 @@ anova.ivreg <- function(object, object2, test = "F", vcov. = NULL, ...)
   return(rval)
 }
 
-#' @rdname ivregMethodsAER
+#' @rdname ivregMethods
 #' @export
 update.ivreg <- function (object, formula., ..., evaluate = TRUE)
 {
@@ -367,3 +377,40 @@ ivdiag <- function(obj, vcov. = NULL) {
 ## 
 ## See
 ##   http://www.stata.com/support/faqs/stat/2sls.html
+
+#' @rdname ivregMethods
+#' @importFrom stats residuals
+#' @export
+residuals.ivreg <- function(object, type=c("response", "projected", "regressors", "working",
+                                            "deviance", "pearson", "partial"), ...){
+  type <- match.arg(type)
+  w <- weights(object)
+  if (is.null(w)) w <- 1
+  res <- switch(type,
+                working  =,
+                response  = object$residuals,
+                deviance =,
+                pearson  = sqrt(w)*object$residuals,
+                projected   = object$residuals.1,
+                regressors  = object$residuals.2,
+                partial  = object$residuals + predict(object, type = "terms"))
+  naresid(object$na.action, res)
+}
+
+#' @rdname ivregMethods
+#' @importFrom effects Effect
+#' @param mod An object of class \code{"ivreg"}.
+#' @param focal.predictors Focal predictors for effect plot, see \code{\link[effects]{Effect}}.
+#' @export
+Effect.ivreg <- function (focal.predictors, mod, ...) {
+  mod$contrasts <- mod$contrasts$regressors
+  NextMethod()
+}
+
+#' @rdname ivregMethods
+#' @importFrom stats formula
+#' @export
+formula.ivreg <- function(x, component = c("regressors", "projected", "instruments"), ... ) {
+  component <- match.arg(component)
+  formula(x$terms[[component]])
+}

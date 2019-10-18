@@ -105,7 +105,9 @@ ivreg.fit <- function(x, y, z, weights, offset, ...)
 
   rval <- list(
     coefficients = fit$coefficients,
-    residuals = res,    
+    residuals = res,
+    residuals.1 = auxreg$residuals,
+    residuals.2 = fit$residuals,
     fitted.values = yhat,
     weights = weights,
     offset = if(identical(offset, rep(0, n))) NULL else offset,
@@ -116,7 +118,8 @@ ivreg.fit <- function(x, y, z, weights, offset, ...)
     cov.unscaled = ucov,
     sigma = sqrt(rss/fit$df.residual), ## NOTE: Stata divides by n here and uses z tests rather than t tests...
     # hatvalues = hat,
-    x = xz
+    x = xz,
+    qr = fit$qr
   )
   
   return(rval)
