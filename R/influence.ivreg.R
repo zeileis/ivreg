@@ -116,7 +116,7 @@ influence.ivreg <- function(model, sigma. = n <= 1e3, type=c("stage2", "both"), 
   r <- XtZ %*% ZtZinv %*% t(Z)
   XfXfinv <- solve(crossprod(X.fit))
 
-  n <- model$n
+  n <- model$nobs
   p <- length(b)  # model$p
   dfbeta <- matrix(0, n, p)
   rownames(dfbeta) <- rnames
@@ -200,7 +200,7 @@ dfbeta.ivreg <- function(model, ...) {
 hatvalues.ivreg <- function(model, type=c("stage2", "both", "maximum"), ...){
   type <- match.arg(type)
   hatvalues <- if (type == "stage2") NextMethod() else {
-    n <- model$n
+    n <- model$nobs
     p <- model$p
     q <- model$q
     mean1 <- q/n
