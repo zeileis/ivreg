@@ -2,7 +2,7 @@
 % Please edit documentation in R/ivregMethodsAER.R
 \name{vcov.ivreg}
 \alias{vcov.ivreg}
-\alias{ivregMethods}
+\alias{ivreg_Methods}
 \alias{bread.ivreg}
 \alias{estfun.ivreg}
 \alias{terms.ivreg}
@@ -53,7 +53,7 @@
   "instruments"), ...)
 }
 \arguments{
-\item{object, object2, model}{An object of class \code{"ivreg"}.}
+\item{object, object2, model, mod}{An object of class \code{"ivreg"}.}
 
 \item{...}{arguments to pass down.}
 
@@ -66,7 +66,9 @@ for \code{model.matrix}, \code{"projected"}, \code{"regressors"}, or \code{"inst
 
 \item{type}{For \code{predict}, one of \code{"response"} (the default)  or \code{"terms"};
 for \code{residuals}, one of \code{"response"} (the default), \code{"projected"}, \code{"regressors"},
-\code{"working"}, \code{"deviance"}, \code{"pearson"}, or \code{"partial"}.}
+\code{"working"}, \code{"deviance"}, \code{"pearson"}, or \code{"partial"}; 
+\code{type = "working"} and \code{"response"} are equivalent, as are 
+\code{type = "deviance"} and \code{"pearson"}.}
 
 \item{na.action}{\code{na} method to apply to predictor values for predictions; default is \code{\link{na.pass}}.}
 
@@ -87,10 +89,11 @@ for \code{residuals}, one of \code{"response"} (the default), \code{"projected"}
 \item{evaluate}{If \code{TRUE}, the default, the updated model is evaluated; if \code{FALSE} the updated call is returned.}
 
 \item{focal.predictors}{Focal predictors for effect plot, see \code{\link[effects]{Effect}}.}
-
-\item{mod}{An object of class \code{"ivreg"}.}
 }
 \description{
 Various methods for processing \code{"ivreg"} objects; for diagnostic methods,
-  see ivregDiagnostics.
+  see \code{\link{2SLS_Diagnostics}}.
+}
+\seealso{
+\code{\link{ivreg}}, \code{\link{ivreg.fit}}, \code{\link{2SLS_Diagnostics}}
 }

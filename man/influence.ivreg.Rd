@@ -6,20 +6,22 @@
 \alias{rstudent.ivreg}
 \alias{cooks.distance.ivreg}
 \alias{dfbeta.influence.ivreg}
-\alias{dfbeta.ivreg}
 \alias{hatvalues.ivreg}
 \alias{rstudent.influence.ivreg}
 \alias{hatvalues.influence.ivreg}
 \alias{cooks.distance.influence.ivreg}
 \alias{qqPlot.ivreg}
-\alias{qqPlot.influence.ivreg}
+\alias{qPlot.influence.ivreg}
 \alias{influencePlot.ivreg}
-\alias{influencePlot.influence.ivreg}
+\alias{nfluencePlot.influence.ivreg}
 \alias{infIndexPlot.ivreg}
 \alias{infIndexPlot.influence.ivreg}
 \alias{model.matrix.influence.ivreg}
 \alias{avPlot.ivreg}
-\title{Deletion Diagnostic Methods for \code{"ivreg"} Objects}
+\alias{dfbeta.ivreg}
+\alias{qqPlot.influence.ivreg}
+\alias{influencePlot.influence.ivreg}
+\title{Deletion and Other Diagnostic Methods for \code{"ivreg"} Objects}
 \usage{
 \method{influence}{ivreg}(model, sigma. = n <= 1000, type = c("stage2",
   "both"), ...)
@@ -62,7 +64,7 @@
 \method{avPlot}{ivreg}(model, ...)
 }
 \arguments{
-\item{model}{A \code{"ivreg"} or \code{"influence.ivreg"} object.}
+\item{model, x}{A \code{"ivreg"} or \code{"influence.ivreg"} object.}
 
 \item{sigma.}{If \code{TRUE} (the default for 1000 or fewer cases), the deleted value
 of the residual standard deviation is computed for each case; if \code{FALSE}, the
@@ -77,8 +79,6 @@ stage regression/number of cases); the geometric mean or casewise maximum values
 multiplied by the average hatvalue from the second stage.}
 
 \item{...}{arguments to be passed down.}
-
-\item{x}{A \code{"ivreg"} or \code{"influence.ivreg"} object.}
 
 \item{ylab}{The vertical axis label.}
 
@@ -115,9 +115,12 @@ The pointwise confidence envelope for the \code{qqPlot} methods assumes an indep
 from the t distribution with degrees of freedom equal to the residual degrees of
 freedom for the model and so are approximate, because the studentized residuals aren't
 independent.
+
+For additional information, see the vignette 
+\href{../doc/Diagnostics-for-2SLS-Regression.pdf}{Diagnostics for 2SLS Regression}.
 }
 \examples{
-kmenta.eq1 <- ivreg(Q ~ P + D, ~ D + F + A, data=Kmenta)
+kmenta.eq1 <- ivreg(Q ~ P + D | D + F + A, data=Kmenta)
 car::avPlots(kmenta.eq1)
 car::crPlots(kmenta.eq1)
 car::influencePlot(kmenta.eq1)

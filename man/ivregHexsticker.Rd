@@ -14,6 +14,3 @@ Open the official hex sticker for the \pkg{ivreg} package in your browser.
 ivregHexsticker()
 }
 }
-\author{
-John Fox
-}

@@ -2,7 +2,7 @@
 #' 
 #' Open the official hex sticker for the \pkg{ivreg} package in your browser.
 #' 
-#' @author John Fox
+#' @aliases ivregHexsticker
 #' @examples 
 #' \dontrun{
 #' ivregHexsticker()

@@ -24,16 +24,28 @@ or \code{\link[stats]{lm.wfit}}, respectively.}
 }
 \value{
 \code{ivreg.fit} returns an unclassed list with the following
-components: \item{coefficients}{parameter estimates.} \item{residuals}{a
-vector of residuals.} \item{fitted.values}{a vector of predicted means.}
-\item{weights}{either the vector of weights used (if any) or \code{NULL} (if
-none).} \item{offset}{either the offset used (if any) or \code{NULL} (if
-none).} \item{estfun}{a matrix containing the empirical estimating
-functions.} \item{n}{number of observations.} \item{nobs}{number of
-observations with non-zero weights.} \item{rank}{the numeric rank of the
-fitted linear model.} \item{df.residual}{residual degrees of freedom for
-fitted model.} \item{cov.unscaled}{unscaled covariance matrix for the
-coefficients.} \item{sigma}{residual standard error.}
+components: 
+\item{coefficients}{parameter estimates, from the stage-2 regression.} 
+\item{residuals}{vector of model residuals.} 
+\item{residuals.1}{matrix of residuals from the stage-1 regression.}
+\item{residuals.2}{vector of residuals from the stage-2 regression.}
+\item{fitted.values}{vector of predicted means.}
+\item{weights}{either the vector of weights used (if any) or \code{NULL} (if none).} 
+\item{offset}{either the offset used (if any) or \code{NULL} (if none).} 
+\item{estfun}{a matrix containing the empirical estimating functions.} 
+\item{n}{number of observations.} 
+\item{nobs}{number of observations with non-zero weights.} 
+\item{p}{number of columns in the model matrix x of regressors.}
+\item{q}{number of columns in the instrumental variables model matrix z}
+\item{rank}{numeric rank of the stage-2 regression.} 
+\item{df.residual}{residual degrees of freedom for fitted model.} 
+\item{cov.unscaled}{unscaled covariance matrix for the coefficients.} 
+\item{sigma}{residual standard error.}
+\item{x}{projection of x matrix onto span of z.}
+\item{qr}{QR decomposition for the stage-2 regression.}
+\item{qr.1}{QR decomposition for the stage-1 regression.}
+\item{rank.1}{numeric rank of the stage-1 regression.}
+\item{coefficients.1}{matrix of coefficients from the stage-1 regression.}
 }
 \description{
 Fit instrumental-variable regression by two-stage least squares. This is
@@ -42,12 +54,7 @@ instruments is equal to the number of predictors.
 }
 \details{
 \code{\link{ivreg}} is the high-level interface to the work-horse function
-\code{ivreg.fit}, a set of standard methods (including \code{summary},
-\code{vcov}, \code{anova}, \code{hatvalues}, \code{predict}, \code{terms},
-\code{model.matrix}, \code{bread}, \code{estfun}) is available and described
-on \code{\link{summary.ivreg}}.
-
-\code{ivreg.fit} is a convenience interface to \code{\link{lm.fit}} (or
+\code{ivreg.fit}. \code{ivreg.fit} is a convenience interface to \code{\link{lm.fit}} (or
 \code{\link{lm.wfit}}) for first projecting \code{x} onto the image of
 \code{z} and the running a regression of \code{y} onto the projected
 \code{x}.
@@ -74,6 +81,6 @@ ivreg.fit(x, y, z)$coefficients
 
 }
 \seealso{
-\code{\link{ivreg}}, \code{\link[stats:lmfit]{lm.fit}}
+\code{\link{ivreg}}, \code{\link{lm.fit}}, \code{\link{lm.wfit}}
 }
 \keyword{regression}

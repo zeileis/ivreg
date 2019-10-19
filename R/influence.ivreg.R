@@ -10,10 +10,15 @@ na.remove <- function(x){
 
 formula.ivreg <- function(x, ...) formula(x$terms$regressors)
 
-#' Deletion Diagnostic Methods for \code{"ivreg"} Objects
+#' Deletion and Other Diagnostic Methods for \code{"ivreg"} Objects
 #'
-#' @aliases 2SLS_Diagnostics
-#' @param model A \code{"ivreg"} or \code{"influence.ivreg"} object.
+#' @aliases 2SLS_Diagnostics influence.ivreg rstudent.ivreg cooks.distance.ivreg 
+#' dfbeta.influence.ivreg hatvalues.ivreg rstudent.influence.ivreg hatvalues.influence.ivreg
+#' cooks.distance.influence.ivreg qqPlot.ivreg qPlot.influence.ivreg influencePlot.ivreg
+#' nfluencePlot.influence.ivreg infIndexPlot.ivreg infIndexPlot.influence.ivreg
+#' model.matrix.influence.ivreg avPlot.ivreg
+#' 
+#' @param model,x A \code{"ivreg"} or \code{"influence.ivreg"} object.
 #' @param sigma. If \code{TRUE} (the default for 1000 or fewer cases), the deleted value
 #' of the residual standard deviation is computed for each case; if \code{FALSE}, the
 #' overall residual standard deviation is used to compute other deletion diagnostics.
@@ -53,6 +58,9 @@ formula.ivreg <- function(x, ...) formula(x$terms$regressors)
 #' from the t distribution with degrees of freedom equal to the residual degrees of
 #' freedom for the model and so are approximate, because the studentized residuals aren't
 #' independent.
+#' 
+#' For additional information, see the vignette 
+#' \href{../doc/Diagnostics-for-2SLS-Regression.pdf}{Diagnostics for 2SLS Regression}.
 #'
 #' @importFrom stats influence
 #' @export
@@ -61,7 +69,7 @@ formula.ivreg <- function(x, ...) formula(x$terms$regressors)
 #'   \code{\link[car]{qqPlot}}, \code{\link[car]{influencePlot}},
 #'   \code{\link[car]{infIndexPlot}}
 #' @examples
-#' kmenta.eq1 <- ivreg(Q ~ P + D, ~ D + F + A, data=Kmenta)
+#' kmenta.eq1 <- ivreg(Q ~ P + D | D + F + A, data=Kmenta)
 #' car::avPlots(kmenta.eq1)
 #' car::crPlots(kmenta.eq1)
 #' car::influencePlot(kmenta.eq1)
@@ -253,7 +261,6 @@ qqPlot.ivreg <- function(x,
 
 #' @rdname influence.ivreg
 #' @method qqPlot influence.ivreg
-#' @param x A \code{"ivreg"} or \code{"influence.ivreg"} object.
 #' @param distribution \code{"t"} (the default) or \code{"norm"}.
 #' @param ylab The vertical axis label.
 #' @export

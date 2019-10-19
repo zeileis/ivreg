@@ -6,9 +6,10 @@
 #' 
 #' \code{ivreg} is the high-level interface to the work-horse function
 #' \code{\link{ivreg.fit}}, a set of standard methods (including \code{print},
-#' \code{summary}, \code{vcov}, \code{anova}, \code{hatvalues}, \code{predict},
+#' \code{summary}, \code{vcov}, \code{anova}, \code{predict}, \code{residuals},
 #' \code{terms}, \code{model.matrix}, \code{bread}, \code{estfun}) is available
-#' and described on \code{\link{summary.ivreg}}.
+#' and described on \code{\link{ivreg_Methods}}. For methods related to regression
+#' diagnotics, see \code{\link{2SLS_Diagnostics}}.
 #' 
 #' Regressors and instruments for \code{ivreg} are most easily specified in a
 #' formula with two parts on the right-hand side, e.g., \code{y ~ x1 + x2 | z1
@@ -45,28 +46,34 @@
 #' @param model,x,y logicals.  If \code{TRUE} the corresponding components of
 #' the fit (the model frame, the model matrices , the response) are returned.
 #' @param \dots further arguments passed to \code{\link{ivreg.fit}}.
-#' @return \code{ivreg} returns an object of class \code{"ivreg"}, with the
-#' following components: \item{coefficients}{parameter estimates.}
-#' \item{residuals}{a vector of residuals.} \item{fitted.values}{a vector of
-#' predicted means.} \item{weights}{either the vector of weights used (if any)
-#' or \code{NULL} (if none).} \item{offset}{either the offset used (if any) or
-#' \code{NULL} (if none).} \item{n}{number of observations.} \item{nobs}{number
-#' of observations with non-zero weights.} \item{rank}{the numeric rank of the
-#' fitted linear model.} \item{df.residual}{residual degrees of freedom for
-#' fitted model.} \item{cov.unscaled}{unscaled covariance matrix for the
-#' coefficients.} \item{sigma}{residual standard error.} \item{call}{the
-#' original function call.} \item{formula}{the model formula.} \item{terms}{a
-#' list with elements \code{"regressors"} and \code{"instruments"} containing
-#' the terms objects for the respective components.} \item{levels}{levels of
-#' the categorical regressors.} \item{contrasts}{the contrasts used for
-#' categorical regressors.} \item{model}{the full model frame (if \code{model =
-#' TRUE}).} \item{y}{the response vector (if \code{y = TRUE}).} \item{x}{a list
-#' with elements \code{"regressors"}, \code{"instruments"}, \code{"projected"},
-#' containing the model matrices from the respective components (if \code{x =
-#' TRUE}). \code{"projected"} is the matrix of regressors projected on the
-#' image of the instruments.}
-#' @seealso \code{\link{ivreg.fit}}, \code{\link[stats]{lm}},
-#' \code{\link[stats:lmfit]{lm.fit}}
+#' 
+#' @return \code{ivreg} returns an object of class \code{"ivreg"} that inherits from
+#' class \code{"lm"}, with the following components: 
+#' \item{coefficients}{parameter estimates.}
+#' \item{residuals}{a vector of residuals.} 
+#' \item{fitted.values}{a vector of predicted means.} 
+#' \item{weights}{either the vector of weights used (if any) or \code{NULL} (if none).} 
+#' \item{offset}{either the offset used (if any) or \code{NULL} (if none).} 
+#' \item{n}{number of observations.} 
+#' \item{nobs}{number of observations with non-zero weights.} 
+#' \item{rank}{the numeric rank of the fitted linear model.} 
+#' \item{df.residual}{residual degrees of freedom for fitted model.} 
+#' \item{cov.unscaled}{unscaled covariance matrix for the coefficients.} 
+#' \item{sigma}{residual standard error.} 
+#' \item{call}{the original function call.} 
+#' \item{formula}{the model formula.}
+#' \item{na.action}{function applied to missing values in the model fit.}
+#' \item{terms}{a list with elements \code{"regressors"} and \code{"instruments"} 
+#' containing the terms objects for the respective components.} 
+#' \item{levels}{levels of the categorical regressors.} 
+#' \item{contrasts}{the contrasts used for categorical regressors.} 
+#' \item{model}{the full model frame (if \code{model = TRUE}).} 
+#' \item{y}{the response vector (if \code{y = TRUE}).} 
+#' \item{x}{a list with elements \code{"regressors"}, \code{"instruments"}, \code{"projected"},
+#' containing the model matrices from the respective components (if \code{x = TRUE}). 
+#' \code{"projected"} is the matrix of regressors projected on the image of the instruments.}
+#' @seealso \code{\link{ivreg.fit}}, \code{\link{2SLS_Diagnostics}}, \code{\link{ivreg_Methods}},
+#' \code{\link[stats]{lm}}, \code{\link[stats:lmfit]{lm.fit}}
 #' @references Greene, W. H. (1993) \emph{Econometric Analysis}, 2nd ed.,
 #' Macmillan.
 #' @keywords regression
