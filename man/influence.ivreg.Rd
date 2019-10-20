@@ -24,7 +24,7 @@
 \title{Deletion and Other Diagnostic Methods for \code{"ivreg"} Objects}
 \usage{
 \method{influence}{ivreg}(model, sigma. = n <= 1000, type = c("stage2",
-  "both"), ...)
+  "both", "maximum"), ...)
 
 \method{rstudent}{ivreg}(model, ...)
 

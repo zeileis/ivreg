@@ -76,7 +76,7 @@ formula.ivreg <- function(x, ...) formula(x$terms$regressors)
 #' car::influenceIndexPlot(kmenta.eq1)
 #' car::qqPlot(kmenta.eq1)
 #' plot(effects::predictorEffects(kmenta.eq1, residuals=TRUE))
-influence.ivreg <- function(model, sigma. = n <= 1e3, type=c("stage2", "both"), ...){
+influence.ivreg <- function(model, sigma. = n <= 1e3, type=c("stage2", "both", "maximum"), ...){
 
   type <- match.arg(type)
 
@@ -88,9 +88,9 @@ influence.ivreg <- function(model, sigma. = n <= 1e3, type=c("stage2", "both"), 
   b <- coef(model) # model$coefficients
   res <- na.remove(residuals(model)) # na.remove(model$residuals)
   sigma2 <- model$sigma^2
-  hatvalues <-  na.remove(hatvalues(model, type=type)) # FIXME
+  hatvalues <-  na.remove(hatvalues(model, type=type))
 
-  na.action <- model$na.action ## FIXME: na.action apparently not stored in object
+  na.action <- model$na.action 
 
   rnames <- rownames(X)
   cnames <- colnames(X)
