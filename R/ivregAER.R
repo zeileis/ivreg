@@ -90,7 +90,7 @@
     #' fm <- ivreg(log(packs) ~ log(rprice) + log(rincome) | log(rincome) + tdiff + I(tax/cpi),
     #'   data = CigarettesSW, subset = year == "1995")
     #' summary(fm)
-    #' summary(fm, vcov = sandwich::sandwich, df = Inf, diagnostics = TRUE)
+    #' summary(fm, vcov = sandwich::sandwich, df = Inf, tests = TRUE)
     #' 
     #' ## ANOVA
     #' fm2 <- ivreg(log(packs) ~ log(rprice) | tdiff, data = CigarettesSW, subset = year == "1995")

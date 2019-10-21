@@ -35,7 +35,7 @@
 \method{print}{ivreg}(x, digits = max(3, getOption("digits") - 3), ...)
 
 \method{summary}{ivreg}(object, vcov. = NULL, df = NULL,
-  diagnostics = FALSE, ...)
+  tests = FALSE, diagnostics, ...)
 
 \method{print}{summary.ivreg}(x, digits = max(3, getOption("digits") -
   3), signif.stars = getOption("show.signif.stars"), ...)
@@ -78,7 +78,9 @@ for \code{residuals}, one of \code{"response"} (the default), \code{"projected"}
 
 \item{df}{Optional residual degrees of freedom to use in computing model summary.}
 
-\item{diagnostics}{Report 2SLS diagnostic tests in model summary (default is \code{FALSE}).}
+\item{tests, diagnostics}{Report 2SLS "diagnostic" tests in model summary (default is \code{FALSE}). 
+These tests are not to be confused with the \emph{regression diagnostics} provided elsewhere in the \pkg{ivreg}
+package: see \code{\link{2SLS_Diagnostics}}; the \code{diagnostics} argument is retained for backwards compatibility.}
 
 \item{signif.stars}{Show "significance stars" in summary output.}
 
