@@ -13,7 +13,7 @@
 #' @aliases ivreg.fit
 #' 
 #' @param x regressor matrix.
-#' @param y vector with dependent variable.
+#' @param y vector for the response variable.
 #' @param z instruments matrix.
 #' @param weights an optional vector of weights to be used in the fitting
 #' process.
@@ -27,7 +27,7 @@
 #' \item{residuals}{vector of model residuals.} 
 #' \item{residuals.1}{matrix of residuals from the stage-1 regression.}
 #' \item{residuals.2}{vector of residuals from the stage-2 regression.}
-#' \item{fitted.values}{vector of predicted means.}
+#' \item{fitted.values}{vector of predicted means for the response.}
 #' \item{weights}{either the vector of weights used (if any) or \code{NULL} (if none).} 
 #' \item{offset}{either the offset used (if any) or \code{NULL} (if none).} 
 #' \item{estfun}{a matrix containing the empirical estimating functions.} 
@@ -35,14 +35,14 @@
 #' \item{nobs}{number of observations with non-zero weights.} 
 #' \item{p}{number of columns in the model matrix x of regressors.}
 #' \item{q}{number of columns in the instrumental variables model matrix z}
-#' \item{rank}{numeric rank of the stage-2 regression.} 
+#' \item{rank}{numeric rank of the model matrix for the stage-2 regression.} 
 #' \item{df.residual}{residual degrees of freedom for fitted model.} 
 #' \item{cov.unscaled}{unscaled covariance matrix for the coefficients.} 
 #' \item{sigma}{residual standard error.}
 #' \item{x}{projection of x matrix onto span of z.}
 #' \item{qr}{QR decomposition for the stage-2 regression.}
 #' \item{qr.1}{QR decomposition for the stage-1 regression.}
-#' \item{rank.1}{numeric rank of the stage-1 regression.}
+#' \item{rank.1}{numeric rank of the model matrix for the stage-1 regression.}
 #' \item{coefficients.1}{matrix of coefficients from the stage-1 regression.}
 #' @seealso \code{\link{ivreg}}, \code{\link{lm.fit}}, \code{\link{lm.wfit}}
 #' @keywords regression

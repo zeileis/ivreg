@@ -13,7 +13,7 @@
 #' @param na.action \code{na} method to apply to predictor values for predictions; default is \code{\link{na.pass}}.
 #' @param digits For printing.
 #' @param signif.stars Show "significance stars" in summary output.
-#' @param vcov. Optional coefficient covariance matrix to use in computing model summary.
+#' @param vcov. Optional coefficient covariance matrix, or a function to compute the covariance matrix, to use in computing the model summary.
 #' @param df Optional residual degrees of freedom to use in computing model summary.
 #' @param tests,diagnostics Report 2SLS "diagnostic" tests in model summary (default is \code{FALSE}). 
 #' These tests are not to be confused with the \emph{regression diagnostics} provided elsewhere in the \pkg{ivreg}

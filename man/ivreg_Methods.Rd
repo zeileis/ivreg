@@ -74,7 +74,7 @@ for \code{residuals}, one of \code{"response"} (the default), \code{"projected"}
 
 \item{digits}{For printing.}
 
-\item{vcov.}{Optional coefficient covariance matrix to use in computing model summary.}
+\item{vcov.}{Optional coefficient covariance matrix, or a function to compute the covariance matrix, to use in computing the model summary.}
 
 \item{df}{Optional residual degrees of freedom to use in computing model summary.}
 

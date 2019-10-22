@@ -35,24 +35,35 @@ known component to be included during fitting.}
 \code{\link[stats:model.matrix]{model.matrix.default}}.}
 
 \item{model, x, y}{logicals.  If \code{TRUE} the corresponding components of
-the fit (the model frame, the model matrices , the response) are returned.}
+the fit (the model frame, the model matrices , the response) are returned. These
+components are necessary for computing regression diagnostics.}
 
 \item{\dots}{further arguments passed to \code{\link{ivreg.fit}}.}
 }
 \value{
 \code{ivreg} returns an object of class \code{"ivreg"} that inherits from
-class \code{"lm"}, with the following components: 
-\item{coefficients}{parameter estimates.}
-\item{residuals}{a vector of residuals.} 
-\item{fitted.values}{a vector of predicted means.} 
+class \code{"lm"}, with the following components:
+\item{coefficients}{parameter estimates, from the stage-2 regression.} 
+\item{residuals}{vector of model residuals.} 
+\item{residuals.1}{matrix of residuals from the stage-1 regression.}
+\item{residuals.2}{vector of residuals from the stage-2 regression.}
+\item{fitted.values}{vector of predicted means for the response.}
 \item{weights}{either the vector of weights used (if any) or \code{NULL} (if none).} 
 \item{offset}{either the offset used (if any) or \code{NULL} (if none).} 
+\item{estfun}{a matrix containing the empirical estimating functions.} 
 \item{n}{number of observations.} 
 \item{nobs}{number of observations with non-zero weights.} 
-\item{rank}{the numeric rank of the fitted linear model.} 
+\item{p}{number of columns in the model matrix x of regressors.}
+\item{q}{number of columns in the instrumental variables model matrix z}
+\item{rank}{numeric rank of the model matrix for the stage-2 regression.} 
 \item{df.residual}{residual degrees of freedom for fitted model.} 
 \item{cov.unscaled}{unscaled covariance matrix for the coefficients.} 
-\item{sigma}{residual standard error.} 
+\item{sigma}{residual standard deviation.}
+\item{qr}{QR decomposition for the stage-2 regression.}
+\item{qr.1}{QR decomposition for the stage-1 regression.}
+\item{rank.1}{numeric rank of the model matrix for the stage-1 regression.}
+\item{coefficients.1}{matrix of coefficients from the stage-1 regression.}
+\item{df.residual}{residual degrees of freedom for fitted model.} 
 \item{call}{the original function call.} 
 \item{formula}{the model formula.}
 \item{na.action}{function applied to missing values in the model fit.}
@@ -69,20 +80,20 @@ containing the model matrices from the respective components (if \code{x = TRUE}
 \description{
 Fit instrumental-variable regression by two-stage least squares. This is
 equivalent to direct instrumental-variables estimation when the number of
-instruments is equal to the number of predictors.
+instruments is equal to the number of regressors.
 }
 \details{
 \code{ivreg} is the high-level interface to the work-horse function
-\code{\link{ivreg.fit}}, a set of standard methods (including \code{print},
+\code{\link{ivreg.fit}}. A set of standard methods (including \code{print},
 \code{summary}, \code{vcov}, \code{anova}, \code{predict}, \code{residuals},
 \code{terms}, \code{model.matrix}, \code{bread}, \code{estfun}) is available
-and described on \code{\link{ivreg_Methods}}. For methods related to regression
+and described in \code{\link{ivreg_Methods}}. For methods related to regression
 diagnotics, see \code{\link{2SLS_Diagnostics}}.
 
 Regressors and instruments for \code{ivreg} are most easily specified in a
 formula with two parts on the right-hand side, e.g., \code{y ~ x1 + x2 | z1
-+ z2 + z3}, where \code{x1} and \code{x2} are the regressors and \code{z1},
-\code{z2}, and \code{z3} are the instruments. Note that exogenous regressors
++ z2 + z3}, where \code{x1} and \code{x2} are the explanatory variables and \code{z1},
+\code{z2}, and \code{z3} are the instrumental variables. Note that exogenous regressors
 have to be included as instruments for themselves. For example, if there is
 one exogenous regressor \code{ex} and one endogenous regressor \code{en}
 with instrument \code{in}, the appropriate formula would be \code{y ~ ex +

@@ -28,9 +28,9 @@ fit in the examples.
 }
 \examples{
 deq <- ivreg(Q ~ P + D | D + F + A, data=Kmenta) # demand equation
-summary(deq, diagnostics=TRUE)
+summary(deq, tests=TRUE)
 seq <- ivreg(Q ~ P + F + A | D + F + A, data=Kmenta) # supply equation
-summary(seq, diagnostics=TRUE)
+summary(seq, tests=TRUE)
 }
 \seealso{
 \code{\link{ivreg}}.

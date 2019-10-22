@@ -111,7 +111,7 @@ method and then to extract the various specific diagnostics with the methods for
 added-variable plots (\code{\link[car]{avPlots}}) and component-plus-residual
 plots (\code{\link[car]{crPlots}}), also work, as do effect plots
 (e.g., \code{\link[effects]{predictorEffects}}) with residuals (see the examples below).
-The pointwise confidence envelope for the \code{qqPlot} methods assumes an independent random sample
+The pointwise confidence envelope for the \code{\link[car]{qqPlot}} method assumes an independent random sample
 from the t distribution with degrees of freedom equal to the residual degrees of
 freedom for the model and so are approximate, because the studentized residuals aren't
 independent.
