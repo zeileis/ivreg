@@ -140,5 +140,5 @@ confint(car::Boot(kmenta.eq1, R=250)) # 250 reps for brevity
 \code{\link{ivreg}}, \link{2SLS_Methods}, \code{\link[car]{avPlots}},
   \code{\link[car]{crPlots}}, \code{\link[effects]{predictorEffects}},
   \code{\link[car]{qqPlot}}, \code{\link[car]{influencePlot}},
-  \code{\link[car]{infIndexPlot}}
+  \code{\link[car]{infIndexPlot}}, \code{\link[car]{Boot}}.
 }

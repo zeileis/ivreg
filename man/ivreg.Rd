@@ -35,7 +35,7 @@ known component to be included during fitting.}
 \code{\link[stats:model.matrix]{model.matrix.default}}.}
 
 \item{model, x, y}{logicals.  If \code{TRUE} the corresponding components of
-the fit (the model frame, the model matrices , the response) are returned. These
+the fit (the model frame, the model matrices, the response) are returned. These
 components are necessary for computing regression diagnostics.}
 
 \item{\dots}{further arguments passed to \code{\link{ivreg.fit}}.}

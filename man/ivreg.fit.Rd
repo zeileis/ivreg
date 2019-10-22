@@ -54,10 +54,10 @@ instruments is equal to the number of predictors.
 }
 \details{
 \code{\link{ivreg}} is the high-level interface to the work-horse function
-\code{ivreg.fit}. \code{ivreg.fit} is a convenience interface to \code{\link{lm.fit}} (or
+\code{ivreg.fit}. \code{ivreg.fit} is essentially a convenience interface to \code{\link{lm.fit}} (or
 \code{\link{lm.wfit}}) for first projecting \code{x} onto the image of
-\code{z} and the running a regression of \code{y} onto the projected
-\code{x}.
+\code{z}, then running a regression of \code{y} on the projected
+\code{x}, and computing the residual standard deviation.
 }
 \examples{
 

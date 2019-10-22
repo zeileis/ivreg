@@ -67,7 +67,7 @@ formula.ivreg <- function(x, ...) formula(x$terms$regressors)
 #' @seealso \code{\link{ivreg}}, \link{2SLS_Methods}, \code{\link[car]{avPlots}},
 #'   \code{\link[car]{crPlots}}, \code{\link[effects]{predictorEffects}},
 #'   \code{\link[car]{qqPlot}}, \code{\link[car]{influencePlot}},
-#'   \code{\link[car]{infIndexPlot}}
+#'   \code{\link[car]{infIndexPlot}}, \code{\link[car]{Boot}}.
 #' @examples
 #' kmenta.eq1 <- ivreg(Q ~ P + D | D + F + A, data=Kmenta)
 #' car::avPlots(kmenta.eq1)

@@ -44,7 +44,7 @@
 #' @param contrasts an optional list. See the \code{contrasts.arg} of
 #' \code{\link[stats:model.matrix]{model.matrix.default}}.
 #' @param model,x,y logicals.  If \code{TRUE} the corresponding components of
-#' the fit (the model frame, the model matrices , the response) are returned. These
+#' the fit (the model frame, the model matrices, the response) are returned. These
 #' components are necessary for computing regression diagnostics.
 #' @param \dots further arguments passed to \code{\link{ivreg.fit}}.
 #' 

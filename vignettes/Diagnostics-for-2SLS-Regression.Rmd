@@ -317,7 +317,7 @@ Remedies for nonconstant variance in 2SLS regression are similar to those in lea
 
 * If, alternatively, we know the variance of the errors up to a constant of proportionality, then we can use inverse-variance weights for the 2SLS estimator. The `ivreg()` function supports weighted 2SLS regression, and the diagnostics in the **ivreg** package work with weighted 2SLS fits  (see the next section).
 
-* Finally, we can employ a *"sandwich" estimator* of the coefficient covariance matrix in 2SLS to correct standard errors for nonconstant error variance, much as in least-squares regression as proposed by @Huber1967 and @White1980 [also see @LongErvin2000]. 
+* Finally, we can employ a *"sandwich" estimator* of the coefficient covariance matrix in 2SLS [or the *bootstrap*: see e.g., @DavisonHinkley1997] to correct standard errors for nonconstant error variance, much as in least-squares regression as proposed by @Huber1967 and @White1980 [also see @LongErvin2000]. 
 
 The **ivreg** package supports the `sandwich()` function in the **sandwich** package  [@Zeileis2006]. For the Kmenta example, where evidence of nonconstant error variance is slight, the sandwich standard errors are similar to, indeed slightly smaller than, the conventional 2SLS standard errors:
 ```{r}
@@ -374,7 +374,7 @@ colnames(SEs2) <- c("sandwich", "conventional")
 SEs2
 ```
 
-Bootstrapping provides an alternative to sandwich standard errors as a correction for nonconstant error variance, and the **ivreg** package supplies an \code{"ivreg"} method for the `Boot()` function in the **car** package, implementing the case-resampling bootstrap, and returning an object of class \code{"boot"} suitable for use with functions in the **boot** package [@DavisonHinkley1997; @CantyRipley2019]. By default, $R = 999$ bootstrap replications are generated. For example:
+As mentioned, ootstrapping provides an alternative to sandwich standard errors as a correction for nonconstant error variance, and the **ivreg** package supplies an `"ivreg"` method for the `Boot()` function in the **car** package, implementing the case-resampling bootstrap, and returning an object of class `"boot"` suitable for use with functions in the **boot** package [@DavisonHinkley1997; @CantyRipley2019]. By default, $R = 999$ bootstrap replications are generated. For example:
 ```{r}
 set.seed <- 869255 # for reproducibility
 b.deq2 <- Boot(deq2)
@@ -401,7 +401,7 @@ Alternatively, we can treat the two stages of 2SLS as *weighted least squares (W
 
 Phillips's updating formulas for 2SLS regression could also be modified for the weighted case, but a simpler approach (which is evident in the formula for $b_{\mathrm{W2SLS}}$ above) is to convert the weighted 2SLS problem into an unweighted problem, by transforming the data to constant variance using $W^{1/2} = \mathrm{diag}\{\sqrt{w_i}\}$, the Cholesky square root of $W$. The square root of $W$ is particularly simple because $W$ is diagonal. Then in Phillips's updating formulas, we replace $y$ with $y^* = W^{1/2}y$, $X$ with $X^* = W^{1/2}X$, and $Z$ with $Z^* = W^{1/2}Z$.
 
-For the modified \code{Kmenta2} data, we know that the variances of the errors in the demand equation are inversely proportional to the variable \code{w}. This is of course artificial knowledge, reflecting the manner in which the data were constructed. The weighted 2SLS estimator is therefore computed as
+For the modified `Kmenta2` data, we know that the variances of the errors in the demand equation are inversely proportional to the variable `w`. This is of course artificial knowledge, reflecting the manner in which the data were constructed. The weighted 2SLS estimator is therefore computed as
 ```{r}
 deqw <- update(deq, data=Kmenta2, weights=1/w)
 summary(deqw, tests=TRUE)
@@ -412,6 +412,7 @@ Plotting studentized residuals against fitted values and testing for nonconstant
 ncvTest(deqw)
 plot(fitted(deqw), rstudent(deqw))
 ```
+
 A Bonferroni outlier test suggests that the studentized residual isn't unusually large, and once more we're in the unusual situation of knowing that the model is correct.
 ```{r}
 outlierTest(deqw)
