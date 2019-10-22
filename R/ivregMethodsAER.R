@@ -183,7 +183,7 @@ summary.ivreg <- function(object, vcov. = NULL, df = NULL, tests=FALSE, diagnost
   Rmat <- if(attr(object$terms$regressors, "intercept"))
     cbind(0, diag(length(na.omit(coef(object)))-1)) else diag(length(na.omit(coef(object))))
   waldtest <- car::linearHypothesis(object, Rmat, vcov. = vcov., test = ifelse(df > 0, "F", "Chisq"), singular.ok = TRUE)
-  waldtest <- c(waldtest[2,3], waldtest[2,4], abs(waldtest[2,2]), if(df > 0) waldtest[2,1] else NULL)
+  waldtest <- c(waldtest[2, "F"], waldtest[2, "Pr(>F)"], waldtest[2, "Df"], if(df > 0) waldtest[2, "Res.Df"] else NULL)
   
   ## diagnostic tests
   diag <- if(diagnostics) ivdiag(object, vcov. = vcov.) else NULL
