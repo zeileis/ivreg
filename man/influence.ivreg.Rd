@@ -18,6 +18,7 @@
 \alias{infIndexPlot.influence.ivreg}
 \alias{model.matrix.influence.ivreg}
 \alias{avPlot.ivreg}
+\alias{Boot.ivreg}
 \alias{dfbeta.ivreg}
 \alias{qqPlot.influence.ivreg}
 \alias{influencePlot.influence.ivreg}
@@ -62,9 +63,12 @@
 \method{model.matrix}{influence.ivreg}(object, ...)
 
 \method{avPlot}{ivreg}(model, ...)
+
+\method{Boot}{ivreg}(object, f = coef, labels = names(f(object)),
+  R = 999, method = "case", ncores = 1, ...)
 }
 \arguments{
-\item{model, x}{A \code{"ivreg"} or \code{"influence.ivreg"} object.}
+\item{model, x, object}{A \code{"ivreg"} or \code{"influence.ivreg"} object.}
 
 \item{sigma.}{If \code{TRUE} (the default for 1000 or fewer cases), the deleted value
 of the residual standard deviation is computed for each case; if \code{FALSE}, the
@@ -84,7 +88,9 @@ multiplied by the average hatvalue from the second stage.}
 
 \item{distribution}{\code{"t"} (the default) or \code{"norm"}.}
 
-\item{object}{An \code{"influence.ivreg"} object.}
+\item{f, labels, R, ncores}{see \code{\link[car]{Boot}}.}
+
+\item{method}{only \code{"case"} (case resampling) is supported: see \code{\link[car]{Boot}}.}
 }
 \value{
 In the case of \code{influence.ivreg}, an object of class \code{"influence.ivreg"}
@@ -127,6 +133,8 @@ car::influencePlot(kmenta.eq1)
 car::influenceIndexPlot(kmenta.eq1)
 car::qqPlot(kmenta.eq1)
 plot(effects::predictorEffects(kmenta.eq1, residuals=TRUE))
+set.seed <- 12321 # for reproducibility
+confint(car::Boot(kmenta.eq1, R=250)) # 250 reps for brevity
 }
 \seealso{
 \code{\link{ivreg}}, \link{2SLS_Methods}, \code{\link[car]{avPlots}},

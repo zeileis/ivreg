@@ -16,9 +16,9 @@ formula.ivreg <- function(x, ...) formula(x$terms$regressors)
 #' dfbeta.influence.ivreg hatvalues.ivreg rstudent.influence.ivreg hatvalues.influence.ivreg
 #' cooks.distance.influence.ivreg qqPlot.ivreg qPlot.influence.ivreg influencePlot.ivreg
 #' nfluencePlot.influence.ivreg infIndexPlot.ivreg infIndexPlot.influence.ivreg
-#' model.matrix.influence.ivreg avPlot.ivreg
+#' model.matrix.influence.ivreg avPlot.ivreg Boot.ivreg
 #' 
-#' @param model,x A \code{"ivreg"} or \code{"influence.ivreg"} object.
+#' @param model,x,object A \code{"ivreg"} or \code{"influence.ivreg"} object.
 #' @param sigma. If \code{TRUE} (the default for 1000 or fewer cases), the deleted value
 #' of the residual standard deviation is computed for each case; if \code{FALSE}, the
 #' overall residual standard deviation is used to compute other deletion diagnostics.
@@ -76,6 +76,8 @@ formula.ivreg <- function(x, ...) formula(x$terms$regressors)
 #' car::influenceIndexPlot(kmenta.eq1)
 #' car::qqPlot(kmenta.eq1)
 #' plot(effects::predictorEffects(kmenta.eq1, residuals=TRUE))
+#' set.seed <- 12321 # for reproducibility
+#' confint(car::Boot(kmenta.eq1, R=250)) # 250 reps for brevity
 influence.ivreg <- function(model, sigma. = n <= 1e3, type=c("stage2", "both", "maximum"), ...){
 
   type <- match.arg(type)
@@ -316,7 +318,6 @@ infIndexPlot.influence.ivreg <- function(model, ...){
 
 #' @rdname influence.ivreg
 #' @method model.matrix influence.ivreg
-#' @param object An \code{"influence.ivreg"} object.
 #' @export
 model.matrix.influence.ivreg <- function(object, ...){
   object$model
@@ -327,5 +328,17 @@ model.matrix.influence.ivreg <- function(object, ...){
 #' @export
 avPlot.ivreg <- function(model, ...){
   model$model.matrix <- model.matrix(model, type="projected")
+  NextMethod()
+}
+
+#' @rdname influence.ivreg
+#' @method Boot ivreg
+#' @importFrom car Boot
+#' @param method only \code{"case"} (case resampling) is supported: see \code{\link[car]{Boot}}.
+#' @param f,labels,R,ncores see \code{\link[car]{Boot}}.
+#' @export
+Boot.ivreg <- function(object, f = coef, labels = names(f(object)), R = 999, 
+                       method = "case", ncores = 1, ...){
+  method <- match.arg(method)
   NextMethod()
 }

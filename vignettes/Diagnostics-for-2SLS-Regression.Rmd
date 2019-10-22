@@ -1,7 +1,7 @@
 ---
 title: "Diagnostics for 2SLS Regression"
 author: "John Fox"
-date: "2019-10-21"
+date: "2019-10-22"
 bibliography: Diagnostics-for-2SLS-Regression.bib
 biblio-style: "apalike"
 output: rmarkdown::html_vignette
@@ -364,6 +364,30 @@ spreadLevelPlot(deq2)
 ncvTest(deq2)
 ```
 The extreme value of the suggested power transformation of $Q$ from the spread-level plot, $\lambda =-23$, reflects (as I noted previously) the fact that $\max(Q)/\min(Q)$ isn't much larger than 1.
+
+In our example, the sandwich standard errors are not very different from the conventional standard errors:
+```{r}
+SEs2 <- round(cbind(sqrt(diag(sandwich::sandwich(deq2))), 
+                   sqrt(diag(vcov(deq2)))), 
+             4)
+colnames(SEs2) <- c("sandwich", "conventional")
+SEs2
+```
+
+Bootstrapping provides an alternative to sandwich standard errors as a correction for nonconstant error variance, and the **ivreg** package supplies an \code{"ivreg"} method for the `Boot()` function in the **car** package, implementing the case-resampling bootstrap, and returning an object of class \code{"boot"} suitable for use with functions in the **boot** package [@DavisonHinkley1997; @CantyRipley2019]. By default, $R = 999$ bootstrap replications are generated. For example:
+```{r}
+set.seed <- 869255 # for reproducibility
+b.deq2 <- Boot(deq2)
+summary(deq2, vcov.=vcov(b.deq2))
+```
+
+The bootstrap standard errors are larger than the conventional or sandwich standard errors for this example.
+
+Boostrap confidence intervals can also be computed from the object returned by `Boot()`, by default reporting $BC_a$ intervals (see the documentation for `confint.boot()` in the **car** package):
+```{r}
+confint(b.deq2)
+```
+
 
 ## Weighted 2SLS Regession
 
