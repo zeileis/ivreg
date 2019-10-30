@@ -44,3 +44,7 @@ test_that("rstudent computed correctly with weights", {
   expect_equal(rstudent(m.ivreg.w), rstudent(m.lm.w))
 })
 
+test_that("influence measures computed correctly in paralllel", {
+  expect_equal(influence(m), influence(m, ncores=2))
+})
+

@@ -22,6 +22,8 @@ formula.ivreg <- function(x, ...) formula(x$terms$regressors)
 #' @param sigma. If \code{TRUE} (the default for 1000 or fewer cases), the deleted value
 #' of the residual standard deviation is computed for each case; if \code{FALSE}, the
 #' overall residual standard deviation is used to compute other deletion diagnostics.
+#' @param ncores If \code{ncores > 1} (the default is \code{1}) computations are performed
+#' in parallel; this is advantageous only for large data sets.
 #' @param type If \code{"stage2"} (the default), hatvalues are for the second stage regression;
 #' if \code{"both"}, the hatvalues are the geometric mean of the casewise hatvalues for the
 #' two stages; if \code{"maximum"}, the hatvalues are the larger of the casewise
@@ -61,7 +63,7 @@ formula.ivreg <- function(x, ...) formula(x$terms$regressors)
 #' 
 #' For additional information, see the vignette 
 #' \href{../doc/Diagnostics-for-2SLS-Regression.pdf}{Diagnostics for 2SLS Regression}.
-#'
+#' @import foreach
 #' @importFrom stats influence
 #' @export
 #' @seealso \code{\link{ivreg}}, \link{2SLS_Methods}, \code{\link[car]{avPlots}},
@@ -78,7 +80,8 @@ formula.ivreg <- function(x, ...) formula(x$terms$regressors)
 #' plot(effects::predictorEffects(kmenta.eq1, residuals=TRUE))
 #' set.seed <- 12321 # for reproducibility
 #' confint(car::Boot(kmenta.eq1, R=250)) # 250 reps for brevity
-influence.ivreg <- function(model, sigma. = n <= 1e3, type=c("stage2", "both", "maximum"), ...){
+influence.ivreg <- function(model, sigma. = n <= 1e3, type=c("stage2", "both", "maximum"), 
+                            ncores=1, ...){
 
   type <- match.arg(type)
 
@@ -89,7 +92,7 @@ influence.ivreg <- function(model, sigma. = n <= 1e3, type=c("stage2", "both", "
   if (is.null(y)) stop("response variable not in model object")
   b <- coef(model) # model$coefficients
   res <- na.remove(residuals(model)) # na.remove(model$residuals)
-  sigma2 <- model$sigma^2
+  .sigma <- sqrt(model$sigma^2)
   hatvalues <-  na.remove(hatvalues(model, type=type))
 
   na.action <- model$na.action 
@@ -120,40 +123,72 @@ influence.ivreg <- function(model, sigma. = n <= 1e3, type=c("stage2", "both", "
 
   n <- model$nobs
   p <- length(b)  # model$p
-  dfbeta <- matrix(0, n, p)
-  rownames(dfbeta) <- rnames
-  colnames(dfbeta) <- cnames
-  dffits <- cookd <- rep(0, n)
-  sigma <- rep(sqrt(sigma2), n)
-  names(dffits) <- names(sigma) <- names(cookd) <- rnames
-
-  for (i in 1:n){ #TODO: move this loop to cpp code?
-    c <- as.vector(Z[i, ] %*% ZtZinv %*% Z[i, ])
-    Xmr <- X[i, ] - r[, i]
-    XiAinvXi <- as.vector(X[i, ] %*% Ainv %*% X[i, ])
-    XmrAinvXi <- as.vector(Xmr %*% Ainv %*% X[i, ])
-    XmrAinvXmr <- as.vector(Xmr %*% Ainv %*% Xmr)
-    delta <- 1 - XiAinvXi + XmrAinvXi^2/(1 - c + XmrAinvXmr)
-    denom <- (1 - c + XmrAinvXmr)*delta
-    h <- Xmr * (1 - XiAinvXi) / denom + X[i, ] * XmrAinvXi / denom
-    j <- Xmr * XmrAinvXi / denom - X[i, ]/delta
-    g <- h * as.vector((y[i] - Z[i, ] %*% pi) - (y[i] - r[, i] %*% b)) +
-      (h + j)*as.vector(y[i] - X[i, ] %*% b)
-    dfbeta[i, ] <- - Ainv %*% g
-    if (sigma.){
-      ss <- rss + as.vector(g %*% Ainv %*% crossprod(X[-i, ]) %*% Ainv %*% g) -
-        2 * as.vector(g %*% Ainv %*% t(X[-i, ]) %*% (y[-i] - X[-i, ] %*% b))  -
-        as.vector(y[i] - X[i, ] %*% b)^2
-      sigma[i] <- sqrt(ss/(n - p - 1))
+  
+  if (ncores > 1){
+    cl <- parallel::makeCluster(ncores) 
+    doParallel::registerDoParallel(cl)
+    result <- foreach(i = 1:n, .combine=rbind) %dopar% {
+      c <- as.vector(Z[i, ] %*% ZtZinv %*% Z[i, ])
+      Xmr <- X[i, ] - r[, i]
+      XiAinvXi <- as.vector(X[i, ] %*% Ainv %*% X[i, ])
+      XmrAinvXi <- as.vector(Xmr %*% Ainv %*% X[i, ])
+      XmrAinvXmr <- as.vector(Xmr %*% Ainv %*% Xmr)
+      delta <- 1 - XiAinvXi + XmrAinvXi^2/(1 - c + XmrAinvXmr)
+      denom <- (1 - c + XmrAinvXmr)*delta
+      h <- Xmr * (1 - XiAinvXi) / denom + X[i, ] * XmrAinvXi / denom
+      j <- Xmr * XmrAinvXi / denom - X[i, ]/delta
+      g <- h * as.vector((y[i] - Z[i, ] %*% pi) - (y[i] - r[, i] %*% b)) +
+        (h + j)*as.vector(y[i] - X[i, ] %*% b)
+      dfbeta.i <- - as.vector(Ainv %*% g)
+      sigma.i <- if (sigma.){
+        ss <- rss + as.vector(g %*% Ainv %*% crossprod(X[-i, ]) %*% Ainv %*% g) -
+          2 * as.vector(g %*% Ainv %*% t(X[-i, ]) %*% (y[-i] - X[-i, ] %*% b))  -
+          as.vector(y[i] - X[i, ] %*% b)^2
+        sqrt(ss/(n - p - 1))
+      } else .sigma
+      dffits.i <- as.vector(X[i, ] %*% dfbeta.i)/
+        (sigma.i * as.vector(sqrt(X[i, ] %*% XfXfinv %*% X[i, ])))
+      c(dfbeta.i, sigma.i, dffits.i)
     }
-    dffits[i] <- as.vector(X[i, ] %*% dfbeta[i, ])/
-      (sigma[i] * as.vector(sqrt(X[i, ] %*% XfXfinv %*% X[i, ])))
+    parallel::stopCluster(cl)
+    nc <- ncol(result)
+    dfbeta <- result[, -c(nc - 1, nc)]
+    sigma <- result[, nc - 1]
+    dffits <- result[, nc]
+  } else {
+    dfbeta <- matrix(0, n, p)
+    dffits <- cookd <- rep(0, n)
+    sigma <- rep(.sigma, n)
+    for (i in 1:n){ #TODO: move this loop to cpp code?
+      c <- as.vector(Z[i, ] %*% ZtZinv %*% Z[i, ])
+      Xmr <- X[i, ] - r[, i]
+      XiAinvXi <- as.vector(X[i, ] %*% Ainv %*% X[i, ])
+      XmrAinvXi <- as.vector(Xmr %*% Ainv %*% X[i, ])
+      XmrAinvXmr <- as.vector(Xmr %*% Ainv %*% Xmr)
+      delta <- 1 - XiAinvXi + XmrAinvXi^2/(1 - c + XmrAinvXmr)
+      denom <- (1 - c + XmrAinvXmr)*delta
+      h <- Xmr * (1 - XiAinvXi) / denom + X[i, ] * XmrAinvXi / denom
+      j <- Xmr * XmrAinvXi / denom - X[i, ]/delta
+      g <- h * as.vector((y[i] - Z[i, ] %*% pi) - (y[i] - r[, i] %*% b)) +
+        (h + j)*as.vector(y[i] - X[i, ] %*% b)
+      dfbeta[i, ] <- - Ainv %*% g
+      if (sigma.){
+        ss <- rss + as.vector(g %*% Ainv %*% crossprod(X[-i, ]) %*% Ainv %*% g) -
+          2 * as.vector(g %*% Ainv %*% t(X[-i, ]) %*% (y[-i] - X[-i, ] %*% b))  -
+          as.vector(y[i] - X[i, ] %*% b)^2
+        sigma[i] <- sqrt(ss/(n - p - 1))
+      }
+      dffits[i] <- as.vector(X[i, ] %*% dfbeta[i, ])/
+        (sigma[i] * as.vector(sqrt(X[i, ] %*% XfXfinv %*% X[i, ])))
+    }
   }
 
-
   rstudent <- w*res/(sigma * sqrt(1 - hatvalues))
-
-  cookd <- (sigma^2/sigma2)*dffits^2/p
+  cookd <- (sigma^2/.sigma^2)*dffits^2/p
+  
+  rownames(dfbeta) <- rnames
+  colnames(dfbeta) <- cnames
+  names(dffits) <- names(sigma) <- names(cookd) <- rnames
 
   result <- list(model = model.matrix(model),
                  coefficients=coef(model),
@@ -335,7 +370,7 @@ avPlot.ivreg <- function(model, ...){
 #' @method Boot ivreg
 #' @importFrom car Boot
 #' @param method only \code{"case"} (case resampling) is supported: see \code{\link[car]{Boot}}.
-#' @param f,labels,R,ncores see \code{\link[car]{Boot}}.
+#' @param f,labels,R see \code{\link[car]{Boot}}.
 #' @export
 Boot.ivreg <- function(object, f = coef, labels = names(f(object)), R = 999, 
                        method = "case", ncores = 1, ...){

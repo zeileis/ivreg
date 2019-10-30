@@ -25,7 +25,7 @@
 \title{Deletion and Other Diagnostic Methods for \code{"ivreg"} Objects}
 \usage{
 \method{influence}{ivreg}(model, sigma. = n <= 1000, type = c("stage2",
-  "both", "maximum"), ...)
+  "both", "maximum"), ncores = 1, ...)
 
 \method{rstudent}{ivreg}(model, ...)
 
@@ -82,13 +82,16 @@ the hatvalues for each stage are first divided by their average (number of coeff
 stage regression/number of cases); the geometric mean or casewise maximum values are then
 multiplied by the average hatvalue from the second stage.}
 
+\item{ncores}{If \code{ncores > 1} (the default is \code{1}) computations are performed
+in parallel; this is advantageous only for large data sets.}
+
 \item{...}{arguments to be passed down.}
 
 \item{ylab}{The vertical axis label.}
 
 \item{distribution}{\code{"t"} (the default) or \code{"norm"}.}
 
-\item{f, labels, R, ncores}{see \code{\link[car]{Boot}}.}
+\item{f, labels, R}{see \code{\link[car]{Boot}}.}
 
 \item{method}{only \code{"case"} (case resampling) is supported: see \code{\link[car]{Boot}}.}
 }
