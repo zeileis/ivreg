@@ -19,6 +19,32 @@ test_that("dfbeta computed correctly 2", {
   expect_equal(dfbeta(m.ivreg), dfbeta(m.lm))
 })
 
+Kmenta2 <- Kmenta
+Kmenta2$Q[c(1, 4, 10)] <- NA
+m.miss <- update(m, data=Kmenta2, na.action=na.exclude)
+
+test_that("deletion statistics computed correctly with na.exclude", {
+  expect_true(all(is.na(hatvalues(m.miss)[c(1, 4, 10)])))
+  expect_true(all(is.na(residuals(m.miss)[c(1, 4, 10)])))
+  expect_true(all(is.na(fitted(m.miss)[c(1, 4, 10)])))
+  expect_true(all(is.na(rstudent(m.miss)[c(1, 4, 10)])))
+  expect_true(all(is.na(dffits(m.miss)[c(1, 4, 10)])))
+  expect_true(all(is.na(cooks.distance(m.miss)[c(1, 4, 10)])))
+  expect_true(all(is.na(dfbeta(m.miss)[c(1, 4, 10), ])))
+})
+
+m.miss.2<- update(m, data=Kmenta2)
+nms <- rownames(Kmenta)[-c(1, 4, 10)]
+test_that("rownames of deletion statistics preserved with na.omit", {
+  expect_equal(names(hatvalues(m.miss.2)), nms)
+  expect_equal(names(residuals(m.miss.2)), nms)
+  expect_equal(names(fitted(m.miss.2)), nms)
+  expect_equal(names(rstudent(m.miss.2)), nms)
+  expect_equal(names(dffits(m.miss.2)), nms)
+  expect_equal(names(cooks.distance(m.miss.2)), nms)
+  expect_equal(rownames(dfbeta(m.miss.2)), nms)
+})
+
 m.ivreg.w <- ivreg(Q ~ P + D | P + D, weights=Q, data=Kmenta) # WLS
 m.lm.w <- lm(Q ~ P + D, data=Kmenta, weights=Q)
 
