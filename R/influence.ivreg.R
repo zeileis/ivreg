@@ -1,11 +1,6 @@
 na.remove <- function(x){
-  # remove NAs from a vector preserving names and returning a vector
-  if (!is.vector(x)) "x is not a vector"
-  x <- na.omit(x)
-  nms <- names(x)
-  x <- as.vector(x)
-  if (!is.null(nms)) names(x) <- nms
-  x
+  # remove NAs preserving names
+  x <- x[!is.na(x)]
 }
 
 formula.ivreg <- function(x, ...) formula(x$terms$regressors)
