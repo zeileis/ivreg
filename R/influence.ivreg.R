@@ -250,7 +250,7 @@ hatvalues.ivreg <- function(model, type=c("stage2", "both", "maximum"), ...){
     mean2*hat
   }
   na.action <- model$na.action
-  if(class(na.action) == "exclude") hatvalues[na.action]  <- NA
+  if(inherits(na.action, "exclude")) hatvalues[na.action]  <- NA
   hatvalues
 }
 
