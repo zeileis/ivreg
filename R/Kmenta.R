@@ -1,8 +1,6 @@
-#' Partly Artifical Data on the U. S. Economy
+#' Partly Artifical Data on the U.S. Economy
 #'
-#' @docType data
-#'
-#' @usage Kmenta
+#' @usage data("Kmenta", package = "ivreg")
 #'
 #' @description These are partly contrived data from Kmenta (1986), constructed
 #' to illustrate estimation of a simultaneous-equation econometric model. The data
@@ -23,9 +21,10 @@
 #' @source Kmenta, J. (1986) \emph{Elements of Econometrics, Second Edition}, Macmillan.
 #' @seealso \code{\link{ivreg}}.
 #'
-#' @examples 
-#' deq <- ivreg(Q ~ P + D | D + F + A, data=Kmenta) # demand equation
-#' summary(deq, tests=TRUE)
-#' seq <- ivreg(Q ~ P + F + A | D + F + A, data=Kmenta) # supply equation
-#' summary(seq, tests=TRUE)
+#' @examples
+#' data("Kmenta", package = "ivreg") 
+#' deq <- ivreg(Q ~ P + D     | D + F + A, data = Kmenta) # demand equation
+#' seq <- ivreg(Q ~ P + F + A | D + F + A, data = Kmenta) # supply equation
+#' summary(deq, tests = TRUE)
+#' summary(seq, tests = TRUE)
 "Kmenta"
