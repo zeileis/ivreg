@@ -1,6 +1,6 @@
-#' Fitting Instrumental-Variable Regressions
+#' Fitting Instrumental-Variable Regressions by 2SLS
 #' 
-#' Fit instrumental-variable regression by two-stage least squares. This is
+#' Fit instrumental-variable regression by two-stage least squares (2SLS). This is
 #' equivalent to direct instrumental-variables estimation when the number of
 #' instruments is equal to the number of predictors.
 #' 
@@ -49,7 +49,7 @@
 #' @examples
 #' 
 #' ## data
-#' if (length(find.package("AER", quiet=TRUE)) > 0){
+#' if (length(find.package("AER", quiet = TRUE)) > 0){
     #' data("CigarettesSW", package="AER")
     #' CigarettesSW$rprice <- with(CigarettesSW, price/cpi)
     #' CigarettesSW$rincome <- with(CigarettesSW, income/population/cpi)

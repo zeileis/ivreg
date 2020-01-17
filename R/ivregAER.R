@@ -1,6 +1,6 @@
-#' Instrumental-Variable Regression
+#' Instrumental-Variable Regression by 2SLS
 #' 
-#' Fit instrumental-variable regression by two-stage least squares. This is
+#' Fit instrumental-variable regression by two-stage least squares (2SLS). This is
 #' equivalent to direct instrumental-variables estimation when the number of
 #' instruments is equal to the number of regressors.
 #' 
