@@ -66,23 +66,23 @@ formula.ivreg <- function(x, ...) formula(x$terms$regressors)
 #'   \code{\link[car]{qqPlot}}, \code{\link[car]{influencePlot}},
 #'   \code{\link[car]{infIndexPlot}}, \code{\link[car]{Boot}}.
 #' @examples
-#' kmenta.eq1 <- ivreg(Q ~ P + D | D + F + A, data=Kmenta)
+#' kmenta.eq1 <- ivreg(Q ~ P + D | D + F + A, data = Kmenta)
 #' car::avPlots(kmenta.eq1)
 #' car::crPlots(kmenta.eq1)
 #' car::influencePlot(kmenta.eq1)
 #' car::influenceIndexPlot(kmenta.eq1)
 #' car::qqPlot(kmenta.eq1)
-#' plot(effects::predictorEffects(kmenta.eq1, residuals=TRUE))
+#' plot(effects::predictorEffects(kmenta.eq1, residuals = TRUE))
 #' set.seed <- 12321 # for reproducibility
-#' confint(car::Boot(kmenta.eq1, R=250)) # 250 reps for brevity
-influence.ivreg <- function(model, sigma. = n <= 1e3, type=c("stage2", "both", "maximum"), 
-                            ncores=1, ...){
+#' confint(car::Boot(kmenta.eq1, R = 250)) # 250 reps for brevity
+influence.ivreg <- function(model, sigma. = n <= 1e3, type = c("stage2", "both", "maximum"), 
+                            ncores = 1, ...){
 
   type <- match.arg(type)
 
-  Z <- model.matrix(model, component="instruments") # model$model.matrix.instruments
-  X <- model.matrix(model, component="regressors") # model$model.matrix
-  X.fit <- model.matrix(model, component="projected") # model$fitted.1 
+  Z <- model.matrix(model, component = "instruments") # model$model.matrix.instruments
+  X <- model.matrix(model, component = "regressors") # model$model.matrix
+  X.fit <- model.matrix(model, component = "projected") # model$fitted.1 
   y <- model$y
   if (is.null(y)) stop("response variable not in model object")
   b <- coef(model) # model$coefficients
@@ -186,7 +186,7 @@ influence.ivreg <- function(model, sigma. = n <= 1e3, type=c("stage2", "both", "
   names(dffits) <- names(sigma) <- names(cookd) <- rnames
 
   result <- list(model = model.matrix(model),
-                 coefficients=coef(model),
+                 coefficients = coef(model),
                  dfbeta = naresid(na.action, dfbeta),
                  sigma = naresid(na.action, sigma),
                  dffits = naresid(na.action, dffits),
@@ -229,7 +229,7 @@ dfbeta.ivreg <- function(model, ...) {
 #' @rdname influence.ivreg
 #' @importFrom stats hatvalues lm.influence
 #' @export
-hatvalues.ivreg <- function(model, type=c("stage2", "both", "maximum"), ...){
+hatvalues.ivreg <- function(model, type = c("stage2", "both", "maximum"), ...){
   type <- match.arg(type)
   hatvalues <- if (type == "stage2") NextMethod() else {
     n <- model$nobs
@@ -280,14 +280,14 @@ cooks.distance.influence.ivreg <- {
 #' @importFrom graphics par
 #' @export
 qqPlot.ivreg <- function(x,
-                        ylab=paste("Studentized Residuals(",deparse(substitute(x)), ")", sep=""),
-                        distribution=c("t", "norm"), ...){
+                         ylab = paste("Studentized Residuals(", deparse(substitute(x)), ")", sep = ""),
+                         distribution = c("t", "norm"), ...){
   distribution <- match.arg(distribution)
   rstudent <- rstudent(x)
   if (distribution == "t"){
-    car::qqPlot(rstudent, ylab=ylab, distribution="t", df=df.residual(x), ...)
+    car::qqPlot(rstudent, ylab = ylab, distribution = "t", df = df.residual(x), ...)
   } else {
-    car::qqPlot(rstudent, ylab=ylab, distribution="norm", ...)
+    car::qqPlot(rstudent, ylab = ylab, distribution = "norm", ...)
   }
 }
 
@@ -297,14 +297,14 @@ qqPlot.ivreg <- function(x,
 #' @param ylab The vertical axis label.
 #' @export
 qqPlot.influence.ivreg <- function(x,
-                                  ylab=paste("Studentized Residuals(",deparse(substitute(x)), ")", sep=""),
-                                  distribution=c("t", "norm"), ...){
+                                   ylab = paste("Studentized Residuals(", deparse(substitute(x)), ")", sep = ""),
+                                   distribution = c("t", "norm"), ...){
   distribution <- match.arg(distribution)
   rstudent <- rstudent(x)
   if (distribution == "t"){
-    car::qqPlot(rstudent, ylab=ylab, distribution="t", df=df.residual(x), ...)
+    car::qqPlot(rstudent, ylab = ylab, distribution = "t", df = df.residual(x), ...)
   } else {
-    car::qqPlot(rstudent, ylab=ylab, ...)
+    car::qqPlot(rstudent, ylab = ylab, ...)
   }
 }
 
@@ -357,7 +357,7 @@ model.matrix.influence.ivreg <- function(object, ...){
 #' @importFrom car avPlot
 #' @export
 avPlot.ivreg <- function(model, ...){
-  model$model.matrix <- model.matrix(model, type="projected")
+  model$model.matrix <- model.matrix(model, type = "projected")
   NextMethod()
 }
 

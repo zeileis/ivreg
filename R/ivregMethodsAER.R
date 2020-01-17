@@ -136,7 +136,7 @@ print.ivreg <- function(x, digits = max(3, getOption("digits") - 3), ...)
 
 #' @rdname ivreg_Methods
 #' @export
-summary.ivreg <- function(object, vcov. = NULL, df = NULL, tests=FALSE, diagnostics, ...)
+summary.ivreg <- function(object, vcov. = NULL, df = NULL, tests = FALSE, diagnostics, ...)
 {
   if (missing(diagnostics)) diagnostics <- tests
   ## weighted residuals
