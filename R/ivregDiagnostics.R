@@ -3,15 +3,17 @@ na.remove <- function(x){
   x <- x[!is.na(x)]
 }
 
-formula.ivreg <- function(x, ...) formula(x$terms$regressors)
+# formula.ivreg <- function(x, ...) formula(x$terms$regressors)
 
 #' Deletion and Other Diagnostic Methods for \code{"ivreg"} Objects
 #'
-#' @aliases 2SLS_Diagnostics influence.ivreg rstudent.ivreg cooks.distance.ivreg 
+#' @aliases ivregDiagnostics influence.ivreg rstudent.ivreg cooks.distance.ivreg 
 #' dfbeta.influence.ivreg hatvalues.ivreg rstudent.influence.ivreg hatvalues.influence.ivreg
-#' cooks.distance.influence.ivreg qqPlot.ivreg qPlot.influence.ivreg influencePlot.ivreg
+#' cooks.distance.influence.ivreg qqPlot.ivreg qqPlot.influence.ivreg influencePlot.ivreg
 #' nfluencePlot.influence.ivreg infIndexPlot.ivreg infIndexPlot.influence.ivreg
-#' model.matrix.influence.ivreg avPlot.ivreg Boot.ivreg
+#' model.matrix.influence.ivreg avPlot.ivreg Boot.ivreg 
+#' crPlot.ivreg plot.ivreg qqPlot.ivreg outlierTest.ivreg influencePlot.ivreg 
+#' spreadLevelPlot.ivreg ncvTest.ivreg deviance.ivreg
 #' 
 #' @param model,x,object A \code{"ivreg"} or \code{"influence.ivreg"} object.
 #' @param sigma. If \code{TRUE} (the default for 1000 or fewer cases), the deleted value
@@ -26,6 +28,7 @@ formula.ivreg <- function(x, ...) formula(x$terms$regressors)
 #' the hatvalues for each stage are first divided by their average (number of coefficients in
 #' stage regression/number of cases); the geometric mean or casewise maximum values are then
 #' multiplied by the average hatvalue from the second stage.
+#' @param main Main title for the graph.
 #' @param ... arguments to be passed down.
 #'
 #' @return In the case of \code{influence.ivreg}, an object of class \code{"influence.ivreg"}
@@ -44,8 +47,8 @@ formula.ivreg <- function(x, ...) formula(x$terms$regressors)
 #' In the case of other methods, such as \code{rstudent.ivreg} or
 #' \code{rstudent.influence.ivreg}, the corresponding diagnostic statistics.
 #'
-#' @description Methods for computing deletion diagnostics for 2SLS regression.
-#' It's generally more efficient to compute the diagnostics via the \code{influence}
+#' @description Methods for computing deletion and other regression diagnostics for 2SLS regression.
+#' It's generally more efficient to compute the deletion diagnostics via the \code{influence}
 #' method and then to extract the various specific diagnostics with the methods for
 #' \code{"influence.ivreg"} objects. Other diagnostics for linear models, such as
 #' added-variable plots (\code{\link[car]{avPlots}}) and component-plus-residual
@@ -64,7 +67,9 @@ formula.ivreg <- function(x, ...) formula(x$terms$regressors)
 #' @seealso \code{\link{ivreg}}, \link{2SLS_Methods}, \code{\link[car]{avPlots}},
 #'   \code{\link[car]{crPlots}}, \code{\link[effects]{predictorEffects}},
 #'   \code{\link[car]{qqPlot}}, \code{\link[car]{influencePlot}},
-#'   \code{\link[car]{infIndexPlot}}, \code{\link[car]{Boot}}.
+#'   \code{\link[car]{infIndexPlot}}, \code{\link[car]{Boot}}, 
+#'   \code{\link[car]{outlierTest}}, \code{\link[car]{spreadLevelPlot}}, 
+#'   \code{\link[car]{ncvTest}}.
 #' @examples
 #' kmenta.eq1 <- ivreg(Q ~ P + D | D + F + A, data = Kmenta)
 #' car::avPlots(kmenta.eq1)
@@ -72,9 +77,16 @@ formula.ivreg <- function(x, ...) formula(x$terms$regressors)
 #' car::influencePlot(kmenta.eq1)
 #' car::influenceIndexPlot(kmenta.eq1)
 #' car::qqPlot(kmenta.eq1)
+#' car::spreadLevelPlot(kmenta.eq1)
 #' plot(effects::predictorEffects(kmenta.eq1, residuals = TRUE))
 #' set.seed <- 12321 # for reproducibility
 #' confint(car::Boot(kmenta.eq1, R = 250)) # 250 reps for brevity
+#' car::outlierTest(kmenta.eq1)
+#' car::ncvTest(kmenta.eq1)
+#' 
+#' @rdname ivregDiagnostics
+#' @importFrom stats influence
+#' @export
 influence.ivreg <- function(model, sigma. = n <= 1e3, type = c("stage2", "both", "maximum"), 
                             ncores = 1, ...){
 
@@ -198,14 +210,14 @@ influence.ivreg <- function(model, sigma. = n <= 1e3, type = c("stage2", "both",
   result
 }
 
-#' @rdname influence.ivreg
+#' @rdname ivregDiagnostics
 #' @importFrom stats rstudent
 #' @export
 rstudent.ivreg <- function(model, ...) {
   influence(model)$rstudent
 }
 
-#' @rdname influence.ivreg
+#' @rdname ivregDiagnostics
 #' @importFrom stats cooks.distance
 #' @method cooks.distance ivreg
 #' @export
@@ -213,25 +225,31 @@ cooks.distance.ivreg <- function(model, ...) {
   influence(model)$cookd
 }
 
-#' @rdname influence.ivreg
+#' @rdname ivregDiagnostics
 #' @export
 dfbeta.influence.ivreg <- function(model, ...) {
   model$dfbeta
 }
 
-#' @rdname influence.ivreg
+#' @rdname ivregDiagnostics
 #' @importFrom stats dfbeta
 #' @export
 dfbeta.ivreg <- function(model, ...) {
   influence(model)$dfbeta
 }
 
-#' @rdname influence.ivreg
+#' @rdname ivregDiagnostics
 #' @importFrom stats hatvalues lm.influence
 #' @export
 hatvalues.ivreg <- function(model, type = c("stage2", "both", "maximum"), ...){
   type <- match.arg(type)
-  hatvalues <- if (type == "stage2") NextMethod() else {
+  if (length(class(model)) == 1){
+    class(model) <- c("ivreg", "lm")
+    return(hatvalues(model, type=type, ...))
+  }
+  hatvalues <- if (type == "stage2") {
+    NextMethod()
+  } else {
     n <- model$nobs
     p <- model$p
     q <- model$q
@@ -254,28 +272,28 @@ hatvalues.ivreg <- function(model, type = c("stage2", "both", "maximum"), ...){
   hatvalues
 }
 
-#' @rdname influence.ivreg
+#' @rdname ivregDiagnostics
 #' @method rstudent influence.ivreg
 #' @export
 rstudent.influence.ivreg <- function(model, ...) {
   model$rstudent
 }
 
-#' @rdname influence.ivreg
+#' @rdname ivregDiagnostics
 #' @method hatvalues influence.ivreg
 #' @export
 hatvalues.influence.ivreg <- function(model, ...) {
   model$hatvalues
 }
 
-#' @rdname influence.ivreg
+#' @rdname ivregDiagnostics
 #' @export
 #' @method cooks.distance influence.ivreg
 cooks.distance.influence.ivreg <- {
   function(model, ...) model$cookd
 }
 
-#' @rdname influence.ivreg
+#' @rdname ivregDiagnostics
 #' @importFrom car qqPlot
 #' @importFrom graphics par
 #' @export
@@ -291,7 +309,7 @@ qqPlot.ivreg <- function(x,
   }
 }
 
-#' @rdname influence.ivreg
+#' @rdname ivregDiagnostics
 #' @method qqPlot influence.ivreg
 #' @param distribution \code{"t"} (the default) or \code{"norm"}.
 #' @param ylab The vertical axis label.
@@ -308,7 +326,7 @@ qqPlot.influence.ivreg <- function(x,
   }
 }
 
-#' @rdname influence.ivreg
+#' @rdname ivregDiagnostics
 #' @method influencePlot ivreg
 #' @importFrom car influencePlot
 #' @export
@@ -316,7 +334,7 @@ influencePlot.ivreg <- function(model, ...){
   influencePlot(influence(model), ...)
 }
 
-#' @rdname influence.ivreg
+#' @rdname ivregDiagnostics
 #' @method influencePlot influence.ivreg
 #' @export
 influencePlot.influence.ivreg <- function(model, ...){
@@ -327,14 +345,14 @@ influencePlot.influence.ivreg <- function(model, ...){
   else NextMethod()
 }
 
-#' @rdname influence.ivreg
+#' @rdname ivregDiagnostics
 #' @method infIndexPlot ivreg
 #' @export
 infIndexPlot.ivreg <- function(model, ...){
   infIndexPlot(influence(model), ...)
 }
 
-#' @rdname influence.ivreg
+#' @rdname ivregDiagnostics
 #' @method infIndexPlot influence.ivreg
 #' @importFrom car infIndexPlot
 #' @export
@@ -346,22 +364,27 @@ infIndexPlot.influence.ivreg <- function(model, ...){
   else NextMethod()
 }
 
-#' @rdname influence.ivreg
+#' @rdname ivregDiagnostics
 #' @method model.matrix influence.ivreg
 #' @export
 model.matrix.influence.ivreg <- function(object, ...){
   object$model
 }
 
-#' @rdname influence.ivreg
+#' @rdname ivregDiagnostics
 #' @importFrom car avPlot
 #' @export
 avPlot.ivreg <- function(model, ...){
-  model$model.matrix <- model.matrix(model, type = "projected")
-  NextMethod()
+  if (length(class(model)) == 1) {
+    class(model) <- c("ivreg", "lm")
+    model$model.matrix <- model.matrix(model, type = "projected")
+    avPlot(model, ...)
+  } else {
+    NextMethod()
+  }
 }
 
-#' @rdname influence.ivreg
+#' @rdname ivregDiagnostics
 #' @method Boot ivreg
 #' @importFrom car Boot
 #' @param method only \code{"case"} (case resampling) is supported: see \code{\link[car]{Boot}}.
@@ -371,4 +394,98 @@ Boot.ivreg <- function(object, f = coef, labels = names(f(object)), R = 999,
                        method = "case", ncores = 1, ...){
   method <- match.arg(method)
   NextMethod()
+}
+
+#' @rdname ivregDiagnostics
+#' @importFrom car crPlot
+#' @export
+crPlot.ivreg <- function(model, ...){
+  if (length(class(model)) == 1) {
+    class(model) <- c("ivreg", "lm")
+    crPlot(model, ...)
+  } else {
+    NextMethod()
+  }
+}
+
+#' @rdname ivregDiagnostics
+#' @importFrom graphics plot
+#' @export
+plot.ivreg <- function(x, ...){
+  if (length(class(x)) == 1) {
+    class(x) <- c("ivreg", "lm")
+    plot(x, ...)
+  } else {
+    NextMethod()
+  }
+}
+
+#' @rdname ivregDiagnostics
+#' @importFrom car qqPlot
+#' @export
+qqPlot.ivreg <- function(x, distribution=c("t", "norm"), ...){
+  distribution <- match.arg(distribution)
+  rstudent <- rstudent(x)
+  df <- df.residual(x)
+  qqPlot(rstudent, distribution=distribution, df=df, ylab="Studentized Residuals", ...)
+}
+
+#' @rdname ivregDiagnostics
+#' @importFrom car outlierTest
+#' @export
+outlierTest.ivreg <- function(x, ...){
+  if (length(class(x)) == 1) {
+    class(x) <- c("ivreg", "lm")
+    outlierTest(x, ...)
+  } else {
+    NextMethod()
+  }
+}
+
+#' @rdname ivregDiagnostics
+#' @importFrom car influencePlot
+#' @export
+influencePlot.ivreg <- function(x, ...){
+  if (length(class(x)) == 1) {
+    class(x) <- c("ivreg", "lm")
+    influencePlot(x, ...)
+  } else {
+    NextMethod()
+  }
+}
+
+#' @rdname ivregDiagnostics
+#' @importFrom car spreadLevelPlot
+#' @export
+spreadLevelPlot.ivreg <- function(x, main="Spread-Level Plot", ...){
+  if (length(class(x)) == 1) {
+    class(x) <- c("ivreg", "lm")
+    spreadLevelPlot(x, main=main, ...)
+  } else {
+    NextMethod()
+  }
+}
+
+#' @rdname ivregDiagnostics
+#' @importFrom car ncvTest
+#' @export
+ncvTest.ivreg <- function(model, ...){
+  if (length(class(model)) == 1) {
+    class(model) <- c("ivreg", "lm")
+    ncvTest(model, ...)
+  } else {
+    NextMethod()
+  }
+}
+
+#' @rdname ivregDiagnostics
+#' @importFrom stats deviance
+#' @export
+deviance.ivreg <- function(object, ...){
+  if (length(class(object)) == 1) {
+    class(object) <- c("ivreg", "lm")
+    deviance(object, ...)
+  } else {
+    NextMethod()
+  }
 }

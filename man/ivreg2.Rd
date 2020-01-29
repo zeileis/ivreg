@@ -4,10 +4,21 @@
 \alias{ivreg2}
 \title{2SLS Least Squares Estimation of a Linear Model}
 \usage{
-ivreg2(formula, instruments = rhs(formula), data, subset, weights,
-  na.action = getOption("na.action"), contrasts = NULL,
-  singular.ok = FALSE, model = TRUE, x = TRUE, y = TRUE,
-  qr = TRUE, ...)
+ivreg2(
+  formula,
+  instruments = rhs(formula),
+  data,
+  subset,
+  weights,
+  na.action = getOption("na.action"),
+  contrasts = NULL,
+  singular.ok = FALSE,
+  model = TRUE,
+  x = TRUE,
+  y = TRUE,
+  qr = TRUE,
+  ...
+)
 }
 \arguments{
 \item{formula}{A model \link[stats]{formula}, as for \code{\link[stats]{lm}},
@@ -72,7 +83,7 @@ those returned by \code{\link{fitivreg2}}:
 Provides a formula-based interface for 2SLS estimation of
 a linear model. Computations are done by \code{\link{fitivreg2}}. The returned object has
 the necessary information for computing a variety of
-\link[=2SLS_Diagnostics]{regression diagnostics}.
+\link[=ivregDiagnostics]{regression diagnostics}.
 }
 \examples{
 summary(ivreg2(Q ~ P + D, ~ D + F + A, data=Kmenta))     # demand equation
@@ -81,7 +92,7 @@ summary(ivreg2(Q ~ P + F + A, ~ D + F + A, data=Kmenta)) # supply equation
 }
 \seealso{
 \code{\link{fitivreg2}}, \code{\link[stats]{lm}}, \code{\link[stats]{formula}}, \code{\link{2SLS_Methods}},
-\code{\link{2SLS_Diagnostics}}
+\code{\link{ivregDiagnostics}}
 }
 \author{
 John Fox \email{jfox@mcmaster.ca}

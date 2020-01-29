@@ -183,12 +183,12 @@ fitivreg2 <- function(y, X, Z, wt=NULL, singular.ok=FALSE, qr=TRUE){
 #' @description   Provides a formula-based interface for 2SLS estimation of
 #' a linear model. Computations are done by \code{\link{fitivreg2}}. The returned object has
 #' the necessary information for computing a variety of
-#' \link[=2SLS_Diagnostics]{regression diagnostics}.
+#' \link[=ivregDiagnostics]{regression diagnostics}.
 #'
 #' @author John Fox \email{jfox@mcmaster.ca}
 #'
 #' @seealso \code{\link{fitivreg2}}, \code{\link[stats]{lm}}, \code{\link[stats]{formula}}, \code{\link{2SLS_Methods}},
-#' \code{\link{2SLS_Diagnostics}}
+#' \code{\link{ivregDiagnostics}}
 #'
 #' @importFrom stats model.weights .getXlevels
 #' @export
@@ -253,7 +253,7 @@ ivreg2 <- function (formula, instruments=rhs(formula), data, subset, weights,
 #' Methods for \code{"ivreg2"} Objects
 #' @aliases 2SLS_Methods
 #' @description Various methods for processing \code{"ivreg2"} objects; for diagnostic methods,
-#'   see \link{2SLS_Diagnostics}.
+#'   see \link{ivregDiagnostics}.
 #' @param object An object of class \code{"ivreg2"}.
 #' @param type Type of object desired, varies by method:
 #' \describe{
@@ -269,7 +269,7 @@ ivreg2 <- function (formula, instruments=rhs(formula), data, subset, weights,
 #' @importFrom stats model.matrix
 #' @export
 #' @method model.matrix ivreg2
-#' @seealso \code{\link{ivreg2}}, \link{2SLS_Diagnostics},
+#' @seealso \code{\link{ivreg2}}, \link{ivregDiagnostics},
 #'   \code{\link[sandwich]{sandwich}}
 #' @examples
 #' kmenta.eq1 <- ivreg2(Q ~ P + D, ~ D + F + A, data=Kmenta)

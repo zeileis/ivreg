@@ -1,7 +1,7 @@
 ---
 title: "Diagnostics for 2SLS Regression"
 author: "John Fox"
-date: "2019-10-22"
+date: "2020-01-29"
 bibliography: Diagnostics-for-2SLS-Regression.bib
 biblio-style: "apalike"
 output: rmarkdown::html_vignette
@@ -163,12 +163,12 @@ Setting `tests=TRUE` in the calls to `summary()` prints the results of three "di
 
 * The Sargan test is a test of overidentification. That is, in an overidentified regression equation, where there are more instrumental variables than coefficients to estimate, as in Kmenta's deman equation, it's possible that the instrumental variables provide conflicting information about the values of the coefficients. A large test statistic and small p-value for the Sargan test suggest, therefore, that the model is misspecified. In the example, we obtain a moderately small p-value of 0.084 by chance even though we know (by the manner in which the data were constructed) that the demand equation is correct. The Sargan test is inapplicable to a just-identified regression equation, with an equal number of instrumental variables and coefficients, as in Kmenta's supply equation.
 
-`"ivreg"` objects inherit from class `"lm"`, and many methods for `"lm"` objects work properly for `"ivreg"` objects. For example, the `plot()` method for `"lm"` objects produces interpretable plots, here for the 2SLS fit for the demand equation in Kmenta's model:
+Several methods for class `"lm"` objects work properly with the objects produced by `ivreg()`. For example, the `plot()` method for `"ivreg"` objects invokes the corresponding `"lm"` method and produces interpretable plots, here for the 2SLS fit for the demand equation in Kmenta's model:
 ```{r fig.height=8, fig.width=8}
 par(mfrow=c(2, 2))
 plot(deq)
 ```
-I prefer, however, the versions of these diagnostic graphs described below, in this and subsequent sections.
+In this case, however, I prefer the versions of these diagnostic graphs described below, in this and subsequent sections.
 
 As I mentioned, the `Kmenta` data are partly contrived by simulating the model, and so it's probably not surprising that the data are well behaved. For example, a *QQ plot* of studentized residuals and an *"influence plot"* of hatvalues, studentized residuals, and Cook's distances for the first structural equation are both unremarkable, except for a couple of high-leverage but in-line cases:
 ```{r}
@@ -247,7 +247,7 @@ in our case by 2SLS regression, obtaining estimated regression coefficients $a^\
 
 ### Diagnosing Nonlinearity: An Example
 
-I turn once more to the demand equation for Kmenta's data and model to illustrate component-plus-residual plots, and once more the data are well behaved. `"ivreg"` objects inherit the `"lm"` class, and the `"lm"` method for the `crPlot()` function in the **car** package works with these objects. In particular, `crPlots()` constructs component-plus-residual plots for all of the numeric explanatory variables in an additive regression equation. For example,
+I turn once more to the demand equation for Kmenta's data and model to illustrate component-plus-residual plots, and once more the data are well behaved. An `"ivreg"` method is provided for the `crPlot()` function in the **car** package. In particular, `crPlots()` constructs component-plus-residual plots for all of the numeric explanatory variables in an additive regression equation. For example,
 ```{r fig.height=4, fig.width=8}
 crPlots(deq, smooth=list(span=1))
 ```

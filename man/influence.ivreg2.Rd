@@ -19,8 +19,7 @@
 \alias{model.matrix.influence.ivreg2}
 \title{Deletion Diagnostic Methods for \code{"ivreg2"} Objects}
 \usage{
-\method{influence}{ivreg2}(model, sigma. = n <= 1000,
-  type = c("stage2", "both"), ...)
+\method{influence}{ivreg2}(model, sigma. = n <= 1000, type = c("stage2", "both"), ...)
 
 \method{rstudent}{ivreg2}(model, ...)
 
@@ -30,8 +29,7 @@
 
 \method{dfbeta}{ivreg2}(model, ...)
 
-\method{hatvalues}{ivreg2}(model, type = c("stage2", "both", "maximum"),
-  ...)
+\method{hatvalues}{ivreg2}(model, type = c("stage2", "both", "maximum"), ...)
 
 \method{rstudent}{influence.ivreg2}(model, ...)
 
@@ -39,13 +37,19 @@
 
 \method{cooks.distance}{influence.ivreg2}(model, ...)
 
-\method{qqPlot}{ivreg2}(x, ylab = paste("Studentized Residuals(",
-  deparse(substitute(x)), ")", sep = ""), distribution = c("t", "norm"),
-  ...)
+\method{qqPlot}{ivreg2}(
+  x,
+  ylab = paste("Studentized Residuals(", deparse(substitute(x)), ")", sep = ""),
+  distribution = c("t", "norm"),
+  ...
+)
 
-\method{qqPlot}{influence.ivreg2}(x,
-  ylab = paste("Studentized Residuals(", deparse(substitute(x)), ")", sep
-  = ""), distribution = c("t", "norm"), ...)
+\method{qqPlot}{influence.ivreg2}(
+  x,
+  ylab = paste("Studentized Residuals(", deparse(substitute(x)), ")", sep = ""),
+  distribution = c("t", "norm"),
+  ...
+)
 
 \method{influencePlot}{ivreg2}(model, ...)
 

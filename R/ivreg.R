@@ -9,7 +9,7 @@
 #' \code{summary}, \code{vcov}, \code{anova}, \code{predict}, \code{residuals},
 #' \code{terms}, \code{model.matrix}, \code{bread}, \code{estfun}) is available
 #' and described in \code{\link{ivreg_Methods}}. For methods related to regression
-#' diagnotics, see \code{\link{2SLS_Diagnostics}}.
+#' diagnotics, see \code{\link{ivregDiagnostics}}.
 #' 
 #' Regressors and instruments for \code{ivreg} are most easily specified in a
 #' formula with two parts on the right-hand side, e.g., \code{y ~ x1 + x2 | z1
@@ -83,7 +83,7 @@
 #' \item{x}{a list with elements \code{"regressors"}, \code{"instruments"}, \code{"projected"},
 #' containing the model matrices from the respective components (if \code{x = TRUE}). 
 #' \code{"projected"} is the matrix of regressors projected on the image of the instruments.}
-#' @seealso \code{\link{ivreg.fit}}, \code{\link{2SLS_Diagnostics}}, \code{\link{ivreg_Methods}},
+#' @seealso \code{\link{ivreg.fit}}, \code{\link{ivregDiagnostics}}, \code{\link{ivreg_Methods}},
 #' \code{\link[stats]{lm}}, \code{\link[stats:lmfit]{lm.fit}}
 #' @references Greene, W. H. (1993) \emph{Econometric Analysis}, 2nd ed.,
 #' Macmillan.
@@ -179,6 +179,6 @@ ivreg <- function(formula, instruments, data, subset, na.action, weights, offset
   if(x) rval$x <- list(regressors = X, instruments = Z, projected = rval$x)
     else rval$x <- NULL
       
-  class(rval) <- c("ivreg", "lm")
+  class(rval) <- "ivreg"
   return(rval)
 }

@@ -3,12 +3,13 @@
 #' print.ivreg summary.ivreg print.summary.ivreg anova.ivreg update.ivreg residuals.ivreg Effect.ivreg 
 #' formula.ivreg
 #' @description Various methods for processing \code{"ivreg"} objects; for diagnostic methods,
-#'   see \code{\link{2SLS_Diagnostics}}.
-#' @seealso \code{\link{ivreg}}, \code{\link{ivreg.fit}}, \code{\link{2SLS_Diagnostics}}
+#'   see \code{\link{ivregDiagnostics}}.
+#' @seealso \code{\link{ivreg}}, \code{\link{ivreg.fit}}, \code{\link{ivregDiagnostics}}
 #' @param object,object2,model,mod An object of class \code{"ivreg"}.
 #' @param x An object of class \code{"ivreg"} or \code{"summary.ivreg"}.
-#' @param component For \code{terms}, \code{"regressors"} or \code{"instruments"}; 
-#' for \code{model.matrix}, \code{"projected"}, \code{"regressors"}, or \code{"instruments"}.
+#' @param component For \code{\link{terms}}, \code{"regressors"} or \code{"instruments"}; 
+#' for \code{\link{model.matrix}}, \code{"projected"}, \code{"regressors"}, or \code{"instruments"};
+#' for \code{\link{formula}}, \code{"regressors"}, \code{"instruments"},  or \code{"complete"}.
 #' @param newdata Values of predictors for which to obtain predicted values.
 #' @param na.action \code{na} method to apply to predictor values for predictions; default is \code{\link{na.pass}}.
 #' @param digits For printing.
@@ -17,7 +18,7 @@
 #' @param df Optional residual degrees of freedom to use in computing model summary.
 #' @param tests,diagnostics Report 2SLS "diagnostic" tests in model summary (default is \code{FALSE}). 
 #' These tests are not to be confused with the \emph{regression diagnostics} provided elsewhere in the \pkg{ivreg}
-#' package: see \code{\link{2SLS_Diagnostics}}; the \code{diagnostics} argument is retained for backwards compatibility.
+#' package: see \code{\link{ivregDiagnostics}}; the \code{diagnostics} argument is retained for backwards compatibility.
 #' @param test Test statistics for ANOVA table; only \code{test = "F"} is supported.
 #' @param formula. To update model.
 #' @param evaluate If \code{TRUE}, the default, the updated model is evaluated; if \code{FALSE} the updated call is returned.
@@ -416,7 +417,13 @@ Effect.ivreg <- function (focal.predictors, mod, ...) {
 #' @rdname ivreg_Methods
 #' @importFrom stats formula
 #' @export
-formula.ivreg <- function(x, component = c("regressors", "projected", "instruments"), ... ) {
+formula.ivreg <- function(x, component = c("regressors", "instruments", "complete"), ... ) {
   component <- match.arg(component)
-  formula(x$terms[[component]])
+  if (component == "complete"){
+    class(x) <- "default"
+    formula(x)
+    
+  } else {
+    formula(x$terms[[component]])
+  }
 }

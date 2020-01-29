@@ -3,7 +3,7 @@
 \docType{data}
 \name{Kmenta}
 \alias{Kmenta}
-\title{Partly Artifical Data on the U. S. Economy}
+\title{Partly Artifical Data on the U.S. Economy}
 \format{A data frame with 20 rows and 5 columns.
 \describe{
   \item{Q}{food consumption per capita.}
@@ -16,7 +16,7 @@
 Kmenta, J. (1986) \emph{Elements of Econometrics, Second Edition}, Macmillan.
 }
 \usage{
-Kmenta
+data("Kmenta", package = "ivreg")
 }
 \description{
 These are partly contrived data from Kmenta (1986), constructed
@@ -27,10 +27,11 @@ variables Q and P are simulated according to the linear simultaneous equation mo
 fit in the examples.
 }
 \examples{
-deq <- ivreg(Q ~ P + D | D + F + A, data=Kmenta) # demand equation
-summary(deq, tests=TRUE)
-seq <- ivreg(Q ~ P + F + A | D + F + A, data=Kmenta) # supply equation
-summary(seq, tests=TRUE)
+data("Kmenta", package = "ivreg") 
+deq <- ivreg(Q ~ P + D     | D + F + A, data = Kmenta) # demand equation
+seq <- ivreg(Q ~ P + F + A | D + F + A, data = Kmenta) # supply equation
+summary(deq, tests = TRUE)
+summary(seq, tests = TRUE)
 }
 \seealso{
 \code{\link{ivreg}}.

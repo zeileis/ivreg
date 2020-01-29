@@ -16,30 +16,29 @@
 \alias{estfun.ivreg2}
 \title{Methods for \code{"ivreg2"} Objects}
 \usage{
-\method{model.matrix}{ivreg2}(object, type = c("model", "instruments",
-  "stage2"), ...)
+\method{model.matrix}{ivreg2}(object, type = c("model", "instruments", "stage2"), ...)
 
 \method{avPlot}{ivreg2}(model, ...)
 
 \method{vcov}{ivreg2}(object, ...)
 
-\method{residuals}{ivreg2}(object, type = c("response", "stage1",
-  "stage2", "working", "deviance", "pearson", "partial"), ...)
+\method{residuals}{ivreg2}(
+  object,
+  type = c("response", "stage1", "stage2", "working", "deviance", "pearson", "partial"),
+  ...
+)
 
-\method{fitted}{ivreg2}(object, type = c("model", "stage1", "stage2"),
-  ...)
+\method{fitted}{ivreg2}(object, type = c("model", "stage1", "stage2"), ...)
 
 \method{print}{ivreg2}(x, digits = getOption("digits") - 2, ...)
 
-\method{summary}{ivreg2}(object, digits = getOption("digits") - 2,
-  vcov. = vcov, ...)
+\method{summary}{ivreg2}(object, digits = getOption("digits") - 2, vcov. = vcov, ...)
 
 \method{print}{summary.ivreg2}(x, ...)
 
 \method{anova}{ivreg2}(object, model.2, s2, dfe, ...)
 
-\method{update}{ivreg2}(object, formula., instruments., ...,
-  evaluate = TRUE)
+\method{update}{ivreg2}(object, formula., instruments., ..., evaluate = TRUE)
 
 \method{bread}{ivreg2}(x, ...)
 
@@ -87,7 +86,7 @@ if \code{FALSE} simply generate the updated call.}
 }
 \description{
 Various methods for processing \code{"ivreg2"} objects; for diagnostic methods,
-  see \link{2SLS_Diagnostics}.
+  see \link{ivregDiagnostics}.
 }
 \examples{
 kmenta.eq1 <- ivreg2(Q ~ P + D, ~ D + F + A, data=Kmenta)
@@ -98,6 +97,6 @@ summary(kmenta.eq1, vcov.=sandwich::sandwich) # sandwich SEs
 plot(fitted(kmenta.eq1), residuals(kmenta.eq1)) # residuals vs fitted values
 }
 \seealso{
-\code{\link{ivreg2}}, \link{2SLS_Diagnostics},
+\code{\link{ivreg2}}, \link{ivregDiagnostics},
   \code{\link[sandwich]{sandwich}}
 }
