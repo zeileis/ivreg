@@ -16,6 +16,8 @@
 \alias{residuals.ivreg}
 \alias{Effect.ivreg}
 \alias{formula.ivreg}
+\alias{Anova.ivreg}
+\alias{linearHypothesis.ivreg}
 \title{Methods for \code{"ivreg"} Objects}
 \usage{
 \method{vcov}{ivreg}(object, ...)
@@ -65,6 +67,10 @@
 \method{Effect}{ivreg}(focal.predictors, mod, ...)
 
 \method{formula}{ivreg}(x, component = c("regressors", "instruments", "complete"), ...)
+
+\method{Anova}{ivreg}(mod, test.statistic = c("F", "Chisq"), ...)
+
+\method{linearHypothesis}{ivreg}(model, test = c("F", "Chisq"), ...)
 }
 \arguments{
 \item{object, object2, model, mod}{An object of class \code{"ivreg"}.}
@@ -99,7 +105,10 @@ package: see \code{\link{ivregDiagnostics}}; the \code{diagnostics} argument is 
 
 \item{signif.stars}{Show "significance stars" in summary output.}
 
-\item{test}{Test statistics for ANOVA table; only \code{test = "F"} is supported.}
+\item{test, test.statistic}{Test statistics for ANOVA table computed by \code{anova()}, \code{Anova()},
+or \code{linearHypothesis()}. Only \code{test = "F"} is supported by \code{anova()}; this is also
+the default for \code{Anova()} and \code{linearHypothesis()}, which also allow \code{test = "Chisq"} for
+asymptotic tests.}
 
 \item{formula.}{To update model.}
 

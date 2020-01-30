@@ -19,7 +19,10 @@
 #' @param tests,diagnostics Report 2SLS "diagnostic" tests in model summary (default is \code{FALSE}). 
 #' These tests are not to be confused with the \emph{regression diagnostics} provided elsewhere in the \pkg{ivreg}
 #' package: see \code{\link{ivregDiagnostics}}; the \code{diagnostics} argument is retained for backwards compatibility.
-#' @param test Test statistics for ANOVA table; only \code{test = "F"} is supported.
+#' @param test,test.statistic Test statistics for ANOVA table computed by \code{anova()}, \code{Anova()},
+#' or \code{linearHypothesis()}. Only \code{test = "F"} is supported by \code{anova()}; this is also
+#' the default for \code{Anova()} and \code{linearHypothesis()}, which also allow \code{test = "Chisq"} for
+#' asymptotic tests.
 #' @param formula. To update model.
 #' @param evaluate If \code{TRUE}, the default, the updated model is evaluated; if \code{FALSE} the updated call is returned.
 #' @param ... arguments to pass down.
@@ -426,4 +429,19 @@ formula.ivreg <- function(x, component = c("regressors", "instruments", "complet
   } else {
     formula(x$terms[[component]])
   }
+}
+
+#' @rdname ivreg_Methods
+#' @importFrom car Anova
+#' @export
+Anova.ivreg <- function(mod, test.statistic=c("F", "Chisq"), ...){
+  test.statistic <- match.arg(test.statistic)
+  NextMethod(test.statistic=test.statistic)
+}
+
+#' @rdname ivreg_Methods
+#' @export
+linearHypothesis.ivreg <- function(model, test=c("F", "Chisq"), ...){
+  test <- match.arg(test)
+  NextMethod(test=test)
 }
