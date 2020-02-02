@@ -16,7 +16,7 @@
 #' @param signif.stars Show "significance stars" in summary output.
 #' @param vcov. Optional coefficient covariance matrix, or a function to compute the covariance matrix, to use in computing the model summary.
 #' @param df Optional residual degrees of freedom to use in computing model summary.
-#' @param tests,diagnostics Report 2SLS "diagnostic" tests in model summary (default is \code{FALSE}). 
+#' @param tests,diagnostics Report 2SLS "diagnostic" tests in model summary (default is \code{TRUE}). 
 #' These tests are not to be confused with the \emph{regression diagnostics} provided elsewhere in the \pkg{ivreg}
 #' package: see \code{\link{ivregDiagnostics}}; the \code{diagnostics} argument is retained for backwards compatibility.
 #' @param test,test.statistic Test statistics for ANOVA table computed by \code{anova()}, \code{Anova()},
@@ -140,9 +140,13 @@ print.ivreg <- function(x, digits = max(3, getOption("digits") - 3), ...)
 
 #' @rdname ivreg_Methods
 #' @export
-summary.ivreg <- function(object, vcov. = NULL, df = NULL, tests = FALSE, diagnostics, ...)
+summary.ivreg <- function(object, vcov. = NULL, df = NULL, tests = TRUE, diagnostics, ...)
 {
   if (missing(diagnostics)) diagnostics <- tests
+  
+  if (length(formula(object, component="instruments")) == 0) diagnostics <- FALSE 
+      # prevent some "inherited" "lm" methods from failing
+  
   ## weighted residuals
   res <- object$residuals
   y <- object$fitted.values + res

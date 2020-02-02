@@ -72,6 +72,7 @@ na.remove <- function(x){
 #'   \code{\link[car]{ncvTest}}.
 #' @examples
 #' kmenta.eq1 <- ivreg(Q ~ P + D | D + F + A, data = Kmenta)
+#' summary(kmenta.eq1)
 #' car::avPlots(kmenta.eq1)
 #' car::crPlots(kmenta.eq1)
 #' car::influencePlot(kmenta.eq1)

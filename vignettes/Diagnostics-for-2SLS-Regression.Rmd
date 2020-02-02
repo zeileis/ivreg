@@ -149,13 +149,13 @@ Kmenta independently sampled 20 values of $\delta_1$ and $\delta_2$, each from $
 The structural equations are estimated as follows by the `ivreg()` function [compare @Kmenta1986, p. 686]:
 ```{r}
 deq <- ivreg(Q ~ P + D, ~ D + F + A, data=Kmenta)     # demand equation
-summary(deq, tests=TRUE)
+summary(deq)
 ```
 ```{r}
 seq <- ivreg(Q ~ P + F + A, ~ D + F + A, data=Kmenta) # supply equation
-summary(seq, tests=TRUE)
+summary(seq)
 ```
-Setting `tests=TRUE` in the calls to `summary()` prints the results of three "diagnostic" tests. These tests are not the focus of the vignette and so I'll comment on them only briefly:
+By default, `summary()` prints the results of three "diagnostic" tests for 2SLS regression. These tests (which can be suppressed by setting the argument `tests=FALSE`) are not the focus of the vignette and so I'll comment on them only briefly:
 
 * A good instrumental variable is highly correlated with one or more of the explanatory variables while remaining uncorrelated with the errors. If an endogenous regressor is only weakly related to the instrumental variables, then its coefficient will be estimated imprecisely. We hope for a large test statistic and small p-value in the diagnostic test for weak instruments, as is the case for both regression equations in the Kmenta model.
 
@@ -404,7 +404,7 @@ Phillips's updating formulas for 2SLS regression could also be modified for the 
 For the modified `Kmenta2` data, we know that the variances of the errors in the demand equation are inversely proportional to the variable `w`. This is of course artificial knowledge, reflecting the manner in which the data were constructed. The weighted 2SLS estimator is therefore computed as
 ```{r}
 deqw <- update(deq, data=Kmenta2, weights=1/w)
-summary(deqw, tests=TRUE)
+summary(deqw)
 ```
 
 Plotting studentized residuals against fitted values and testing for nonconstant error variance don't indicate a heteroscedasticity problem, but there is a relatively large studentized residual of about $-3$ that stands out somewhat from the other values:
