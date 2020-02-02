@@ -155,7 +155,7 @@ summary(deq)
 seq <- ivreg(Q ~ P + F + A, ~ D + F + A, data=Kmenta) # supply equation
 summary(seq)
 ```
-By default, `summary()` prints the results of three "diagnostic" tests for 2SLS regression. These tests (which can be suppressed by setting the argument `tests=FALSE`) are not the focus of the vignette and so I'll comment on them only briefly:
+By default, `summary()` prints the results of three "diagnostic" tests for 2SLS regression. These tests (which can be suppressed by setting the argument `diagnostics=FALSE`) are not the focus of the vignette and so I'll comment on them only briefly:
 
 * A good instrumental variable is highly correlated with one or more of the explanatory variables while remaining uncorrelated with the errors. If an endogenous regressor is only weakly related to the instrumental variables, then its coefficient will be estimated imprecisely. We hope for a large test statistic and small p-value in the diagnostic test for weak instruments, as is the case for both regression equations in the Kmenta model.
 
