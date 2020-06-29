@@ -5,8 +5,9 @@
 #' instruments is equal to the number of predictors.
 #' 
 #' \code{\link{ivreg}} is the high-level interface to the work-horse function
-#' \code{ivreg.fit}. \code{ivreg.fit} is essentially a convenience interface to \code{\link{lm.fit}} (or
-#' \code{\link{lm.wfit}}) for first projecting \code{x} onto the image of
+#' \code{ivreg.fit}. \code{ivreg.fit} is essentially a convenience interface to
+#' \code{\link[stats:lmfit]{lm.fit}} (or \code{\link[stats:lmfit]{lm.wfit}})
+#' for first projecting \code{x} onto the image of
 #' \code{z}, then running a regression of \code{y} on the projected
 #' \code{x}, and computing the residual standard deviation.
 #' 
@@ -20,7 +21,7 @@
 #' @param offset an optional offset that can be used to specify an a priori
 #' known component to be included during fitting.
 #' @param \dots further arguments passed to \code{\link[stats:lmfit]{lm.fit}}
-#' or \code{\link[stats]{lm.wfit}}, respectively.
+#' or \code{\link[stats:lmfit]{lm.wfit}}, respectively.
 #' @return \code{ivreg.fit} returns an unclassed list with the following
 #' components: 
 #' \item{coefficients}{parameter estimates, from the stage-2 regression.} 
@@ -44,7 +45,7 @@
 #' \item{qr.1}{QR decomposition for the stage-1 regression.}
 #' \item{rank.1}{numeric rank of the model matrix for the stage-1 regression.}
 #' \item{coefficients.1}{matrix of coefficients from the stage-1 regression.}
-#' @seealso \code{\link{ivreg}}, \code{\link{lm.fit}}, \code{\link{lm.wfit}}
+#' @seealso \code{\link{ivreg}}, \code{\link[stats:lmfit]{lm.fit}}, \code{\link[stats:lmfit]{lm.wfit}}
 #' @keywords regression
 #' @examples
 #' 

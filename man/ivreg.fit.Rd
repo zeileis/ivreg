@@ -20,7 +20,7 @@ process.}
 known component to be included during fitting.}
 
 \item{\dots}{further arguments passed to \code{\link[stats:lmfit]{lm.fit}}
-or \code{\link[stats]{lm.wfit}}, respectively.}
+or \code{\link[stats:lmfit]{lm.wfit}}, respectively.}
 }
 \value{
 \code{ivreg.fit} returns an unclassed list with the following
@@ -54,8 +54,9 @@ instruments is equal to the number of predictors.
 }
 \details{
 \code{\link{ivreg}} is the high-level interface to the work-horse function
-\code{ivreg.fit}. \code{ivreg.fit} is essentially a convenience interface to \code{\link{lm.fit}} (or
-\code{\link{lm.wfit}}) for first projecting \code{x} onto the image of
+\code{ivreg.fit}. \code{ivreg.fit} is essentially a convenience interface to
+\code{\link[stats:lmfit]{lm.fit}} (or \code{\link[stats:lmfit]{lm.wfit}})
+for first projecting \code{x} onto the image of
 \code{z}, then running a regression of \code{y} on the projected
 \code{x}, and computing the residual standard deviation.
 }
@@ -81,6 +82,6 @@ ivreg.fit(x, y, z)$coefficients
 
 }
 \seealso{
-\code{\link{ivreg}}, \code{\link{lm.fit}}, \code{\link{lm.wfit}}
+\code{\link{ivreg}}, \code{\link[stats:lmfit]{lm.fit}}, \code{\link[stats:lmfit]{lm.wfit}}
 }
 \keyword{regression}
