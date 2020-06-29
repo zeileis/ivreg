@@ -26,7 +26,7 @@
 
 \method{estfun}{ivreg}(x, ...)
 
-\method{terms}{ivreg}(x, component = c("regressors", "instruments"), ...)
+\method{terms}{ivreg}(x, component = c("regressors", "instruments", "full"), ...)
 
 \method{model.matrix}{ivreg}(
   object,
@@ -79,7 +79,7 @@
 
 \item{x}{An object of class \code{"ivreg"} or \code{"summary.ivreg"}.}
 
-\item{component}{For \code{\link{terms}}, \code{"regressors"} or \code{"instruments"}; 
+\item{component}{For \code{\link{terms}}, \code{"regressors"}, \code{"instruments"}, or \code{"full"}; 
 for \code{\link{model.matrix}}, \code{"projected"}, \code{"regressors"}, or \code{"instruments"};
 for \code{\link{formula}}, \code{"regressors"}, \code{"instruments"},  or \code{"complete"}.}
 

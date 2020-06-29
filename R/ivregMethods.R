@@ -7,7 +7,7 @@
 #' @seealso \code{\link{ivreg}}, \code{\link{ivreg.fit}}, \code{\link{ivregDiagnostics}}
 #' @param object,object2,model,mod An object of class \code{"ivreg"}.
 #' @param x An object of class \code{"ivreg"} or \code{"summary.ivreg"}.
-#' @param component For \code{\link{terms}}, \code{"regressors"} or \code{"instruments"}; 
+#' @param component For \code{\link{terms}}, \code{"regressors"}, \code{"instruments"}, or \code{"full"}; 
 #' for \code{\link{model.matrix}}, \code{"projected"}, \code{"regressors"}, or \code{"instruments"};
 #' for \code{\link{formula}}, \code{"regressors"}, \code{"instruments"},  or \code{"complete"}.
 #' @param newdata Values of predictors for which to obtain predicted values.
@@ -69,7 +69,7 @@ estfun.ivreg <- function (x, ...)
 
 #' @rdname ivreg_Methods
 #' @export
-terms.ivreg <- function(x, component = c("regressors", "instruments"), ...)
+terms.ivreg <- function(x, component = c("regressors", "instruments", "full"), ...)
   x$terms[[match.arg(component)]]
 
 #' @rdname ivreg_Methods
