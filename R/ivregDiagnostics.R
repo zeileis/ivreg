@@ -244,8 +244,8 @@ dfbeta.ivreg <- function(model, ...) {
 #' @export
 hatvalues.ivreg <- function(model, type = c("stage2", "both", "maximum"), ...){
   type <- match.arg(type)
-  if (length(class(model)) == 1){
-    class(model) <- c("ivreg", "lm")
+  if (!inherits(model, "lm")) {
+    class(model) <- c(class(model), "lm")
     return(hatvalues(model, type=type, ...))
   }
   hatvalues <- if (type == "stage2") {
@@ -339,7 +339,7 @@ influencePlot.ivreg <- function(model, ...){
 #' @method influencePlot influence.ivreg
 #' @export
 influencePlot.influence.ivreg <- function(model, ...){
-  if (length(class(model)) == 1) {
+  if (!inherits(model, "lm")) {
     class(model) <- c(class(model), "lm")
     influencePlot(model)
   }
@@ -358,7 +358,7 @@ infIndexPlot.ivreg <- function(model, ...){
 #' @importFrom car infIndexPlot
 #' @export
 infIndexPlot.influence.ivreg <- function(model, ...){
-  if (length(class(model)) == 1) {
+  if (!inherits(model, "lm")) {
     class(model) <- c(class(model), "lm")
     infIndexPlot(model, ...)
   }
@@ -376,8 +376,8 @@ model.matrix.influence.ivreg <- function(object, ...){
 #' @importFrom car avPlot
 #' @export
 avPlot.ivreg <- function(model, ...){
-  if (length(class(model)) == 1) {
-    class(model) <- c("ivreg", "lm")
+  if (!inherits(model, "lm")) {
+    class(model) <- c(class(model), "lm")
     model$model.matrix <- model.matrix(model, type = "projected")
     avPlot(model, ...)
   } else {
@@ -401,8 +401,8 @@ Boot.ivreg <- function(object, f = coef, labels = names(f(object)), R = 999,
 #' @importFrom car crPlot
 #' @export
 crPlot.ivreg <- function(model, ...){
-  if (length(class(model)) == 1) {
-    class(model) <- c("ivreg", "lm")
+  if (!inherits(model, "lm")) {
+    class(model) <- c(class(model), "lm")
     crPlot(model, ...)
   } else {
     NextMethod()
@@ -413,8 +413,8 @@ crPlot.ivreg <- function(model, ...){
 #' @importFrom graphics plot
 #' @export
 plot.ivreg <- function(x, ...){
-  if (length(class(x)) == 1) {
-    class(x) <- c("ivreg", "lm")
+  if (!inherits(x, "lm")) {
+    class(x) <- c(class(x), "lm")
     plot(x, ...)
   } else {
     NextMethod()
@@ -435,8 +435,8 @@ qqPlot.ivreg <- function(x, distribution=c("t", "norm"), ...){
 #' @importFrom car outlierTest
 #' @export
 outlierTest.ivreg <- function(x, ...){
-  if (length(class(x)) == 1) {
-    class(x) <- c("ivreg", "lm")
+  if (!inherits(x, "lm")) {
+    class(x) <- c(class(x), "lm")
     outlierTest(x, ...)
   } else {
     NextMethod()
@@ -447,8 +447,8 @@ outlierTest.ivreg <- function(x, ...){
 #' @importFrom car influencePlot
 #' @export
 influencePlot.ivreg <- function(x, ...){
-  if (length(class(x)) == 1) {
-    class(x) <- c("ivreg", "lm")
+  if (!inherits(x, "lm")) {
+      class(x) <- c(class(x), "lm")
     influencePlot(x, ...)
   } else {
     NextMethod()
@@ -459,8 +459,8 @@ influencePlot.ivreg <- function(x, ...){
 #' @importFrom car spreadLevelPlot
 #' @export
 spreadLevelPlot.ivreg <- function(x, main="Spread-Level Plot", ...){
-  if (length(class(x)) == 1) {
-    class(x) <- c("ivreg", "lm")
+  if (!inherits(x, "lm")) {
+    class(x) <- c(class(x), "lm")
     spreadLevelPlot(x, main=main, ...)
   } else {
     NextMethod()
@@ -471,8 +471,8 @@ spreadLevelPlot.ivreg <- function(x, main="Spread-Level Plot", ...){
 #' @importFrom car ncvTest
 #' @export
 ncvTest.ivreg <- function(model, ...){
-  if (length(class(model)) == 1) {
-    class(model) <- c("ivreg", "lm")
+  if (!inherits(model, "lm")) {
+    class(model) <- c(class(model), "lm")
     ncvTest(model, ...)
   } else {
     NextMethod()
@@ -483,8 +483,8 @@ ncvTest.ivreg <- function(model, ...){
 #' @importFrom stats deviance
 #' @export
 deviance.ivreg <- function(object, ...){
-  if (length(class(object)) == 1) {
-    class(object) <- c("ivreg", "lm")
+  if (!inherits(object, "lm")) {
+    class(object) <- c(class(object), "lm")
     deviance(object, ...)
   } else {
     NextMethod()

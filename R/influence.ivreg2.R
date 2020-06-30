@@ -269,7 +269,7 @@ influencePlot.ivreg2 <- function(model, ...){
 #' @method influencePlot influence.ivreg2
 #' @export
 influencePlot.influence.ivreg2 <- function(model, ...){
-  if (length(class(model)) == 1) {
+  if (!inherits(model, "lm")) {
     class(model) <- c(class(model), "lm")
     influencePlot(model)
   }
@@ -288,7 +288,7 @@ infIndexPlot.ivreg2 <- function(model, ...){
 #' @importFrom car infIndexPlot
 #' @export
 infIndexPlot.influence.ivreg2 <- function(model, ...){
-  if (length(class(model)) == 1) {
+  if (!inherits(model, "lm")) {
     class(model) <- c(class(model), "lm")
     infIndexPlot(model, ...)
   }
