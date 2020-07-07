@@ -1,7 +1,7 @@
 #' Methods for \code{"ivreg"} Objects
 #' @aliases ivreg_Methods vcov.ivreg bread.ivreg estfun.ivreg terms.ivreg model.matrix.ivreg predict.ivreg
 #' print.ivreg summary.ivreg print.summary.ivreg anova.ivreg update.ivreg residuals.ivreg Effect.ivreg 
-#' formula.ivreg
+#' formula.ivreg  find_formula.ivreg
 #' @description Various methods for processing \code{"ivreg"} objects; for diagnostic methods,
 #'   see \code{\link{ivregDiagnostics}}.
 #' @seealso \code{\link{ivreg}}, \code{\link{ivreg.fit}}, \code{\link{ivregDiagnostics}}
@@ -43,6 +43,7 @@ bread.ivreg <- function (x, ...)
     x$cov.unscaled * x$nobs
 
 #' @rdname ivreg_Methods
+#' @importFrom stats weights
 #' @export
 estfun.ivreg <- function (x, ...) 
 {
@@ -108,6 +109,7 @@ model.matrix.ivreg <- function(object, component = c("regressors", "projected", 
 #' \code{type = "working"} and \code{"response"} are equivalent, as are 
 #' \code{type = "deviance"} and \code{"pearson"}.
 #' 
+#' @importFrom stats fitted
 #' @export
 predict.ivreg <- function(object, newdata, type = c("response", "terms"), na.action = na.pass,  ...)
 {
@@ -214,6 +216,7 @@ summary.ivreg <- function(object, vcov. = NULL, df = NULL, diagnostics = TRUE, .
 }
 
 #' @rdname ivreg_Methods
+#' @importFrom stats printCoefmat
 #' @export
 #' @method print summary.ivreg
 print.summary.ivreg <- function(x, digits = max(3, getOption("digits") - 3), 
@@ -274,6 +277,7 @@ anova.ivreg <- function(object, object2, test = "F", vcov. = NULL, ...)
 }
 
 #' @rdname ivreg_Methods
+#' @importFrom stats getCall
 #' @export
 update.ivreg <- function (object, formula., ..., evaluate = TRUE)
 {
@@ -292,6 +296,7 @@ update.ivreg <- function (object, formula., ..., evaluate = TRUE)
   else call
 }
 
+#' @importFrom stats model.frame model.response pf
 ivdiag <- function(obj, vcov. = NULL) {
   ## extract data
   y <- model.response(model.frame(obj))
@@ -432,6 +437,13 @@ formula.ivreg <- function(x, component = c("regressors", "instruments", "complet
   } else {
     formula(x$terms[[component]])
   }
+}
+
+#' @rdname ivreg_Methods
+#' @importFrom insight find_formula
+#' @export
+find_formula.ivreg <- function(x, ...) {
+    list(conditional=formula(x), instruments=formula(x, "instruments"))
 }
 
 #' @rdname ivreg_Methods

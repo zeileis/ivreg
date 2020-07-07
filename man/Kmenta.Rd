@@ -3,7 +3,7 @@
 \docType{data}
 \name{Kmenta}
 \alias{Kmenta}
-\title{Partly Artifical Data on the U.S. Economy}
+\title{Partly Artificial Data on the U.S. Economy}
 \format{
 A data frame with 20 rows and 5 columns.
 \describe{

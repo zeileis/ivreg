@@ -10,6 +10,7 @@ Depends: R (>= 3.5.0)
 Imports: car, 
     effects,
     Formula,
+    insight,
     lmtest,
     sandwich, 
     stats,

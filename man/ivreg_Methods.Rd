@@ -16,6 +16,7 @@
 \alias{residuals.ivreg}
 \alias{Effect.ivreg}
 \alias{formula.ivreg}
+\alias{find_formula.ivreg}
 \alias{Anova.ivreg}
 \alias{linearHypothesis.ivreg}
 \title{Methods for \code{"ivreg"} Objects}
@@ -67,6 +68,8 @@
 \method{Effect}{ivreg}(focal.predictors, mod, ...)
 
 \method{formula}{ivreg}(x, component = c("regressors", "instruments", "complete"), ...)
+
+\method{find_formula}{ivreg}(x, ...)
 
 \method{Anova}{ivreg}(mod, test.statistic = c("F", "Chisq"), ...)
 

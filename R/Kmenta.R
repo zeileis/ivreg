@@ -1,4 +1,4 @@
-#' Partly Artifical Data on the U.S. Economy
+#' Partly Artificial Data on the U.S. Economy
 #'
 #' @usage data("Kmenta", package = "ivreg")
 #'

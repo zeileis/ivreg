@@ -3,6 +3,14 @@ na.remove <- function(x){
   x <- x[!is.na(x)]
 }
 
+diagprod <- function(d, X){
+  # equivalent to diag(d) %*% X
+  if (!is.vector(d)) stop("d is not a vector")
+  if (!is.matrix(X)) stop("X is not a matrix")
+  if (length(d) != nrow(X)) stop("d and X not conformable")
+  d*X
+}
+
 # formula.ivreg <- function(x, ...) formula(x$terms$regressors)
 
 #' Deletion and Other Diagnostic Methods for \code{"ivreg"} Objects
@@ -64,7 +72,7 @@ na.remove <- function(x){
 #' @import foreach
 #' @importFrom stats influence
 #' @export
-#' @seealso \code{\link{ivreg}}, \link{2SLS_Methods}, \code{\link[car]{avPlots}},
+#' @seealso \code{\link{ivreg}}, \code{\link[car]{avPlots}},
 #'   \code{\link[car]{crPlots}}, \code{\link[effects]{predictorEffects}},
 #'   \code{\link[car]{qqPlot}}, \code{\link[car]{influencePlot}},
 #'   \code{\link[car]{infIndexPlot}}, \code{\link[car]{Boot}}, 
@@ -240,15 +248,16 @@ dfbeta.ivreg <- function(model, ...) {
 }
 
 #' @rdname ivregDiagnostics
-#' @importFrom stats hatvalues lm.influence
+#' @importFrom stats df.residual hatvalues lm.influence na.omit naresid
 #' @export
 hatvalues.ivreg <- function(model, type = c("stage2", "both", "maximum"), ...){
   type <- match.arg(type)
-  if (!inherits(model, "lm")) {
-    class(model) <- c(class(model), "lm")
-    return(hatvalues(model, type=type, ...))
-  }
+  # if (!inherits(model, "lm")) {
+  #   class(model) <- c(class(model), "lm")
+  #   return(hatvalues(model, type=type, ...))
+  # }
   hatvalues <- if (type == "stage2") {
+    .Class <- "lm"
     NextMethod()
   } else {
     n <- model$nobs
@@ -294,21 +303,20 @@ cooks.distance.influence.ivreg <- {
   function(model, ...) model$cookd
 }
 
-#' @rdname ivregDiagnostics
-#' @importFrom car qqPlot
-#' @importFrom graphics par
-#' @export
-qqPlot.ivreg <- function(x,
-                         ylab = paste("Studentized Residuals(", deparse(substitute(x)), ")", sep = ""),
-                         distribution = c("t", "norm"), ...){
-  distribution <- match.arg(distribution)
-  rstudent <- rstudent(x)
-  if (distribution == "t"){
-    car::qqPlot(rstudent, ylab = ylab, distribution = "t", df = df.residual(x), ...)
-  } else {
-    car::qqPlot(rstudent, ylab = ylab, distribution = "norm", ...)
-  }
-}
+##' @importFrom car qqPlot
+##' @importFrom graphics par
+##' @export
+# qqPlot.ivreg <- function(x,
+#                          ylab = paste("Studentized Residuals(", deparse(substitute(x)), ")", sep = ""),
+#                          distribution = c("t", "norm"), ...){
+#   distribution <- match.arg(distribution)
+#   rstudent <- rstudent(x)
+#   if (distribution == "t"){
+#     car::qqPlot(rstudent, ylab = ylab, distribution = "t", df = df.residual(x), ...)
+#   } else {
+#     car::qqPlot(rstudent, ylab = ylab, distribution = "norm", ...)
+#   }
+# }
 
 #' @rdname ivregDiagnostics
 #' @method qqPlot influence.ivreg
@@ -339,11 +347,13 @@ influencePlot.ivreg <- function(model, ...){
 #' @method influencePlot influence.ivreg
 #' @export
 influencePlot.influence.ivreg <- function(model, ...){
-  if (!inherits(model, "lm")) {
-    class(model) <- c(class(model), "lm")
-    influencePlot(model)
-  }
-  else NextMethod()
+  # if (!inherits(model, "lm")) {
+  #   class(model) <- c(class(model), "lm")
+  #   influencePlot(model)
+  # }
+  # else NextMethod()
+  .Class <- "lm"
+  NextMethod()
 }
 
 #' @rdname ivregDiagnostics
@@ -363,6 +373,8 @@ infIndexPlot.influence.ivreg <- function(model, ...){
     infIndexPlot(model, ...)
   }
   else NextMethod()
+  # .Class <- "lm"
+  # NextMethod()
 }
 
 #' @rdname ivregDiagnostics
@@ -376,18 +388,21 @@ model.matrix.influence.ivreg <- function(object, ...){
 #' @importFrom car avPlot
 #' @export
 avPlot.ivreg <- function(model, ...){
-  if (!inherits(model, "lm")) {
-    class(model) <- c(class(model), "lm")
-    model$model.matrix <- model.matrix(model, type = "projected")
-    avPlot(model, ...)
-  } else {
-    NextMethod()
-  }
+  # if (!inherits(model, "lm")) {
+  #   class(model) <- c(class(model), "lm")
+  #   model$model.matrix <- model.matrix(model, type = "projected")
+  #   avPlot(model, ...)
+  # } else {
+  #   NextMethod()
+  # }
+  .Class <- "lm"
+  NextMethod()
 }
 
 #' @rdname ivregDiagnostics
 #' @method Boot ivreg
 #' @importFrom car Boot
+#' @importFrom stats coef
 #' @param method only \code{"case"} (case resampling) is supported: see \code{\link[car]{Boot}}.
 #' @param f,labels,R see \code{\link[car]{Boot}}.
 #' @export
@@ -407,6 +422,8 @@ crPlot.ivreg <- function(model, ...){
   } else {
     NextMethod()
   }
+  # .Class <- "lm"
+  # NextMethod()
 }
 
 #' @rdname ivregDiagnostics
@@ -419,6 +436,8 @@ plot.ivreg <- function(x, ...){
   } else {
     NextMethod()
   }
+  # .Class <- "lm"
+  # NextMethod()
 }
 
 #' @rdname ivregDiagnostics
@@ -435,58 +454,68 @@ qqPlot.ivreg <- function(x, distribution=c("t", "norm"), ...){
 #' @importFrom car outlierTest
 #' @export
 outlierTest.ivreg <- function(x, ...){
-  if (!inherits(x, "lm")) {
-    class(x) <- c(class(x), "lm")
-    outlierTest(x, ...)
-  } else {
-    NextMethod()
-  }
+  # if (!inherits(x, "lm")) {
+  #   class(x) <- c(class(x), "lm")
+  #   outlierTest(x, ...)
+  # } else {
+  #   NextMethod()
+  # }
+  .Class <- "lm"
+  NextMethod()
 }
 
 #' @rdname ivregDiagnostics
 #' @importFrom car influencePlot
 #' @export
 influencePlot.ivreg <- function(x, ...){
-  if (!inherits(x, "lm")) {
-      class(x) <- c(class(x), "lm")
-    influencePlot(x, ...)
-  } else {
-    NextMethod()
-  }
+  # if (!inherits(x, "lm")) {
+  #     class(x) <- c(class(x), "lm")
+  #   influencePlot(x, ...)
+  # } else {
+  #   NextMethod()
+  # }
+  .Class <- "lm"
+  NextMethod()
 }
 
 #' @rdname ivregDiagnostics
 #' @importFrom car spreadLevelPlot
 #' @export
 spreadLevelPlot.ivreg <- function(x, main="Spread-Level Plot", ...){
-  if (!inherits(x, "lm")) {
-    class(x) <- c(class(x), "lm")
-    spreadLevelPlot(x, main=main, ...)
-  } else {
-    NextMethod()
-  }
+  # if (!inherits(x, "lm")) {
+  #   class(x) <- c(class(x), "lm")
+  #   spreadLevelPlot(x, main=main, ...)
+  # } else {
+  #   NextMethod()
+  # }
+  .Class <- "lm"
+  NextMethod()
 }
 
 #' @rdname ivregDiagnostics
 #' @importFrom car ncvTest
 #' @export
 ncvTest.ivreg <- function(model, ...){
-  if (!inherits(model, "lm")) {
-    class(model) <- c(class(model), "lm")
-    ncvTest(model, ...)
-  } else {
+  # if (!inherits(model, "lm")) {
+  #   class(model) <- c(class(model), "lm")
+  #   ncvTest(model, ...)
+  # } else {
+  #   NextMethod()
+  # }
+    .Class <- "lm"
     NextMethod()
-  }
 }
 
 #' @rdname ivregDiagnostics
 #' @importFrom stats deviance
 #' @export
 deviance.ivreg <- function(object, ...){
-  if (!inherits(object, "lm")) {
-    class(object) <- c(class(object), "lm")
-    deviance(object, ...)
-  } else {
-    NextMethod()
-  }
+  # if (!inherits(object, "lm")) {
+  #   class(object) <- c(class(object), "lm")
+  #   deviance(object, ...)
+  # } else {
+  #   NextMethod()
+  # }
+  .Class <- "lm"
+  NextMethod()
 }

@@ -53,8 +53,6 @@
 
 \method{cooks.distance}{influence.ivreg}(model, ...)
 
-\method{qqPlot}{ivreg}(x, distribution = c("t", "norm"), ...)
-
 \method{qqPlot}{influence.ivreg}(
   x,
   ylab = paste("Studentized Residuals(", deparse(substitute(x)), ")", sep = ""),
@@ -120,9 +118,9 @@ in parallel; this is advantageous only for large data sets.}
 
 \item{...}{arguments to be passed down.}
 
-\item{distribution}{\code{"t"} (the default) or \code{"norm"}.}
-
 \item{ylab}{The vertical axis label.}
+
+\item{distribution}{\code{"t"} (the default) or \code{"norm"}.}
 
 \item{f, labels, R}{see \code{\link[car]{Boot}}.}
 
@@ -180,7 +178,7 @@ car::ncvTest(kmenta.eq1)
 
 }
 \seealso{
-\code{\link{ivreg}}, \link{2SLS_Methods}, \code{\link[car]{avPlots}},
+\code{\link{ivreg}}, \code{\link[car]{avPlots}},
   \code{\link[car]{crPlots}}, \code{\link[effects]{predictorEffects}},
   \code{\link[car]{qqPlot}}, \code{\link[car]{influencePlot}},
   \code{\link[car]{infIndexPlot}}, \code{\link[car]{Boot}}, 

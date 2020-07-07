@@ -109,6 +109,7 @@
     #' print(car::Anova(fm))
 #' }
 #' 
+#' @importFrom stats .getXlevels model.weights
 #' @export
 ivreg <- function(formula, instruments, data, subset, na.action, weights, offset,
   contrasts = NULL, model = TRUE, y = TRUE, x = FALSE, ...)
