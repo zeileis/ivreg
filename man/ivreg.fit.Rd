@@ -27,8 +27,8 @@ or \code{\link[stats:lmfit]{lm.wfit}}, respectively.}
 components: 
 \item{coefficients}{parameter estimates, from the stage-2 regression.} 
 \item{residuals}{vector of model residuals.} 
-\item{residuals.1}{matrix of residuals from the stage-1 regression.}
-\item{residuals.2}{vector of residuals from the stage-2 regression.}
+\item{residuals1}{matrix of residuals from the stage-1 regression.}
+\item{residuals2}{vector of residuals from the stage-2 regression.}
 \item{fitted.values}{vector of predicted means for the response.}
 \item{weights}{either the vector of weights used (if any) or \code{NULL} (if none).} 
 \item{offset}{either the offset used (if any) or \code{NULL} (if none).} 
@@ -43,9 +43,9 @@ components:
 \item{sigma}{residual standard error.}
 \item{x}{projection of x matrix onto span of z.}
 \item{qr}{QR decomposition for the stage-2 regression.}
-\item{qr.1}{QR decomposition for the stage-1 regression.}
-\item{rank.1}{numeric rank of the model matrix for the stage-1 regression.}
-\item{coefficients.1}{matrix of coefficients from the stage-1 regression.}
+\item{qr1}{QR decomposition for the stage-1 regression.}
+\item{rank1}{numeric rank of the model matrix for the stage-1 regression.}
+\item{coefficients1}{matrix of coefficients from the stage-1 regression.}
 }
 \description{
 Fit instrumental-variable regression by two-stage least squares (2SLS). This is

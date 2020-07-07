@@ -410,8 +410,8 @@ residuals.ivreg <- function(object, type=c("response", "projected", "regressors"
                 response  = object$residuals,
                 deviance =,
                 pearson  = sqrt(w)*object$residuals,
-                projected   = object$residuals.1,
-                regressors  = object$residuals.2,
+                projected   = object$residuals1,
+                regressors  = object$residuals2,
                 partial  = object$residuals + predict(object, type = "terms"))
   naresid(object$na.action, res)
 }

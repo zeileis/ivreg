@@ -57,8 +57,8 @@ components are necessary for computing regression diagnostics.}
 class \code{"lm"}, with the following components:
 \item{coefficients}{parameter estimates, from the stage-2 regression.} 
 \item{residuals}{vector of model residuals.} 
-\item{residuals.1}{matrix of residuals from the stage-1 regression.}
-\item{residuals.2}{vector of residuals from the stage-2 regression.}
+\item{residuals1}{matrix of residuals from the stage-1 regression.}
+\item{residuals2}{vector of residuals from the stage-2 regression.}
 \item{fitted.values}{vector of predicted means for the response.}
 \item{weights}{either the vector of weights used (if any) or \code{NULL} (if none).} 
 \item{offset}{either the offset used (if any) or \code{NULL} (if none).} 
@@ -72,9 +72,9 @@ class \code{"lm"}, with the following components:
 \item{cov.unscaled}{unscaled covariance matrix for the coefficients.} 
 \item{sigma}{residual standard deviation.}
 \item{qr}{QR decomposition for the stage-2 regression.}
-\item{qr.1}{QR decomposition for the stage-1 regression.}
-\item{rank.1}{numeric rank of the model matrix for the stage-1 regression.}
-\item{coefficients.1}{matrix of coefficients from the stage-1 regression.}
+\item{qr1}{QR decomposition for the stage-1 regression.}
+\item{rank1}{numeric rank of the model matrix for the stage-1 regression.}
+\item{coefficients1}{matrix of coefficients from the stage-1 regression.}
 \item{df.residual}{residual degrees of freedom for fitted model.} 
 \item{call}{the original function call.} 
 \item{formula}{the model formula.}

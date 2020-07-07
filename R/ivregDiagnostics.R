@@ -103,7 +103,7 @@ influence.ivreg <- function(model, sigma. = n <= 1e3, type = c("stage2", "both",
 
   Z <- model.matrix(model, component = "instruments") # model$model.matrix.instruments
   X <- model.matrix(model, component = "regressors") # model$model.matrix
-  X.fit <- model.matrix(model, component = "projected") # model$fitted.1 
+  X.fit <- model.matrix(model, component = "projected") # model$fitted1 
   y <- model$y
   if (is.null(y)) stop("response variable not in model object")
   b <- coef(model) # model$coefficients
@@ -265,15 +265,15 @@ hatvalues.ivreg <- function(model, type = c("stage2", "both", "maximum"), ...){
     q <- model$q
     mean1 <- q/n
     mean2 <- p/n
-    hat.2 <- lm.influence(model)$hat/mean2
+    hat2 <- lm.influence(model)$hat/mean2
     model[c("qr", "rank", "residuals", "coefficients")] <-
-      list(model$qr.1, model$rank.1, na.omit(residuals(model, type="projected")), 
-           model$coefficients.1)
-    hat.1 <- lm.influence(model)$hat/mean1
+      list(model$qr1, model$rank1, na.omit(residuals(model, type="projected")), 
+           model$coefficients1)
+    hat1 <- lm.influence(model)$hat/mean1
     hat <- if (type == "both") {
-      sqrt(hat.1*hat.2)
+      sqrt(hat1*hat2)
     } else {
-      pmax(hat.1, hat.2)
+      pmax(hat1, hat2)
     }
     mean2*hat
   }
