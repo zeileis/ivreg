@@ -1,7 +1,7 @@
 #' Methods for \code{"ivreg"} Objects
 #' @aliases ivreg_Methods vcov.ivreg bread.ivreg estfun.ivreg terms.ivreg model.matrix.ivreg predict.ivreg
 #' print.ivreg summary.ivreg print.summary.ivreg anova.ivreg update.ivreg residuals.ivreg Effect.ivreg 
-#' formula.ivreg  find_formula.ivreg
+#' formula.ivreg  find_formula.ivreg alias.ivreg qr.ivreg
 #' @description Various methods for processing \code{"ivreg"} objects; for diagnostic methods,
 #'   see \code{\link{ivregDiagnostics}}.
 #' @seealso \code{\link{ivreg}}, \code{\link{ivreg.fit}}, \code{\link{ivregDiagnostics}}
@@ -125,7 +125,8 @@ predict.ivreg <- function(object, newdata, type = c("response", "terms"), na.act
       drop(X[, ok, drop = FALSE] %*% object$coefficients[ok])
     } 
   } else {
-    NextMethod()
+      .Class <- "lm"
+      suppressWarnings(NextMethod())
   }
 }
 
@@ -459,4 +460,19 @@ Anova.ivreg <- function(mod, test.statistic=c("F", "Chisq"), ...){
 linearHypothesis.ivreg <- function(model, test=c("F", "Chisq"), ...){
   test <- match.arg(test)
   NextMethod(test=test)
+}
+
+#' @importFrom stats alias
+#' @rdname ivreg_Methods
+#' @export
+alias.ivreg <- function(object, ...){
+    .Class="lm"
+    NextMethod()
+}
+
+#' @rdname ivreg_Methods
+#' @export
+qr.ivreg <- function(x, ...){
+    .Class="lm"
+    NextMethod()
 }

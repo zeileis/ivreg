@@ -17,8 +17,10 @@
 \alias{Effect.ivreg}
 \alias{formula.ivreg}
 \alias{find_formula.ivreg}
+\alias{alias.ivreg}
 \alias{Anova.ivreg}
 \alias{linearHypothesis.ivreg}
+\alias{qr.ivreg}
 \title{Methods for \code{"ivreg"} Objects}
 \usage{
 \method{vcov}{ivreg}(object, ...)
@@ -74,6 +76,10 @@
 \method{Anova}{ivreg}(mod, test.statistic = c("F", "Chisq"), ...)
 
 \method{linearHypothesis}{ivreg}(model, test = c("F", "Chisq"), ...)
+
+\method{alias}{ivreg}(object, ...)
+
+\method{qr}{ivreg}(x, ...)
 }
 \arguments{
 \item{object, object2, model, mod}{An object of class \code{"ivreg"}.}

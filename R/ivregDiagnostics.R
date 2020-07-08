@@ -416,14 +416,14 @@ Boot.ivreg <- function(object, f = coef, labels = names(f(object)), R = 999,
 #' @importFrom car crPlot
 #' @export
 crPlot.ivreg <- function(model, ...){
-  if (!inherits(model, "lm")) {
-    class(model) <- c(class(model), "lm")
-    crPlot(model, ...)
-  } else {
-    NextMethod()
-  }
-  # .Class <- "lm"
-  # NextMethod()
+  # if (!inherits(model, "lm")) {
+  #   class(model) <- c(class(model), "lm")
+  #   crPlot(model, ...)
+  # } else {
+  #   NextMethod()
+  # }
+  .Class <- "lm"
+  NextMethod()
 }
 
 #' @rdname ivregDiagnostics
