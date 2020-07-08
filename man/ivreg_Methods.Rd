@@ -18,9 +18,9 @@
 \alias{formula.ivreg}
 \alias{find_formula.ivreg}
 \alias{alias.ivreg}
+\alias{qr.ivreg}
 \alias{Anova.ivreg}
 \alias{linearHypothesis.ivreg}
-\alias{qr.ivreg}
 \title{Methods for \code{"ivreg"} Objects}
 \usage{
 \method{vcov}{ivreg}(object, ...)

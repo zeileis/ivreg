@@ -27,8 +27,12 @@ diagprod <- function(d, X){
 #' @param sigma. If \code{TRUE} (the default for 1000 or fewer cases), the deleted value
 #' of the residual standard deviation is computed for each case; if \code{FALSE}, the
 #' overall residual standard deviation is used to compute other deletion diagnostics.
-#' @param ncores If \code{ncores > 1} (the default is \code{1}) computations are performed
-#' in parallel; this is advantageous only for large data sets.
+#' @param applyfun Optional loop replacement function that should work like
+#' \code{\link[base]{lapply}} with arguments \code{function(X, FUN, ...)}. The default
+#' is to use a loop unless the \code{ncores} argument is specified (see below).
+#' @param ncores Numeric, number of cores to be used in parallel computations. If set
+#' to an integer the \code{applyfun} is set to use either \code{\link[parallel]{parLapply}}
+#' (on Windows) or \code{\link[parallel]{mclapply}} (otherwise) with the desired number of cores.
 #' @param type If \code{"stage2"} (the default), hatvalues are for the second stage regression;
 #' if \code{"both"}, the hatvalues are the geometric mean of the casewise hatvalues for the
 #' two stages; if \code{"maximum"}, the hatvalues are the larger of the casewise
@@ -97,7 +101,7 @@ diagprod <- function(d, X){
 #' @importFrom stats influence
 #' @export
 influence.ivreg <- function(model, sigma. = n <= 1e3, type = c("stage2", "both", "maximum"), 
-                            ncores = 1, ...){
+                            applyfun = NULL, ncores = NULL, ...){
 
   type <- match.arg(type)
 
@@ -140,10 +144,21 @@ influence.ivreg <- function(model, sigma. = n <= 1e3, type = c("stage2", "both",
   n <- model$nobs
   p <- length(b)  # model$p
   
-  if (ncores > 1){
-    cl <- parallel::makeCluster(ncores) 
-    doParallel::registerDoParallel(cl)
-    result <- foreach(i = 1:n, .combine=rbind) %dopar% {
+  ## set up parallel apply if specified
+  if(!is.null(ncores) && is.null(applyfun)) {
+    applyfun <- if(ncores == 1L) {
+      lapply
+    } else if(.Platform$OS.type == "windows") {
+      cl <- parallel::makeCluster(ncores) 
+      on.exit(parallel::stopCluster(cl))
+      function(X, FUN, ...) parallel::parLapply(cl, X, FUN, ...)
+    } else {
+      function(X, FUN, ...) parallel::mclapply(X, FUN, ..., mc.cores = ncores)    
+    }
+  }
+
+  if (is.function(applyfun)){
+    result <- applyfun(1:n, function(i) {
       c <- as.vector(Z[i, ] %*% ZtZinv %*% Z[i, ])
       Xmr <- X[i, ] - r[, i]
       XiAinvXi <- as.vector(X[i, ] %*% Ainv %*% X[i, ])
@@ -165,8 +180,8 @@ influence.ivreg <- function(model, sigma. = n <= 1e3, type = c("stage2", "both",
       dffits.i <- as.vector(X[i, ] %*% dfbeta.i)/
         (sigma.i * as.vector(sqrt(X[i, ] %*% XfXfinv %*% X[i, ])))
       c(dfbeta.i, sigma.i, dffits.i)
-    }
-    parallel::stopCluster(cl)
+    })
+    result <- do.call("rbind", result)
     nc <- ncol(result)
     dfbeta <- result[, -c(nc - 1, nc)]
     sigma <- result[, nc - 1]

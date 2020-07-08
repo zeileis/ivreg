@@ -33,7 +33,8 @@
   model,
   sigma. = n <= 1000,
   type = c("stage2", "both", "maximum"),
-  ncores = 1,
+  applyfun = NULL,
+  ncores = NULL,
   ...
 )
 
@@ -113,8 +114,13 @@ the hatvalues for each stage are first divided by their average (number of coeff
 stage regression/number of cases); the geometric mean or casewise maximum values are then
 multiplied by the average hatvalue from the second stage.}
 
-\item{ncores}{If \code{ncores > 1} (the default is \code{1}) computations are performed
-in parallel; this is advantageous only for large data sets.}
+\item{applyfun}{Optional loop replacement function that should work like
+\code{\link[base]{lapply}} with arguments \code{function(X, FUN, ...)}. The default
+is to use a loop unless the \code{ncores} argument is specified (see below).}
+
+\item{ncores}{Numeric, number of cores to be used in parallel computations. If set
+to an integer the \code{applyfun} is set to use either \code{\link[parallel]{parLapply}}
+(on Windows) or \code{\link[parallel]{mclapply}} (otherwise) with the desired number of cores.}
 
 \item{...}{arguments to be passed down.}
 
