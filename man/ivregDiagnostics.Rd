@@ -119,7 +119,7 @@ multiplied by the average hatvalue from the second stage.}
 is to use a loop unless the \code{ncores} argument is specified (see below).}
 
 \item{ncores}{Numeric, number of cores to be used in parallel computations. If set
-to an integer the \code{applyfun} is set to use either \code{\link[parallel]{parLapply}}
+to an integer the \code{applyfun} is set to use either \code{\link[parallel:clusterApply]{parLapply}}
 (on Windows) or \code{\link[parallel]{mclapply}} (otherwise) with the desired number of cores.}
 
 \item{...}{arguments to be passed down.}

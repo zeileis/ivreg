@@ -1,7 +1,7 @@
 ---
 title: "Diagnostics for 2SLS Regression"
 author: "John Fox"
-date: "2020-01-29"
+date: "2020-07-10"
 bibliography: Diagnostics-for-2SLS-Regression.bib
 biblio-style: "apalike"
 output: rmarkdown::html_vignette
@@ -159,9 +159,9 @@ By default, `summary()` prints the results of three "diagnostic" tests for 2SLS 
 
 * A good instrumental variable is highly correlated with one or more of the explanatory variables while remaining uncorrelated with the errors. If an endogenous regressor is only weakly related to the instrumental variables, then its coefficient will be estimated imprecisely. We hope for a large test statistic and small p-value in the diagnostic test for weak instruments, as is the case for both regression equations in the Kmenta model.
 
-* Applied to 2SLS regression, the Wu--Hausman test is a test of \emph{endogenity}. If all of the regressors are exogenous, then both the OLS and 2SLS estimators are consistent, and the OLS estimator is more efficient, but if one or more regressors are endogenous, then the OLS estimator is inconsistent. A large test statistic and small p-value, as in the example, suggests that the OLS estimator is inconsistent and the 2SLS estimator is therefore to be preferred.
+* Applied to 2SLS regression, the Wu--Hausman test is a test of *endogenity*. If all of the regressors are exogenous, then both the OLS and 2SLS estimators are consistent, and the OLS estimator is more efficient, but if one or more regressors are endogenous, then the OLS estimator is inconsistent. A large test statistic and small p-value, as in the example, suggests that the OLS estimator is inconsistent and the 2SLS estimator is therefore to be preferred.
 
-* The Sargan test is a test of overidentification. That is, in an overidentified regression equation, where there are more instrumental variables than coefficients to estimate, as in Kmenta's deman equation, it's possible that the instrumental variables provide conflicting information about the values of the coefficients. A large test statistic and small p-value for the Sargan test suggest, therefore, that the model is misspecified. In the example, we obtain a moderately small p-value of 0.084 by chance even though we know (by the manner in which the data were constructed) that the demand equation is correct. The Sargan test is inapplicable to a just-identified regression equation, with an equal number of instrumental variables and coefficients, as in Kmenta's supply equation.
+* The Sargan test is a test of overidentification. That is, in an overidentified regression equation, where there are more instrumental variables than coefficients to estimate, as in Kmenta's demand equation, it's possible that the instrumental variables provide conflicting information about the values of the coefficients. A large test statistic and small p-value for the Sargan test suggest, therefore, that the model is misspecified. In the example, we obtain a moderately small p-value of 0.084 by chance even though we know (by the manner in which the data were constructed) that the demand equation is correct. The Sargan test is inapplicable to a just-identified regression equation, with an equal number of instrumental variables and coefficients, as in Kmenta's supply equation.
 
 Several methods for class `"lm"` objects work properly with the objects produced by `ivreg()`. For example, the `plot()` method for `"ivreg"` objects invokes the corresponding `"lm"` method and produces interpretable plots, here for the 2SLS fit for the demand equation in Kmenta's model:
 ```{r fig.height=8, fig.width=8}
@@ -302,7 +302,7 @@ A common score test for nonconstant error variance in least-squares regression, 
 $$
 V(\varepsilon) = g(\gamma_0 + \gamma_1 z_1 + \cdots + \gamma_s z_s) 
 $$
-where the function $g()$ is unspecified and the variables $z_1, \ldots, z_s$ are predictors of the error variance. In the most common application, independently proposed by @CookWeisberg1983, there is one $z$, the fitted values $\widehat{y}$ from the regression, although it is also common to use the regressors $x$ from the primary regression as $z$s. The test is implemented by regressing the squared standardized residuals $e_i^2/\widehat{\sigma}^2$ on the $z$s, where $\widehat{\sigma}^2 = \sum e_i^2/n$. The residual sum of squares for this auxiliary regression divided by 2 is then asymptotically distributed as $\chi^2_s$ under the null hypothesis of constant error variance.
+where the function $g()$ is unspecified and the variables $z_1, \ldots, z_s$ are predictors of the error variance. In the most common application, independently proposed by @CookWeisberg1983, there is one $z$, the fitted values $\widehat{y}$ from the regression, although it is also common to use the regressors $x$ from the primary regression as $z$s. The test is implemented by regressing the squared standardized residuals $e_i^2/\widehat{\sigma}^2$ on the $z$s, where $\widehat{\sigma}^2 = \sum e_i^2/n$. The regression sum of squares for this auxiliary regression divided by 2 is then asymptotically distributed as $\chi^2_s$ under the null hypothesis of constant error variance.
 
 The Breusch-Pagan/Cook-Weisberg test is easily adaptable to 2SLS regression, as implemented by the `ncvTest()` function in the **car** package. For Kmenta's demand equation:
 ```{r}
@@ -374,7 +374,7 @@ colnames(SEs2) <- c("sandwich", "conventional")
 SEs2
 ```
 
-As mentioned, ootstrapping provides an alternative to sandwich standard errors as a correction for nonconstant error variance, and the **ivreg** package supplies an `"ivreg"` method for the `Boot()` function in the **car** package, implementing the case-resampling bootstrap, and returning an object of class `"boot"` suitable for use with functions in the **boot** package [@DavisonHinkley1997; @CantyRipley2019]. By default, $R = 999$ bootstrap replications are generated. For example:
+As mentioned, bootstrapping provides an alternative to sandwich standard errors as a correction for nonconstant error variance, and the **ivreg** package supplies an `"ivreg"` method for the `Boot()` function in the **car** package, implementing the case-resampling bootstrap, and returning an object of class `"boot"` suitable for use with functions in the **boot** package [@DavisonHinkley1997; @CantyRipley2019]. By default, $R = 999$ bootstrap replications are generated. For example:
 ```{r}
 set.seed <- 869255 # for reproducibility
 b.deq2 <- Boot(deq2)
