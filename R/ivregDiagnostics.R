@@ -18,9 +18,10 @@ diagprod <- function(d, X){
 #' @aliases ivregDiagnostics influence.ivreg rstudent.ivreg cooks.distance.ivreg 
 #' dfbeta.influence.ivreg hatvalues.ivreg rstudent.influence.ivreg hatvalues.influence.ivreg
 #' cooks.distance.influence.ivreg qqPlot.ivreg qqPlot.influence.ivreg influencePlot.ivreg
-#' nfluencePlot.influence.ivreg infIndexPlot.ivreg infIndexPlot.influence.ivreg
-#' model.matrix.influence.ivreg avPlot.ivreg Boot.ivreg 
-#' crPlot.ivreg plot.ivreg qqPlot.ivreg outlierTest.ivreg influencePlot.ivreg 
+#' influencePlot.influence.ivreg infIndexPlot.ivreg infIndexPlot.influence.ivreg
+#' model.matrix.influence.ivreg avPlots.ivreg avPlot.ivreg mcPlots.ivreg mcPlot.ivreg Boot.ivreg 
+#' crPlots.ivreg crPlot.ivreg ceresPlots.ivreg ceresPlot.ivreg plot.ivreg qqPlot.ivreg 
+#' outlierTest.ivreg influencePlot.ivreg 
 #' spreadLevelPlot.ivreg ncvTest.ivreg deviance.ivreg
 #' 
 #' @param model,x,object A \code{"ivreg"} or \code{"influence.ivreg"} object.
@@ -40,6 +41,8 @@ diagprod <- function(d, X){
 #' the hatvalues for each stage are first divided by their average (number of coefficients in
 #' stage regression/number of cases); the geometric mean or casewise maximum values are then
 #' multiplied by the average hatvalue from the second stage.
+#' @param terms Terms for which added-variable plots are to be constructed; the default, 
+#' if the argument isn't specified, is the \code{"regressors"} component of the model formula.
 #' @param main Main title for the graph.
 #' @param ... arguments to be passed down.
 #'
@@ -58,6 +61,8 @@ diagprod <- function(d, X){
 #' }
 #' In the case of other methods, such as \code{rstudent.ivreg} or
 #' \code{rstudent.influence.ivreg}, the corresponding diagnostic statistics.
+#' Many other methods (e.g., \code{crPlot.ivreg}, \code{avPlot.ivreg}, \code{Effect.ivreg})
+#' draw graphs.
 #'
 #' @description Methods for computing deletion and other regression diagnostics for 2SLS regression.
 #' It's generally more efficient to compute the deletion diagnostics via the \code{influence}
@@ -86,7 +91,9 @@ diagprod <- function(d, X){
 #' kmenta.eq1 <- ivreg(Q ~ P + D | D + F + A, data = Kmenta)
 #' summary(kmenta.eq1)
 #' car::avPlots(kmenta.eq1)
+#' car::mcPlots(kmenta.eq1)
 #' car::crPlots(kmenta.eq1)
+#' car::ceresPlots(kmenta.eq1)
 #' car::influencePlot(kmenta.eq1)
 #' car::influenceIndexPlot(kmenta.eq1)
 #' car::qqPlot(kmenta.eq1)
@@ -400,6 +407,19 @@ model.matrix.influence.ivreg <- function(object, ...){
 }
 
 #' @rdname ivregDiagnostics
+#' @importFrom car avPlots
+#' @export
+avPlots.ivreg <- function(model, terms, ...){
+  if (missing(terms)){
+    terms <- formula(model, "regressors")[c(1, 3)]
+    avPlots(model, terms=terms, ...)
+    return(invisible(NULL))
+  }
+  .Class <- "lm"
+  NextMethod()
+}
+
+#' @rdname ivregDiagnostics
 #' @importFrom car avPlot
 #' @export
 avPlot.ivreg <- function(model, ...){
@@ -407,6 +427,33 @@ avPlot.ivreg <- function(model, ...){
   #   class(model) <- c(class(model), "lm")
   #   model$model.matrix <- model.matrix(model, type = "projected")
   #   avPlot(model, ...)
+  # } else {
+  #   NextMethod()
+  # }
+  .Class <- "lm"
+  NextMethod()
+}
+
+#' @rdname ivregDiagnostics
+#' @importFrom car mcPlots
+#' @export
+mcPlots.ivreg <- function(model, terms, ...){
+  if (missing(terms)){
+    terms <- formula(model, "regressors")[c(1, 3)]
+    mcPlots(model, terms=terms, ...)
+    return(invisible(NULL))
+  }
+  .Class <- "lm"
+  NextMethod()
+}
+
+#' @rdname ivregDiagnostics
+#' @importFrom car mcPlot
+#' @export
+mcPlot.ivreg <- function(model, ...){
+  # if (!inherits(model, "lm")) {
+  #   class(model) <- c(class(model), "lm")
+  #   crPlot(model, ...)
   # } else {
   #   NextMethod()
   # }
@@ -428,9 +475,49 @@ Boot.ivreg <- function(object, f = coef, labels = names(f(object)), R = 999,
 }
 
 #' @rdname ivregDiagnostics
+#' @importFrom car crPlots
+#' @export
+crPlots.ivreg <- function(model, terms, ...){
+  if (missing(terms)){
+    terms <- formula(model, "regressors")[c(1, 3)]
+    crPlots(model, terms=terms, ...)
+    return(invisible(NULL))
+  }
+  .Class <- "lm"
+  NextMethod()
+}
+
+#' @rdname ivregDiagnostics
 #' @importFrom car crPlot
 #' @export
 crPlot.ivreg <- function(model, ...){
+  # if (!inherits(model, "lm")) {
+  #   class(model) <- c(class(model), "lm")
+  #   crPlot(model, ...)
+  # } else {
+  #   NextMethod()
+  # }
+  .Class <- "lm"
+  NextMethod()
+}
+
+#' @rdname ivregDiagnostics
+#' @importFrom car ceresPlots
+#' @export
+ceresPlots.ivreg <- function(model, terms, ...){
+  if (missing(terms)){
+    terms <- formula(model, "regressors")[c(1, 3)]
+    ceresPlots(model, terms=terms, ...)
+    return(invisible(NULL))
+  }
+  .Class <- "lm"
+  NextMethod()
+}
+
+#' @rdname ivregDiagnostics
+#' @importFrom car ceresPlot
+#' @export
+ceresPlot.ivreg <- function(model, ...){
   # if (!inherits(model, "lm")) {
   #   class(model) <- c(class(model), "lm")
   #   crPlot(model, ...)

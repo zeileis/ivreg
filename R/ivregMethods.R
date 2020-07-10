@@ -429,7 +429,7 @@ Effect.ivreg <- function (focal.predictors, mod, ...) {
 #' @rdname ivreg_Methods
 #' @importFrom stats formula
 #' @export
-formula.ivreg <- function(x, component = c("regressors", "instruments", "complete"), ... ) {
+formula.ivreg <- function(x, component = c("complete", "regressors", "instruments"), ... ) {
   component <- match.arg(component)
   if (component == "complete"){
     class(x) <- "default"
@@ -444,7 +444,7 @@ formula.ivreg <- function(x, component = c("regressors", "instruments", "complet
 #' @importFrom insight find_formula
 #' @export
 find_formula.ivreg <- function(x, ...) {
-    list(conditional=formula(x), instruments=formula(x, "instruments"))
+    list(conditional=formula(x, "regressors"), instruments=formula(x, "instruments"))
 }
 
 #' @rdname ivreg_Methods

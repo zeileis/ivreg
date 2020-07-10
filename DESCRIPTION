@@ -7,8 +7,8 @@ Authors@R: c(person(given = "John", family = "Fox", role = c("aut", "cre"), emai
 Description: Two-stage least-squares regression for linear models, and related functions for computing and graphing a wide variety of standard regression diagnostics.
 License: GPL (>= 2)
 Depends: R (>= 3.5.0)
-Imports: car, 
-    effects,
+Imports: car (>= 3.0-9), 
+    effects (>= 4.2.0),
     Formula,
     insight,
     lmtest,

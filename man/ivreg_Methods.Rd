@@ -69,7 +69,7 @@
 
 \method{Effect}{ivreg}(focal.predictors, mod, ...)
 
-\method{formula}{ivreg}(x, component = c("regressors", "instruments", "complete"), ...)
+\method{formula}{ivreg}(x, component = c("complete", "regressors", "instruments"), ...)
 
 \method{find_formula}{ivreg}(x, ...)
 

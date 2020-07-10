@@ -1,7 +1,7 @@
 ---
 title: "Diagnostics for 2SLS Regression"
 author: "John Fox"
-date: "2020-01-29"
+date: "2020-07-13"
 bibliography: Diagnostics-for-2SLS-Regression.bib
 biblio-style: "apalike"
 output: rmarkdown::html_vignette
@@ -159,9 +159,9 @@ By default, `summary()` prints the results of three "diagnostic" tests for 2SLS 
 
 * A good instrumental variable is highly correlated with one or more of the explanatory variables while remaining uncorrelated with the errors. If an endogenous regressor is only weakly related to the instrumental variables, then its coefficient will be estimated imprecisely. We hope for a large test statistic and small p-value in the diagnostic test for weak instruments, as is the case for both regression equations in the Kmenta model.
 
-* Applied to 2SLS regression, the Wu--Hausman test is a test of \emph{endogenity}. If all of the regressors are exogenous, then both the OLS and 2SLS estimators are consistent, and the OLS estimator is more efficient, but if one or more regressors are endogenous, then the OLS estimator is inconsistent. A large test statistic and small p-value, as in the example, suggests that the OLS estimator is inconsistent and the 2SLS estimator is therefore to be preferred.
+* Applied to 2SLS regression, the Wu--Hausman test is a test of *endogenity*. If all of the regressors are exogenous, then both the OLS and 2SLS estimators are consistent, and the OLS estimator is more efficient, but if one or more regressors are endogenous, then the OLS estimator is inconsistent. A large test statistic and small p-value, as in the example, suggests that the OLS estimator is inconsistent and the 2SLS estimator is therefore to be preferred.
 
-* The Sargan test is a test of overidentification. That is, in an overidentified regression equation, where there are more instrumental variables than coefficients to estimate, as in Kmenta's deman equation, it's possible that the instrumental variables provide conflicting information about the values of the coefficients. A large test statistic and small p-value for the Sargan test suggest, therefore, that the model is misspecified. In the example, we obtain a moderately small p-value of 0.084 by chance even though we know (by the manner in which the data were constructed) that the demand equation is correct. The Sargan test is inapplicable to a just-identified regression equation, with an equal number of instrumental variables and coefficients, as in Kmenta's supply equation.
+* The Sargan test is a test of overidentification. That is, in an overidentified regression equation, where there are more instrumental variables than coefficients to estimate, as in Kmenta's demand equation, it's possible that the instrumental variables provide conflicting information about the values of the coefficients. A large test statistic and small p-value for the Sargan test suggest, therefore, that the model is misspecified. In the example, we obtain a moderately small p-value of 0.084 by chance even though we know (by the manner in which the data were constructed) that the demand equation is correct. The Sargan test is inapplicable to a just-identified regression equation, with an equal number of instrumental variables and coefficients, as in Kmenta's supply equation.
 
 Several methods for class `"lm"` objects work properly with the objects produced by `ivreg()`. For example, the `plot()` method for `"ivreg"` objects invokes the corresponding `"lm"` method and produces interpretable plots, here for the 2SLS fit for the demand equation in Kmenta's model:
 ```{r fig.height=8, fig.width=8}
@@ -209,7 +209,7 @@ Removing the 20th case produces estimated coefficients close to those for the un
 deq1.20 <- update(deq1, subset = -20)
 compareCoefs(deq, deq1, deq1.20)
 ```
-The standard errors of the estimated coefficients are larger than they were originally because we now have 19 rather than 20 cases and because the variation of the explanatory variables is reduced.
+The standard errors of the estimated coefficients are larger than they were originally because we now have 19 rather than 20 cases and because the variation of the explanatory variables is reduced. 
 
 It's of some interest to discover whether the three definitions of hatvaues make a practical difference to this example. A scatterplot matrix for the three kinds of hatvalues suggests that they all produce similar results:
 ```{r fig.height=6, fig.width=6}
@@ -254,7 +254,12 @@ crPlots(deq, smooth=list(span=1))
 
 I set a large *span* for the *loess smoother* in the plot because there are only $n = 20$ cases in the `Kmenta` data set. The default value of the span is $2/3$. In each panel, the loess smooth, given by the magenta line, closely matches the least-squares line, given by the broken blue line, which represents the fitted regression plane viewed edge-on in the direction of the *focal explanatory variable*, $P$ on the left and $D$ on the right. Both partial relationships therefore appear to be linear.
 
-`crPlots()` works only for additive models; the `predictorEffects()` function in the **effects** package plots partial residuals for more complex models. In the current example, which is an additive model, we get essentially the same graphs as before, except for the scaling of the $y$ axis:
+CERES plots [***reference***], implemented in the `ceresPlots()` function in the **car** package, are a version of component-plus-residuals plots that use smoothers rather than linear regression and that therefore are more robust with respect to nonlinear relationships among the predictors. In most applications, component-plus-residuals and CERES plots produce similar results, and that's the case here:
+```{r fig.height=4, fig.width=8}
+ceresPlots(deq, smooth=list(span=1))
+```
+
+`crPlots()` and `ceresPlots()` work only for additive models; the `predictorEffects()` function in the **effects** package plots partial residuals for more complex models. In the current example, which is an additive model, we get essentially the same graphs as before, except for the scaling of the $y$ axis:
 ```{r fig.height=4, fig.width=8}
 library(effects)
 plot(predictorEffects(deq, residuals=TRUE), 
@@ -302,7 +307,7 @@ A common score test for nonconstant error variance in least-squares regression, 
 $$
 V(\varepsilon) = g(\gamma_0 + \gamma_1 z_1 + \cdots + \gamma_s z_s) 
 $$
-where the function $g()$ is unspecified and the variables $z_1, \ldots, z_s$ are predictors of the error variance. In the most common application, independently proposed by @CookWeisberg1983, there is one $z$, the fitted values $\widehat{y}$ from the regression, although it is also common to use the regressors $x$ from the primary regression as $z$s. The test is implemented by regressing the squared standardized residuals $e_i^2/\widehat{\sigma}^2$ on the $z$s, where $\widehat{\sigma}^2 = \sum e_i^2/n$. The residual sum of squares for this auxiliary regression divided by 2 is then asymptotically distributed as $\chi^2_s$ under the null hypothesis of constant error variance.
+where the function $g()$ is unspecified and the variables $z_1, \ldots, z_s$ are predictors of the error variance. In the most common application, independently proposed by @CookWeisberg1983, there is one $z$, the fitted values $\widehat{y}$ from the regression, although it is also common to use the regressors $x$ from the primary regression as $z$s. The test is implemented by regressing the squared standardized residuals $e_i^2/\widehat{\sigma}^2$ on the $z$s, where $\widehat{\sigma}^2 = \sum e_i^2/n$. The regression sum of squares for this auxiliary regression divided by 2 is then asymptotically distributed as $\chi^2_s$ under the null hypothesis of constant error variance.
 
 The Breusch-Pagan/Cook-Weisberg test is easily adaptable to 2SLS regression, as implemented by the `ncvTest()` function in the **car** package. For Kmenta's demand equation:
 ```{r}
@@ -374,7 +379,7 @@ colnames(SEs2) <- c("sandwich", "conventional")
 SEs2
 ```
 
-As mentioned, ootstrapping provides an alternative to sandwich standard errors as a correction for nonconstant error variance, and the **ivreg** package supplies an `"ivreg"` method for the `Boot()` function in the **car** package, implementing the case-resampling bootstrap, and returning an object of class `"boot"` suitable for use with functions in the **boot** package [@DavisonHinkley1997; @CantyRipley2019]. By default, $R = 999$ bootstrap replications are generated. For example:
+As mentioned, bootstrapping provides an alternative to sandwich standard errors as a correction for nonconstant error variance, and the **ivreg** package supplies an `"ivreg"` method for the `Boot()` function in the **car** package, implementing the case-resampling bootstrap, and returning an object of class `"boot"` suitable for use with functions in the **boot** package [@DavisonHinkley1997; @CantyRipley2019]. By default, $R = 999$ bootstrap replications are generated. For example:
 ```{r}
 set.seed <- 869255 # for reproducibility
 b.deq2 <- Boot(deq2)
@@ -430,6 +435,11 @@ For example, for the demand equation in Kmenta's model:
 sqrt(vif(deq))
 ```
 Taking the square-roots of the VIFs puts them on the coefficient standard-error scale. That is, the standard errors of the coefficients of $P$ and $D$ are 23% larger than they would be if the estimated coefficients were uncorrelated (which is equivalent to the columns of $\widehat{X}$ for $P$ and $D$ in the second-stage regression being uncorrelated). When, as here, each term in the model has just one coefficient, generalized and ordinary variance-inflation factors coincide. The equality of the VIFs for $P$ and $D$ is peculiar to the case of two regressors (beyond the regression constant).
+
+*Marginal/conditional* plot, produced by the `mcPlots()` function in the **car** package,  superimpose the added-variable plots on corresponding marginal scatterplots for the regressors. These graphs allow us to visualize the reduction in precision of estimation of each coefficient due to collinearity, which reduces the conditional variation of a regressor relative to its marginal variation. for example, for the demand equation:
+```{r fig.height=4, fig.width=8}
+mcPlots(deq)
+```
 
 ## Concluding Remarks
 

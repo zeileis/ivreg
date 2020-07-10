@@ -13,20 +13,25 @@
 \alias{qqPlot.ivreg}
 \alias{qqPlot.influence.ivreg}
 \alias{influencePlot.ivreg}
-\alias{nfluencePlot.influence.ivreg}
+\alias{influencePlot.influence.ivreg}
 \alias{infIndexPlot.ivreg}
 \alias{infIndexPlot.influence.ivreg}
 \alias{model.matrix.influence.ivreg}
+\alias{avPlots.ivreg}
 \alias{avPlot.ivreg}
+\alias{mcPlots.ivreg}
+\alias{mcPlot.ivreg}
 \alias{Boot.ivreg}
+\alias{crPlots.ivreg}
 \alias{crPlot.ivreg}
+\alias{ceresPlots.ivreg}
+\alias{ceresPlot.ivreg}
 \alias{plot.ivreg}
 \alias{outlierTest.ivreg}
 \alias{spreadLevelPlot.ivreg}
 \alias{ncvTest.ivreg}
 \alias{deviance.ivreg}
 \alias{dfbeta.ivreg}
-\alias{influencePlot.influence.ivreg}
 \title{Deletion and Other Diagnostic Methods for \code{"ivreg"} Objects}
 \usage{
 \method{influence}{ivreg}(
@@ -71,7 +76,13 @@
 
 \method{model.matrix}{influence.ivreg}(object, ...)
 
+\method{avPlots}{ivreg}(model, terms, ...)
+
 \method{avPlot}{ivreg}(model, ...)
+
+\method{mcPlots}{ivreg}(model, terms, ...)
+
+\method{mcPlot}{ivreg}(model, ...)
 
 \method{Boot}{ivreg}(
   object,
@@ -83,7 +94,13 @@
   ...
 )
 
+\method{crPlots}{ivreg}(model, terms, ...)
+
 \method{crPlot}{ivreg}(model, ...)
+
+\method{ceresPlots}{ivreg}(model, terms, ...)
+
+\method{ceresPlot}{ivreg}(model, ...)
 
 \method{plot}{ivreg}(x, ...)
 
@@ -119,7 +136,7 @@ multiplied by the average hatvalue from the second stage.}
 is to use a loop unless the \code{ncores} argument is specified (see below).}
 
 \item{ncores}{Numeric, number of cores to be used in parallel computations. If set
-to an integer the \code{applyfun} is set to use either \code{\link[parallel]{parLapply}}
+to an integer the \code{applyfun} is set to use either \code{\link[parallel:clusterApply]{parLapply}}
 (on Windows) or \code{\link[parallel]{mclapply}} (otherwise) with the desired number of cores.}
 
 \item{...}{arguments to be passed down.}
@@ -127,6 +144,9 @@ to an integer the \code{applyfun} is set to use either \code{\link[parallel]{par
 \item{ylab}{The vertical axis label.}
 
 \item{distribution}{\code{"t"} (the default) or \code{"norm"}.}
+
+\item{terms}{Terms for which added-variable plots are to be constructed; the default, 
+if the argument isn't specified, is the \code{"regressors"} component of the model formula.}
 
 \item{f, labels, R}{see \code{\link[car]{Boot}}.}
 
@@ -150,6 +170,8 @@ with the following components:
 }
 In the case of other methods, such as \code{rstudent.ivreg} or
 \code{rstudent.influence.ivreg}, the corresponding diagnostic statistics.
+Many other methods (e.g., \code{crPlot.ivreg}, \code{avPlot.ivreg}, \code{Effect.ivreg})
+draw graphs.
 }
 \description{
 Methods for computing deletion and other regression diagnostics for 2SLS regression.
@@ -171,7 +193,9 @@ For additional information, see the vignette
 kmenta.eq1 <- ivreg(Q ~ P + D | D + F + A, data = Kmenta)
 summary(kmenta.eq1)
 car::avPlots(kmenta.eq1)
+car::mcPlots(kmenta.eq1)
 car::crPlots(kmenta.eq1)
+car::ceresPlots(kmenta.eq1)
 car::influencePlot(kmenta.eq1)
 car::influenceIndexPlot(kmenta.eq1)
 car::qqPlot(kmenta.eq1)
