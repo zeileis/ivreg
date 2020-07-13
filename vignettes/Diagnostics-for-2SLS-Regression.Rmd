@@ -1,7 +1,11 @@
 ---
 title: "Diagnostics for 2SLS Regression"
 author: "John Fox"
-date: "2020-07-13"
+<<<<<<< HEAD
+date: "2020-07-10"
+=======
+date: "2020-07-10"
+>>>>>>> 65718a55d32f77ac263fd6a75f5ad4a7f9812967
 bibliography: Diagnostics-for-2SLS-Regression.bib
 biblio-style: "apalike"
 output: rmarkdown::html_vignette
