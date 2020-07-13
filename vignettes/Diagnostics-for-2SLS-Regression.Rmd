@@ -1,11 +1,7 @@
 ---
 title: "Diagnostics for 2SLS Regression"
 author: "John Fox"
-<<<<<<< HEAD
 date: "2020-07-13"
-=======
-date: "2020-07-10"
->>>>>>> 65718a55d32f77ac263fd6a75f5ad4a7f9812967
 bibliography: Diagnostics-for-2SLS-Regression.bib
 biblio-style: "apalike"
 output: rmarkdown::html_vignette
@@ -258,7 +254,7 @@ crPlots(deq, smooth=list(span=1))
 
 I set a large *span* for the *loess smoother* in the plot because there are only $n = 20$ cases in the `Kmenta` data set. The default value of the span is $2/3$. In each panel, the loess smooth, given by the magenta line, closely matches the least-squares line, given by the broken blue line, which represents the fitted regression plane viewed edge-on in the direction of the *focal explanatory variable*, $P$ on the left and $D$ on the right. Both partial relationships therefore appear to be linear.
 
-CERES plots [***reference***], implemented in the `ceresPlots()` function in the **car** package, are a version of component-plus-residuals plots that use smoothers rather than linear regression and that therefore are more robust with respect to nonlinear relationships among the predictors. In most applications, component-plus-residuals and CERES plots produce similar results, and that's the case here:
+CERES plots [@Cook1993], implemented in the `ceresPlots()` function in the **car** package, are a version of component-plus-residuals plots that use smoothers rather than linear regression and that therefore are more robust with respect to nonlinear relationships among the predictors. In most applications, component-plus-residuals and CERES plots produce similar results, and that's the case here:
 ```{r fig.height=4, fig.width=8}
 ceresPlots(deq, smooth=list(span=1))
 ```
