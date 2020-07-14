@@ -23,6 +23,8 @@
 #' or \code{linearHypothesis()}. Only \code{test = "F"} is supported by \code{anova()}; this is also
 #' the default for \code{Anova()} and \code{linearHypothesis()}, which also allow \code{test = "Chisq"} for
 #' asymptotic tests.
+#' @param hypothesis.matrix,rhs For formulating a linear hypothesis; see the documentation
+#' for \code{\link{linearHypothesis}} for details.
 #' @param formula. To update model.
 #' @param evaluate If \code{TRUE}, the default, the updated model is evaluated; if \code{FALSE} the updated call is returned.
 #' @param ... arguments to pass down.
@@ -457,7 +459,8 @@ Anova.ivreg <- function(mod, test.statistic=c("F", "Chisq"), ...){
 
 #' @rdname ivreg_Methods
 #' @export
-linearHypothesis.ivreg <- function(model, test=c("F", "Chisq"), ...){
+linearHypothesis.ivreg <- function(model, hypothesis.matrix, rhs=NULL, 
+                                   test=c("F", "Chisq"), ...){
   test <- match.arg(test)
   NextMethod(test=test)
 }

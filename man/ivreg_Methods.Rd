@@ -75,7 +75,13 @@
 
 \method{Anova}{ivreg}(mod, test.statistic = c("F", "Chisq"), ...)
 
-\method{linearHypothesis}{ivreg}(model, test = c("F", "Chisq"), ...)
+\method{linearHypothesis}{ivreg}(
+  model,
+  hypothesis.matrix,
+  rhs = NULL,
+  test = c("F", "Chisq"),
+  ...
+)
 
 \method{alias}{ivreg}(object, ...)
 
@@ -124,6 +130,9 @@ asymptotic tests.}
 \item{evaluate}{If \code{TRUE}, the default, the updated model is evaluated; if \code{FALSE} the updated call is returned.}
 
 \item{focal.predictors}{Focal predictors for effect plot, see \code{\link[effects]{Effect}}.}
+
+\item{hypothesis.matrix, rhs}{For formulating a linear hypothesis; see the documentation
+for \code{\link{linearHypothesis}} for details.}
 }
 \description{
 Various methods for processing \code{"ivreg"} objects; for diagnostic methods,
