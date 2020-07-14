@@ -31,9 +31,18 @@ diagprod <- function(d, X){
 #' @param applyfun Optional loop replacement function that should work like
 #' \code{\link[base]{lapply}} with arguments \code{function(X, FUN, ...)}. The default
 #' is to use a loop unless the \code{ncores} argument is specified (see below).
-#' @param ncores Numeric, number of cores to be used in parallel computations. If set
+#' @param ncores 
+#' Numeric, number of cores to be used in parallel computations. If set
+#' #ifdef windows
 #' to an integer the \code{applyfun} is set to use either \code{\link[parallel:clusterApply]{parLapply}}
-#' (on Windows) or \code{\link[parallel]{mclapply}} (otherwise) with the desired number of cores.
+#' (on Windows) or \code{mclapply} 
+#' #endif
+#' #ifndef  windows
+#' to an integer the \code{applyfun} is set to use either \code{parLapply}
+#' (on Windows) or \code{\link[parallel]{mclapply}} 
+#' #endif
+#' (otherwise) with the desired number of cores.
+#' 
 #' @param type If \code{"stage2"} (the default), hatvalues are for the second stage regression;
 #' if \code{"both"}, the hatvalues are the geometric mean of the casewise hatvalues for the
 #' two stages; if \code{"maximum"}, the hatvalues are the larger of the casewise
