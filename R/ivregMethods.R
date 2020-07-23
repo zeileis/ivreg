@@ -32,7 +32,7 @@
 #' @importFrom stats model.matrix vcov terms predict update anova quantile weighted.mean delete.response lm lm.fit lm.wfit model.offset na.pass pchisq 
 #' @importFrom lmtest coeftest waldtest waldtest.default lrtest lrtest.default
 #' @importFrom car linearHypothesis
-#' @import Formula sandwich
+#' @import Formula
 
 #' @rdname ivreg_Methods
 #' @export
@@ -40,13 +40,13 @@ vcov.ivreg <- function(object, ...)
   object$sigma^2 * object$cov.unscaled
 
 #' @rdname ivreg_Methods
-#' @export    
+#' @exportS3Method sandwich::bread
 bread.ivreg <- function (x, ...) 
     x$cov.unscaled * x$nobs
 
 #' @rdname ivreg_Methods
 #' @importFrom stats weights
-#' @export
+#' @exportS3Method sandwich::estfun
 estfun.ivreg <- function (x, ...) 
 {
     xmat <- model.matrix(x)
@@ -420,9 +420,8 @@ residuals.ivreg <- function(object, type=c("response", "projected", "regressors"
 }
 
 #' @rdname ivreg_Methods
-#' @importFrom effects Effect
 #' @param focal.predictors Focal predictors for effect plot, see \code{\link[effects]{Effect}}.
-#' @export
+#' @exportS3Method effects::Effect
 Effect.ivreg <- function (focal.predictors, mod, ...) {
   mod$contrasts <- mod$contrasts$regressors
   NextMethod()
@@ -443,8 +442,7 @@ formula.ivreg <- function(x, component = c("complete", "regressors", "instrument
 }
 
 #' @rdname ivreg_Methods
-#' @importFrom insight find_formula
-#' @export
+#' @exportS3Method insight::find_formula
 find_formula.ivreg <- function(x, ...) {
     list(conditional=formula(x, "regressors"), instruments=formula(x, "instruments"))
 }
