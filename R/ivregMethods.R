@@ -469,13 +469,13 @@ linearHypothesis.ivreg <- function(model, hypothesis.matrix, rhs=NULL,
 #' @rdname ivreg_Methods
 #' @export
 alias.ivreg <- function(object, ...){
-    .Class="lm"
+    .Class <- "lm"
     NextMethod()
 }
 
 #' @rdname ivreg_Methods
 #' @export
 qr.ivreg <- function(x, ...){
-    .Class="lm"
+    .Class <- "lm"
     NextMethod()
 }
