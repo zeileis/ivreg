@@ -307,16 +307,29 @@ ivdiag <- function(obj, vcov. = NULL) {
   z <- model.matrix(obj, component = "instruments")
   w <- weights(obj)
   
+  ## names of "regressors" and "instruments"
+  xnam <- colnames(x)
+  znam <- colnames(z)
+
+  ## relabel "instruments" to match order from "regressors"
+  fx <- attr(terms(obj, component = "regressors"), "factors")
+  fz <- attr(terms(obj, component = "instruments"), "factors")  
+  fz <- fz[c(rownames(fx)[rownames(fx) %in% rownames(fz)], rownames(fz)[!(rownames(fz) %in% rownames(fx))]), , drop = FALSE]
+  nz <- apply(fz > 0, 2, function(x) paste(rownames(fz)[x], collapse = ":"))
+  nz <- nz[names(nz) != nz]
+  nz <- nz[nz %in% colnames(fx)]
+  if(length(nz) > 0L) znam[names(nz)] <- nz
+
   ## endogenous/instrument variables
-  endo <- which(!(colnames(x) %in% colnames(z)))
-  inst <- which(!(colnames(z) %in% colnames(x)))
+  endo <- which(!(xnam %in% znam))
+  inst <- which(!(znam %in% xnam))
   if((length(endo) <= 0L) | (length(inst) <= 0L))
     stop("no endogenous/instrument variables")
 
   ## return value
   rval <- matrix(NA, nrow = length(endo) + 2L, ncol = 4L)
   colnames(rval) <- c("df1", "df2", "statistic", "p-value")
-  rownames(rval) <- c(if(length(endo) > 1L) paste0("Weak instruments (", colnames(x)[endo], ")") else "Weak instruments",
+  rownames(rval) <- c(if(length(endo) > 1L) paste0("Weak instruments (", xnam[endo], ")") else "Weak instruments",
     "Wu-Hausman", "Sargan")
   
   ## convenience functions
