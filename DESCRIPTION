@@ -12,16 +12,14 @@ Imports: car (>= 3.0-9),
     lmtest,
     stats,
     utils,
-    parallel,
-    doParallel,
-    foreach
 Suggests: 
     AER,
     effects (>= 4.2.0),
     knitr,
     insight,
-    sandwich, 
+    parallel,
     rmarkdown,
+    sandwich, 
     testthat
 Encoding: UTF-8
 LazyData: true

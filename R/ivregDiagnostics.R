@@ -87,7 +87,6 @@ diagprod <- function(d, X){
 #' 
 #' For additional information, see the vignette 
 #' \href{../doc/Diagnostics-for-2SLS-Regression.pdf}{Diagnostics for 2SLS Regression}.
-#' @import foreach
 #' @importFrom stats influence
 #' @export
 #' @seealso \code{\link{ivreg}}, \code{\link[car]{avPlots}},
