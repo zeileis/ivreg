@@ -1,0 +1,12 @@
+reference:
+  - title: "Instrumental Variables Regression"
+    contents: 
+      - ivreg
+      - ivreg.fit
+      - ivreg_Methods
+      - ivregDiagnostics
+  - title: "Data Sets"
+    contents: 
+      - CigaretteDemand
+      - Kmenta
+      - SchoolingReturns
