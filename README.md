@@ -1,5 +1,3 @@
-# ivreg
-
 ## Two-Stage Least-Squares Regression with Diagnostics
 
 An implementation of instrumental variables regression using two-stage least-squares
@@ -10,3 +8,18 @@ various regression diagnostics, including hat values, deletion diagnostics such 
 studentized residuals and Cook's distances; graphical diagnostics such as
 component-plus-residual plots and added-variable plots; and effect plots with partial
 residuals.
+
+**Instrumental variables regression:**
+
+```
+library("ivreg")
+ivreg(Q ~ P + D | D + F + A, data = Kmenta)
+```
+
+**Via two-stage least squares (2SLS):**
+
+$y = X \beta + \varepsilon$
+
+$\widehat{X} = Z (Z^\top Z)^{-1} Z^\top X$
+
+$b_{\mathrm{2SLS}} = (\widehat{X}^\top \widehat{X}) \widehat{X}^\top y$
