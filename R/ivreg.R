@@ -85,29 +85,22 @@
 #' \code{"projected"} is the matrix of regressors projected on the image of the instruments.}
 #' @seealso \code{\link{ivreg.fit}}, \code{\link{ivregDiagnostics}}, \code{\link{ivreg_Methods}},
 #' \code{\link[stats]{lm}}, \code{\link[stats:lmfit]{lm.fit}}
-#' @references Greene, W. H. (1993) \emph{Econometric Analysis}, 2nd ed.,
-#' Macmillan.
+#' @references Greene, W.H. (1993) \emph{Econometric Analysis}, 2nd ed., Macmillan.
 #' @keywords regression
 #' @examples
-#' 
 #' ## data
-#' if (length(find.package("AER", quiet=TRUE)) > 0){
-    #' data("CigarettesSW", package = "AER")
-    #' CigarettesSW$rprice <- with(CigarettesSW, price/cpi)
-    #' CigarettesSW$rincome <- with(CigarettesSW, income/population/cpi)
-    #' CigarettesSW$tdiff <- with(CigarettesSW, (taxs - tax)/cpi)
-    #' 
-    #' ## model 
-    #' fm <- ivreg(log(packs) ~ log(rprice) + log(rincome) | log(rincome) + tdiff + I(tax/cpi),
-    #'   data = CigarettesSW, subset = year == "1995")
-    #' print(summary(fm)) # print() not normally necessary
-    #' print(summary(fm, vcov = sandwich::sandwich, df = Inf))
-    #' 
-    #' ## ANOVA
-    #' fm2 <- ivreg(log(packs) ~ log(rprice) | tdiff, data = CigarettesSW, subset = year == "1995")
-    #' print(anova(fm, fm2))
-    #' print(car::Anova(fm))
-#' }
+#' data("CigaretteDemand", package = "ivreg")
+#' 
+#' ## model 
+#' m <- ivreg(log(packs) ~ log(rprice) + log(rincome) | salestax + log(rincome),
+#'   data = CigaretteDemand)
+#' summary(m)
+#' summary(m, vcov = sandwich::sandwich, df = Inf)
+#' 
+#' ## ANOVA
+#' m2 <- update(m, . ~ . - log(rincome) | . - log(rincome))
+#' anova(m, m2)
+#' car::Anova(m)
 #' 
 #' @importFrom stats .getXlevels model.weights
 #' @export

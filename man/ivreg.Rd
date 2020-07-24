@@ -115,30 +115,23 @@ second part of the formula. The latter is typically more convenient, if
 there is a large number of exogenous regressors.
 }
 \examples{
-
 ## data
-if (length(find.package("AER", quiet=TRUE)) > 0){
-data("CigarettesSW", package = "AER")
-CigarettesSW$rprice <- with(CigarettesSW, price/cpi)
-CigarettesSW$rincome <- with(CigarettesSW, income/population/cpi)
-CigarettesSW$tdiff <- with(CigarettesSW, (taxs - tax)/cpi)
+data("CigaretteDemand", package = "ivreg")
 
 ## model 
-fm <- ivreg(log(packs) ~ log(rprice) + log(rincome) | log(rincome) + tdiff + I(tax/cpi),
-  data = CigarettesSW, subset = year == "1995")
-print(summary(fm)) # print() not normally necessary
-print(summary(fm, vcov = sandwich::sandwich, df = Inf))
+m <- ivreg(log(packs) ~ log(rprice) + log(rincome) | salestax + log(rincome),
+  data = CigaretteDemand)
+summary(m)
+summary(m, vcov = sandwich::sandwich, df = Inf)
 
 ## ANOVA
-fm2 <- ivreg(log(packs) ~ log(rprice) | tdiff, data = CigarettesSW, subset = year == "1995")
-print(anova(fm, fm2))
-print(car::Anova(fm))
-}
+m2 <- update(m, . ~ . - log(rincome) | . - log(rincome))
+anova(m, m2)
+car::Anova(m)
 
 }
 \references{
-Greene, W. H. (1993) \emph{Econometric Analysis}, 2nd ed.,
-Macmillan.
+Greene, W.H. (1993) \emph{Econometric Analysis}, 2nd ed., Macmillan.
 }
 \seealso{
 \code{\link{ivreg.fit}}, \code{\link{ivregDiagnostics}}, \code{\link{ivreg_Methods}},

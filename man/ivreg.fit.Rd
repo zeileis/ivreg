@@ -61,24 +61,18 @@ for first projecting \code{x} onto the image of
 \code{x}, and computing the residual standard deviation.
 }
 \examples{
-
 ## data
-if (length(find.package("AER", quiet = TRUE)) > 0){
-data("CigarettesSW", package="AER")
-CigarettesSW$rprice <- with(CigarettesSW, price/cpi)
-CigarettesSW$rincome <- with(CigarettesSW, income/population/cpi)
-CigarettesSW$tdiff <- with(CigarettesSW, (taxs - tax)/cpi)
+data("CigaretteDemand", package = "ivreg")
 
 ## high-level interface
-fm <- ivreg(log(packs) ~ log(rprice) + log(rincome) | log(rincome) + tdiff + I(tax/cpi),
-  data = CigarettesSW, subset = year == "1995")
+m <- ivreg(log(packs) ~ log(rprice) + log(rincome) | salestax + log(rincome),
+  data = CigaretteDemand)
 
 ## low-level interface
-y <- fm$y
-x <- model.matrix(fm, component = "regressors")
-z <- model.matrix(fm, component = "instruments")
+y <- m$y
+x <- model.matrix(m, component = "regressors")
+z <- model.matrix(m, component = "instruments")
 ivreg.fit(x, y, z)$coefficients
-}
 
 }
 \seealso{

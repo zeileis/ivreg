@@ -15,7 +15,7 @@ A data frame with 20 rows and 5 columns.
   }
 }
 \source{
-Kmenta, J. (1986) \emph{Elements of Econometrics, Second Edition}, Macmillan.
+Kmenta, J. (1986) \emph{Elements of Econometrics}, 2nd ed., Macmillan.
 }
 \usage{
 data("Kmenta", package = "ivreg")
