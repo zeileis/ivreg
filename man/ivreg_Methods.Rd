@@ -19,6 +19,8 @@
 \alias{find_formula.ivreg}
 \alias{alias.ivreg}
 \alias{qr.ivreg}
+\alias{vcovHC.ivreg}
+\alias{model.matrix.ivreg_projected}
 \alias{Anova.ivreg}
 \alias{linearHypothesis.ivreg}
 \title{Methods for \code{"ivreg"} Objects}
@@ -29,6 +31,8 @@
 
 \method{estfun}{ivreg}(x, ...)
 
+\method{vcovHC}{ivreg}(x, ...)
+
 \method{terms}{ivreg}(x, component = c("regressors", "instruments", "full"), ...)
 
 \method{model.matrix}{ivreg}(
@@ -36,6 +40,8 @@
   component = c("regressors", "projected", "instruments"),
   ...
 )
+
+\method{model.matrix}{ivreg_projected}(object, ...)
 
 \method{predict}{ivreg}(
   object,

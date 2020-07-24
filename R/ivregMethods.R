@@ -49,7 +49,7 @@ bread.ivreg <- function (x, ...)
 #' @exportS3Method sandwich::estfun
 estfun.ivreg <- function (x, ...) 
 {
-    xmat <- model.matrix(x)
+    xmat <- model.matrix(x, component = "projected")
     if(any(alias <- is.na(coef(x)))) xmat <- xmat[, !alias, drop = FALSE]
     wts <- weights(x)
     if(is.null(wts)) wts <- 1
@@ -58,6 +58,13 @@ estfun.ivreg <- function (x, ...)
     attr(rval, "assign") <- NULL
     attr(rval, "contrasts") <- NULL
     return(rval)
+}
+
+#' @rdname ivreg_Methods
+#' @exportS3Method sandwich::vcovHC
+vcovHC.ivreg <- function (x, ...) {
+    class(x) <- c("ivreg_projected", "ivreg")
+    sandwich::vcovHC.default(x, ...)
 }
 
 #' #' @rdname ivreg_Methods
@@ -103,6 +110,11 @@ model.matrix.ivreg <- function(object, component = c("regressors", "projected", 
     } else stop("not enough information in fitted model to return model.matrix")
   return(rval)
 }
+
+#' @rdname ivreg_Methods
+#' @export
+model.matrix.ivreg_projected <- function(object, ...) model.matrix.ivreg(object, component = "projected")
+
 
 #' @rdname ivreg_Methods
 #' @param type For \code{predict}, one of \code{"response"} (the default)  or \code{"terms"};
@@ -286,7 +298,7 @@ update.ivreg <- function (object, formula., ..., evaluate = TRUE)
 {
   if(is.null(call <- getCall(object))) stop("need an object with call component")
   extras <- match.call(expand.dots = FALSE)$...
-  if(!missing(formula.)) call$formula <- formula(update(Formula(formula(object)), formula.))
+  if(!missing(formula.)) call$formula <- formula(update(Formula(formula(object, component = "complete")), formula.))
   if(length(extras)) {
     existing <- !is.na(match(names(extras), names(call)))
     for (a in names(extras)[existing]) call[[a]] <- extras[[a]]
