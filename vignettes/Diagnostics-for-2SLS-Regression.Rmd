@@ -1,13 +1,18 @@
 ---
 title: "Diagnostics for 2SLS Regression"
-author: "John Fox"
-date: "2020-07-13"
-bibliography: Diagnostics-for-2SLS-Regression.bib
+output:
+  html_document:
+    toc: true
+    toc_float: true
+    theme: flatly
+bibliography: ivreg.bib
 biblio-style: "apalike"
-output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Diagnostics-for-2SLS-Regression}
+  %\VignetteIndexEntry{Diagnostics for 2SLS Regression}
   %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteDepends{ivreg,car,effects,sandwich}
+  %\VignetteKeywords{two-stage least squares, instrumental variables, diagnostics}
+  %\VignettePackage{ivreg}
   %\VignetteEncoding{UTF-8}
 ---
 
@@ -19,28 +24,28 @@ knitr::opts_chunk$set(echo = TRUE, comment=NA, prompt=TRUE, fig.height=4, fig.wi
 
 The **ivreg** package extends a variety of standard numeric and graphical regression  diagnostics to linear models fit by *two-stage least-squares (2SLS)* regression, a commonly employed method of instrumental-variables estimation for potentially overidentified structural equations in which there are endogenous regressors. The `ivreg.fit()` function in the package computes the 2SLS estimator employing a low-level interface not generally intended for direct use, and returns a list containing quantities that faciliate the computation of various diagnostics. The `ivreg()` function provides a user-friendly formula-based interface to `ivreg.fit()`.
 
-`ivreg()` is derived from and supersedes the `ivreg()` function in the **AER** package [@KleiberZeileis2008], making additional provision for regression diagnostics. The subject of this vignette is the rationale for the extension of various standard regression diagnostics to 2SLS and the use of functions in the **ivreg** package to compute them, along with functions in other packages, specifically the base-R **stats** package [@RCore2019] and the **car** and **effects** packages [@FoxWeisberg2019], that work with the `"ivreg"` objects produced by `ivreg()`.
+`ivreg()` is derived from and supersedes the `ivreg()` function in the **AER** package [@KleiberZeileis2008], making additional provision for regression diagnostics. The subject of this vignette is the rationale for the extension of various standard regression diagnostics to 2SLS and the use of functions in the **ivreg** package to compute them, along with functions in other packages, specifically the base-R **stats** package [@R] and the **car** and **effects** packages [@FoxWeisberg2019], that work with the `"ivreg"` objects produced by `ivreg()`.
 
 
 ## Review of 2SLS Estimation
 
 I'll need some basic results for 2SLS regression to develop diagnostics and so I review the method briefly here. 2SLS regression was invented independently in the 1950s by @Basmann1957 and Theil [as cited in @Theil1971], who took slightly different but equivalent approaches, both described below, to derive the 2SLS estimator.
 
-We want to estimate the linear model $y = X \beta + \varepsilon$, where $y$ is an $n \times 1$ vector of observations on a response variable, $X$ is an $n \times p$ matrix of regressors, typically with an initial columns of $1$s for the regression constant, $\beta$ is a $p \times 1$ vector of regression coefficients to be estimated from the data, and $\varepsilon$ is an $n \times 1$ vector of errors assumed to be distributed $N_n(0, \sigma^2 I_n)$ where $N_n$ is the multivariate-normal distribution, $0$ is an $n \times 1$ vector of zeroes, and $I_n$ is the order-$n$ identity matrix. Suppose that some (perhaps all) of the regressors in $X$ are *endogenous*, in the sense that they are thought not to be independent of $\varepsilon$. As a consequence, the *ordinary least-squares (OLS)* estimator $b_{\mathrm{OLS}} = (X^T X)^{-1} X^T y$ of $\beta$ is generally biased and inconsistent.
+We want to estimate the linear model $y = X \beta + \varepsilon$, where $y$ is an $n \times 1$ vector of observations on a response variable, $X$ is an $n \times p$ matrix of regressors, typically with an initial columns of $1$s for the regression constant, $\beta$ is a $p \times 1$ vector of regression coefficients to be estimated from the data, and $\varepsilon$ is an $n \times 1$ vector of errors assumed to be distributed $N_n(0, \sigma^2 I_n)$ where $N_n$ is the multivariate-normal distribution, $0$ is an $n \times 1$ vector of zeroes, and $I_n$ is the order-$n$ identity matrix. Suppose that some (perhaps all) of the regressors in $X$ are *endogenous*, in the sense that they are thought not to be independent of $\varepsilon$. As a consequence, the *ordinary least-squares (OLS)* estimator $b_{\mathrm{OLS}} = (X^\top X)^{-1} X^\top y$ of $\beta$ is generally biased and inconsistent.
 
 Now suppose that we have another set of $q$ *instrumental variables (IVs)* $Z$ that are independent of $\epsilon$, where $q \ge p$. If $q = p$ we can apply the IVs directly to estimate $\beta$, but if $q > p$ we have more IVs than we need. Simply discarding IVs would be inefficient, and 2SLS regression is a procedure for reducing the number of IVs to $p$ by combining them in a sensible way.
 
-The *first stage* of 2SLS regresses all of regressors in the model matrix $X$ on the IVs $Z$ by multivariate ordinary least squares, obtaining the $q \times p$ matrix of regression coefficients $B = (Z^T Z)^{-1} Z^T X$, and the fitted values $\widehat{X} = Z B$. The columns of $B$ are equivalent to the coefficients produced by separate least-squares regressions of each of the columns of $X$ on $Z$. If some of the columns of $X$ are exogenous, then these columns also appear in $Z$, and consequently the columns of $\widehat{X}$ pertaining to exogenous regressors simply reproduce the corresponding columns of $X$.
+The *first stage* of 2SLS regresses all of regressors in the model matrix $X$ on the IVs $Z$ by multivariate ordinary least squares, obtaining the $q \times p$ matrix of regression coefficients $B = (Z^\top Z)^{-1} Z^\top X$, and the fitted values $\widehat{X} = Z B$. The columns of $B$ are equivalent to the coefficients produced by separate least-squares regressions of each of the columns of $X$ on $Z$. If some of the columns of $X$ are exogenous, then these columns also appear in $Z$, and consequently the columns of $\widehat{X}$ pertaining to exogenous regressors simply reproduce the corresponding columns of $X$.
 
 Because the columns of $\widehat{X}$ are linear combinations of the columns of $Z$, they are (asymptotically) uncorrelated with $\varepsilon$, making them suitable IVs for estimating the regression equation. This IV step is the *second stage* of 2SLS in Theil's approach.
 
-As an alternative, we can obtain exactly the same estimates $b_{\mathrm{2SLS}}$ of $\beta$ by performing an OLS regression of $y$ on $\widehat{X}$, producing $b_{\mathrm{2SLS}} = (\widehat{X}^T \widehat{X}) \widehat{X}^T y$. This is Basmann's approach and it motivates the name "2SLS." 
+As an alternative, we can obtain exactly the same estimates $b_{\mathrm{2SLS}}$ of $\beta$ by performing an OLS regression of $y$ on $\widehat{X}$, producing $b_{\mathrm{2SLS}} = (\widehat{X}^\top \widehat{X}) \widehat{X}^\top y$. This is Basmann's approach and it motivates the name "2SLS." 
 
 Whether we think of the second stage as IV estimation or OLS regression, we can combine the two stages into a single formula:
 $$
-b_{\mathrm{2SLS}} = [X^T Z(Z^T Z)^{-1} Z^T X]^{-1} X^T Z (Z^T Z)^{-1} Z^{T} y
+b_{\mathrm{2SLS}} = [X^\top Z(Z^\top Z)^{-1} Z^\top X]^{-1} X^\top Z (Z^\top Z)^{-1} Z^\top y
 $$
-This is what the `tsls()` function in the **sem** package [@FoxNieByrnes2017] does, but from the point of view of developing regression diagnostics, it's advantageous to compute the 2SLS estimator by two distinct OLS regressions, which is the approach taken by `ivreg()`.
+This is what the `tsls()` function in the **sem** package [@sem] does, but from the point of view of developing regression diagnostics, it's advantageous to compute the 2SLS estimator by two distinct OLS regressions, which is the approach taken by `ivreg()`.
 
 
 ## Unusual-Data Diagnostics for 2SLS Regression
@@ -53,37 +58,37 @@ As it turns out, and as Belsley, Kuh, and Welsch note, exact updating formulas f
 $$
 b_{\mathrm{2SLS}-i} = b_{\mathrm{2SLS}} +A^{-1}g_i
 $$
-where $b_{\mathrm{2SLS}-i}$ is the 2SLS vector of regression coefficients with the $i$th case removed, and
+where $b_{\mathrm{2SLS}-i}$ is the 2SLS vector of regression coefficients with the $i$-th case removed, and
 
 \begin{align}
-A   &= X^TZ(Z^TZ)^{-1}Z^TX \\
-g_i &= u_i[(y_i - z_i^T a) - (y_i - r_i^T b_{\mathrm{2SLS}})] + (u_i + j_i)(y_i - x_i^T b_{\mathrm{2SLS}}) \\
-u_i &= \frac{1 - x_i^T A^{-1} x_i}{[1 - c_i + (x_i - r_i)^T A^{-1} (x_i - r_i)]D_i}(x_i - r_i) 
-       + \frac{(x_i - r_i)^T A^{-1} x_i}{[1 - c_i + (x_i - r_i)^T A^{-1} (x_i - r_i)]D_i}x_i \\
-j_i &= \frac{(x_i - r_i)^T A^{-1} x_i}{[1 - c_i + (x_i - r_i)^T A^{-1} (x_i - r_i)]D_i}(x_i - r_i) - \frac{1}{D_i}x_i \\
-r_i &= X^T Z (Z^T Z)^{-1} z_i \\
-c_i &= z_i^T (Z^T Z)^{-1} z_i \\
-D_i &= 1 - x_i^T A^{-1} x_i + \frac{[(x_i - r_i)^T A^{-1} x_i]^2}{1 - c_i + (x_i - r_i)^TA^{-1}(x_i - r_i)} \\
-a   &= (Z^T Z)^{-1} Z^T y
+A   &= X^\top Z(Z^\top Z)^{-1}Z^\top X \\
+g_i &= u_i[(y_i - z_i^\top a) - (y_i - r_i^\top b_{\mathrm{2SLS}})] + (u_i + j_i)(y_i - x_i^\top b_{\mathrm{2SLS}}) \\
+u_i &= \frac{1 - x_i^\top A^{-1} x_i}{[1 - c_i + (x_i - r_i)^\top A^{-1} (x_i - r_i)]D_i}(x_i - r_i) 
+       + \frac{(x_i - r_i)^\top A^{-1} x_i}{[1 - c_i + (x_i - r_i)^\top A^{-1} (x_i - r_i)]D_i}x_i \\
+j_i &= \frac{(x_i - r_i)^\top A^{-1} x_i}{[1 - c_i + (x_i - r_i)^\top A^{-1} (x_i - r_i)]D_i}(x_i - r_i) - \frac{1}{D_i}x_i \\
+r_i &= X^\top Z (Z^\top Z)^{-1} z_i \\
+c_i &= z_i^\top (Z^\top Z)^{-1} z_i \\
+D_i &= 1 - x_i^\top A^{-1} x_i + \frac{[(x_i - r_i)^\top A^{-1} x_i]^2}{1 - c_i + (x_i - r_i)^\top A^{-1}(x_i - r_i)} \\
+a   &= (Z^\top Z)^{-1} Z^\top y
 \end{align}
 
-Here, $y_i$ is the value of the response for the $i$th case, $x_i^T$ is the $i$th row of the model matrix $X$, and $z_i^T$ is the $i$th row of the instrumental-variables model matrix $Z$.
+Here, $y_i$ is the value of the response for the $i$-th case, $x_i^\top$ is the $i$-th row of the model matrix $X$, and $z_i^\top$ is the $i$-th row of the instrumental-variables model matrix $Z$.
 
 Belsley, Kuh, and Welsch specifically examine (in my notation) the values of $\mathrm{dfbeta}_i = b_{\mathrm{2SLS}} - b_{\mathrm{2SLS}-i}$. They discuss as well the deleted values of the residual standard deviation $s_{-i}$. (Belsley, Kuh, and Welsch define the residual variances $s^2$ and $s_{-i}^2$ respectively as the full-sample and deleted residual sums of squares divided by $n$; in the **ivreg** packages, we divide by the residual degrees of freedom, $n - p$ for the full-sample value of $s^2$ and $n - p - 1$ for the case-deleted values.)
 
 Belsley, Kuh, and Welsch then compute their summary measure of influence on the fitted values (and regression coefficients) $\mathrm{dffits}$ as
 $$
-\mathrm{dffits}_i = \frac{x_i^T \mathrm{dfbeta_{i}}}{s_{-i} \sqrt{x_i^T (\widehat{X}^T \widehat{X})^{-1} x_i}}
+\mathrm{dffits}_i = \frac{x_i^\top \mathrm{dfbeta_{i}}}{s_{-i} \sqrt{x_i^\top (\widehat{X}^\top \widehat{X})^{-1} x_i}}
 $$
-where (as before) $x_i^T$ is the $i$th row of the model matrix $X$ and $\widehat{X}$ is the model matrix of second-stage regressors.
+where (as before) $x_i^\top$ is the $i$-th row of the model matrix $X$ and $\widehat{X}$ is the model matrix of second-stage regressors.
 
 Let 
 $$
-H^* = X[X^T Z(Z^T Z)^{-1} Z^T X]^{-1} X^T Z (Z^T Z)^{-1} Z^{T}
+H^* = X[X^\top Z(Z^\top Z)^{-1} Z^\top X]^{-1} X^\top Z (Z^\top Z)^{-1} Z^\top
 $$ 
-represent the $n \times n$ matrix that transforms $y$ into the fitted values, $\widehat{y} = H^* y$. In OLS regression, the analogous quantity is the *hat-matrix* $H = X(X^T X)^{-1}X^T$. Belsley, Kuh, and Welsch note that $H^*$, unlike $H$, is not an orthogonal-projection matrix, projecting $y$ orthogonally onto the subspace spanned by the columns of $X$. (They say that $H^*$ isn't a projection matrix, but that isn't true: It represents an oblique projection of $y$ onto the subspace spanned by the columns of $X$.) In particular, although $H^*$, like $H$, is idempotent ($H^* = H^* H^*$) and $\mathrm{trace}(H^*) = p$, $H^*$, unlike $H$, is asymmetric, and thus its diagonal elements can't be treated as summary measures of leverage, that is, as *hatvalues*. 
+represent the $n \times n$ matrix that transforms $y$ into the fitted values, $\widehat{y} = H^* y$. In OLS regression, the analogous quantity is the *hat-matrix* $H = X(X^\top X)^{-1}X^\top$. Belsley, Kuh, and Welsch note that $H^*$, unlike $H$, is not an orthogonal-projection matrix, projecting $y$ orthogonally onto the subspace spanned by the columns of $X$. (They say that $H^*$ isn't a projection matrix, but that isn't true: It represents an oblique projection of $y$ onto the subspace spanned by the columns of $X$.) In particular, although $H^*$, like $H$, is idempotent ($H^* = H^* H^*$) and $\mathrm{trace}(H^*) = p$, $H^*$, unlike $H$, is asymmetric, and thus its diagonal elements can't be treated as summary measures of leverage, that is, as *hatvalues*. 
 
-Belsley, Kuh, and Welsch recommend simply using the havalues from the second-stage regression. These are the diagonal entries $h_i = h_{ii}$ of $H_2 = \widehat{X}(\widehat{X}^T \widehat{X})^{-1} \widehat{X}^T$. I discuss some alternatives below.
+Belsley, Kuh, and Welsch recommend simply using the havalues from the second-stage regression. These are the diagonal entries $h_i = h_{ii}$ of $H_2 = \widehat{X}(\widehat{X}^\top \widehat{X})^{-1} \widehat{X}^\top$. I discuss some alternatives below.
 
 In addition to hatvalues, $\mathrm{dfbeta}$, $s_{-i}$, and $\mathrm{dffits}$, the **ivreg** packages calculates *Cook's distances* $D_i$, which are essentially a slightly differently scaled version of $\mathrm{dffits}$ that uses the overall residual standard deviation $s$ in place of the deleted standard deviations $s_{-i}$: 
 $$
@@ -94,7 +99,7 @@ Because they have equal variances and are approximately $t$-distributed under th
 $$
 \mathrm{rstudent}_i = \frac{e_i}{s_{-i} \sqrt{1 - h_i}}
 $$
-where $e_i = y_i - x_i^T b_{2SLS}$ is the *response residual* for the $i$th case.
+where $e_i = y_i - x_i^\top b_{2SLS}$ is the *response residual* for the $i$-th case.
 
 As mentioned, @BelsleyKuhWelsch1980 recommend using hatvalues from the second-stage regression. That's a reasonable choice and the default in the **ivreg** package, but it risks missing cases that have high leverage in the first-stage but not the second-stage regression. Let $h_i^{(1)}$ represent the hatvalues from the first stage and $h_i^{(2)}$ those from the second stage. If the model includes an intercept, both sets of hatvalues are bounded by $1/n$ and $1$, but the average hatvalue in the first stage is $q/n$ while the average in the second stage is $p/n$. To make the hatvalues from the two stages comparable, I divide each by its average, $h^{(1*)}_i = \frac{h_i^{(1)}}{q/n}$ and $h^{(2*)}_i = \frac{h_i^{(2)}}{p/n}$. Then we can define the two-stages hatvalue either as the (rescaled) larger of the two for each case, $h_i = (p/n) \times \max \left( h^{(1*)}_i, h^{(2*)}_i \right)$, or as their (rescaled) geometric mean, $h_i = (p/n) \times \sqrt{h^{(1*)}_i \times  h^{(2*)}_i}$. The **ivreg** package provides both of these options.
 
@@ -118,7 +123,8 @@ The **ivreg** package contains the `Kmenta` data set, used in @Kmenta1986[, Ch. 
 
 The data set is small and so we can examine it in its entirety:
 ```{r}
-library(ivreg)
+library("ivreg")
+data("Kmenta", package = "ivreg")
 Kmenta
 ```
 
@@ -172,7 +178,7 @@ In this case, however, I prefer the versions of these diagnostic graphs describe
 
 As I mentioned, the `Kmenta` data are partly contrived by simulating the model, and so it's probably not surprising that the data are well behaved. For example, a *QQ plot* of studentized residuals and an *"influence plot"* of hatvalues, studentized residuals, and Cook's distances for the first structural equation are both unremarkable, except for a couple of high-leverage but in-line cases:
 ```{r}
-library(car) # for diagnostic generic functions
+library("car") # for diagnostic generic functions
 qqPlot(deq)
 ```
 ```{r}
@@ -261,7 +267,7 @@ ceresPlots(deq, smooth=list(span=1))
 
 `crPlots()` and `ceresPlots()` work only for additive models; the `predictorEffects()` function in the **effects** package plots partial residuals for more complex models. In the current example, which is an additive model, we get essentially the same graphs as before, except for the scaling of the $y$ axis:
 ```{r fig.height=4, fig.width=8}
-library(effects)
+library("effects")
 plot(predictorEffects(deq, residuals=TRUE), 
      partial.residuals=list(span=1))
 ```
@@ -379,7 +385,7 @@ colnames(SEs2) <- c("sandwich", "conventional")
 SEs2
 ```
 
-As mentioned, bootstrapping provides an alternative to sandwich standard errors as a correction for nonconstant error variance, and the **ivreg** package supplies an `"ivreg"` method for the `Boot()` function in the **car** package, implementing the case-resampling bootstrap, and returning an object of class `"boot"` suitable for use with functions in the **boot** package [@DavisonHinkley1997; @CantyRipley2019]. By default, $R = 999$ bootstrap replications are generated. For example:
+As mentioned, bootstrapping provides an alternative to sandwich standard errors as a correction for nonconstant error variance, and the **ivreg** package supplies an `"ivreg"` method for the `Boot()` function in the **car** package, implementing the case-resampling bootstrap, and returning an object of class `"boot"` suitable for use with functions in the **boot** package [@DavisonHinkley1997; @boot]. By default, $R = 999$ bootstrap replications are generated. For example:
 ```{r}
 set.seed <- 869255 # for reproducibility
 b.deq2 <- Boot(deq2)
@@ -400,7 +406,7 @@ Suppose that we modify the regression model $y = X \beta + \varepsilon$ so that 
 
 Then the *weighted 2SLS* estimator is
 $$
-b_{\mathrm{W2SLS}} = [X^T W Z(Z^T W Z)^{-1} Z^T W X]^{-1} X^T W Z (Z^T W Z)^{-1} Z^{T} W y
+b_{\mathrm{W2SLS}} = [X^\top W Z(Z^\top W Z)^{-1} Z^\top W X]^{-1} X^\top W Z (Z^\top W Z)^{-1} Z^\top W y
 $$
 Alternatively, we can treat the two stages of 2SLS as *weighted least squares (WLS)* problems, in each stage minimizing the weighted sum of squared residuals. The `ivreg()` function computes the weighted 2SLS estimator in this manner.
 

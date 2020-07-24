@@ -1,0 +1,126 @@
+---
+title: "ivreg: Two-Stage Least-Squares Regression with Diagnostics"
+author: "John Fox, Christian Kleiber, Achim Zeileis"
+output:
+  html_document:
+    toc: true
+    toc_float: true
+    theme: flatly
+vignette: >
+  %\VignetteIndexEntry{ivreg: Two-Stage Least-Squares Regression with Diagnostics}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteDepends{ivreg,car,effects,sandwich}
+  %\VignetteKeywords{two-stage least squares, instrumental variables, diagnostics}
+  %\VignettePackage{ivreg}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, comment=NA, prompt=TRUE, fig.height=4, fig.width=4)
+```
+
+## Overview
+
+The **ivreg** package provides a comprehensive implementation of instrumental variables
+regression using two-stage least-squares (2SLS) estimation. The standard
+regression functionality (parameter estimation, inference, robust covariances,
+predictions, etc.) is derived from and supersedes the `ivreg()` function in the
+[**AER**](https://CRAN.R-project.org/package=AER) package. Additionally, various
+regression diagnostics are supported, including hat values, deletion diagnostics such
+as studentized residuals and Cook's distances; graphical diagnostics such as
+component-plus-residual plots and added-variable plots; and effect plots with partial
+residuals.
+
+In order to provide all of this functionality the **ivreg** package integrates
+seamlessly with other packages by providing suitable S3 methods. Specifically, this
+includes methods for functionality from the
+[base-R](https://www.R-project.org/) **stats** package,
+[**car**](https://CRAN.R-project.org/package=car),
+[**effects**](https://CRAN.R-project.org/package=effects),
+[**lmtest**](https://CRAN.R-project.org/package=lmtest),
+[**sandwich**](https://CRAN.R-project.org/package=sandwich),
+and others.
+
+
+## Installation
+
+The stable release version of **ivreg** is hosted on the Comprehensive R Archive Network
+(CRAN) at <https://CRAN.R-project.org/package=ivreg> and can be installed along with all
+dependencies via
+
+```{r installation-cran, eval=FALSE}
+install.packages("ivreg", dependencies = TRUE)
+```
+
+The development version of **ivreg** is hosted on GitHub at <https://github.com/john-d-fox/ivreg/>.
+It can be installed via
+
+```{r installation-rforge, eval=FALSE}
+remotes::install_github("https://github.com/john-d-fox/ivreg/")
+```
+
+## Instrumental variables regression
+
+The main function in the **ivreg** package is `ivreg()`. It is the high-level
+formula interface to the work-horse function \code{\link{ivreg.fit}} with both
+returning a list of quantities similar to `lm()` (coefficients, variance-covariance
+matrix, residuals, etc.). In case of `ivreg()` the returned list has the class `"ivreg"`
+for which a wide rande of standard methods is available, including `print()`,
+`summary()`, `coef()`, `vcov()`, `anova()`, `predict()`, `residuals()`, `terms()`,
+`model.matrix()`, `formula()`, `update()`, `hatvalues()`, `dfbeta()`, `rstudent()`.
+Moreover, methods for functionality from other packages is provided which will
+be introduced in more detail in separate articles.
+
+Regressors and instruments for `ivreg()` are most easily specified in a
+formula with two parts on the right-hand side, e.g., `y ~ x1 + x2 | z1 + z2 + z3`,
+where `x1` and `x2` are the explanatory variables and `z1`, `z2`, and `z3` are the
+instrumental variables. Note that exogenous regressors have to be included as instruments
+for themselves. A worked example is included below.
+
+
+## Illustration: Returns to schooling
+
+As a first illustration for using the **ivreg** package we investigate
+the causal link of schooling on earnings in a classical model for wage determinants.
+The data is from the United States of America and provided in the package as
+`SchoolingReturns`. It was originally studied by David Card but subsequently also
+used in many introductory econometrics textbooks. The relevant variables for this
+illustration are:
+
+```{r data}
+data("SchoolingReturns", package = "ivreg")
+summary(SchoolingReturns[, 1:8])
+```
+
+A standard wage equation uses a semi-logarithmic linear regression for `wage`, estimated by
+ordinary least squares (OLS), with the years of `education` as the prime regressor
+while adjusting for a quadratic term in labor market `experience` as well as factors
+coding `ethnicity`, residing in a city (`smsa`) and/or the US `south`.
+
+```{r lm}
+m_ols <- lm(log(wage) ~ education + poly(experience, 2) + ethnicity + smsa + south,
+  data = SchoolingReturns)
+summary(m_ols)
+```
+
+Thus, OLS estimation yields an estimate of `r round(100 * coef(m_ols)["education"], digits = 1)`%
+for the returns to schooling. However, this estimate is problematic because it can be argued
+that `education` is endogenous (and hence also `experience` which is `age` minus
+`education` minus 6). Therefore, we use geographical proximity to a college when growing
+up as an exogenous instrument for `education`. Additionally, `age` is the natural
+exogenous instrument for `education` while the remaining factors can be considered
+exogenous and are thus used as instruments for themselves.
+
+To fit this model with `ivreg()` we can simply extend the formula from `lm()` above and
+add a second part after the `|` separator with all instrumental variables.
+
+```{r ivreg}
+library("ivreg")
+m_iv <- ivreg(log(wage) ~ education + poly(experience, 2) + ethnicity + smsa + south |
+  nearcollege + poly(age, 2) + ethnicity + smsa + south,
+  data = SchoolingReturns)
+summary(m_iv)
+```
+
+Thus, using two-stage least squares for estimating this IV regression yields a much larger
+estimate for the returns to schooling, namely `r round(100 * coef(m_iv)["education"], digits = 1)`%.
