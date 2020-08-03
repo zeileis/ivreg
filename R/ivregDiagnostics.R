@@ -282,10 +282,6 @@ dfbeta.ivreg <- function(model, ...) {
 #' @export
 hatvalues.ivreg <- function(model, type = c("stage2", "both", "maximum"), ...){
   type <- match.arg(type)
-  # if (!inherits(model, "lm")) {
-  #   class(model) <- c(class(model), "lm")
-  #   return(hatvalues(model, type=type, ...))
-  # }
   hatvalues <- if (type == "stage2") {
     .Class <- "lm"
     NextMethod()
@@ -377,11 +373,6 @@ influencePlot.ivreg <- function(model, ...){
 #' @method influencePlot influence.ivreg
 #' @export
 influencePlot.influence.ivreg <- function(model, ...){
-  # if (!inherits(model, "lm")) {
-  #   class(model) <- c(class(model), "lm")
-  #   influencePlot(model)
-  # }
-  # else NextMethod()
   .Class <- "lm"
   NextMethod()
 }
@@ -403,8 +394,6 @@ infIndexPlot.influence.ivreg <- function(model, ...){
     infIndexPlot(model, ...)
   }
   else NextMethod()
-  # .Class <- "lm"
-  # NextMethod()
 }
 
 #' @rdname ivregDiagnostics
@@ -431,13 +420,6 @@ avPlots.ivreg <- function(model, terms, ...){
 #' @importFrom car avPlot
 #' @export
 avPlot.ivreg <- function(model, ...){
-  # if (!inherits(model, "lm")) {
-  #   class(model) <- c(class(model), "lm")
-  #   model$model.matrix <- model.matrix(model, type = "projected")
-  #   avPlot(model, ...)
-  # } else {
-  #   NextMethod()
-  # }
   .Class <- "lm"
   NextMethod()
 }
@@ -459,12 +441,6 @@ mcPlots.ivreg <- function(model, terms, ...){
 #' @importFrom car mcPlot
 #' @export
 mcPlot.ivreg <- function(model, ...){
-  # if (!inherits(model, "lm")) {
-  #   class(model) <- c(class(model), "lm")
-  #   crPlot(model, ...)
-  # } else {
-  #   NextMethod()
-  # }
   .Class <- "lm"
   NextMethod()
 }
@@ -499,12 +475,7 @@ crPlots.ivreg <- function(model, terms, ...){
 #' @importFrom car crPlot
 #' @export
 crPlot.ivreg <- function(model, ...){
-  # if (!inherits(model, "lm")) {
-  #   class(model) <- c(class(model), "lm")
-  #   crPlot(model, ...)
-  # } else {
-  #   NextMethod()
-  # }
+  model$contrasts <- model$contrasts$regressors
   .Class <- "lm"
   NextMethod()
 }
@@ -526,12 +497,8 @@ ceresPlots.ivreg <- function(model, terms, ...){
 #' @importFrom car ceresPlot
 #' @export
 ceresPlot.ivreg <- function(model, ...){
-  # if (!inherits(model, "lm")) {
-  #   class(model) <- c(class(model), "lm")
-  #   crPlot(model, ...)
-  # } else {
-  #   NextMethod()
-  # }
+  model$contrasts <- model$contrasts$regressors
+  model$formula <- formula(model, "regressors")
   .Class <- "lm"
   NextMethod()
 }
@@ -606,12 +573,6 @@ spreadLevelPlot.ivreg <- function(x, main="Spread-Level Plot", ...){
 #' @importFrom car ncvTest
 #' @export
 ncvTest.ivreg <- function(model, ...){
-  # if (!inherits(model, "lm")) {
-  #   class(model) <- c(class(model), "lm")
-  #   ncvTest(model, ...)
-  # } else {
-  #   NextMethod()
-  # }
     .Class <- "lm"
     NextMethod()
 }
