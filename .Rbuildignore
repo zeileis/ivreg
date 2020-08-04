@@ -1,0 +1,5 @@
+^README\.Rmd$
+^README\.html$
+^docs$
+^pkgdown$
+^_pkgdown\.yml$
