@@ -1,5 +1,7 @@
 ---
 title: "Diagnostics for 2SLS Regression"
+author: "John Fox, Christian Kleiber, Achim Zeileis"
+date: "last modified: 2020-08-04"
 output:
   html_document:
     toc: true
@@ -24,12 +26,12 @@ knitr::opts_chunk$set(echo = TRUE, comment=NA, prompt=TRUE, fig.height=4, fig.wi
 
 The **ivreg** package extends a variety of standard numeric and graphical regression  diagnostics to linear models fit by *two-stage least-squares (2SLS)* regression, a commonly employed method of instrumental-variables estimation for potentially overidentified structural equations in which there are endogenous regressors. The `ivreg.fit()` function in the package computes the 2SLS estimator employing a low-level interface not generally intended for direct use, and returns a list containing quantities that faciliate the computation of various diagnostics. The `ivreg()` function provides a user-friendly formula-based interface to `ivreg.fit()`.
 
-`ivreg()` is derived from and supersedes the `ivreg()` function in the **AER** package [@KleiberZeileis2008], making additional provision for regression diagnostics. The subject of this vignette is the rationale for the extension of various standard regression diagnostics to 2SLS and the use of functions in the **ivreg** package to compute them, along with functions in other packages, specifically the base-R **stats** package [@R] and the **car** and **effects** packages [@FoxWeisberg2019], that work with the `"ivreg"` objects produced by `ivreg()`.
+`ivreg()` is derived from and supersedes the `ivreg()` function in the **AER** package [@KleiberZeileis2008], making additional provision for regression diagnostics. The principal subject of this vignette is the rationale for the extension of various standard regression diagnostics to 2SLS and the use of functions in the **ivreg** package to compute them, along with functions in other packages, specifically the base-R **stats** package [@R] and the **car** and **effects** packages [@FoxWeisberg2019], that work with the `"ivreg"` objects produced by `ivreg()`.
 
 
 ## Review of 2SLS Estimation
 
-I'll need some basic results for 2SLS regression to develop diagnostics and so I review the method briefly here. 2SLS regression was invented independently in the 1950s by @Basmann1957 and Theil [as cited in @Theil1971], who took slightly different but equivalent approaches, both described below, to derive the 2SLS estimator.
+We'll need some basic results for 2SLS regression to develop diagnostics and so we review the method briefly here. 2SLS regression was invented independently in the 1950s by @Basmann1957 and Theil [as cited in @Theil1971], who took slightly different but equivalent approaches, both described below, to derive the 2SLS estimator.
 
 We want to estimate the linear model $y = X \beta + \varepsilon$, where $y$ is an $n \times 1$ vector of observations on a response variable, $X$ is an $n \times p$ matrix of regressors, typically with an initial columns of $1$s for the regression constant, $\beta$ is a $p \times 1$ vector of regression coefficients to be estimated from the data, and $\varepsilon$ is an $n \times 1$ vector of errors assumed to be distributed $N_n(0, \sigma^2 I_n)$ where $N_n$ is the multivariate-normal distribution, $0$ is an $n \times 1$ vector of zeroes, and $I_n$ is the order-$n$ identity matrix. Suppose that some (perhaps all) of the regressors in $X$ are *endogenous*, in the sense that they are thought not to be independent of $\varepsilon$. As a consequence, the *ordinary least-squares (OLS)* estimator $b_{\mathrm{OLS}} = (X^\top X)^{-1} X^\top y$ of $\beta$ is generally biased and inconsistent.
 
@@ -50,11 +52,11 @@ This is what the `tsls()` function in the **sem** package [@sem] does, but from 
 
 ## Unusual-Data Diagnostics for 2SLS Regression
 
-As far as I can tell, diagnostics for regression models fit by 2SLS are a relatively neglected topic, but were addressed briefly by @BelsleyKuhWelsch1980 [pp. 266--268]. Deletion diagnostics directly assess the influence of each case on a fitted regression model by removing the case, refitting the model, and noting how the regression coefficients or other regression outputs, such as the residual standard deviation, change. 
+As far as we can tell, diagnostics for regression models fit by 2SLS are a relatively neglected topic, but were addressed briefly by @BelsleyKuhWelsch1980 [pp. 266--268]. Deletion diagnostics directly assess the influence of each case on a fitted regression model by removing the case, refitting the model, and noting how the regression coefficients or other regression outputs, such as the residual standard deviation, change. 
 
 Case-deletion diagnostics for influential data can always be obtained by brute-force computation, literally refitting the model with each case removed in turn, but this approach is inefficient and consequently unattractive in large samples. For some classes of statistical models, such as generalized linear models [e.g., @Pregibon1981], computationally less demanding approximations to case-deletion diagnostics are available, and for linear models efficient "updating" formulas are available [as described, e.g., by @BelsleyKuhWelsch1980] that permit the exact computation of case-deletion diagnostics. 
 
-As it turns out, and as Belsley, Kuh, and Welsch note, exact updating formulas for 2SLS regression permitting the efficient computation of case-delection statistics were given by @Phillips1977[, Equations 15 and 16]. Phillips's formulas, reproduced here in my notation (and fixing a couple of small typos in the original), are used in the case-deletion statistics computed in the **ivreg** package:
+As it turns out, and as Belsley, Kuh, and Welsch note, exact updating formulas for 2SLS regression permitting the efficient computation of case-delection statistics were given by @Phillips1977[, Equations 15 and 16]. Phillips's formulas, reproduced here in our notation (and fixing a couple of small typos in the original), are used in the case-deletion statistics computed in the **ivreg** package:
 $$
 b_{\mathrm{2SLS}-i} = b_{\mathrm{2SLS}} +A^{-1}g_i
 $$
@@ -74,7 +76,7 @@ a   &= (Z^\top Z)^{-1} Z^\top y
 
 Here, $y_i$ is the value of the response for the $i$-th case, $x_i^\top$ is the $i$-th row of the model matrix $X$, and $z_i^\top$ is the $i$-th row of the instrumental-variables model matrix $Z$.
 
-Belsley, Kuh, and Welsch specifically examine (in my notation) the values of $\mathrm{dfbeta}_i = b_{\mathrm{2SLS}} - b_{\mathrm{2SLS}-i}$. They discuss as well the deleted values of the residual standard deviation $s_{-i}$. (Belsley, Kuh, and Welsch define the residual variances $s^2$ and $s_{-i}^2$ respectively as the full-sample and deleted residual sums of squares divided by $n$; in the **ivreg** packages, we divide by the residual degrees of freedom, $n - p$ for the full-sample value of $s^2$ and $n - p - 1$ for the case-deleted values.)
+Belsley, Kuh, and Welsch specifically examine (in our notation) the values of $\mathrm{dfbeta}_i = b_{\mathrm{2SLS}} - b_{\mathrm{2SLS}-i}$. They discuss as well the deleted values of the residual standard deviation $s_{-i}$. (Belsley, Kuh, and Welsch define the residual variances $s^2$ and $s_{-i}^2$ respectively as the full-sample and deleted residual sums of squares divided by $n$; in the **ivreg** packages, we divide by the residual degrees of freedom, $n - p$ for the full-sample value of $s^2$ and $n - p - 1$ for the case-deleted values.)
 
 Belsley, Kuh, and Welsch then compute their summary measure of influence on the fitted values (and regression coefficients) $\mathrm{dffits}$ as
 $$
@@ -88,7 +90,7 @@ H^* = X[X^\top Z(Z^\top Z)^{-1} Z^\top X]^{-1} X^\top Z (Z^\top Z)^{-1} Z^\top
 $$ 
 represent the $n \times n$ matrix that transforms $y$ into the fitted values, $\widehat{y} = H^* y$. In OLS regression, the analogous quantity is the *hat-matrix* $H = X(X^\top X)^{-1}X^\top$. Belsley, Kuh, and Welsch note that $H^*$, unlike $H$, is not an orthogonal-projection matrix, projecting $y$ orthogonally onto the subspace spanned by the columns of $X$. (They say that $H^*$ isn't a projection matrix, but that isn't true: It represents an oblique projection of $y$ onto the subspace spanned by the columns of $X$.) In particular, although $H^*$, like $H$, is idempotent ($H^* = H^* H^*$) and $\mathrm{trace}(H^*) = p$, $H^*$, unlike $H$, is asymmetric, and thus its diagonal elements can't be treated as summary measures of leverage, that is, as *hatvalues*. 
 
-Belsley, Kuh, and Welsch recommend simply using the havalues from the second-stage regression. These are the diagonal entries $h_i = h_{ii}$ of $H_2 = \widehat{X}(\widehat{X}^\top \widehat{X})^{-1} \widehat{X}^\top$. I discuss some alternatives below.
+Belsley, Kuh, and Welsch recommend simply using the havalues from the second-stage regression. These are the diagonal entries $h_i = h_{ii}$ of $H_2 = \widehat{X}(\widehat{X}^\top \widehat{X})^{-1} \widehat{X}^\top$. We discuss some alternatives below.
 
 In addition to hatvalues, $\mathrm{dfbeta}$, $s_{-i}$, and $\mathrm{dffits}$, the **ivreg** packages calculates *Cook's distances* $D_i$, which are essentially a slightly differently scaled version of $\mathrm{dffits}$ that uses the overall residual standard deviation $s$ in place of the deleted standard deviations $s_{-i}$: 
 $$
@@ -101,7 +103,7 @@ $$
 $$
 where $e_i = y_i - x_i^\top b_{2SLS}$ is the *response residual* for the $i$-th case.
 
-As mentioned, @BelsleyKuhWelsch1980 recommend using hatvalues from the second-stage regression. That's a reasonable choice and the default in the **ivreg** package, but it risks missing cases that have high leverage in the first-stage but not the second-stage regression. Let $h_i^{(1)}$ represent the hatvalues from the first stage and $h_i^{(2)}$ those from the second stage. If the model includes an intercept, both sets of hatvalues are bounded by $1/n$ and $1$, but the average hatvalue in the first stage is $q/n$ while the average in the second stage is $p/n$. To make the hatvalues from the two stages comparable, I divide each by its average, $h^{(1*)}_i = \frac{h_i^{(1)}}{q/n}$ and $h^{(2*)}_i = \frac{h_i^{(2)}}{p/n}$. Then we can define the two-stages hatvalue either as the (rescaled) larger of the two for each case, $h_i = (p/n) \times \max \left( h^{(1*)}_i, h^{(2*)}_i \right)$, or as their (rescaled) geometric mean, $h_i = (p/n) \times \sqrt{h^{(1*)}_i \times  h^{(2*)}_i}$. The **ivreg** package provides both of these options.
+As mentioned, @BelsleyKuhWelsch1980 recommend using hatvalues from the second-stage regression. That's a reasonable choice and the default in the **ivreg** package, but it risks missing cases that have high leverage in the first-stage but not the second-stage regression. Let $h_i^{(1)}$ represent the hatvalues from the first stage and $h_i^{(2)}$ those from the second stage. If the model includes an intercept, both sets of hatvalues are bounded by $1/n$ and $1$, but the average hatvalue in the first stage is $q/n$ while the average in the second stage is $p/n$. To make the hatvalues from the two stages comparable, we divide each by its average, $h^{(1*)}_i = \frac{h_i^{(1)}}{q/n}$ and $h^{(2*)}_i = \frac{h_i^{(2)}}{p/n}$. Then we can define the two-stages hatvalue either as the (rescaled) larger of the two for each case, $h_i = (p/n) \times \max \left( h^{(1*)}_i, h^{(2*)}_i \right)$, or as their (rescaled) geometric mean, $h_i = (p/n) \times \sqrt{h^{(1*)}_i \times  h^{(2*)}_i}$. The **ivreg** package provides both of these options.
 
 
 ### Unusual-Data Diagnosics in the **ivreg** Package
@@ -124,7 +126,7 @@ The **ivreg** package contains the `Kmenta` data set, used in @Kmenta1986[, Ch. 
 The data set is small and so we can examine it in its entirety:
 ```{r}
 library("ivreg")
-data("Kmenta", package = "ivreg")
+data("Kmenta", package = "ivreg") ## NOT NECESSARY??
 Kmenta
 ```
 
@@ -161,22 +163,23 @@ summary(deq)
 seq <- ivreg(Q ~ P + F + A, ~ D + F + A, data=Kmenta) # supply equation
 summary(seq)
 ```
-By default, `summary()` prints the results of three "diagnostic" tests for 2SLS regression. These tests (which can be suppressed by setting the argument `diagnostics=FALSE`) are not the focus of the vignette and so I'll comment on them only briefly:
+By default, `summary()` prints the results of three "diagnostic" tests for 2SLS regression. These tests (which can be suppressed by setting the argument `diagnostics=FALSE`) are not the focus of the vignette and so we'll comment on them only briefly:
 
-* A good instrumental variable is highly correlated with one or more of the explanatory variables while remaining uncorrelated with the errors. If an endogenous regressor is only weakly related to the instrumental variables, then its coefficient will be estimated imprecisely. We hope for a large test statistic and small p-value in the diagnostic test for weak instruments, as is the case for both regression equations in the Kmenta model.
+* A good instrumental variable is highly correlated with one or more of the explanatory variables while remaining uncorrelated with the errors. If an endogenous regressor is only weakly related to the instrumental variables, then its coefficient will be estimated imprecisely. We hope for a large test statistic and small $p$-value in the diagnostic test for weak instruments, as is the case for both regression equations in the Kmenta model.
 
-* Applied to 2SLS regression, the Wu--Hausman test is a test of *endogenity*. If all of the regressors are exogenous, then both the OLS and 2SLS estimators are consistent, and the OLS estimator is more efficient, but if one or more regressors are endogenous, then the OLS estimator is inconsistent. A large test statistic and small p-value, as in the example, suggests that the OLS estimator is inconsistent and the 2SLS estimator is therefore to be preferred.
+* Applied to 2SLS regression, the Wu--Hausman test is a test of *endogenity*. If all of the regressors are exogenous, then both the OLS and 2SLS estimators are consistent, and the OLS estimator is more efficient, but if one or more regressors are endogenous, then the OLS estimator is inconsistent. A large test statistic and small $p$-value, as in the example, suggests that the OLS estimator is inconsistent and the 2SLS estimator is therefore to be preferred.
 
-* The Sargan test is a test of overidentification. That is, in an overidentified regression equation, where there are more instrumental variables than coefficients to estimate, as in Kmenta's demand equation, it's possible that the instrumental variables provide conflicting information about the values of the coefficients. A large test statistic and small p-value for the Sargan test suggest, therefore, that the model is misspecified. In the example, we obtain a moderately small p-value of 0.084 by chance even though we know (by the manner in which the data were constructed) that the demand equation is correct. The Sargan test is inapplicable to a just-identified regression equation, with an equal number of instrumental variables and coefficients, as in Kmenta's supply equation.
+* The Sargan test is a test of overidentification. That is, in an overidentified regression equation, where there are more instrumental variables than coefficients to estimate, as in Kmenta's demand equation, it's possible that the instrumental variables provide conflicting information about the values of the coefficients. A large test statistic and small $p$-value for the Sargan test suggest, therefore, that the model is misspecified. In the example, we obtain a moderately small $p$-value of 0.084 by chance even though we know (by the manner in which the data were constructed) that the demand equation is correct. The Sargan test is inapplicable to a just-identified regression equation, with an equal number of instrumental variables and coefficients, as in Kmenta's supply equation.
 
 Several methods for class `"lm"` objects work properly with the objects produced by `ivreg()`. For example, the `plot()` method for `"ivreg"` objects invokes the corresponding `"lm"` method and produces interpretable plots, here for the 2SLS fit for the demand equation in Kmenta's model:
 ```{r fig.height=8, fig.width=8}
 par(mfrow=c(2, 2))
 plot(deq)
 ```
-In this case, however, I prefer the versions of these diagnostic graphs described below, in this and subsequent sections.
 
-As I mentioned, the `Kmenta` data are partly contrived by simulating the model, and so it's probably not surprising that the data are well behaved. For example, a *QQ plot* of studentized residuals and an *"influence plot"* of hatvalues, studentized residuals, and Cook's distances for the first structural equation are both unremarkable, except for a couple of high-leverage but in-line cases:
+In this case, however, we prefer the versions of these diagnostic graphs described below, in this and subsequent sections.
+
+As we mentioned, the `Kmenta` data are partly contrived by simulating the model, and so it's probably not surprising that the data are well behaved. For example, a *QQ plot* of studentized residuals and an *"influence plot"* of hatvalues, studentized residuals, and Cook's distances for the first structural equation are both unremarkable, except for a couple of high-leverage but in-line cases:
 ```{r}
 library("car") # for diagnostic generic functions
 qqPlot(deq)
@@ -184,9 +187,9 @@ qqPlot(deq)
 ```{r}
 influencePlot(deq)
 ```
-The circles in the influence plot have areas proportional to Cook's D, the horizontal lines are drawn at 0 and $\pm 2$ on the studentized residuals scale (the horizontal line at $\mathrm{rstudent} = 2$ is off the graph), and the vertical lines are at $2 \times \bar{h}$ and $3 \times \bar{h}$. I invite the reader to repeat these graphs, and the example below, for the second structural equation.
+The circles in the influence plot have areas proportional to Cook's D, the horizontal lines are drawn at 0 and $\pm 2$ on the studentized residuals scale (the horizontal line at $\mathrm{rstudent} = 2$ is off the graph), and the vertical lines are at $2 \times \bar{h}$ and $3 \times \bar{h}$. We invite the reader to repeat these graphs, and the example below, for the second structural equation.
 
-To generate a more interesting example, I'll change the value of $Q$ for the high-leverage 20th case (i.e, for 1941) from $Q_{20} = 106.232$ to $Q_{20} = 95$, a value that's well within the range of $Q$ in the data but out of line with the rest of the data:
+To generate a more interesting example, we'll change the value of $Q$ for the high-leverage 20th case (i.e, for 1941) from $Q_{20} = 106.232$ to $Q_{20} = 95$, a value that's well within the range of $Q$ in the data but out of line with the rest of the data:
 ```{r}
 Kmenta1 <- Kmenta
 Kmenta1[20, "Q"] <- 95
@@ -246,19 +249,19 @@ We don't know $f()$ and so instead fit the *working model*
 $$
 E(y) = \alpha^\prime + \beta_1^\prime x_1 + \beta_2^\prime x_2 + \cdots + \beta_k^\prime x_k 
 $$
-in our case by 2SLS regression, obtaining estimated regression coefficients $a^\prime, b_1^\prime, b_2^\prime, \ldots, b_k^\prime$. Cook and Croos-Dabrera's work shows that as long as the regression estimator is consistant and the $x$s are linearly related, the partial residuals $b^\prime_1 x_1 + e$ can be plotted and smoothed against $x_1$ to visualize an estimate of $f()$, where $e = y - (a^\prime + b_1^\prime x_1 + b_2^\prime x_2 + \cdots b_k^\prime x_k)$ are the model residuals. In practice, the component-plus-residual plot can break down as an accurate representation of $f()$ if there are strong nonlinear relationships between $x_1$ and the other $x$s or if $y$ is nonlinearly related to another $x$ that is correlated with $x_1$.
+in our case by 2SLS regression, obtaining estimated regression coefficients $a^\prime, b_1^\prime, b_2^\prime, \ldots, b_k^\prime$. Cook and Croos-Dabrera's work shows that as long as the regression estimator is consistant and the $x$s are linearly related, the partial residuals $b^\prime_1 x_1 + e$ can be plotted and smoothed against $x_1$ to visualize an estimate of $f()$, where $e = y - (a^\prime + b_1^\prime x_1 + b_2^\prime x_2 + \cdots b_k^\prime x_k)$ are the response residuals. In practice, the component-plus-residual plot can break down as an accurate representation of $f()$ if there are strong nonlinear relationships between $x_1$ and the other $x$s or if $y$ is nonlinearly related to another $x$ that is correlated with $x_1$.
 
 @FoxWeisberg2018 extend component-plus-residual plots to more complex regression models, which can, for example, include interactions, by adding partial residuals to *predictor effect plots*. These graphs also can be applied to linear models fit by 2SLS regression.
 
 
 ### Diagnosing Nonlinearity: An Example
 
-I turn once more to the demand equation for Kmenta's data and model to illustrate component-plus-residual plots, and once more the data are well behaved. An `"ivreg"` method is provided for the `crPlot()` function in the **car** package. In particular, `crPlots()` constructs component-plus-residual plots for all of the numeric explanatory variables in an additive regression equation. For example,
+We turn once more to the demand equation for Kmenta's data and model to illustrate component-plus-residual plots, and once more the data are well behaved. An `"ivreg"` method is provided for the `crPlot()` function in the **car** package. In particular, `crPlots()` constructs component-plus-residual plots for all of the numeric explanatory variables in an additive regression equation. For example,
 ```{r fig.height=4, fig.width=8}
 crPlots(deq, smooth=list(span=1))
 ```
 
-I set a large *span* for the *loess smoother* in the plot because there are only $n = 20$ cases in the `Kmenta` data set. The default value of the span is $2/3$. In each panel, the loess smooth, given by the magenta line, closely matches the least-squares line, given by the broken blue line, which represents the fitted regression plane viewed edge-on in the direction of the *focal explanatory variable*, $P$ on the left and $D$ on the right. Both partial relationships therefore appear to be linear.
+We set a large *span* for the *loess smoother* [@ClevelandGrosseShyu1992] in the plot because there are only $n = 20$ cases in the `Kmenta` data set. The default value of the span is $2/3$. In each panel, the loess smooth, given by the magenta line, closely matches the least-squares line, given by the broken blue line, which represents the fitted regression plane viewed edge-on in the direction of the *focal explanatory variable*, $P$ on the left and $D$ on the right. Both partial relationships therefore appear to be linear.
 
 CERES plots [@Cook1993], implemented in the `ceresPlots()` function in the **car** package, are a version of component-plus-residuals plots that use smoothers rather than linear regression and that therefore are more robust with respect to nonlinear relationships among the predictors. In most applications, component-plus-residuals and CERES plots produce similar results, and that's the case here:
 ```{r fig.height=4, fig.width=8}
@@ -271,6 +274,7 @@ library("effects")
 plot(predictorEffects(deq, residuals=TRUE), 
      partial.residuals=list(span=1))
 ```
+
 The shaded blue regions in the predictor effect plots represent pointwise 95% confidence envelopes around the fitted partial-regression lines.
 
 Suppose, however, that we fit the wrong model to the data:
@@ -279,7 +283,7 @@ deq2 <- update(deq, . ~ I((P - 85)^4/10^5) + D)
 crPlots(deq2, smooth=list(span=1))
 ```
 
-Because the ratio $\max(P)/\min(P) = 113.49/86.50 = 1.3$ is not much larger than 1, I subtracted a number slightly smaller than $\min(P)$ from $P$ prior to raising the variable to the 4th power to induce substantial nonlinearity into the fitted partial regression curve. The resulting component-plus-residual plot for the transformed $P$ clearly reflects the resulting lack of fit, while the plot for $D$ is still reasonably linear.
+Because the ratio $\max(P)/\min(P) = 113.49/86.50 = 1.3$ is not much larger than 1, we subtracted a number slightly smaller than $\min(P)$ from $P$ prior to raising the variable to the 4th power to induce substantial nonlinearity into the fitted partial regression curve. The resulting component-plus-residual plot for the transformed $P$ clearly reflects the resulting lack of fit, while the plot for $D$ is still reasonably linear.
 
 Predictor effect plots with partial residuals show a different view of the same situation by placing `P` rather than the transformed `P` on the horizontal axis, and revealing that the fitted nonlinear partial regression function fails to capture the linear pattern of the data:
 
@@ -287,6 +291,8 @@ Predictor effect plots with partial residuals show a different view of the same 
 plot(predictorEffects(deq2, residuals=TRUE), 
      partial.residuals=list(span=1))
 ```
+
+Recall that the blue lines represent the fitted model and the magenta lines are for the smoothed partial residuals; discrepancy between the two lines is indicative of lack of fit.
 
 
 ## Nonconstant Error Variance
@@ -320,15 +326,16 @@ The Breusch-Pagan/Cook-Weisberg test is easily adaptable to 2SLS regression, as 
 ncvTest(deq)
 ncvTest(deq, var = ~ P + D)
 ```
-Here, the first test is against the fitted values and the second against the explanatory variables in the demand equation; the $p$-values for both tests are large, suggesting little evidence against the hypothesis of constant variance.
+Here, the first test is against the fitted values and the second more general test is against the explanatory variables in the demand equation; the $p$-values for both tests are large, suggesting little evidence against the hypothesis of constant variance.
 
-Remedies for nonconstant variance in 2SLS regression are similar to those in least-squares regression. 
+Remedies for nonconstant variance in 2SLS regression are similar to those in least-squares regression: 
 
-* I've already suggested that if the error variance increases (or decreases) with the level of the response, and if the response is positive, then we might be able to stabilize the error variance by power-transforming the response. 
+* We've already suggested that if the error variance increases (or decreases) with the level of the response, and if the response is positive, then we might be able to stabilize the error variance by power-transforming the response. 
 
 * If, alternatively, we know the variance of the errors up to a constant of proportionality, then we can use inverse-variance weights for the 2SLS estimator. The `ivreg()` function supports weighted 2SLS regression, and the diagnostics in the **ivreg** package work with weighted 2SLS fits  (see the next section).
 
-* Finally, we can employ a *"sandwich" estimator* of the coefficient covariance matrix in 2SLS [or the *bootstrap*: see e.g., @DavisonHinkley1997] to correct standard errors for nonconstant error variance, much as in least-squares regression as proposed by @Huber1967 and @White1980 [also see @LongErvin2000]. 
+* Finally, we can employ a *"sandwich" estimator* of the coefficient covariance matrix in 2SLS [or the *bootstrap*: see, e.g., @DavisonHinkley1997] to correct standard errors for nonconstant error variance, much as in least-squares regression as proposed by @Huber1967 and @White1980 
+[also see @LongErvin2000]. 
 
 The **ivreg** package supports the `sandwich()` function in the **sandwich** package  [@Zeileis2006]. For the Kmenta example, where evidence of nonconstant error variance is slight, the sandwich standard errors are similar to, indeed slightly smaller than, the conventional 2SLS standard errors:
 ```{r}
@@ -340,7 +347,7 @@ colnames(SEs) <- c("sandwich", "conventional")
 SEs
 ```
 
-I'll modify Kmenta's data to reflect nonconstant error variance, regenerating the data as Kmenta did originally from the reduced-form equations, expressing the endogenous variables $P$ and $Q$ as functions of the exogenous variables $D$, $F$, and $A$, and reduced-form errors $\nu_1$ and $\nu_2$:
+We'll modify Kmenta's data to reflect nonconstant error variance, regenerating the data as Kmenta did originally from the reduced-form equations, expressing the endogenous variables $P$ and $Q$ as functions of the exogenous variables $D$, $F$, and $A$, and reduced-form errors $\nu_1$ and $\nu_2$:
 ```{r}
 Kmenta2 <- Kmenta[, c("D", "F", "A")]
 set.seed(492365) # for reproducibility
@@ -362,7 +369,7 @@ Plotting the sampled reduced-form errors `v1` against the expectation of `Q` sho
 with(Kmenta2, plot(EQ, v1))
 ```
 
-Then refitting the demand equation to the new data set, I get
+Then refitting the demand equation to the new data set, we get
 ```{r}
 deq2 <- update(deq, data=Kmenta2)
 summary(deq2)
@@ -374,7 +381,7 @@ spreadLevelPlot(deq2)
 ```{r}
 ncvTest(deq2)
 ```
-The extreme value of the suggested power transformation of $Q$ from the spread-level plot, $\lambda =-23$, reflects (as I noted previously) the fact that $\max(Q)/\min(Q)$ isn't much larger than 1.
+The extreme value of the suggested power transformation of $Q$ from the spread-level plot, $\lambda =-23$, reflects (as we noted previously) the fact that $\max(Q)/\min(Q)$ isn't much larger than 1.
 
 In our example, the sandwich standard errors are not very different from the conventional standard errors:
 ```{r}
@@ -394,7 +401,7 @@ summary(deq2, vcov.=vcov(b.deq2))
 
 The bootstrap standard errors are larger than the conventional or sandwich standard errors for this example.
 
-Boostrap confidence intervals can also be computed from the object returned by `Boot()`, by default reporting $BC_a$ intervals (see the documentation for `confint.boot()` in the **car** package):
+Boostrap confidence intervals can also be computed from the object returned by `Boot()`, by default reporting $BC_a$ (*bias-corrected, accelerated*) intervals (see the documentation for `confint.boot()` in the **car** package):
 ```{r}
 confint(b.deq2)
 ```
@@ -432,7 +439,7 @@ outlierTest(deqw)
 
 ## Collinearity Diagnostics
 
-In addition to unusual-data diagnostics, @BelsleyKuhWelsch1980 briefly extend their approach to collinearity diagnostics to 2SLS regression. I believe that this approach, which assimilates collinearity to numerical instability, is flawed, in that it takes into account "collinearity with the intercept." That is, regressors with values far from 0 have large sums of products with the constant regressor, producing a large standard error of the intercept, and simply reflecting the fact that the intercept extrapolates the fitted regression surface far beyond the range of the data.
+In addition to unusual-data diagnostics, @BelsleyKuhWelsch1980 briefly extend their approach to collinearity diagnostics to 2SLS regression. We believe that this approach, which assimilates collinearity to numerical instability, is flawed, in that it takes into account "collinearity with the intercept." That is, regressors with values far from 0 have large sums of products with the constant regressor, producing a large standard error of the intercept, and simply reflecting the fact that the intercept extrapolates the fitted regression surface far beyond the range of the data.
 
 @FoxMonette1992 describe an alternative approach to collinearity diagnostics in linear models fit by least squares based on *generalized variance-inflation factors*. The implementation of generalized variance inflation fators in the `vif()` function in the **car** package, which employs the estimated covariance matrix of the coefficients, applies in general to models with linear predictors, including linear models estimated by 2SLS.
 
@@ -442,10 +449,12 @@ sqrt(vif(deq))
 ```
 Taking the square-roots of the VIFs puts them on the coefficient standard-error scale. That is, the standard errors of the coefficients of $P$ and $D$ are 23% larger than they would be if the estimated coefficients were uncorrelated (which is equivalent to the columns of $\widehat{X}$ for $P$ and $D$ in the second-stage regression being uncorrelated). When, as here, each term in the model has just one coefficient, generalized and ordinary variance-inflation factors coincide. The equality of the VIFs for $P$ and $D$ is peculiar to the case of two regressors (beyond the regression constant).
 
-*Marginal/conditional* plot, produced by the `mcPlots()` function in the **car** package,  superimpose the added-variable plots on corresponding marginal scatterplots for the regressors. These graphs allow us to visualize the reduction in precision of estimation of each coefficient due to collinearity, which reduces the conditional variation of a regressor relative to its marginal variation. for example, for the demand equation:
+*Marginal/conditional* plots, produced by the `mcPlots()` function in the **car** package,  superimpose the added-variable plots on corresponding marginal scatterplots for the regressors. These graphs allow us to visualize the reduction in precision of estimation of each coefficient due to collinearity, which reduces the conditional variation of a regressor relative to its marginal variation. for example, for the demand equation:
 ```{r fig.height=4, fig.width=8}
 mcPlots(deq)
 ```
+
+The blue points in each panel represent the marginal scatterplot and the magenta points represent the (partial) added-variable plot, with the arrows showing the relationship between the two sets of points.
 
 ## Concluding Remarks
 
