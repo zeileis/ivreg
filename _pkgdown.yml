@@ -1,3 +1,6 @@
+template:
+  assets: "pkgdown/assets/"
+
 reference:
   - title: "Instrumental Variables Regression"
     contents: 
