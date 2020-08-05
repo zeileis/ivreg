@@ -9,3 +9,6 @@ the package provides various regression diagnostics, including hat values,
 deletion diagnostics such as studentized residuals and Cook's distances;
 graphical diagnostics such as component-plus-residual plots and added-variable
 plots; and effect plots with partial residuals.
+
+* An overview of the package, documentation, examples, and vignettes are provided
+at <https://john-d-fox.github.io/ivreg/>.

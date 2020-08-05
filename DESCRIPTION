@@ -24,5 +24,5 @@ Encoding: UTF-8
 LazyData: true
 VignetteBuilder: knitr
 BugReports: https://github.com/john-d-fox/ivreg/issues/
-URL: https://github.com/john-d-fox/ivreg/
+URL: https://john-d-fox.github.io/ivreg/
 RoxygenNote: 7.1.1
