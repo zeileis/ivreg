@@ -21,12 +21,14 @@ studentized residuals and Cook's distances; graphical diagnostics such as
 component-plus-residual plots and added-variable plots; and effect plots with partial
 residuals.
 
+
 **Instrumental variables regression:**
 
 ```
 library("ivreg")
 ivreg(Q ~ P + D | D + F + A, data = Kmenta)
 ```
+
 
 **Via two-stage least squares (2SLS):**
 
@@ -36,11 +38,11 @@ exams::tex2image("\\begin{eqnarray*}
   \\widehat{X}                       & = & Z (Z^\\top Z)^{-1} Z^\\top X \\\\
   \\widehat{\\beta}_{\\mathrm{2SLS}} & = & (\\widehat{X}^\\top \\widehat{X}) \\widehat{X}^\\top y
 \\end{eqnarray*}",
-  format = "svg", pt = 17, width.border = 5, col.border = "red",
+  format = "svg", header = "", pt = 14,
   dir = file.path(getwd(), "man", "figures"), name = "README-2sls")
 ```
 
-![2SLS](man/figures/README-2sls.svg)
+<img alt="2SLS" src="man/figures/README-2sls.svg" style="border:10px solid transparent">
 
 
 **With diagnostics:**

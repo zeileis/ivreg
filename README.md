@@ -20,7 +20,7 @@ plots with partial residuals.
 
 **Via two-stage least squares (2SLS):**
 
-![2SLS](man/figures/README-2sls.svg)
+<img alt="2SLS" src="man/figures/README-2sls.svg" style="border:10px solid transparent">
 
 **With diagnostics:**
 
