@@ -1,5 +1,11 @@
 template:
   assets: "pkgdown/assets/"
+  opengraph:
+    image:
+      src: logo.png
+    twitter:
+      creator: "@AchimZeileis"
+      card: summary
 
 reference:
   - title: "Instrumental Variables Regression"
