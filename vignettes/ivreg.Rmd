@@ -7,8 +7,6 @@ output:
     toc: true
     toc_float: true
     theme: flatly
-bibliography: ivreg.bib
-biblio-style: "apalike"    
 vignette: >
   %\VignetteIndexEntry{ivreg: Two-Stage Least-Squares Regression with Diagnostics}
   %\VignetteEngine{knitr::rmarkdown}
@@ -19,7 +17,7 @@ vignette: >
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE, comment=NA, prompt=TRUE, fig.height=4, fig.width=4)
+knitr::opts_chunk$set(echo = TRUE, fig.height=4, fig.width=4)
 ```
 
 ## Overview
@@ -46,7 +44,8 @@ among others.
 
 ## Installation
 
-The stable release version of **ivreg** is hosted on the Comprehensive R Archive Network
+The stable release version of [**ivreg**](https://CRAN.R-project.org/package=ivreg)
+is hosted on the Comprehensive R Archive Network
 (CRAN) at <https://CRAN.R-project.org/package=ivreg> and can be installed along with all
 dependencies via
 
@@ -55,7 +54,8 @@ install.packages("ivreg", dependencies = TRUE)
 ```
 
 The development version of **ivreg** is hosted on GitHub at <https://github.com/john-d-fox/ivreg/>.
-It can be conviently installed installed via the `install_github()` function in the **remotes** package [@HesterEtAl2020]:
+It can be conveniently installed installed via the `install_github()` function in the
+[**remotes**](https://CRAN.R-project.org/package=remotes) package:
 
 ```{r installation-rforge, eval=FALSE}
 remotes::install_github("https://github.com/john-d-fox/ivreg/")
@@ -87,12 +87,12 @@ must be included among the instruments. A worked example is described immediatel
 As an initial demonstration of the **ivreg** package, we investigate
 the effect of schooling on earnings in a classical model for wage determination.
 The data are from the United States, and are provided in the package as
-`SchoolingReturns`. This data set was originally studied by David @Card1995, and was subsequently
-employed, as here, to illustrate 2SLS estimation in introductory econometrics textbooks [e.g., @Verbeek2004]. The relevant variables for this
+`SchoolingReturns`. This data set was originally studied by David Card, and was subsequently
+employed, as here, to illustrate 2SLS estimation in introductory econometrics textbooks. The relevant variables for this
 illustration are:
 
 ```{r data}
-data("SchoolingReturns", package = "ivreg") ## NOT NECESSARY??
+data("SchoolingReturns", package = "ivreg")
 summary(SchoolingReturns[, 1:8])
 ```
 
@@ -113,7 +113,10 @@ that `education` is endogenous (and hence also `experience`, which is taken to b
 `education` minus 6). We therefore use geographical proximity to a college when growing
 up as an exogenous instrument for `education`. Additionally, `age` is the natural
 exogenous instrument for `experience`, while the remaining explanatory variables can be considered
-exogenous and are thus used as instruments for themselves.^[Although it's a useful strategy to select an effective instrument or instruments for each endogenous explanatory variable, in 2SLS regression all of the instrumental variables are used to estimate all of the regression coefficients in the model.]
+exogenous and are thus used as instruments for themselves.
+Although it's a useful strategy to select an effective instrument or instruments for each endogenous
+explanatory variable, in 2SLS regression all of the instrumental variables are used to estimate all
+of the regression coefficients in the model.
 
 To fit this model with `ivreg()` we can simply extend the formula from `lm()` above, adding a second part after the `|` separator to specify the instrumental variables:
 
@@ -126,10 +129,13 @@ summary(m_iv)
 ```
 
 Thus, using two-stage least squares to estimate the regression yields a much larger
-coefficient for the returns to schooling, namely `r round(100 * coef(m_iv)["education"], digits = 1)`% per year. Notice as well that the standard errors of the coefficients are larger for 2SLS estimation than for OLS, and that, partly as a consequence, evidence for the effects of `ethnicity` and the quadratic component of `experience` is now weak:
-```{r}
+coefficient for the returns to schooling, namely `r round(100 * coef(m_iv)["education"], digits = 1)`% per year.
+Notice as well that the standard errors of the coefficients are larger for 2SLS estimation
+than for OLS, and that, partly as a consequence, evidence for the effects of `ethnicity`
+and the quadratic component of `experience` is now weak. These differences are brought
+out more clearly when using the `compareCoefs()` function from the **car** package:
+
+```{r compareCoefs}
 car::compareCoefs(m_ols, m_iv)
 ```
 
-
-## References
