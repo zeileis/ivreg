@@ -1,5 +1,5 @@
 #' Methods for \code{"ivreg"} Objects
-#' @aliases ivreg_Methods vcov.ivreg bread.ivreg estfun.ivreg terms.ivreg model.matrix.ivreg predict.ivreg
+#' @aliases ivregMethods vcov.ivreg bread.ivreg estfun.ivreg terms.ivreg model.matrix.ivreg predict.ivreg
 #' print.ivreg summary.ivreg print.summary.ivreg anova.ivreg update.ivreg residuals.ivreg Effect.ivreg 
 #' formula.ivreg  find_formula.ivreg alias.ivreg qr.ivreg
 #' @description Various methods for processing \code{"ivreg"} objects; for diagnostic methods,
@@ -34,17 +34,17 @@
 #' @importFrom car linearHypothesis
 #' @import Formula
 
-#' @rdname ivreg_Methods
+#' @rdname ivregMethods
 #' @export
 vcov.ivreg <- function(object, ...)
   object$sigma^2 * object$cov.unscaled
 
-#' @rdname ivreg_Methods
+#' @rdname ivregMethods
 #' @exportS3Method sandwich::bread ivreg
 bread.ivreg <- function (x, ...) 
     x$cov.unscaled * x$nobs
 
-#' @rdname ivreg_Methods
+#' @rdname ivregMethods
 #' @importFrom stats weights
 #' @exportS3Method sandwich::estfun ivreg
 estfun.ivreg <- function (x, ...) 
@@ -60,14 +60,14 @@ estfun.ivreg <- function (x, ...)
     return(rval)
 }
 
-#' @rdname ivreg_Methods
+#' @rdname ivregMethods
 #' @exportS3Method sandwich::vcovHC ivreg
 vcovHC.ivreg <- function (x, ...) {
     class(x) <- c("ivreg_projected", "ivreg")
     sandwich::vcovHC.default(x, ...)
 }
 
-#' #' @rdname ivreg_Methods
+#' #' @rdname ivregMethods
 #' #' @export
 #' hatvalues.ivreg <- function(model, ...) {
 #'   xz <- model.matrix(model, component = "projected")
@@ -77,12 +77,12 @@ vcovHC.ivreg <- function (x, ...) {
 #'   diag(x %*% solve_qr(xz) %*% t(x) %*% z %*% solve_qr(z) %*% t(z))
 #' }
 
-#' @rdname ivreg_Methods
+#' @rdname ivregMethods
 #' @export
 terms.ivreg <- function(x, component = c("regressors", "instruments", "full"), ...)
   x$terms[[match.arg(component)]]
 
-#' @rdname ivreg_Methods
+#' @rdname ivregMethods
 #' @export
 model.matrix.ivreg <- function(object, component = c("regressors", "projected", "instruments"), ...) {
   component <- match.arg(component)
@@ -111,12 +111,12 @@ model.matrix.ivreg <- function(object, component = c("regressors", "projected", 
   return(rval)
 }
 
-#' @rdname ivreg_Methods
+#' @rdname ivregMethods
 #' @export
 model.matrix.ivreg_projected <- function(object, ...) model.matrix.ivreg(object, component = "projected")
 
 
-#' @rdname ivreg_Methods
+#' @rdname ivregMethods
 #' @param type For \code{predict}, one of \code{"response"} (the default)  or \code{"terms"};
 #' for \code{residuals}, one of \code{"response"} (the default), \code{"projected"}, \code{"regressors"},
 #' \code{"working"}, \code{"deviance"}, \code{"pearson"}, or \code{"partial"}; 
@@ -144,7 +144,7 @@ predict.ivreg <- function(object, newdata, type = c("response", "terms"), na.act
   }
 }
 
-#' @rdname ivreg_Methods
+#' @rdname ivregMethods
 #' @export
 print.ivreg <- function(x, digits = max(3, getOption("digits") - 3), ...)
 {
@@ -155,7 +155,7 @@ print.ivreg <- function(x, digits = max(3, getOption("digits") - 3), ...)
   invisible(x)
 }
 
-#' @rdname ivreg_Methods
+#' @rdname ivregMethods
 #' @export
 summary.ivreg <- function(object, vcov. = NULL, df = NULL, diagnostics = TRUE, ...)
 {
@@ -230,7 +230,7 @@ summary.ivreg <- function(object, vcov. = NULL, df = NULL, diagnostics = TRUE, .
   return(rval)
 }
 
-#' @rdname ivreg_Methods
+#' @rdname ivregMethods
 #' @importFrom stats printCoefmat
 #' @export
 #' @method print summary.ivreg
@@ -274,7 +274,7 @@ print.summary.ivreg <- function(x, digits = max(3, getOption("digits") - 3),
   invisible(x)
 }
 
-#' @rdname ivreg_Methods
+#' @rdname ivregMethods
 #' @export    
 anova.ivreg <- function(object, object2, test = "F", vcov. = NULL, ...)
 {
@@ -291,7 +291,7 @@ anova.ivreg <- function(object, object2, test = "F", vcov. = NULL, ...)
   return(rval)
 }
 
-#' @rdname ivreg_Methods
+#' @rdname ivregMethods
 #' @importFrom stats getCall
 #' @export
 update.ivreg <- function (object, formula., ..., evaluate = TRUE)
@@ -425,7 +425,7 @@ ivdiag <- function(obj, vcov. = NULL) {
 ## See
 ##   http://www.stata.com/support/faqs/stat/2sls.html
 
-#' @rdname ivreg_Methods
+#' @rdname ivregMethods
 #' @importFrom stats residuals
 #' @export
 residuals.ivreg <- function(object, type=c("response", "projected", "regressors", "working",
@@ -444,7 +444,7 @@ residuals.ivreg <- function(object, type=c("response", "projected", "regressors"
   naresid(object$na.action, res)
 }
 
-#' @rdname ivreg_Methods
+#' @rdname ivregMethods
 #' @param focal.predictors Focal predictors for effect plot, see \code{\link[effects]{Effect}}.
 #' @exportS3Method effects::Effect ivreg
 Effect.ivreg <- function (focal.predictors, mod, ...) {
@@ -452,7 +452,7 @@ Effect.ivreg <- function (focal.predictors, mod, ...) {
   NextMethod()
 }
 
-#' @rdname ivreg_Methods
+#' @rdname ivregMethods
 #' @importFrom stats formula
 #' @export
 formula.ivreg <- function(x, component = c("complete", "regressors", "instruments"), ... ) {
@@ -466,13 +466,13 @@ formula.ivreg <- function(x, component = c("complete", "regressors", "instrument
   }
 }
 
-#' @rdname ivreg_Methods
+#' @rdname ivregMethods
 #' @exportS3Method insight::find_formula ivreg
 find_formula.ivreg <- function(x, ...) {
     list(conditional=formula(x, "regressors"), instruments=formula(x, "instruments"))
 }
 
-#' @rdname ivreg_Methods
+#' @rdname ivregMethods
 #' @importFrom car Anova
 #' @export
 Anova.ivreg <- function(mod, test.statistic=c("F", "Chisq"), ...){
@@ -480,7 +480,7 @@ Anova.ivreg <- function(mod, test.statistic=c("F", "Chisq"), ...){
   NextMethod(test.statistic=test.statistic)
 }
 
-#' @rdname ivreg_Methods
+#' @rdname ivregMethods
 #' @export
 linearHypothesis.ivreg <- function(model, hypothesis.matrix, rhs=NULL, 
                                    test=c("F", "Chisq"), ...){
@@ -489,14 +489,14 @@ linearHypothesis.ivreg <- function(model, hypothesis.matrix, rhs=NULL,
 }
 
 #' @importFrom stats alias
-#' @rdname ivreg_Methods
+#' @rdname ivregMethods
 #' @export
 alias.ivreg <- function(object, ...){
     .Class <- "lm"
     NextMethod()
 }
 
-#' @rdname ivreg_Methods
+#' @rdname ivregMethods
 #' @export
 qr.ivreg <- function(x, ...){
     .Class <- "lm"

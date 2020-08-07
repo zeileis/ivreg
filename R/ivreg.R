@@ -8,7 +8,7 @@
 #' \code{\link{ivreg.fit}}. A set of standard methods (including \code{print},
 #' \code{summary}, \code{vcov}, \code{anova}, \code{predict}, \code{residuals},
 #' \code{terms}, \code{model.matrix}, \code{bread}, \code{estfun}) is available
-#' and described in \code{\link{ivreg_Methods}}. For methods related to regression
+#' and described in \code{\link{ivregMethods}}. For methods related to regression
 #' diagnotics, see \code{\link{ivregDiagnostics}}.
 #' 
 #' Regressors and instruments for \code{ivreg} are most easily specified in a
@@ -83,7 +83,7 @@
 #' \item{x}{a list with elements \code{"regressors"}, \code{"instruments"}, \code{"projected"},
 #' containing the model matrices from the respective components (if \code{x = TRUE}). 
 #' \code{"projected"} is the matrix of regressors projected on the image of the instruments.}
-#' @seealso \code{\link{ivreg.fit}}, \code{\link{ivregDiagnostics}}, \code{\link{ivreg_Methods}},
+#' @seealso \code{\link{ivreg.fit}}, \code{\link{ivregDiagnostics}}, \code{\link{ivregMethods}},
 #' \code{\link[stats]{lm}}, \code{\link[stats:lmfit]{lm.fit}}
 #' @references Greene, W.H. (1993) \emph{Econometric Analysis}, 2nd ed., Macmillan.
 #' @keywords regression

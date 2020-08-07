@@ -2,7 +2,7 @@
 % Please edit documentation in R/ivregMethods.R
 \name{vcov.ivreg}
 \alias{vcov.ivreg}
-\alias{ivreg_Methods}
+\alias{ivregMethods}
 \alias{bread.ivreg}
 \alias{estfun.ivreg}
 \alias{terms.ivreg}
