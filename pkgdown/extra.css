@@ -1,7 +1,7 @@
 /* Edit pkgdown/extra.css to customize the theme */
 
 /* Color:
- * logo-purple:     #ba2bef;
+ * logo-purple:     #8709b0;
  */
 
 @import url('https://fonts.googleapis.com/css?family=Roboto:300,500');
@@ -12,14 +12,14 @@ body {
 }
 
 /* The "default" hyperlinks: default bright blue, hover pinkish */
-a       { color: #ba2bef;}
+a       { color: #8709b0;}
 
 /* Font size for the content and the navigation bar (top): increase
  * font size by a factor of 1.3 (1.3 elements, global) */
 #navbar, div.contents { font-size: 1.3em; }
 
 #tocnav > ul > li > a:hover {
-    color: #ba2bef;
+    color: #8709b0;
 }
 
 h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
@@ -60,7 +60,7 @@ b, strong, th {
     margin-top: 14px;
     font-weight: normal;
     background-color: transparent;
-    /*color: #ba2bef;*/
+    /*color: #8709b0;*/
     color: #777;
 }
 
@@ -91,22 +91,22 @@ b, strong, th {
     background-color: white;
 }
 .dropdown-menu > li > a:hover {
-    color: #ba2bef;
+    color: #8709b0;
 }
 .navbar .navbar-nav > li:hover,
 .navbar .navbar-nav > li.dropdown:hover {
-    background-color: #ba2bef;
+    background-color: #8709b0;
 }
 .navbar .navbar-nav > li > a:hover, .navbar .navbar-nav > li.dropdown > a:hover,
 .navbar .navbar-nav > li:hover > a, .navbar .navbar-nav > li.dropdown:hover > a {
-    background-color: #ba2bef;
+    background-color: #8709b0;
     color: white;
 }
 .navbar .navbar-nav > .active {
     background-color: #ececec;
 }
 .navbar .navbar-nav > .active:hover {
-    background-color: #ba2bef;
+    background-color: #8709b0;
 }
 .navbar .navbar-nav > .active:hover > *,
 .navbar .navbar-nav > .active > a:hover {
@@ -115,7 +115,7 @@ b, strong, th {
 }
 .navbar .navbar-nav > li.dropdown.open:hover,
 .navbar .navbar-nav > li.dropdown:hover {
-    background-color: #ba2bef;
+    background-color: #8709b0;
 }
 .navbar .navbar-nav > li.dropdown.open:hover,
 .navbar .navbar-nav > li.dropdown:hover,
