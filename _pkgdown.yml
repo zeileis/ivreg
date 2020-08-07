@@ -6,7 +6,7 @@ reference:
     contents: 
       - ivreg
       - ivreg.fit
-      - ivreg_Methods
+      - ivregMethods
       - ivregDiagnostics
   - title: "Data Sets"
     contents: 
