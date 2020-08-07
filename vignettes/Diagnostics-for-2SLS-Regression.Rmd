@@ -126,7 +126,7 @@ The **ivreg** package contains the `Kmenta` data set, used in @Kmenta1986[, Ch. 
 The data set is small and so we can examine it in its entirety:
 ```{r}
 library("ivreg")
-data("Kmenta", package = "ivreg") ## NOT NECESSARY??
+data("Kmenta", package = "ivreg")
 Kmenta
 ```
 

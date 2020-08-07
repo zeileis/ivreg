@@ -5,20 +5,14 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>**ivreg**: Two-Stage Least-Squares Regression with Diagnostics • ivreg</title>
-<!-- favicons --><link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
-<link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
-<link rel="apple-touch-icon" type="image/png" sizes="180x180" href="../apple-touch-icon.png">
-<link rel="apple-touch-icon" type="image/png" sizes="120x120" href="../apple-touch-icon-120x120.png">
-<link rel="apple-touch-icon" type="image/png" sizes="76x76" href="../apple-touch-icon-76x76.png">
-<link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png">
+<title>ivreg: Two-Stage Least-Squares Regression with Diagnostics • ivreg</title>
 <!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script><!-- Bootstrap --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha256-bZLfwXAP04zRMK2BjiO8iu9pf4FbLqX6zitd+tIvLhE=" crossorigin="anonymous">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script><!-- bootstrap-toc --><link rel="stylesheet" href="../bootstrap-toc.css">
 <script src="../bootstrap-toc.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
 <!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
 <script src="../pkgdown.js"></script><link href="../extra.css" rel="stylesheet">
-<meta property="og:title" content="**ivreg**: Two-Stage Least-Squares Regression with Diagnostics">
+<meta property="og:title" content="ivreg: Two-Stage Least-Squares Regression with Diagnostics">
 <meta property="og:description" content="ivreg">
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
@@ -92,8 +86,7 @@
       </header><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
-      <h1 data-toc-skip>
-<strong>ivreg</strong>: Two-Stage Least-Squares Regression with Diagnostics</h1>
+      <h1 data-toc-skip>ivreg: Two-Stage Least-Squares Regression with Diagnostics</h1>
                         <h4 class="author">John Fox, Christian Kleiber, Achim Zeileis</h4>
             
             <h4 class="date">last modified: 2020-08-04</h4>
@@ -114,10 +107,10 @@
 <div id="installation" class="section level2">
 <h2 class="hasAnchor">
 <a href="#installation" class="anchor"></a>Installation</h2>
-<p>The stable release version of <strong>ivreg</strong> is hosted on the Comprehensive R Archive Network (CRAN) at <a href="https://CRAN.R-project.org/package=ivreg" class="uri">https://CRAN.R-project.org/package=ivreg</a> and can be installed along with all dependencies via</p>
-<div class="sourceCode" id="cb1"><html><body><pre class="r">&gt; install.packages("ivreg", dependencies = TRUE)</pre></body></html></div>
-<p>The development version of <strong>ivreg</strong> is hosted on GitHub at <a href="https://github.com/john-d-fox/ivreg/" class="uri">https://github.com/john-d-fox/ivreg/</a>. It can be conviently installed installed via the <code>install_github()</code> function in the <strong>remotes</strong> package <span class="citation">(Hester et al. 2020)</span>:</p>
-<div class="sourceCode" id="cb2"><html><body><pre class="r">&gt; remotes::install_github("https://github.com/john-d-fox/ivreg/")</pre></body></html></div>
+<p>The stable release version of <a href="https://CRAN.R-project.org/package=ivreg"><strong>ivreg</strong></a> is hosted on the Comprehensive R Archive Network (CRAN) at <a href="https://CRAN.R-project.org/package=ivreg" class="uri">https://CRAN.R-project.org/package=ivreg</a> and can be installed along with all dependencies via</p>
+<div class="sourceCode" id="cb1"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span>(<span class="st">"ivreg"</span>, <span class="kw">dependencies</span> <span class="kw">=</span> <span class="fl">TRUE</span>)</pre></body></html></div>
+<p>The development version of <strong>ivreg</strong> is hosted on GitHub at <a href="https://github.com/john-d-fox/ivreg/" class="uri">https://github.com/john-d-fox/ivreg/</a>. It can be conveniently installed installed via the <code>install_github()</code> function in the <a href="https://CRAN.R-project.org/package=remotes"><strong>remotes</strong></a> package:</p>
+<div class="sourceCode" id="cb2"><html><body><pre class="r"><span class="kw pkg">remotes</span><span class="kw ns">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html">install_github</a></span>(<span class="st">"https://github.com/john-d-fox/ivreg/"</span>)</pre></body></html></div>
 </div>
 <div id="instrumental-variables-regression" class="section level2">
 <h2 class="hasAnchor">
@@ -128,145 +121,124 @@
 <div id="illustration-returns-to-schooling" class="section level2">
 <h2 class="hasAnchor">
 <a href="#illustration-returns-to-schooling" class="anchor"></a>Illustration: Returns to schooling</h2>
-<p>As an initial demonstration of the <strong>ivreg</strong> package, we investigate the effect of schooling on earnings in a classical model for wage determination. The data are from the United States, and are provided in the package as <code>SchoolingReturns</code>. This data set was originally studied by David <span class="citation">Card (1995)</span>, and was subsequently employed, as here, to illustrate 2SLS estimation in introductory econometrics textbooks <span class="citation">(e.g., Verbeek 2004)</span>. The relevant variables for this illustration are:</p>
-<div class="sourceCode" id="cb3"><html><body><pre class="r">&gt; data("SchoolingReturns", package = "ivreg") ## NOT NECESSARY??
-&gt; summary(SchoolingReturns[, 1:8])</pre></body></html></div>
-<pre><code>      wage          education       experience     ethnicity     smsa     
- Min.   : 100.0   Min.   : 1.00   Min.   : 0.000   other:2307   no : 864  
- 1st Qu.: 394.2   1st Qu.:12.00   1st Qu.: 6.000   afam : 703   yes:2146  
- Median : 537.5   Median :13.00   Median : 8.000                          
- Mean   : 577.3   Mean   :13.26   Mean   : 8.856                          
- 3rd Qu.: 708.8   3rd Qu.:16.00   3rd Qu.:11.000                          
- Max.   :2404.0   Max.   :18.00   Max.   :23.000                          
- south           age        nearcollege
- no :1795   Min.   :24.00   no : 957   
- yes:1215   1st Qu.:25.00   yes:2053   
-            Median :28.00              
-            Mean   :28.12              
-            3rd Qu.:31.00              
-            Max.   :34.00              </code></pre>
+<p>As an initial demonstration of the <strong>ivreg</strong> package, we investigate the effect of schooling on earnings in a classical model for wage determination. The data are from the United States, and are provided in the package as <code>SchoolingReturns</code>. This data set was originally studied by David Card, and was subsequently employed, as here, to illustrate 2SLS estimation in introductory econometrics textbooks. The relevant variables for this illustration are:</p>
+<div class="sourceCode" id="cb3"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span>(<span class="st">"SchoolingReturns"</span>, <span class="kw">package</span> <span class="kw">=</span> <span class="st">"ivreg"</span>)
+<span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span>(<span class="no">SchoolingReturns</span>[, <span class="fl">1</span>:<span class="fl">8</span>])</pre></body></html></div>
+<pre><code>##       wage          education       experience     ethnicity     smsa     
+##  Min.   : 100.0   Min.   : 1.00   Min.   : 0.000   other:2307   no : 864  
+##  1st Qu.: 394.2   1st Qu.:12.00   1st Qu.: 6.000   afam : 703   yes:2146  
+##  Median : 537.5   Median :13.00   Median : 8.000                          
+##  Mean   : 577.3   Mean   :13.26   Mean   : 8.856                          
+##  3rd Qu.: 708.8   3rd Qu.:16.00   3rd Qu.:11.000                          
+##  Max.   :2404.0   Max.   :18.00   Max.   :23.000                          
+##  south           age        nearcollege
+##  no :1795   Min.   :24.00   no : 957   
+##  yes:1215   1st Qu.:25.00   yes:2053   
+##             Median :28.00              
+##             Mean   :28.12              
+##             3rd Qu.:31.00              
+##             Max.   :34.00</code></pre>
 <p>A standard wage equation uses a semi-logarithmic linear regression for <code>wage</code>, estimated by ordinary least squares (OLS), with years of <code>education</code> as the primary explanatory variable, adjusting for a quadratic term in labor-market <code>experience</code>, as well as for factors coding <code>ethnicity</code>, residence in a city (<code>smsa</code>), and residence in the U.S. <code>south</code>:</p>
-<div class="sourceCode" id="cb5"><html><body><pre class="r">&gt; m_ols &lt;- lm(log(wage) ~ education + poly(experience, 2) + ethnicity + smsa + south,
-+   data = SchoolingReturns)
-&gt; summary(m_ols)</pre></body></html></div>
-<pre><code>
-Call:
-lm(formula = log(wage) ~ education + poly(experience, 2) + ethnicity + 
-    smsa + south, data = SchoolingReturns)
-
-Residuals:
-     Min       1Q   Median       3Q      Max 
--1.59297 -0.22315  0.01893  0.24223  1.33190 
-
-Coefficients:
-                      Estimate Std. Error t value Pr(&gt;|t|)    
-(Intercept)           5.259820   0.048871 107.626  &lt; 2e-16 ***
-education             0.074009   0.003505  21.113  &lt; 2e-16 ***
-poly(experience, 2)1  8.931699   0.494804  18.051  &lt; 2e-16 ***
-poly(experience, 2)2 -2.642043   0.374739  -7.050 2.21e-12 ***
-ethnicityafam        -0.189632   0.017627 -10.758  &lt; 2e-16 ***
-smsayes               0.161423   0.015573  10.365  &lt; 2e-16 ***
-southyes             -0.124862   0.015118  -8.259  &lt; 2e-16 ***
----
-Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
-
-Residual standard error: 0.3742 on 3003 degrees of freedom
-Multiple R-squared:  0.2905,    Adjusted R-squared:  0.2891 
-F-statistic: 204.9 on 6 and 3003 DF,  p-value: &lt; 2.2e-16</code></pre>
-<p>Thus, OLS estimation yields an estimate of 7.4% per year for returns to schooling. This estimate is problematic, however, because it can be argued that <code>education</code> is endogenous (and hence also <code>experience</code>, which is taken to be <code>age</code> minus <code>education</code> minus 6). We therefore use geographical proximity to a college when growing up as an exogenous instrument for <code>education</code>. Additionally, <code>age</code> is the natural exogenous instrument for <code>experience</code>, while the remaining explanatory variables can be considered exogenous and are thus used as instruments for themselves.<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a></p>
+<div class="sourceCode" id="cb5"><html><body><pre class="r"><span class="no">m_ols</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span>(<span class="no">wage</span>) ~ <span class="no">education</span> + <span class="fu"><a href="https://rdrr.io/r/stats/poly.html">poly</a></span>(<span class="no">experience</span>, <span class="fl">2</span>) + <span class="no">ethnicity</span> + <span class="no">smsa</span> + <span class="no">south</span>,
+  <span class="kw">data</span> <span class="kw">=</span> <span class="no">SchoolingReturns</span>)
+<span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span>(<span class="no">m_ols</span>)</pre></body></html></div>
+<pre><code>## 
+## Call:
+## lm(formula = log(wage) ~ education + poly(experience, 2) + ethnicity + 
+##     smsa + south, data = SchoolingReturns)
+## 
+## Residuals:
+##      Min       1Q   Median       3Q      Max 
+## -1.59297 -0.22315  0.01893  0.24223  1.33190 
+## 
+## Coefficients:
+##                       Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)           5.259820   0.048871 107.626  &lt; 2e-16 ***
+## education             0.074009   0.003505  21.113  &lt; 2e-16 ***
+## poly(experience, 2)1  8.931699   0.494804  18.051  &lt; 2e-16 ***
+## poly(experience, 2)2 -2.642043   0.374739  -7.050 2.21e-12 ***
+## ethnicityafam        -0.189632   0.017627 -10.758  &lt; 2e-16 ***
+## smsayes               0.161423   0.015573  10.365  &lt; 2e-16 ***
+## southyes             -0.124862   0.015118  -8.259  &lt; 2e-16 ***
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 0.3742 on 3003 degrees of freedom
+## Multiple R-squared:  0.2905, Adjusted R-squared:  0.2891 
+## F-statistic: 204.9 on 6 and 3003 DF,  p-value: &lt; 2.2e-16</code></pre>
+<p>Thus, OLS estimation yields an estimate of 7.4% per year for returns to schooling. This estimate is problematic, however, because it can be argued that <code>education</code> is endogenous (and hence also <code>experience</code>, which is taken to be <code>age</code> minus <code>education</code> minus 6). We therefore use geographical proximity to a college when growing up as an exogenous instrument for <code>education</code>. Additionally, <code>age</code> is the natural exogenous instrument for <code>experience</code>, while the remaining explanatory variables can be considered exogenous and are thus used as instruments for themselves. Although it’s a useful strategy to select an effective instrument or instruments for each endogenous explanatory variable, in 2SLS regression all of the instrumental variables are used to estimate all of the regression coefficients in the model.</p>
 <p>To fit this model with <code><a href="../reference/ivreg.html">ivreg()</a></code> we can simply extend the formula from <code><a href="https://rdrr.io/r/stats/lm.html">lm()</a></code> above, adding a second part after the <code><a href="https://rdrr.io/r/base/Logic.html">|</a></code> separator to specify the instrumental variables:</p>
-<div class="sourceCode" id="cb7"><html><body><pre class="r">&gt; library("ivreg")
-&gt; m_iv &lt;- ivreg(log(wage) ~ education + poly(experience, 2) + ethnicity + smsa + south |
-+   nearcollege + poly(age, 2) + ethnicity + smsa + south,
-+   data = SchoolingReturns)
-&gt; summary(m_iv)</pre></body></html></div>
-<pre><code>
-Call:
-ivreg(formula = log(wage) ~ education + poly(experience, 2) + 
-    ethnicity + smsa + south | nearcollege + poly(age, 2) + ethnicity + 
-    smsa + south, data = SchoolingReturns)
-
-Residuals:
-     Min       1Q   Median       3Q      Max 
--1.82400 -0.25248  0.02286  0.26349  1.31561 
-
-Coefficients:
-                     Estimate Std. Error t value Pr(&gt;|t|)    
-(Intercept)           4.48522    0.67538   6.641 3.68e-11 ***
-education             0.13295    0.05138   2.588 0.009712 ** 
-poly(experience, 2)1  9.14172    0.56350  16.223  &lt; 2e-16 ***
-poly(experience, 2)2 -0.93810    1.58024  -0.594 0.552797    
-ethnicityafam        -0.10314    0.07737  -1.333 0.182624    
-smsayes               0.10798    0.04974   2.171 0.030010 *  
-southyes             -0.09818    0.02876  -3.413 0.000651 ***
-
-Diagnostic tests:
-                                         df1  df2 statistic  p-value    
-Weak instruments (education)               3 3003     8.008 2.58e-05 ***
-Weak instruments (poly(experience, 2)1)    3 3003  1612.707  &lt; 2e-16 ***
-Weak instruments (poly(experience, 2)2)    3 3003   174.166  &lt; 2e-16 ***
-Wu-Hausman                                 2 3001     0.841    0.432    
-Sargan                                     0   NA        NA       NA    
----
-Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
-
-Residual standard error: 0.4032 on 3003 degrees of freedom
-Multiple R-Squared: 0.1764, Adjusted R-squared: 0.1747 
-Wald test: 148.1 on 6 and 3003 DF,  p-value: &lt; 2.2e-16 </code></pre>
-<p>Thus, using two-stage least squares to estimate the regression yields a much larger coefficient for the returns to schooling, namely 13.3% per year. Notice as well that the standard errors of the coefficients are larger for 2SLS estimation than for OLS, and that, partly as a consequence, evidence for the effects of <code>ethnicity</code> and the quadratic component of <code>experience</code> is now weak:</p>
-<div class="sourceCode" id="cb9"><html><body><pre class="r">&gt; car::compareCoefs(m_ols, m_iv)</pre></body></html></div>
-<pre><code>Warning in car::compareCoefs(m_ols, m_iv): models to be compared are of
-different classes</code></pre>
-<pre><code>Calls:
-1: lm(formula = log(wage) ~ education + poly(experience, 2) + ethnicity + 
-  smsa + south, data = SchoolingReturns)
-2: ivreg(formula = log(wage) ~ education + poly(experience, 2) + ethnicity 
-  + smsa + south | nearcollege + poly(age, 2) + ethnicity + smsa + south, 
-  data = SchoolingReturns)
-
-                     Model 1 Model 2
-(Intercept)           5.2598  4.4852
-SE                    0.0489  0.6754
-                                    
-education            0.07401 0.13295
-SE                   0.00351 0.05138
-                                    
-poly(experience, 2)1   8.932   9.142
-SE                     0.495   0.564
-                                    
-poly(experience, 2)2  -2.642  -0.938
-SE                     0.375   1.580
-                                    
-ethnicityafam        -0.1896 -0.1031
-SE                    0.0176  0.0774
-                                    
-smsayes               0.1614  0.1080
-SE                    0.0156  0.0497
-                                    
-southyes             -0.1249 -0.0982
-SE                    0.0151  0.0288
-                                    </code></pre>
-</div>
-<div id="references" class="section level2 unnumbered">
-<h2 class="hasAnchor">
-<a href="#references" class="anchor"></a>References</h2>
-<div id="refs" class="references">
-<div id="ref-Card1995">
-<p>Card, David. 1995. “Using Geographical Variation in College Proximity to Estimate the Return to Schooling.” In <em>Aspects of Labour Market Behaviour: Essays in Honour of John Vanderkamp</em>, edited by L. N. Christofides, E. K. Grant, and R. Swidinsky, 201–22. Toronto: University of Toronto Press.</p>
-</div>
-<div id="ref-HesterEtAl2020">
-<p>Hester, Jim, Gábor Csardi, Hadley Wickham, Winston Chang, Martin Morgan, and Dan Tenenbaum. 2020. <em>Remotes: R Package Installation from Remote Repositories, Including ’GitHub’</em>. <a href="https://CRAN.R-project.org/package=remotes">https://CRAN.R-project.org/package=remotes</a>.</p>
-</div>
-<div id="ref-Verbeek2004">
-<p>Verbeek, Marno. 2004. <em>A Guide to Modern Econometrics</em>. 2nd ed. Chichester: John Wiley &amp; Sons.</p>
-</div>
-</div>
-</div>
-<div class="footnotes">
-<hr>
-<ol>
-<li id="fn1"><p>Although it’s a useful strategy to select an effective instrument or instruments for each endogenous explanatory variable, in 2SLS regression all of the instrumental variables are used to estimate all of the regression coefficients in the model.<a href="#fnref1" class="footnote-back">↩</a></p></li>
-</ol>
+<div class="sourceCode" id="cb7"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="st">"ivreg"</span>)
+<span class="no">m_iv</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/ivreg.html">ivreg</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span>(<span class="no">wage</span>) ~ <span class="no">education</span> + <span class="fu"><a href="https://rdrr.io/r/stats/poly.html">poly</a></span>(<span class="no">experience</span>, <span class="fl">2</span>) + <span class="no">ethnicity</span> + <span class="no">smsa</span> + <span class="no">south</span> <span class="kw">|</span>
+  <span class="no">nearcollege</span> + <span class="fu"><a href="https://rdrr.io/r/stats/poly.html">poly</a></span>(<span class="no">age</span>, <span class="fl">2</span>) + <span class="no">ethnicity</span> + <span class="no">smsa</span> + <span class="no">south</span>,
+  <span class="kw">data</span> <span class="kw">=</span> <span class="no">SchoolingReturns</span>)
+<span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span>(<span class="no">m_iv</span>)</pre></body></html></div>
+<pre><code>## 
+## Call:
+## ivreg(formula = log(wage) ~ education + poly(experience, 2) + 
+##     ethnicity + smsa + south | nearcollege + poly(age, 2) + ethnicity + 
+##     smsa + south, data = SchoolingReturns)
+## 
+## Residuals:
+##      Min       1Q   Median       3Q      Max 
+## -1.82400 -0.25248  0.02286  0.26349  1.31561 
+## 
+## Coefficients:
+##                      Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)           4.48522    0.67538   6.641 3.68e-11 ***
+## education             0.13295    0.05138   2.588 0.009712 ** 
+## poly(experience, 2)1  9.14172    0.56350  16.223  &lt; 2e-16 ***
+## poly(experience, 2)2 -0.93810    1.58024  -0.594 0.552797    
+## ethnicityafam        -0.10314    0.07737  -1.333 0.182624    
+## smsayes               0.10798    0.04974   2.171 0.030010 *  
+## southyes             -0.09818    0.02876  -3.413 0.000651 ***
+## 
+## Diagnostic tests:
+##                                          df1  df2 statistic  p-value    
+## Weak instruments (education)               3 3003     8.008 2.58e-05 ***
+## Weak instruments (poly(experience, 2)1)    3 3003  1612.707  &lt; 2e-16 ***
+## Weak instruments (poly(experience, 2)2)    3 3003   174.166  &lt; 2e-16 ***
+## Wu-Hausman                                 2 3001     0.841    0.432    
+## Sargan                                     0   NA        NA       NA    
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 0.4032 on 3003 degrees of freedom
+## Multiple R-Squared: 0.1764,  Adjusted R-squared: 0.1747 
+## Wald test: 148.1 on 6 and 3003 DF,  p-value: &lt; 2.2e-16</code></pre>
+<p>Thus, using two-stage least squares to estimate the regression yields a much larger coefficient for the returns to schooling, namely 13.3% per year. Notice as well that the standard errors of the coefficients are larger for 2SLS estimation than for OLS, and that, partly as a consequence, evidence for the effects of <code>ethnicity</code> and the quadratic component of <code>experience</code> is now weak. These differences are brought out more clearly when using the <code>compareCoefs()</code> function from the <strong>car</strong> package:</p>
+<div class="sourceCode" id="cb9"><html><body><pre class="r"><span class="kw pkg">car</span><span class="kw ns">::</span><span class="fu"><a href="https://rdrr.io/pkg/car/man/compareCoefs.html">compareCoefs</a></span>(<span class="no">m_ols</span>, <span class="no">m_iv</span>)</pre></body></html></div>
+<pre><code>## Warning in car::compareCoefs(m_ols, m_iv): models to be compared are of
+## different classes</code></pre>
+<pre><code>## Calls:
+## 1: lm(formula = log(wage) ~ education + poly(experience, 2) + ethnicity + 
+##   smsa + south, data = SchoolingReturns)
+## 2: ivreg(formula = log(wage) ~ education + poly(experience, 2) + ethnicity 
+##   + smsa + south | nearcollege + poly(age, 2) + ethnicity + smsa + south, 
+##   data = SchoolingReturns)
+## 
+##                      Model 1 Model 2
+## (Intercept)           5.2598  4.4852
+## SE                    0.0489  0.6754
+##                                     
+## education            0.07401 0.13295
+## SE                   0.00351 0.05138
+##                                     
+## poly(experience, 2)1   8.932   9.142
+## SE                     0.495   0.564
+##                                     
+## poly(experience, 2)2  -2.642  -0.938
+## SE                     0.375   1.580
+##                                     
+## ethnicityafam        -0.1896 -0.1031
+## SE                    0.0176  0.0774
+##                                     
+## smsayes               0.1614  0.1080
+## SE                    0.0156  0.0497
+##                                     
+## southyes             -0.1249 -0.0982
+## SE                    0.0151  0.0288
+## </code></pre>
 </div>
   </div>
 
