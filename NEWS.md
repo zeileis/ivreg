@@ -1,4 +1,4 @@
-# Version 0.3-0
+# Version 0.5-0
 
 * Initial version of the `ivreg` package: An implementation of instrumental
 variables regression using two-stage least-squares (2SLS) estimation, based on
