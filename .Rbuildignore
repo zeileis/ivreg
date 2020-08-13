@@ -3,4 +3,4 @@
 ^docs$
 ^pkgdown$
 ^_pkgdown\.yml$
-logo.png
+^logo\.png$
