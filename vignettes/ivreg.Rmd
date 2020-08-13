@@ -41,6 +41,13 @@ seamlessly with other packages by providing suitable S3 methods, specifically fo
 [**sandwich**](https://CRAN.R-project.org/package=sandwich) packages,
 among others.
 
+The package is accompanied by two online vignettes, namely this introduction and an
+article introducing the regression diagnostics and graphics:
+
+* [ivreg: Two-Stage Least-Squares Regression with Diagnostics](https://john-d-fox.github.io/ivreg/articles/ivreg.html)
+* [Diagnostics for 2SLS Regression](https://john-d-fox.github.io/ivreg/articles/Diagnostics-for-2SLS-Regression.html)
+
+
 
 ## Installation
 

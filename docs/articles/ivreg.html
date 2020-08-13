@@ -42,7 +42,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ivreg</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3-0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5-0</span>
       </span>
     </div>
 
@@ -113,6 +113,11 @@
 <a href="#overview" class="anchor"></a>Overview</h2>
 <p>The <strong>ivreg</strong> package provides a comprehensive implementation of instrumental variables regression using two-stage least-squares (2SLS) estimation. The standard regression functionality (parameter estimation, inference, robust covariances, predictions, etc.) is derived from and supersedes the <code><a href="../reference/ivreg.html">ivreg()</a></code> function in the <a href="https://CRAN.R-project.org/package=AER"><strong>AER</strong></a> package. Additionally, various regression diagnostics are supported, including hat values, deletion diagnostics such as studentized residuals and Cook’s distances; graphical diagnostics such as component-plus-residual plots and added-variable plots; and effect plots with partial residuals.</p>
 <p>In order to provide all of this functionality the <strong>ivreg</strong> package integrates seamlessly with other packages by providing suitable S3 methods, specifically for generic functions in the <a href="https://www.R-project.org/">base-R</a> <strong>stats</strong> package, and in the <a href="https://CRAN.R-project.org/package=car"><strong>car</strong></a>, <a href="https://CRAN.R-project.org/package=effects"><strong>effects</strong></a>, <a href="https://CRAN.R-project.org/package=lmtest"><strong>lmtest</strong></a>, and <a href="https://CRAN.R-project.org/package=sandwich"><strong>sandwich</strong></a> packages, among others.</p>
+<p>The package is accompanied by two online vignettes, namely this introduction and an article introducing the regression diagnostics and graphics:</p>
+<ul>
+<li><a href="https://john-d-fox.github.io/ivreg/articles/ivreg.html">ivreg: Two-Stage Least-Squares Regression with Diagnostics</a></li>
+<li><a href="https://john-d-fox.github.io/ivreg/articles/Diagnostics-for-2SLS-Regression.html">Diagnostics for 2SLS Regression</a></li>
+</ul>
 </div>
 <div id="installation" class="section level2">
 <h2 class="hasAnchor">
