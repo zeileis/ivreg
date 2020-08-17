@@ -93,7 +93,7 @@
 
       
 
-      </header><div class="row">
+      </header><script src="Diagnostics-for-2SLS-Regression_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Diagnostics for 2SLS Regression</h1>
@@ -130,7 +130,7 @@ b_{\mathrm{2SLS}} = [X^\top Z(Z^\top Z)^{-1} Z^\top X]^{-1} X^\top Z (Z^\top Z)^
 <div id="unusual-data-diagnostics-for-2sls-regression" class="section level2">
 <h2 class="hasAnchor">
 <a href="#unusual-data-diagnostics-for-2sls-regression" class="anchor"></a>Unusual-Data Diagnostics for 2SLS Regression</h2>
-<p>As far as we can tell, diagnostics for regression models fit by 2SLS are a relatively neglected topic, but were addressed briefly by <span class="citation">Belsley, Kuh, and Welsch (1980, 266–268)</span>. Deletion diagnostics directly assess the influence of each case on a fitted regression model by removing the case, refitting the model, and noting how the regression coefficients or other regression outputs, such as the residual standard deviation, change.</p>
+<p>As far as we can tell, diagnostics for regression models fit by 2SLS are a relatively neglected topic, but were addressed briefly by <span class="citation">Belsley, Kuh, and Welsch (1980, 266–68)</span>. Deletion diagnostics directly assess the influence of each case on a fitted regression model by removing the case, refitting the model, and noting how the regression coefficients or other regression outputs, such as the residual standard deviation, change.</p>
 <p>Case-deletion diagnostics for influential data can always be obtained by brute-force computation, literally refitting the model with each case removed in turn, but this approach is inefficient and consequently unattractive in large samples. For some classes of statistical models, such as generalized linear models <span class="citation">(e.g., Pregibon 1981)</span>, computationally less demanding approximations to case-deletion diagnostics are available, and for linear models efficient “updating” formulas are available <span class="citation">(as described, e.g., by Belsley, Kuh, and Welsch 1980)</span> that permit the exact computation of case-deletion diagnostics.</p>
 <p>As it turns out, and as Belsley, Kuh, and Welsch note, exact updating formulas for 2SLS regression permitting the efficient computation of case-delection statistics were given by <span class="citation">Phillips (1977, Equations 15 and 16)</span>. Phillips’s formulas, reproduced here in our notation (and fixing a couple of small typos in the original), are used in the case-deletion statistics computed in the <strong>ivreg</strong> package: <span class="math display">\[
 b_{\mathrm{2SLS}-i} = b_{\mathrm{2SLS}} +A^{-1}g_i
@@ -698,7 +698,7 @@ b_{\mathrm{W2SLS}} = [X^\top W Z(Z^\top W Z)^{-1} Z^\top W X]^{-1} X^\top W Z (Z
 <p>Canty, Angelo, and Brian D. Ripley. 2020. <em>Boot: Bootstrap R (S-PLUS) Functions</em>. <a href="https://CRAN.R-project.org/package=boot">https://CRAN.R-project.org/package=boot</a>.</p>
 </div>
 <div id="ref-ClevelandGrosseShyu1992">
-<p>Cleveland, W. S., E. Grosse, and W. M. Shyu. 1992. “Local Regression Models.” In <em>Statistical Models in S</em>, edited by J.M. Chambers and T.J. Hastie, 309–76. Pacific Grove CA: Wadsworth &amp; Brooks/Cole.</p>
+<p>Cleveland, W. S., E. Grosse, and W. M. Shyu. 1992. “Local Regression Models.” In <em>Statistical Models in S</em>, edited by J. M. Chambers and T. J. Hastie, 309–76. Pacific Grove CA: Wadsworth &amp; Brooks/Cole.</p>
 </div>
 <div id="ref-Cook1993">
 <p>Cook, R. D. 1993. “Exploring Partial Residual Plots.” <em>Technometrics</em> 35: 351–62. <a href="https://doi.org/10.1080/00401706.1993.10485350">https://doi.org/10.1080/00401706.1993.10485350</a>.</p>

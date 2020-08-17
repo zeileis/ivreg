@@ -1,10 +1,10 @@
-pandoc: '2.5'
+pandoc: 2.7.3
 pkgdown: 1.5.1
 pkgdown_sha: ~
 articles:
   Diagnostics-for-2SLS-Regression: Diagnostics-for-2SLS-Regression.html
   ivreg: ivreg.html
-last_built: 2020-08-13T00:43Z
+last_built: 2020-08-17T20:00Z
 urls:
   reference: https://john-d-fox.github.io/ivreg//reference
   article: https://john-d-fox.github.io/ivreg//articles

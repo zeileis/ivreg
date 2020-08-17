@@ -27,11 +27,11 @@
 \usage{
 \method{vcov}{ivreg}(object, ...)
 
-\method{bread}{ivreg}(x, ...)
+bread.ivreg(x, ...)
 
-\method{estfun}{ivreg}(x, ...)
+estfun.ivreg(x, ...)
 
-\method{vcovHC}{ivreg}(x, ...)
+vcovHC.ivreg(x, ...)
 
 \method{terms}{ivreg}(x, component = c("regressors", "instruments", "full"), ...)
 
@@ -73,11 +73,11 @@
   ...
 )
 
-\method{Effect}{ivreg}(focal.predictors, mod, ...)
+Effect.ivreg(focal.predictors, mod, ...)
 
 \method{formula}{ivreg}(x, component = c("complete", "regressors", "instruments"), ...)
 
-\method{find_formula}{ivreg}(x, ...)
+find_formula.ivreg(x, ...)
 
 \method{Anova}{ivreg}(mod, test.statistic = c("F", "Chisq"), ...)
 

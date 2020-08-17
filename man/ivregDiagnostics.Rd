@@ -137,7 +137,13 @@ is to use a loop unless the \code{ncores} argument is specified (see below).}
 
 \item{ncores}{Numeric, number of cores to be used in parallel computations. If set
 to an integer the \code{applyfun} is set to use either \code{\link[parallel:clusterApply]{parLapply}}
-(on Windows) or \code{\link[parallel]{mclapply}} 
+(on Windows) or 
+#ifdef windows
+\code{\link[parallel:mcdummies]{mclapply}}
+#endif
+#ifdef unix
+\code{\link[parallel]{mclapply}}
+#endif 
 (otherwise) with the desired number of cores.}
 
 \item{...}{arguments to be passed down.}
