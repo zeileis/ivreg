@@ -445,7 +445,7 @@ residuals.ivreg <- function(object, type=c("response", "projected", "regressors"
 }
 
 #' @rdname ivregMethods
-#' @param focal.predictors Focal predictors for effect plot, see \code{\link[effects]{Effect}}.
+#' @param focal.predictors Focal predictors for effect plot, see \code{\link[effects:effect]{Effect}}.
 #' @exportS3Method effects::Effect ivreg
 Effect.ivreg <- function (focal.predictors, mod, ...) {
   mod$contrasts <- mod$contrasts$regressors
