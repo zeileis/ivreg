@@ -152,7 +152,7 @@ equivalent to direct instrumental-variables estimation when the number of
 instruments is equal to the number of predictors.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>ivreg.fit</span>(<span class='no'>x</span>, <span class='no'>y</span>, <span class='no'>z</span>, <span class='no'>weights</span>, <span class='no'>offset</span>, <span class='no'>...</span>)</pre>
+    <pre class="usage"><span class='fu'>ivreg.fit</span>(<span class='kw'>x</span>, <span class='kw'>y</span>, <span class='kw'>z</span>, <span class='kw'>weights</span>, <span class='kw'>offset</span>, <span class='kw'>...</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -226,19 +226,18 @@ for first projecting <code>x</code> onto the image of
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'>## data</span>
-<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='st'>"CigaretteDemand"</span>, <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"ivreg"</span>)
+<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='st'>"CigaretteDemand"</span>, package = <span class='st'>"ivreg"</span>)
 
 <span class='co'>## high-level interface</span>
-<span class='no'>m</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='ivreg.html'>ivreg</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/Log.html'>log</a></span>(<span class='no'>packs</span>) ~ <span class='fu'><a href='https://rdrr.io/r/base/Log.html'>log</a></span>(<span class='no'>rprice</span>) + <span class='fu'><a href='https://rdrr.io/r/base/Log.html'>log</a></span>(<span class='no'>rincome</span>) <span class='kw'>|</span> <span class='no'>salestax</span> + <span class='fu'><a href='https://rdrr.io/r/base/Log.html'>log</a></span>(<span class='no'>rincome</span>),
-  <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>CigaretteDemand</span>)
+<span class='kw'>m</span> <span class='op'>&lt;-</span> <span class='fu'><a href='ivreg.html'>ivreg</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/Log.html'>log</a></span>(<span class='kw'>packs</span>) <span class='op'>~</span> <span class='fu'><a href='https://rdrr.io/r/base/Log.html'>log</a></span>(<span class='kw'>rprice</span>) <span class='op'>+</span> <span class='fu'><a href='https://rdrr.io/r/base/Log.html'>log</a></span>(<span class='kw'>rincome</span>) <span class='op'>|</span> <span class='kw'>salestax</span> <span class='op'>+</span> <span class='fu'><a href='https://rdrr.io/r/base/Log.html'>log</a></span>(<span class='kw'>rincome</span>),
+  data = <span class='kw'>CigaretteDemand</span>)
 
 <span class='co'>## low-level interface</span>
-<span class='no'>y</span> <span class='kw'>&lt;-</span> <span class='no'>m</span>$<span class='no'>y</span>
-<span class='no'>x</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/model.matrix.html'>model.matrix</a></span>(<span class='no'>m</span>, <span class='kw'>component</span> <span class='kw'>=</span> <span class='st'>"regressors"</span>)
-<span class='no'>z</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/model.matrix.html'>model.matrix</a></span>(<span class='no'>m</span>, <span class='kw'>component</span> <span class='kw'>=</span> <span class='st'>"instruments"</span>)
-<span class='fu'>ivreg.fit</span>(<span class='no'>x</span>, <span class='no'>y</span>, <span class='no'>z</span>)$<span class='no'>coefficients</span></div><div class='output co'>#&gt;  (Intercept)  log(rprice) log(rincome) 
-#&gt;    9.4306583   -1.1433751    0.2145153 </div><div class='input'>
-</div></pre>
+<span class='kw'>y</span> <span class='op'>&lt;-</span> <span class='kw'>m</span><span class='op'>$</span><span class='kw'>y</span>
+<span class='kw'>x</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/model.matrix.html'>model.matrix</a></span>(<span class='kw'>m</span>, component = <span class='st'>"regressors"</span>)
+<span class='kw'>z</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/model.matrix.html'>model.matrix</a></span>(<span class='kw'>m</span>, component = <span class='st'>"instruments"</span>)
+<span class='fu'>ivreg.fit</span>(<span class='kw'>x</span>, <span class='kw'>y</span>, <span class='kw'>z</span>)<span class='op'>$</span><span class='kw'>coefficients</span></div><div class='output co'>#&gt;  (Intercept)  log(rprice) log(rincome) 
+#&gt;    9.4306583   -1.1433751    0.2145153 </div><div class='input'></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -254,7 +253,7 @@ for first projecting <code>x</code> onto the image of
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.9000.</p>
 </div>
 
       </footer>

@@ -153,18 +153,18 @@ instruments is equal to the number of regressors.</p>
     </div>
 
     <pre class="usage"><span class='fu'>ivreg</span>(
-  <span class='no'>formula</span>,
-  <span class='no'>instruments</span>,
-  <span class='no'>data</span>,
-  <span class='no'>subset</span>,
-  <span class='no'>na.action</span>,
-  <span class='no'>weights</span>,
-  <span class='no'>offset</span>,
-  <span class='kw'>contrasts</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>model</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>y</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>x</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='no'>...</span>
+  <span class='kw'>formula</span>,
+  <span class='kw'>instruments</span>,
+  <span class='kw'>data</span>,
+  <span class='kw'>subset</span>,
+  <span class='kw'>na.action</span>,
+  <span class='kw'>weights</span>,
+  <span class='kw'>offset</span>,
+  contrasts = <span class='kw'>NULL</span>,
+  model = <span class='fl'>TRUE</span>,
+  y = <span class='fl'>TRUE</span>,
+  x = <span class='fl'>FALSE</span>,
+  <span class='kw'>...</span>
 )</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -266,8 +266,8 @@ containing the model matrices from the respective components (if <code>x = TRUE<
 <code><a href='ivreg.fit.html'>ivreg.fit</a></code>. A set of standard methods (including <code>print</code>,
 <code>summary</code>, <code>vcov</code>, <code>anova</code>, <code>predict</code>, <code>residuals</code>,
 <code>terms</code>, <code>model.matrix</code>, <code>bread</code>, <code>estfun</code>) is available
-and described in <code><a href='ivregMethods.html'>ivregMethods</a></code>. For methods related to regression
-diagnotics, see <code><a href='ivregDiagnostics.html'>ivregDiagnostics</a></code>.</p>
+and described in <code><a href='vcov.ivreg.html'>ivregMethods</a></code>. For methods related to regression
+diagnotics, see <code><a href='influence.ivreg.html'>ivregDiagnostics</a></code>.</p>
 <p>Regressors and instruments for <code>ivreg</code> are most easily specified in a
 formula with two parts on the right-hand side, e.g., <code>y ~ x1 + x2 | z1
 + z2 + z3</code>, where <code>x1</code> and <code>x2</code> are the explanatory variables and <code>z1</code>,
@@ -284,17 +284,17 @@ there is a large number of exogenous regressors.</p>
     <p>Greene, W.H. (1993) <em>Econometric Analysis</em>, 2nd ed., Macmillan.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p><code><a href='ivreg.fit.html'>ivreg.fit</a></code>, <code><a href='ivregDiagnostics.html'>ivregDiagnostics</a></code>, <code><a href='ivregMethods.html'>ivregMethods</a></code>,
+    <div class='dont-index'><p><code><a href='ivreg.fit.html'>ivreg.fit</a></code>, <code><a href='influence.ivreg.html'>ivregDiagnostics</a></code>, <code><a href='vcov.ivreg.html'>ivregMethods</a></code>,
 <code><a href='https://rdrr.io/r/stats/lm.html'>lm</a></code>, <code>lm.fit</code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'>## data</span>
-<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='st'>"CigaretteDemand"</span>, <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"ivreg"</span>)
+<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='st'>"CigaretteDemand"</span>, package = <span class='st'>"ivreg"</span>)
 
 <span class='co'>## model </span>
-<span class='no'>m</span> <span class='kw'>&lt;-</span> <span class='fu'>ivreg</span>(<span class='fu'><a href='https://rdrr.io/r/base/Log.html'>log</a></span>(<span class='no'>packs</span>) ~ <span class='fu'><a href='https://rdrr.io/r/base/Log.html'>log</a></span>(<span class='no'>rprice</span>) + <span class='fu'><a href='https://rdrr.io/r/base/Log.html'>log</a></span>(<span class='no'>rincome</span>) <span class='kw'>|</span> <span class='no'>salestax</span> + <span class='fu'><a href='https://rdrr.io/r/base/Log.html'>log</a></span>(<span class='no'>rincome</span>),
-  <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>CigaretteDemand</span>)
-<span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>(<span class='no'>m</span>)</div><div class='output co'>#&gt; 
+<span class='kw'>m</span> <span class='op'>&lt;-</span> <span class='fu'>ivreg</span>(<span class='fu'><a href='https://rdrr.io/r/base/Log.html'>log</a></span>(<span class='kw'>packs</span>) <span class='op'>~</span> <span class='fu'><a href='https://rdrr.io/r/base/Log.html'>log</a></span>(<span class='kw'>rprice</span>) <span class='op'>+</span> <span class='fu'><a href='https://rdrr.io/r/base/Log.html'>log</a></span>(<span class='kw'>rincome</span>) <span class='op'>|</span> <span class='kw'>salestax</span> <span class='op'>+</span> <span class='fu'><a href='https://rdrr.io/r/base/Log.html'>log</a></span>(<span class='kw'>rincome</span>),
+  data = <span class='kw'>CigaretteDemand</span>)
+<span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>(<span class='kw'>m</span>)</div><div class='output co'>#&gt; 
 #&gt; Call:
 #&gt; ivreg(formula = log(packs) ~ log(rprice) + log(rincome) | salestax + 
 #&gt;     log(rincome), data = CigaretteDemand)
@@ -320,7 +320,7 @@ there is a large number of exogenous regressors.</p>
 #&gt; Residual standard error: 0.1896 on 45 degrees of freedom
 #&gt; Multiple R-Squared: 0.4189,	Adjusted R-squared: 0.3931 
 #&gt; Wald test: 6.534 on 2 and 45 DF,  p-value: 0.003227 
-#&gt; </div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>(<span class='no'>m</span>, <span class='kw'>vcov</span> <span class='kw'>=</span> <span class='kw pkg'>sandwich</span><span class='kw ns'>::</span><span class='no'><a href='https://rdrr.io/pkg/sandwich/man/sandwich.html'>sandwich</a></span>, <span class='kw'>df</span> <span class='kw'>=</span> <span class='fl'>Inf</span>)</div><div class='output co'>#&gt; 
+#&gt; </div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>(<span class='kw'>m</span>, vcov = <span class='kw'>sandwich</span>::<span class='kw'><a href='https://rdrr.io/pkg/sandwich/man/sandwich.html'>sandwich</a></span>, df = <span class='fl'>Inf</span>)</div><div class='output co'>#&gt; 
 #&gt; Call:
 #&gt; ivreg(formula = log(packs) ~ log(rprice) + log(rincome) | salestax + 
 #&gt;     log(rincome), data = CigaretteDemand)
@@ -348,14 +348,14 @@ there is a large number of exogenous regressors.</p>
 #&gt; Wald test:     2 on NA DF,  p-value: NA 
 #&gt; </div><div class='input'>
 <span class='co'>## ANOVA</span>
-<span class='no'>m2</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/update.html'>update</a></span>(<span class='no'>m</span>, <span class='no'>.</span> ~ <span class='no'>.</span> - <span class='fu'><a href='https://rdrr.io/r/base/Log.html'>log</a></span>(<span class='no'>rincome</span>) <span class='kw'>|</span> <span class='no'>.</span> - <span class='fu'><a href='https://rdrr.io/r/base/Log.html'>log</a></span>(<span class='no'>rincome</span>))
-<span class='fu'><a href='https://rdrr.io/r/stats/anova.html'>anova</a></span>(<span class='no'>m</span>, <span class='no'>m2</span>)</div><div class='output co'>#&gt; Analysis of Variance Table
+<span class='kw'>m2</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/update.html'>update</a></span>(<span class='kw'>m</span>, <span class='kw'>.</span> <span class='op'>~</span> <span class='kw'>.</span> <span class='op'>-</span> <span class='fu'><a href='https://rdrr.io/r/base/Log.html'>log</a></span>(<span class='kw'>rincome</span>) <span class='op'>|</span> <span class='kw'>.</span> <span class='op'>-</span> <span class='fu'><a href='https://rdrr.io/r/base/Log.html'>log</a></span>(<span class='kw'>rincome</span>))
+<span class='fu'><a href='https://rdrr.io/r/stats/anova.html'>anova</a></span>(<span class='kw'>m</span>, <span class='kw'>m2</span>)</div><div class='output co'>#&gt; Analysis of Variance Table
 #&gt; 
 #&gt; Model 1: log(packs) ~ log(rprice) + log(rincome) | salestax + log(rincome)
 #&gt; Model 2: log(packs) ~ log(rprice) | salestax
 #&gt;   Res.Df    RSS Df Sum of Sq      F Pr(&gt;F)
 #&gt; 1     45 1.6172                           
-#&gt; 2     46 1.6668 -1 -0.049558 0.6379 0.4287</div><div class='input'><span class='kw pkg'>car</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/car/man/Anova.html'>Anova</a></span>(<span class='no'>m</span>)</div><div class='output co'>#&gt; Analysis of Deviance Table (Type II tests)
+#&gt; 2     46 1.6668 -1 -0.049558 0.6379 0.4287</div><div class='input'><span class='kw'>car</span>::<span class='fu'><a href='https://rdrr.io/pkg/car/man/Anova.html'>Anova</a></span>(<span class='kw'>m</span>)</div><div class='output co'>#&gt; Analysis of Deviance Table (Type II tests)
 #&gt; 
 #&gt; Response: log(packs)
 #&gt;              Df       F   Pr(&gt;F)   
@@ -363,8 +363,7 @@ there is a large number of exogenous regressors.</p>
 #&gt; log(rincome)  1  0.6379 0.428667   
 #&gt; Residuals    45                    
 #&gt; ---
-#&gt; Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1</div><div class='input'>
-</div></pre>
+#&gt; Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1</div><div class='input'></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -380,7 +379,7 @@ there is a large number of exogenous regressors.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.9000.</p>
 </div>
 
       </footer>

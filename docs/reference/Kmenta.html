@@ -158,12 +158,12 @@ variables Q and P are simulated according to the linear simultaneous equation mo
 fit in the examples.</p>
     </div>
 
-    <pre class="usage"><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='st'>"Kmenta"</span>, <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"ivreg"</span>)</pre>
+    <pre class="usage"><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='st'>"Kmenta"</span>, package = <span class='st'>"ivreg"</span>)</pre>
 
 
     <h2 class="hasAnchor" id="format"><a class="anchor" href="#format"></a>Format</h2>
 
-    <p>A data frame with 20 rows and 5 columns.</p><dl'>
+    <p>A data frame with 20 rows and 5 columns.</p><dl>
   <dt>Q</dt><dd><p>food consumption per capita.</p></dd>
   <dt>P</dt><dd><p>ratio of food prices to general consumer prices.</p></dd>
   <dt>D</dt><dd><p>disposible income in constant dollars.</p></dd>
@@ -180,10 +180,10 @@ fit in the examples.</p>
     <div class='dont-index'><p><code><a href='ivreg.html'>ivreg</a></code>.</p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='st'>"Kmenta"</span>, <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"ivreg"</span>)
-<span class='no'>deq</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='ivreg.html'>ivreg</a></span>(<span class='no'>Q</span> ~ <span class='no'>P</span> + <span class='no'>D</span>     <span class='kw'>|</span> <span class='no'>D</span> + <span class='no'>F</span> + <span class='no'>A</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>Kmenta</span>) <span class='co'># demand equation</span>
-<span class='no'>seq</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='ivreg.html'>ivreg</a></span>(<span class='no'>Q</span> ~ <span class='no'>P</span> + <span class='no'>F</span> + <span class='no'>A</span> <span class='kw'>|</span> <span class='no'>D</span> + <span class='no'>F</span> + <span class='no'>A</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>Kmenta</span>) <span class='co'># supply equation</span>
-<span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>(<span class='no'>deq</span>, <span class='kw'>tests</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</div><div class='output co'>#&gt; 
+    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='st'>"Kmenta"</span>, package = <span class='st'>"ivreg"</span>) 
+<span class='kw'>deq</span> <span class='op'>&lt;-</span> <span class='fu'><a href='ivreg.html'>ivreg</a></span>(<span class='kw'>Q</span> <span class='op'>~</span> <span class='kw'>P</span> <span class='op'>+</span> <span class='kw'>D</span>     <span class='op'>|</span> <span class='kw'>D</span> <span class='op'>+</span> <span class='kw'>F</span> <span class='op'>+</span> <span class='kw'>A</span>, data = <span class='kw'>Kmenta</span>) <span class='co'># demand equation</span>
+<span class='kw'>seq</span> <span class='op'>&lt;-</span> <span class='fu'><a href='ivreg.html'>ivreg</a></span>(<span class='kw'>Q</span> <span class='op'>~</span> <span class='kw'>P</span> <span class='op'>+</span> <span class='kw'>F</span> <span class='op'>+</span> <span class='kw'>A</span> <span class='op'>|</span> <span class='kw'>D</span> <span class='op'>+</span> <span class='kw'>F</span> <span class='op'>+</span> <span class='kw'>A</span>, data = <span class='kw'>Kmenta</span>) <span class='co'># supply equation</span>
+<span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>(<span class='kw'>deq</span>, tests = <span class='fl'>TRUE</span>)</div><div class='output co'>#&gt; 
 #&gt; Call:
 #&gt; ivreg(formula = Q ~ P + D | D + F + A, data = Kmenta)
 #&gt; 
@@ -208,7 +208,7 @@ fit in the examples.</p>
 #&gt; Residual standard error: 1.966 on 17 degrees of freedom
 #&gt; Multiple R-Squared: 0.7548,	Adjusted R-squared: 0.726 
 #&gt; Wald test: 23.81 on 2 and 17 DF,  p-value: 1.178e-05 
-#&gt; </div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>(<span class='no'>seq</span>, <span class='kw'>tests</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</div><div class='output co'>#&gt; 
+#&gt; </div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>(<span class='kw'>seq</span>, tests = <span class='fl'>TRUE</span>)</div><div class='output co'>#&gt; 
 #&gt; Call:
 #&gt; ivreg(formula = Q ~ P + F + A | D + F + A, data = Kmenta)
 #&gt; 
@@ -250,7 +250,7 @@ fit in the examples.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.9000.</p>
 </div>
 
       </footer>
