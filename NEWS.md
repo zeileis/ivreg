@@ -1,3 +1,8 @@
+# Version 0.5-1
+
+* Current development version on GitHub.
+
+
 # Version 0.5-0
 
 * Initial version of the `ivreg` package: An implementation of instrumental
