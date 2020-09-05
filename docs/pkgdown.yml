@@ -2,7 +2,7 @@ pandoc: '2.5'
 pkgdown: 1.5.1.9000
 pkgdown_sha: 60d1b4aa2fd4254d429676b6fe055311c4927ae3
 articles: []
-last_built: 2020-09-03T22:15Z
+last_built: 2020-09-05T02:24Z
 urls:
   reference: https://john-d-fox.github.io/ivreg//reference
   article: https://john-d-fox.github.io/ivreg//articles

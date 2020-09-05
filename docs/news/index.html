@@ -147,7 +147,10 @@
 <a href="#version-05-1" class="anchor"></a>Version 0.5-1<small> Unreleased </small>
 </h1>
 <ul>
-<li>Current development version on GitHub.</li>
+<li><p>Include information about which <code>"regressors"</code> are endogenous variables and which <code>"instruments"</code> are instruments for the endogenous variables in the fitted model objects from <code><a href="../reference/ivreg.html">ivreg()</a></code> and <code><a href="../reference/ivreg.fit.html">ivreg.fit()</a></code>. Both provide elements <code>$endogenous</code> and <code>$instruments</code> which are named integer vectors provided that endogenous/instrument variables exist, and integers of length zero if not.</p></li>
+<li><p>Include <code>df.residual1</code> element in <code>ivreg</code> objects with the residual degrees of freedom from the stage-1 regression.</p></li>
+<li><p>Add <code><a href="https://rdrr.io/r/stats/coef.html">coef(..., component = "stage1")</a></code> and <code><a href="https://rdrr.io/r/stats/vcov.html">vcov(..., component = "stage1")</a></code> for the estimated coefficients and corresponding variance-covariance matrix from the stage-1 regression (only for the endogenous regressors).</p></li>
+<li><p>Add <code><a href="https://rdrr.io/r/stats/residuals.html">residuals(..., type = "stage1")</a></code> with the residuals from the stage-1 regression (only for the endogenous regressors).</p></li>
 </ul>
 </div>
     <div id="version-05-0" class="section level1">

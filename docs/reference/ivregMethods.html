@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Methods for "ivreg" Objects — vcov.ivreg • ivreg</title>
+<title>Methods for "ivreg" Objects — coef.ivreg • ivreg</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -48,7 +48,7 @@
   <link href="../extra.css" rel="stylesheet">
   
 
-<meta property="og:title" content="Methods for "ivreg" Objects — vcov.ivreg" />
+<meta property="og:title" content="Methods for "ivreg" Objects — coef.ivreg" />
 <meta property="og:description" content="Various methods for processing &quot;ivreg&quot; objects; for diagnostic methods,
   see ivregDiagnostics." />
 <meta property="og:image" content="https://john-d-fox.github.io/ivreg/logo.png" />
@@ -151,7 +151,10 @@
     </div>
 
     <pre class="usage"><span class='co'># S3 method for ivreg</span>
-<span class='fu'><a href='https://rdrr.io/r/stats/vcov.html'>vcov</a></span>(<span class='kw'>object</span>, <span class='kw'>...</span>)
+<span class='fu'><a href='https://rdrr.io/r/stats/coef.html'>coef</a></span>(<span class='kw'>object</span>, component = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"stage2"</span>, <span class='st'>"stage1"</span>), <span class='kw'>...</span>)
+
+<span class='co'># S3 method for ivreg</span>
+<span class='fu'><a href='https://rdrr.io/r/stats/vcov.html'>vcov</a></span>(<span class='kw'>object</span>, component = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"stage2"</span>, <span class='st'>"stage1"</span>), <span class='kw'>...</span>)
 
 <span class='co'># S3 method for ivreg</span>
 <span class='fu'><a href='https://rdrr.io/pkg/sandwich/man/bread.html'>bread</a></span>(<span class='kw'>x</span>, <span class='kw'>...</span>)
@@ -208,7 +211,7 @@
 <span class='fu'><a href='https://rdrr.io/r/stats/residuals.html'>residuals</a></span>(
   <span class='kw'>object</span>,
   type = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"response"</span>, <span class='st'>"projected"</span>, <span class='st'>"regressors"</span>, <span class='st'>"working"</span>, <span class='st'>"deviance"</span>, <span class='st'>"pearson"</span>,
-    <span class='st'>"partial"</span>),
+    <span class='st'>"partial"</span>, <span class='st'>"stage1"</span>),
   <span class='kw'>...</span>
 )
 
@@ -247,18 +250,19 @@
       <td><p>An object of class <code>"ivreg"</code>.</p></td>
     </tr>
     <tr>
+      <th>component</th>
+      <td><p>For <code><a href='https://rdrr.io/r/stats/terms.html'>terms</a></code>, <code>"regressors"</code>, <code>"instruments"</code>, or <code>"full"</code>; 
+for <code><a href='https://rdrr.io/r/stats/model.matrix.html'>model.matrix</a></code>, <code>"projected"</code>, <code>"regressors"</code>, or <code>"instruments"</code>;
+for <code><a href='https://rdrr.io/r/stats/formula.html'>formula</a></code>, <code>"regressors"</code>, <code>"instruments"</code>,  or <code>"complete"</code>;
+for <code><a href='https://rdrr.io/r/stats/coef.html'>coef</a></code> and <code><a href='https://rdrr.io/r/stats/vcov.html'>vcov</a></code>, <code>"stage2"</code> or <code>"stage1"</code>.</p></td>
+    </tr>
+    <tr>
       <th>...</th>
       <td><p>arguments to pass down.</p></td>
     </tr>
     <tr>
       <th>x</th>
       <td><p>An object of class <code>"ivreg"</code> or <code>"summary.ivreg"</code>.</p></td>
-    </tr>
-    <tr>
-      <th>component</th>
-      <td><p>For <code><a href='https://rdrr.io/r/stats/terms.html'>terms</a></code>, <code>"regressors"</code>, <code>"instruments"</code>, or <code>"full"</code>; 
-for <code><a href='https://rdrr.io/r/stats/model.matrix.html'>model.matrix</a></code>, <code>"projected"</code>, <code>"regressors"</code>, or <code>"instruments"</code>;
-for <code><a href='https://rdrr.io/r/stats/formula.html'>formula</a></code>, <code>"regressors"</code>, <code>"instruments"</code>,  or <code>"complete"</code>.</p></td>
     </tr>
     <tr>
       <th>newdata</th>
