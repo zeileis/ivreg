@@ -6,6 +6,16 @@
   `$endogenous` and `$instruments` which are named integer vectors provided
   that endogenous/instrument variables exist, and integers of length zero if
   not.
+  
+* Include `df.residual1` element in `ivreg` objects with the residual degrees
+  of freedom from the stage-1 regression.
+
+* Add `coef(..., component = "stage1")` and `vcov(..., component = "stage1")`
+  for the estimated coefficients and corresponding variance-covariance matrix
+  from the stage-1 regression (only for the endogenous regressors).
+  
+* Add `residuals(..., type = "stage1")` with the residuals from the stage-1
+  regression (only for the endogenous regressors).
 
 
 # Version 0.5-0

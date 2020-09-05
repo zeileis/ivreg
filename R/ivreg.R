@@ -70,6 +70,7 @@
 #' \item{qr1}{QR decomposition for the stage-1 regression.}
 #' \item{rank1}{numeric rank of the model matrix for the stage-1 regression.}
 #' \item{coefficients1}{matrix of coefficients from the stage-1 regression.}
+#' \item{df.residual1}{residual degrees of freedom for the stage-1 regression.} 
 #' \item{endogenous}{columns of the \code{"regressors"} matrix that are endogenous.}
 #' \item{instruments}{columns of the \code{"instruments"} matrix that are
 #' instruments for the endogenous variables.}

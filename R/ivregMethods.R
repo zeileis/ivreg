@@ -9,7 +9,8 @@
 #' @param x An object of class \code{"ivreg"} or \code{"summary.ivreg"}.
 #' @param component For \code{\link{terms}}, \code{"regressors"}, \code{"instruments"}, or \code{"full"}; 
 #' for \code{\link{model.matrix}}, \code{"projected"}, \code{"regressors"}, or \code{"instruments"};
-#' for \code{\link{formula}}, \code{"regressors"}, \code{"instruments"},  or \code{"complete"}.
+#' for \code{\link{formula}}, \code{"regressors"}, \code{"instruments"},  or \code{"complete"};
+#' for \code{\link{coef}} and \code{\link{vcov}}, \code{"stage2"} or \code{"stage1"}.
 #' @param newdata Values of predictors for which to obtain predicted values.
 #' @param na.action \code{na} method to apply to predictor values for predictions; default is \code{\link{na.pass}}.
 #' @param digits For printing.
@@ -36,8 +37,37 @@
 
 #' @rdname ivregMethods
 #' @export
-vcov.ivreg <- function(object, ...)
-  object$sigma^2 * object$cov.unscaled
+coef.ivreg <- function(object, component = c("stage2", "stage1"), ...) {
+  component <- match.arg(component)
+  ## default: stage 2
+  if(component == "stage2") return(object$coefficients)
+  ## otherwise: stage 1
+  if(length(object$endogenous) <= 1L) return(object$coefficients1[, object$endogenous])  
+  cf <- object$coefficients1[, object$endogenous, drop = FALSE]
+  cf <- structure(as.vector(cf), .Names = outer(colnames(cf), rownames(cf), paste, sep = ":"))
+  return(cf)
+}
+
+#' @rdname ivregMethods
+#' @export
+vcov.ivreg <- function(object, component = c("stage2", "stage1"), ...) {
+  component <- match.arg(component)
+  ## default: stage 2ject
+  if(component == "stage2") return(object$sigma^2 * object$cov.unscaled)
+  ## otherwise: stage 1
+  cf <- object$coefficients1
+  if(is.null(cf)) return(NULL)
+  ok <- apply(!is.na(cf), 1L, all)
+  ucov <- chol2inv(object$qr1$qr[1L:length(ok), 1L:length(ok), drop = FALSE])
+  colnames(ucov) <- rownames(ucov) <- colnames(object$qr1$qr)[ok]
+  endo <- object$endogenous
+  if(length(endo) == 1L) return(sum(object$residuals1[, endo]^2)/object$df.residual1 * ucov)
+  sigma2 <- structure(
+    crossprod(object$residuals1[, endo])/object$df.residual1,
+    .Dimnames = rep.int(list(colnames(object$residuals1)[endo]), 2L)
+  )
+  return(kronecker(sigma2, ucov, make.dimnames = TRUE))
+}
 
 #' @rdname ivregMethods
 #' @exportS3Method sandwich::bread ivreg
@@ -420,7 +450,7 @@ ivdiag <- function(obj, vcov. = NULL) {
 #' @importFrom stats residuals
 #' @export
 residuals.ivreg <- function(object, type=c("response", "projected", "regressors", "working",
-                                            "deviance", "pearson", "partial"), ...){
+                                            "deviance", "pearson", "partial", "stage1"), ...){
   type <- match.arg(type)
   w <- weights(object)
   if (is.null(w)) w <- 1
@@ -431,7 +461,8 @@ residuals.ivreg <- function(object, type=c("response", "projected", "regressors"
                 pearson  = sqrt(w)*object$residuals,
                 projected   = object$residuals1,
                 regressors  = object$residuals2,
-                partial  = object$residuals + predict(object, type = "terms"))
+                partial  = object$residuals + predict(object, type = "terms"),
+		stage1 = object$residuals1[, object$endogenous, drop = FALSE])
   naresid(object$na.action, res)
 }
 
