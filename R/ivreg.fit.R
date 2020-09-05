@@ -45,6 +45,9 @@
 #' \item{qr1}{QR decomposition for the stage-1 regression.}
 #' \item{rank1}{numeric rank of the model matrix for the stage-1 regression.}
 #' \item{coefficients1}{matrix of coefficients from the stage-1 regression.}
+#' \item{endogenous}{columns of the \code{"regressors"} matrix that are endogenous.}
+#' \item{instruments}{columns of the \code{"instruments"} matrix that are
+#' instruments for the endogenous variables.}
 #' @seealso \code{\link{ivreg}}, \code{\link[stats:lmfit]{lm.fit}}, \code{\link[stats:lmfit]{lm.wfit}}
 #' @keywords regression
 #' @examples
@@ -108,6 +111,14 @@ ivreg.fit <- function(x, y, z, weights, offset, ...)
   ## hat <- diag(x %*% ucov %*% t(x) %*% pz)
   ## names(hat) <- rownames(x)
 
+  ## infer endogenous variables in x and instruments in z
+  if(!is.null(auxreg)) {
+    endo <- which(colMeans(as.matrix(auxreg$residuals^2)) > sqrt(.Machine$double.eps))
+    inst <- which(rowMeans(as.matrix(coef(auxreg)^2)[, -endo, drop = FALSE]) < sqrt(.Machine$double.eps))
+  } else {
+    endo <- inst <- integer()
+  }
+
   rval <- list(
     coefficients = fit$coefficients,
     residuals = res,
@@ -129,7 +140,9 @@ ivreg.fit <- function(x, y, z, weights, offset, ...)
     qr = fit$qr,
     qr1 = auxreg$qr,
     rank1 = auxreg$rank,
-    coefficients1 = coef(auxreg)
+    coefficients1 = coef(auxreg),
+    endogenous = endo,
+    instruments = inst
   )
   
   return(rval)

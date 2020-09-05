@@ -323,18 +323,9 @@ ivdiag <- function(obj, vcov. = NULL) {
   xnam <- colnames(x)
   znam <- colnames(z)
 
-  ## relabel "instruments" to match order from "regressors"
-  fx <- attr(terms(obj, component = "regressors"), "factors")
-  fz <- attr(terms(obj, component = "instruments"), "factors")  
-  fz <- fz[c(rownames(fx)[rownames(fx) %in% rownames(fz)], rownames(fz)[!(rownames(fz) %in% rownames(fx))]), , drop = FALSE]
-  nz <- apply(fz > 0, 2, function(x) paste(rownames(fz)[x], collapse = ":"))
-  nz <- nz[names(nz) != nz]
-  nz <- nz[nz %in% colnames(fx)]
-  if(length(nz) > 0L) znam[names(nz)] <- nz
-
   ## endogenous/instrument variables
-  endo <- which(!(xnam %in% znam))
-  inst <- which(!(znam %in% xnam))
+  endo <- obj$endogenous
+  inst <- obj$instruments
   if((length(endo) <= 0L) | (length(inst) <= 0L))
     stop("no endogenous/instrument variables")
 
