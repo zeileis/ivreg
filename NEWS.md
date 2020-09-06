@@ -12,10 +12,15 @@
 
 * Add `coef(..., component = "stage1")` and `vcov(..., component = "stage1")`
   for the estimated coefficients and corresponding variance-covariance matrix
-  from the stage-1 regression (only for the endogenous regressors).
+  from the stage-1 regression (only for the endogenous regressors). (Prompted
+  by a request from Grant McDermott.)
   
 * Add `residuals(..., type = "stage1")` with the residuals from the stage-1
   regression (only for the endogenous regressors).
+
+* The `coef()` and `vcov()` method gained a `complete = TRUE` argument assuring
+  that the elements pertaining to aliased coefficients are included. By setting
+  `complete = FALSE` these elements are dropped.
 
 
 # Version 0.5-0
