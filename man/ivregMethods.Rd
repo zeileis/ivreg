@@ -26,15 +26,15 @@
 \alias{linearHypothesis.ivreg}
 \title{Methods for \code{"ivreg"} Objects}
 \usage{
-\method{coef}{ivreg}(object, component = c("stage2", "stage1"), ...)
+\method{coef}{ivreg}(object, component = c("stage2", "stage1"), complete = TRUE, ...)
 
-\method{vcov}{ivreg}(object, component = c("stage2", "stage1"), ...)
+\method{vcov}{ivreg}(object, component = c("stage2", "stage1"), complete = TRUE, ...)
 
-\method{bread}{ivreg}(x, ...)
+bread.ivreg(x, ...)
 
-\method{estfun}{ivreg}(x, ...)
+estfun.ivreg(x, ...)
 
-\method{vcovHC}{ivreg}(x, ...)
+vcovHC.ivreg(x, ...)
 
 \method{terms}{ivreg}(x, component = c("regressors", "instruments", "full"), ...)
 
@@ -76,11 +76,11 @@
   ...
 )
 
-\method{Effect}{ivreg}(focal.predictors, mod, ...)
+Effect.ivreg(focal.predictors, mod, ...)
 
 \method{formula}{ivreg}(x, component = c("complete", "regressors", "instruments"), ...)
 
-\method{find_formula}{ivreg}(x, ...)
+find_formula.ivreg(x, ...)
 
 \method{Anova}{ivreg}(mod, test.statistic = c("F", "Chisq"), ...)
 
@@ -103,6 +103,8 @@
 for \code{\link{model.matrix}}, \code{"projected"}, \code{"regressors"}, or \code{"instruments"};
 for \code{\link{formula}}, \code{"regressors"}, \code{"instruments"},  or \code{"complete"};
 for \code{\link{coef}} and \code{\link{vcov}}, \code{"stage2"} or \code{"stage1"}.}
+
+\item{complete}{If \code{TRUE}, the default, the returned coefficient vector (for \code{coef()}) or coefficient-coevariance matrix (for \code{vcov}) includes elements for aliased regressors.}
 
 \item{...}{arguments to pass down.}
 

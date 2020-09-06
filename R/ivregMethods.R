@@ -28,45 +28,70 @@
 #' for \code{\link{linearHypothesis}} for details.
 #' @param formula. To update model.
 #' @param evaluate If \code{TRUE}, the default, the updated model is evaluated; if \code{FALSE} the updated call is returned.
+#' @param complete If \code{TRUE}, the default, the returned coefficient vector (for \code{coef()}) or coefficient-coevariance matrix (for \code{vcov}) includes elements for aliased regressors.
 #' @param ... arguments to pass down.
 #'
-#' @importFrom stats model.matrix vcov terms predict update anova quantile weighted.mean delete.response lm lm.fit lm.wfit model.offset na.pass pchisq 
+#' @importFrom stats model.matrix vcov .vcov.aliased terms predict update anova quantile weighted.mean delete.response lm lm.fit lm.wfit model.offset na.pass pchisq 
 #' @importFrom lmtest coeftest waldtest waldtest.default lrtest lrtest.default
 #' @importFrom car linearHypothesis
 #' @import Formula
 
 #' @rdname ivregMethods
 #' @export
-coef.ivreg <- function(object, component = c("stage2", "stage1"), ...) {
+coef.ivreg <- function(object, component = c("stage2", "stage1"), complete = TRUE, ...) {
   component <- match.arg(component)
   ## default: stage 2
-  if(component == "stage2") return(object$coefficients)
+  if(component == "stage2") {
+    cf <- object$coefficients
+    if (!complete) cf <- cf[!is.na(cf)]
+    return(cf)
+  }
   ## otherwise: stage 1
-  if(length(object$endogenous) <= 1L) return(object$coefficients1[, object$endogenous])  
+  if(length(object$endogenous) <= 1L) {
+    cf <- object$coefficients1[, object$endogenous]
+    if (!complete) cf <- cf[!is.na(cf)]
+    return(cf)
+  }
   cf <- object$coefficients1[, object$endogenous, drop = FALSE]
-  cf <- structure(as.vector(cf), .Names = outer(colnames(cf), rownames(cf), paste, sep = ":"))
+  cf <- structure(as.vector(cf), .Names = as.vector(t(outer(colnames(cf), rownames(cf), paste, sep = ":"))))
+  if (!complete) cf <- cf[!is.na(cf)]
   return(cf)
 }
 
 #' @rdname ivregMethods
 #' @export
-vcov.ivreg <- function(object, component = c("stage2", "stage1"), ...) {
+vcov.ivreg <- function(object, component = c("stage2", "stage1"), complete=TRUE, ...) {
   component <- match.arg(component)
-  ## default: stage 2ject
-  if(component == "stage2") return(object$sigma^2 * object$cov.unscaled)
+  ## default: stage 2
+  if(component == "stage2"){
+    vc <- object$sigma^2 * object$cov.unscaled
+    cf <- object$coefficients2
+    return(.vcov.aliased(is.na(cf), vc, complete=complete))
+  }
   ## otherwise: stage 1
+  cf <- coef(object, component="stage1", complete=complete)
+  nms <- names(cf)
+  ok1 <- !is.na(cf)
   cf <- object$coefficients1
   if(is.null(cf)) return(NULL)
   ok <- apply(!is.na(cf), 1L, all)
-  ucov <- chol2inv(object$qr1$qr[1L:length(ok), 1L:length(ok), drop = FALSE])
-  colnames(ucov) <- rownames(ucov) <- colnames(object$qr1$qr)[ok]
+  ucov <- chol2inv(object$qr1$qr[1L:sum(ok), 1L:sum(ok), drop = FALSE]) 
   endo <- object$endogenous
-  if(length(endo) == 1L) return(sum(object$residuals1[, endo]^2)/object$df.residual1 * ucov)
+  if(length(endo) == 1L) {
+    vc <- .vcov.aliased(!ok, 
+                        sum(object$residuals1[, endo]^2)/object$df.residual1 * ucov,
+                        complete=complete)
+    rownames(vc) <- colnames(vc) <- nms
+    return(vc)
+  }
   sigma2 <- structure(
     crossprod(object$residuals1[, endo])/object$df.residual1,
     .Dimnames = rep.int(list(colnames(object$residuals1)[endo]), 2L)
   )
-  return(kronecker(sigma2, ucov, make.dimnames = TRUE))
+  vc <- kronecker(sigma2, ucov, make.dimnames = TRUE)
+  vc <- .vcov.aliased(!ok1, vc, complete=complete)
+  rownames(vc) <- colnames(vc) <- nms
+  return(vc)
 }
 
 #' @rdname ivregMethods
