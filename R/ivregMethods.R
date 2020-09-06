@@ -43,54 +43,55 @@ coef.ivreg <- function(object, component = c("stage2", "stage1"), complete = TRU
   ## default: stage 2
   if(component == "stage2") {
     cf <- object$coefficients
-    if (!complete) cf <- cf[!is.na(cf)]
-    return(cf)
-  }
-  ## otherwise: stage 1
-  if(length(object$endogenous) <= 1L) {
+  } else if(length(object$endogenous) <= 1L) {
+  ## otherwise: stage 1 with single endogenous variable
     cf <- object$coefficients1[, object$endogenous]
-    if (!complete) cf <- cf[!is.na(cf)]
-    return(cf)
+  } else {
+  ## or: stage 1 with multiple endogenous variables
+    cf <- object$coefficients1[, object$endogenous, drop = FALSE]
+    cf <- structure(as.vector(cf), .Names = as.vector(t(outer(colnames(cf), rownames(cf), paste, sep = ":"))))
   }
-  cf <- object$coefficients1[, object$endogenous, drop = FALSE]
-  cf <- structure(as.vector(cf), .Names = as.vector(t(outer(colnames(cf), rownames(cf), paste, sep = ":"))))
   if (!complete) cf <- cf[!is.na(cf)]
   return(cf)
 }
 
+myvcov <- function(object) list(
+  "s2t" = vcov.ivreg(object, component = "stage2", complete = TRUE),
+  "s2f" = vcov.ivreg(object, component = "stage2", complete = FALSE),
+  "s1t" = vcov.ivreg(object, component = "stage1", complete = TRUE),
+  "s1f" = vcov.ivreg(object, component = "stage1", complete = FALSE)
+)
+
 #' @rdname ivregMethods
 #' @export
-vcov.ivreg <- function(object, component = c("stage2", "stage1"), complete=TRUE, ...) {
+vcov.ivreg <- function(object, component = c("stage2", "stage1"), complete = TRUE, ...) {
   component <- match.arg(component)
   ## default: stage 2
-  if(component == "stage2"){
+  if(component == "stage2") {
     vc <- object$sigma^2 * object$cov.unscaled
-    cf <- object$coefficients
-    return(.vcov.aliased(is.na(cf), vc, complete=complete))
-  }
+    ok <- !is.na(object$coefficients)
+  } else {
   ## otherwise: stage 1
-  cf <- coef(object, component="stage1", complete=complete)
-  nms <- names(cf)
-  ok1 <- !is.na(cf)
-  cf <- object$coefficients1
-  if(is.null(cf)) return(NULL)
-  ok <- apply(!is.na(cf), 1L, all)
-  ucov <- chol2inv(object$qr1$qr[1L:sum(ok), 1L:sum(ok), drop = FALSE]) 
-  endo <- object$endogenous
-  if(length(endo) == 1L) {
-    vc <- .vcov.aliased(!ok, 
-                        sum(object$residuals1[, endo]^2)/object$df.residual1 * ucov,
-                        complete=complete)
-    rownames(vc) <- colnames(vc) <- nms
-    return(vc)
+    cf <- object$coefficients1
+    if(is.null(cf)) return(NULL)
+    ok <- apply(!is.na(cf), 1L, all)
+    ucov <- chol2inv(object$qr1$qr[1L:sum(ok), 1L:sum(ok), drop = FALSE])
+    rownames(ucov) <- colnames(ucov) <- colnames(object$qr1$qr)[1L:sum(ok)]
+    endo <- object$endogenous
+    if(length(endo) == 1L) {
+      vc <- sum(object$residuals1[, endo]^2)/object$df.residual1 * ucov
+    } else {
+      sigma2 <- structure(
+        crossprod(object$residuals1[, endo])/object$df.residual1,
+        .Dimnames = rep.int(list(colnames(object$residuals1)[endo]), 2L)
+      )
+      vc <- kronecker(sigma2, ucov, make.dimnames = TRUE)
+      ok <- structure(
+        rep.int(ok, length(endo)),
+        .Names = as.vector(t(outer(colnames(cf)[endo], rownames(cf), paste, sep = ":"))))
+    }
   }
-  sigma2 <- structure(
-    crossprod(object$residuals1[, endo])/object$df.residual1,
-    .Dimnames = rep.int(list(colnames(object$residuals1)[endo]), 2L)
-  )
-  vc <- kronecker(sigma2, ucov, make.dimnames = TRUE)
-  vc <- .vcov.aliased(!ok1, vc, complete=complete)
-  rownames(vc) <- colnames(vc) <- nms
+  vc <- .vcov.aliased(!ok, vc, complete = complete)
   return(vc)
 }
 
