@@ -65,7 +65,7 @@ vcov.ivreg <- function(object, component = c("stage2", "stage1"), complete=TRUE,
   ## default: stage 2
   if(component == "stage2"){
     vc <- object$sigma^2 * object$cov.unscaled
-    cf <- object$coefficients2
+    cf <- object$coefficients
     return(.vcov.aliased(is.na(cf), vc, complete=complete))
   }
   ## otherwise: stage 1
