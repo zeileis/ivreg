@@ -46,6 +46,7 @@
 #' \item{rank1}{numeric rank of the model matrix for the stage-1 regression.}
 #' \item{coefficients1}{matrix of coefficients from the stage-1 regression.}
 #' \item{df.residual1}{residual degrees of freedom for the stage-1 regression.} 
+#' \item{exogenous}{columns of the \code{"regressors"} matrix that are exogenous.}
 #' \item{endogenous}{columns of the \code{"regressors"} matrix that are endogenous.}
 #' \item{instruments}{columns of the \code{"instruments"} matrix that are
 #' instruments for the endogenous variables.}
@@ -113,9 +114,11 @@ ivreg.fit <- function(x, y, z, weights, offset, ...)
   ## names(hat) <- rownames(x)
 
   ## infer endogenous variables in x and instruments in z
+  exog <- structure(seq_along(colnames(x)), .Names = colnames(x))
   if(!is.null(auxreg)) {
     endo <- which(colMeans(as.matrix(auxreg$residuals^2)) > sqrt(.Machine$double.eps))
     inst <- which(rowMeans(as.matrix(coef(auxreg)^2)[, -endo, drop = FALSE]) < sqrt(.Machine$double.eps))
+    exog <- exog[-endo]
   } else {
     endo <- inst <- integer()
   }
@@ -143,6 +146,7 @@ ivreg.fit <- function(x, y, z, weights, offset, ...)
     rank1 = auxreg$rank,
     coefficients1 = coef(auxreg),
     df.residual1 = auxreg$df.residual,
+    exogenous = exog,
     endogenous = endo,
     instruments = inst
   )
