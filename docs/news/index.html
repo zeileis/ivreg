@@ -149,8 +149,9 @@
 <ul>
 <li><p>Include information about which <code>"regressors"</code> are endogenous variables and which <code>"instruments"</code> are instruments for the endogenous variables in the fitted model objects from <code><a href="../reference/ivreg.html">ivreg()</a></code> and <code><a href="../reference/ivreg.fit.html">ivreg.fit()</a></code>. Both provide elements <code>$endogenous</code> and <code>$instruments</code> which are named integer vectors provided that endogenous/instrument variables exist, and integers of length zero if not.</p></li>
 <li><p>Include <code>df.residual1</code> element in <code>ivreg</code> objects with the residual degrees of freedom from the stage-1 regression.</p></li>
-<li><p>Add <code><a href="https://rdrr.io/r/stats/coef.html">coef(..., component = "stage1")</a></code> and <code><a href="https://rdrr.io/r/stats/vcov.html">vcov(..., component = "stage1")</a></code> for the estimated coefficients and corresponding variance-covariance matrix from the stage-1 regression (only for the endogenous regressors).</p></li>
+<li><p>Add <code><a href="https://rdrr.io/r/stats/coef.html">coef(..., component = "stage1")</a></code> and <code><a href="https://rdrr.io/r/stats/vcov.html">vcov(..., component = "stage1")</a></code> for the estimated coefficients and corresponding variance-covariance matrix from the stage-1 regression (only for the endogenous regressors). (Prompted by a request from Grant McDermott.)</p></li>
 <li><p>Add <code><a href="https://rdrr.io/r/stats/residuals.html">residuals(..., type = "stage1")</a></code> with the residuals from the stage-1 regression (only for the endogenous regressors).</p></li>
+<li><p>The <code><a href="https://rdrr.io/r/stats/coef.html">coef()</a></code> and <code><a href="https://rdrr.io/r/stats/vcov.html">vcov()</a></code> method gained a <code>complete = TRUE</code> argument assuring that the elements pertaining to aliased coefficients are included. By setting <code>complete = FALSE</code> these elements are dropped.</p></li>
 </ul>
 </div>
     <div id="version-05-0" class="section level1">
@@ -179,7 +180,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.9000.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

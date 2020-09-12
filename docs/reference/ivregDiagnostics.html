@@ -382,7 +382,8 @@ draw graphs.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='kw'>kmenta.eq1</span> <span class='op'>&lt;-</span> <span class='fu'><a href='ivreg.html'>ivreg</a></span>(<span class='kw'>Q</span> <span class='op'>~</span> <span class='kw'>P</span> <span class='op'>+</span> <span class='kw'>D</span> <span class='op'>|</span> <span class='kw'>D</span> <span class='op'>+</span> <span class='kw'>F</span> <span class='op'>+</span> <span class='kw'>A</span>, data = <span class='kw'>Kmenta</span>)
-<span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>(<span class='kw'>kmenta.eq1</span>)</div><div class='output co'>#&gt; 
+<span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>(<span class='kw'>kmenta.eq1</span>)
+</div><div class='output co'>#&gt; 
 #&gt; Call:
 #&gt; ivreg(formula = Q ~ P + D | D + F + A, data = Kmenta)
 #&gt; 
@@ -407,30 +408,43 @@ draw graphs.</p>
 #&gt; Residual standard error: 1.966 on 17 degrees of freedom
 #&gt; Multiple R-Squared: 0.7548,	Adjusted R-squared: 0.726 
 #&gt; Wald test: 23.81 on 2 and 17 DF,  p-value: 1.178e-05 
-#&gt; </div><div class='input'><span class='kw'>car</span>::<span class='fu'><a href='https://rdrr.io/pkg/car/man/avPlots.html'>avPlots</a></span>(<span class='kw'>kmenta.eq1</span>)</div><div class='img'><img src='ivregDiagnostics-1.png' alt='' width='700' height='433' /></div><div class='input'><span class='kw'>car</span>::<span class='fu'><a href='https://rdrr.io/pkg/car/man/mcPlots.html'>mcPlots</a></span>(<span class='kw'>kmenta.eq1</span>)</div><div class='img'><img src='ivregDiagnostics-2.png' alt='' width='700' height='433' /></div><div class='input'><span class='kw'>car</span>::<span class='fu'><a href='https://rdrr.io/pkg/car/man/crPlots.html'>crPlots</a></span>(<span class='kw'>kmenta.eq1</span>)</div><div class='img'><img src='ivregDiagnostics-3.png' alt='' width='700' height='433' /></div><div class='input'><span class='kw'>car</span>::<span class='fu'><a href='https://rdrr.io/pkg/car/man/ceresPlots.html'>ceresPlots</a></span>(<span class='kw'>kmenta.eq1</span>)</div><div class='img'><img src='ivregDiagnostics-4.png' alt='' width='700' height='433' /></div><div class='input'><span class='kw'>car</span>::<span class='fu'><a href='https://rdrr.io/pkg/car/man/influencePlot.html'>influencePlot</a></span>(<span class='kw'>kmenta.eq1</span>)</div><div class='img'><img src='ivregDiagnostics-5.png' alt='' width='700' height='433' /></div><div class='output co'>#&gt;         StudRes        Hat      CookD
+#&gt; </div><div class='input'><span class='kw'>car</span>::<span class='fu'><a href='https://rdrr.io/pkg/car/man/avPlots.html'>avPlots</a></span>(<span class='kw'>kmenta.eq1</span>)
+</div><div class='img'><img src='ivregDiagnostics-1.png' alt='' width='700' height='433' /></div><div class='input'><span class='kw'>car</span>::<span class='fu'><a href='https://rdrr.io/pkg/car/man/mcPlots.html'>mcPlots</a></span>(<span class='kw'>kmenta.eq1</span>)
+</div><div class='img'><img src='ivregDiagnostics-2.png' alt='' width='700' height='433' /></div><div class='input'><span class='kw'>car</span>::<span class='fu'><a href='https://rdrr.io/pkg/car/man/crPlots.html'>crPlots</a></span>(<span class='kw'>kmenta.eq1</span>)
+</div><div class='img'><img src='ivregDiagnostics-3.png' alt='' width='700' height='433' /></div><div class='input'><span class='kw'>car</span>::<span class='fu'><a href='https://rdrr.io/pkg/car/man/ceresPlots.html'>ceresPlots</a></span>(<span class='kw'>kmenta.eq1</span>)
+</div><div class='img'><img src='ivregDiagnostics-4.png' alt='' width='700' height='433' /></div><div class='input'><span class='kw'>car</span>::<span class='fu'><a href='https://rdrr.io/pkg/car/man/influencePlot.html'>influencePlot</a></span>(<span class='kw'>kmenta.eq1</span>)
+</div><div class='img'><img src='ivregDiagnostics-5.png' alt='' width='700' height='433' /></div><div class='output co'>#&gt;         StudRes        Hat      CookD
 #&gt; 1929 -1.7359357 0.09079703 0.06956671
 #&gt; 1933 -1.3686682 0.26453459 0.21973049
 #&gt; 1937 -2.0995532 0.13849570 0.17147564
 #&gt; 1938 -0.2010944 0.39711512 0.01508349
-#&gt; 1941 -0.4505155 0.46498004 0.05257374</div><div class='input'><span class='kw'>car</span>::<span class='fu'><a href='https://rdrr.io/pkg/car/man/infIndexPlot.html'>influenceIndexPlot</a></span>(<span class='kw'>kmenta.eq1</span>)</div><div class='img'><img src='ivregDiagnostics-6.png' alt='' width='700' height='433' /></div><div class='input'><span class='kw'>car</span>::<span class='fu'><a href='https://rdrr.io/pkg/car/man/qqPlot.html'>qqPlot</a></span>(<span class='kw'>kmenta.eq1</span>)</div><div class='img'><img src='ivregDiagnostics-7.png' alt='' width='700' height='433' /></div><div class='output co'>#&gt; 1937 1929 
-#&gt;   16    8 </div><div class='input'><span class='kw'>car</span>::<span class='fu'><a href='https://rdrr.io/pkg/car/man/spreadLevelPlot.html'>spreadLevelPlot</a></span>(<span class='kw'>kmenta.eq1</span>)</div><div class='img'><img src='ivregDiagnostics-8.png' alt='' width='700' height='433' /></div><div class='output co'>#&gt; 
-#&gt; Suggested power transformation:  -2.44685 </div><div class='input'><span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span>(<span class='kw'>effects</span>::<span class='fu'><a href='https://rdrr.io/pkg/effects/man/predictorEffects.html'>predictorEffects</a></span>(<span class='kw'>kmenta.eq1</span>, residuals = <span class='fl'>TRUE</span>))</div><div class='output co'>#&gt; <span class='message'>Registered S3 methods overwritten by 'lme4':</span>
+#&gt; 1941 -0.4505155 0.46498004 0.05257374</div><div class='input'><span class='kw'>car</span>::<span class='fu'><a href='https://rdrr.io/pkg/car/man/infIndexPlot.html'>influenceIndexPlot</a></span>(<span class='kw'>kmenta.eq1</span>)
+</div><div class='img'><img src='ivregDiagnostics-6.png' alt='' width='700' height='433' /></div><div class='input'><span class='kw'>car</span>::<span class='fu'><a href='https://rdrr.io/pkg/car/man/qqPlot.html'>qqPlot</a></span>(<span class='kw'>kmenta.eq1</span>)
+</div><div class='img'><img src='ivregDiagnostics-7.png' alt='' width='700' height='433' /></div><div class='output co'>#&gt; 1937 1929 
+#&gt;   16    8 </div><div class='input'><span class='kw'>car</span>::<span class='fu'><a href='https://rdrr.io/pkg/car/man/spreadLevelPlot.html'>spreadLevelPlot</a></span>(<span class='kw'>kmenta.eq1</span>)
+</div><div class='img'><img src='ivregDiagnostics-8.png' alt='' width='700' height='433' /></div><div class='output co'>#&gt; 
+#&gt; Suggested power transformation:  -2.44685 </div><div class='input'><span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span>(<span class='kw'>effects</span>::<span class='fu'><a href='https://rdrr.io/pkg/effects/man/predictorEffects.html'>predictorEffects</a></span>(<span class='kw'>kmenta.eq1</span>, residuals = <span class='fl'>TRUE</span>))
+</div><div class='output co'>#&gt; <span class='message'>Registered S3 methods overwritten by 'lme4':</span>
 #&gt; <span class='message'>  method                          from</span>
 #&gt; <span class='message'>  cooks.distance.influence.merMod car </span>
 #&gt; <span class='message'>  influence.merMod                car </span>
 #&gt; <span class='message'>  dfbeta.influence.merMod         car </span>
 #&gt; <span class='message'>  dfbetas.influence.merMod        car </span></div><div class='img'><img src='ivregDiagnostics-9.png' alt='' width='700' height='433' /></div><div class='input'><span class='kw'>set.seed</span> <span class='op'>&lt;-</span> <span class='fl'>12321</span> <span class='co'># for reproducibility</span>
-<span class='fu'><a href='https://rdrr.io/r/stats/confint.html'>confint</a></span>(<span class='kw'>car</span>::<span class='fu'><a href='https://rdrr.io/pkg/car/man/Boot.html'>Boot</a></span>(<span class='kw'>kmenta.eq1</span>, R = <span class='fl'>250</span>)) <span class='co'># 250 reps for brevity</span></div><div class='output co'>#&gt; Bootstrap bca confidence intervals
+<span class='fu'><a href='https://rdrr.io/r/stats/confint.html'>confint</a></span>(<span class='kw'>car</span>::<span class='fu'><a href='https://rdrr.io/pkg/car/man/Boot.html'>Boot</a></span>(<span class='kw'>kmenta.eq1</span>, R = <span class='fl'>250</span>)) <span class='co'># 250 reps for brevity</span>
+</div><div class='output co'>#&gt; Bootstrap bca confidence intervals
 #&gt; 
 #&gt;                  2.5 %       97.5 %
 #&gt; (Intercept) 74.1021451 107.77780398
 #&gt; P           -0.4454188   0.02161098
-#&gt; D            0.1902243   0.40024278</div><div class='input'><span class='kw'>car</span>::<span class='fu'><a href='https://rdrr.io/pkg/car/man/outlierTest.html'>outlierTest</a></span>(<span class='kw'>kmenta.eq1</span>)</div><div class='output co'>#&gt; No Studentized residuals with Bonferroni p &lt; 0.05
+#&gt; D            0.1902243   0.40024278</div><div class='input'><span class='kw'>car</span>::<span class='fu'><a href='https://rdrr.io/pkg/car/man/outlierTest.html'>outlierTest</a></span>(<span class='kw'>kmenta.eq1</span>)
+</div><div class='output co'>#&gt; No Studentized residuals with Bonferroni p &lt; 0.05
 #&gt; Largest |rstudent|:
 #&gt;       rstudent unadjusted p-value Bonferroni p
-#&gt; 1937 -2.099553           0.051985           NA</div><div class='input'><span class='kw'>car</span>::<span class='fu'><a href='https://rdrr.io/pkg/car/man/ncvTest.html'>ncvTest</a></span>(<span class='kw'>kmenta.eq1</span>)</div><div class='output co'>#&gt; Non-constant Variance Score Test 
+#&gt; 1937 -2.099553           0.051985           NA</div><div class='input'><span class='kw'>car</span>::<span class='fu'><a href='https://rdrr.io/pkg/car/man/ncvTest.html'>ncvTest</a></span>(<span class='kw'>kmenta.eq1</span>)
+</div><div class='output co'>#&gt; Non-constant Variance Score Test 
 #&gt; Variance formula: ~ fitted.values 
-#&gt; Chisquare = 0.2390325, Df = 1, p = 0.62491</div><div class='input'></div></pre>
+#&gt; Chisquare = 0.2390325, Df = 1, p = 0.62491</div><div class='input'>
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -446,7 +460,7 @@ draw graphs.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.9000.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

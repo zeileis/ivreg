@@ -199,7 +199,8 @@ is provided by Hanck et al. (2020, Chapter 12).</p>
 <span class='co'>## basic price elasticity: OLS vs. IV</span>
 <span class='kw'>cig_ols</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/Log.html'>log</a></span>(<span class='kw'>packs</span>) <span class='op'>~</span> <span class='fu'><a href='https://rdrr.io/r/base/Log.html'>log</a></span>(<span class='kw'>rprice</span>), data = <span class='kw'>CigaretteDemand</span>)
 <span class='kw'>cig_iv</span> <span class='op'>&lt;-</span> <span class='fu'><a href='ivreg.html'>ivreg</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/Log.html'>log</a></span>(<span class='kw'>packs</span>) <span class='op'>~</span> <span class='fu'><a href='https://rdrr.io/r/base/Log.html'>log</a></span>(<span class='kw'>rprice</span>) <span class='op'>|</span> <span class='kw'>salestax</span>, data = <span class='kw'>CigaretteDemand</span>)
-<span class='fu'><a href='https://rdrr.io/r/base/cbind.html'>cbind</a></span>(OLS = <span class='fu'><a href='https://rdrr.io/r/stats/coef.html'>coef</a></span>(<span class='kw'>cig_ols</span>), IV = <span class='fu'><a href='https://rdrr.io/r/stats/coef.html'>coef</a></span>(<span class='kw'>cig_iv</span>))</div><div class='output co'>#&gt;                   OLS        IV
+<span class='fu'><a href='https://rdrr.io/r/base/cbind.html'>cbind</a></span>(OLS = <span class='fu'><a href='https://rdrr.io/r/stats/coef.html'>coef</a></span>(<span class='kw'>cig_ols</span>), IV = <span class='fu'><a href='https://rdrr.io/r/stats/coef.html'>coef</a></span>(<span class='kw'>cig_iv</span>))
+</div><div class='output co'>#&gt;                   OLS        IV
 #&gt; (Intercept) 10.338924  9.719877
 #&gt; log(rprice) -1.213057 -1.083587</div><div class='input'>
 <span class='co'>## adjusting for income differences (exogenous)</span>
@@ -209,11 +210,13 @@ is provided by Hanck et al. (2020, Chapter 12).</p>
 <span class='kw'>cig_iv3</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/update.html'>update</a></span>(<span class='kw'>cig_iv2</span>, <span class='kw'>.</span> <span class='op'>~</span> <span class='kw'>.</span> <span class='op'>|</span> <span class='kw'>.</span> <span class='op'>+</span> <span class='kw'>cigtax</span>)
 
 <span class='co'>## comparison using heteroscedasticity-consistent standard errors</span>
-<span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='st'>"lmtest"</span>)</div><div class='output co'>#&gt; <span class='message'>Loading required package: zoo</span></div><div class='output co'>#&gt; <span class='message'></span>
+<span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='st'>"lmtest"</span>)
+</div><div class='output co'>#&gt; <span class='message'>Loading required package: zoo</span></div><div class='output co'>#&gt; <span class='message'></span>
 #&gt; <span class='message'>Attaching package: ‘zoo’</span></div><div class='output co'>#&gt; <span class='message'>The following objects are masked from ‘package:base’:</span>
 #&gt; <span class='message'></span>
 #&gt; <span class='message'>    as.Date, as.Date.numeric</span></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='st'>"sandwich"</span>)
-<span class='fu'><a href='https://rdrr.io/pkg/lmtest/man/coeftest.html'>coeftest</a></span>(<span class='kw'>cig_iv2</span>, vcov = <span class='kw'>vcovHC</span>, type = <span class='st'>"HC1"</span>)</div><div class='output co'>#&gt; 
+<span class='fu'><a href='https://rdrr.io/pkg/lmtest/man/coeftest.html'>coeftest</a></span>(<span class='kw'>cig_iv2</span>, vcov = <span class='kw'>vcovHC</span>, type = <span class='st'>"HC1"</span>)
+</div><div class='output co'>#&gt; 
 #&gt; t test of coefficients:
 #&gt; 
 #&gt;              Estimate Std. Error t value  Pr(&gt;|t|)    
@@ -222,7 +225,8 @@ is provided by Hanck et al. (2020, Chapter 12).</p>
 #&gt; log(rincome)  0.21452    0.31175  0.6881  0.494917    
 #&gt; ---
 #&gt; Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
-#&gt; </div><div class='input'><span class='fu'><a href='https://rdrr.io/pkg/lmtest/man/coeftest.html'>coeftest</a></span>(<span class='kw'>cig_iv3</span>, vcov = <span class='kw'>vcovHC</span>, type = <span class='st'>"HC1"</span>)</div><div class='output co'>#&gt; 
+#&gt; </div><div class='input'><span class='fu'><a href='https://rdrr.io/pkg/lmtest/man/coeftest.html'>coeftest</a></span>(<span class='kw'>cig_iv3</span>, vcov = <span class='kw'>vcovHC</span>, type = <span class='st'>"HC1"</span>)
+</div><div class='output co'>#&gt; 
 #&gt; t test of coefficients:
 #&gt; 
 #&gt;              Estimate Std. Error t value  Pr(&gt;|t|)    
@@ -237,7 +241,8 @@ is provided by Hanck et al. (2020, Chapter 12).</p>
   data = <span class='kw'>CigaretteDemand</span>)
 <span class='kw'>cig_ivdiff2</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/update.html'>update</a></span>(<span class='kw'>cig_ivdiff1</span>, <span class='kw'>.</span> <span class='op'>~</span> <span class='kw'>.</span> <span class='op'>|</span> <span class='kw'>.</span> <span class='op'>-</span> <span class='kw'>salestaxdiff</span> <span class='op'>+</span> <span class='kw'>cigtaxdiff</span>)
 <span class='kw'>cig_ivdiff3</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/update.html'>update</a></span>(<span class='kw'>cig_ivdiff1</span>, <span class='kw'>.</span> <span class='op'>~</span> <span class='kw'>.</span> <span class='op'>|</span> <span class='kw'>.</span> <span class='op'>+</span> <span class='kw'>cigtaxdiff</span>)
-<span class='fu'><a href='https://rdrr.io/pkg/lmtest/man/coeftest.html'>coeftest</a></span>(<span class='kw'>cig_ivdiff1</span>, vcov = <span class='kw'>vcovHC</span>, type = <span class='st'>"HC1"</span>)</div><div class='output co'>#&gt; 
+<span class='fu'><a href='https://rdrr.io/pkg/lmtest/man/coeftest.html'>coeftest</a></span>(<span class='kw'>cig_ivdiff1</span>, vcov = <span class='kw'>vcovHC</span>, type = <span class='st'>"HC1"</span>)
+</div><div class='output co'>#&gt; 
 #&gt; t test of coefficients:
 #&gt; 
 #&gt;              Estimate Std. Error t value  Pr(&gt;|t|)    
@@ -246,7 +251,8 @@ is provided by Hanck et al. (2020, Chapter 12).</p>
 #&gt; incomediff   0.525970   0.339494  1.5493   0.12832    
 #&gt; ---
 #&gt; Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
-#&gt; </div><div class='input'><span class='fu'><a href='https://rdrr.io/pkg/lmtest/man/coeftest.html'>coeftest</a></span>(<span class='kw'>cig_ivdiff2</span>, vcov = <span class='kw'>vcovHC</span>, type = <span class='st'>"HC1"</span>)</div><div class='output co'>#&gt; 
+#&gt; </div><div class='input'><span class='fu'><a href='https://rdrr.io/pkg/lmtest/man/coeftest.html'>coeftest</a></span>(<span class='kw'>cig_ivdiff2</span>, vcov = <span class='kw'>vcovHC</span>, type = <span class='st'>"HC1"</span>)
+</div><div class='output co'>#&gt; 
 #&gt; t test of coefficients:
 #&gt; 
 #&gt;              Estimate Std. Error t value  Pr(&gt;|t|)    
@@ -255,7 +261,8 @@ is provided by Hanck et al. (2020, Chapter 12).</p>
 #&gt; incomediff   0.428146   0.298718  1.4333    0.1587    
 #&gt; ---
 #&gt; Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
-#&gt; </div><div class='input'><span class='fu'><a href='https://rdrr.io/pkg/lmtest/man/coeftest.html'>coeftest</a></span>(<span class='kw'>cig_ivdiff3</span>, vcov = <span class='kw'>vcovHC</span>, type = <span class='st'>"HC1"</span>)</div><div class='output co'>#&gt; 
+#&gt; </div><div class='input'><span class='fu'><a href='https://rdrr.io/pkg/lmtest/man/coeftest.html'>coeftest</a></span>(<span class='kw'>cig_ivdiff3</span>, vcov = <span class='kw'>vcovHC</span>, type = <span class='st'>"HC1"</span>)
+</div><div class='output co'>#&gt; 
 #&gt; t test of coefficients:
 #&gt; 
 #&gt;              Estimate Std. Error t value  Pr(&gt;|t|)    
@@ -280,7 +287,7 @@ is provided by Hanck et al. (2020, Chapter 12).</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.9000.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

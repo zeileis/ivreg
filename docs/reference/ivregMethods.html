@@ -151,10 +151,10 @@
     </div>
 
     <pre class="usage"><span class='co'># S3 method for ivreg</span>
-<span class='fu'><a href='https://rdrr.io/r/stats/coef.html'>coef</a></span>(<span class='kw'>object</span>, component = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"stage2"</span>, <span class='st'>"stage1"</span>), <span class='kw'>...</span>)
+<span class='fu'><a href='https://rdrr.io/r/stats/coef.html'>coef</a></span>(<span class='kw'>object</span>, component = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"stage2"</span>, <span class='st'>"stage1"</span>), complete = <span class='fl'>TRUE</span>, <span class='kw'>...</span>)
 
 <span class='co'># S3 method for ivreg</span>
-<span class='fu'><a href='https://rdrr.io/r/stats/vcov.html'>vcov</a></span>(<span class='kw'>object</span>, component = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"stage2"</span>, <span class='st'>"stage1"</span>), <span class='kw'>...</span>)
+<span class='fu'><a href='https://rdrr.io/r/stats/vcov.html'>vcov</a></span>(<span class='kw'>object</span>, component = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"stage2"</span>, <span class='st'>"stage1"</span>), complete = <span class='fl'>TRUE</span>, <span class='kw'>...</span>)
 
 <span class='co'># S3 method for ivreg</span>
 <span class='fu'><a href='https://rdrr.io/pkg/sandwich/man/bread.html'>bread</a></span>(<span class='kw'>x</span>, <span class='kw'>...</span>)
@@ -257,6 +257,10 @@ for <code><a href='https://rdrr.io/r/stats/formula.html'>formula</a></code>, <co
 for <code><a href='https://rdrr.io/r/stats/coef.html'>coef</a></code> and <code><a href='https://rdrr.io/r/stats/vcov.html'>vcov</a></code>, <code>"stage2"</code> or <code>"stage1"</code>.</p></td>
     </tr>
     <tr>
+      <th>complete</th>
+      <td><p>If <code>TRUE</code>, the default, the returned coefficient vector (for <code><a href='https://rdrr.io/r/stats/coef.html'>coef()</a></code>) or coefficient-coevariance matrix (for <code>vcov</code>) includes elements for aliased regressors.</p></td>
+    </tr>
+    <tr>
       <th>...</th>
       <td><p>arguments to pass down.</p></td>
     </tr>
@@ -347,7 +351,7 @@ for <code>linearHypothesis</code> for details.</p></td>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.9000.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>
