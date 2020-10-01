@@ -1,7 +1,7 @@
 ---
 title: "Diagnostics for 2SLS Regression"
 author: "John Fox, Christian Kleiber, Achim Zeileis"
-date: "last modified: 2020-08-04"
+date: "last modified: 2020-10-01"
 output:
   html_document:
     toc: true
@@ -156,11 +156,11 @@ Kmenta independently sampled 20 values of $\delta_1$ and $\delta_2$, each from $
 
 The structural equations are estimated as follows by the `ivreg()` function [compare @Kmenta1986, p. 686]:
 ```{r}
-deq <- ivreg(Q ~ P + D, ~ D + F + A, data=Kmenta)     # demand equation
+deq <- ivreg(Q ~ P + D | D + F + A, data=Kmenta)     # demand equation
 summary(deq)
 ```
 ```{r}
-seq <- ivreg(Q ~ P + F + A, ~ D + F + A, data=Kmenta) # supply equation
+seq <- ivreg(Q ~ P + F + A | D + F + A, data=Kmenta) # supply equation
 summary(seq)
 ```
 By default, `summary()` prints the results of three "diagnostic" tests for 2SLS regression. These tests (which can be suppressed by setting the argument `diagnostics=FALSE`) are not the focus of the vignette and so we'll comment on them only briefly:
@@ -311,8 +311,8 @@ spreadLevelPlot(deq, smooth=list(span=1))
 ```
 which suggests a slight tendency of spread to increase with level. The transformation $\lambda = - 2.45$ seems strong, until we notice that the values of $Q$ are far from 0, and that the ratio of the largest to smallest values $Q_{\mathrm{max}}/Q_{\mathrm{min}} = 106.23/92.42 = 1.15$ is close to 1, so that $Q^{-2.45}$ is nearly a linear transformation of $Q$---that is, effectively no transformation at all:
 ```{r}
-with(Kmenta, plot(Q, Q^2.5))
-abline(lm(Q^2.5 ~ Q, data=Kmenta))
+with(Kmenta, plot(Q, Q^-2.5))
+abline(lm(Q^-2.5 ~ Q, data=Kmenta))
 ```
 
 A common score test for nonconstant error variance in least-squares regression, suggested by @BreuschPagan1979, is based on the model 

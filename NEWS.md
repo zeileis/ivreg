@@ -21,6 +21,8 @@
 * The `coef()` and `vcov()` method gained a `complete = TRUE` argument assuring
   that the elements pertaining to aliased coefficients are included. By setting
   `complete = FALSE` these elements are dropped.
+  
+* Small edits to the Diagnostics vignette.
 
 
 # Version 0.5-0
