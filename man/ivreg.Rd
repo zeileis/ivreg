@@ -134,6 +134,16 @@ m2 <- update(m, . ~ . - log(rincome) | . - log(rincome))
 anova(m, m2)
 car::Anova(m)
 
+# Robust 2SLS regression
+data("Kmenta", package = "ivreg")
+Kmenta1 <- Kmenta
+Kmenta1[20, "Q"] <- 95 # corrupted data
+deq <- ivreg(Q ~ P + D | D + F + A, data=Kmenta) # demand equation, uncorrupted data
+deq1 <- ivreg(Q ~ P + D | D + F + A, data=Kmenta1) # standard 2SLS, corrupted data
+deq2 <- ivreg(Q ~ P + D | D + F + A, data=Kmenta1, subset=-20) # standard 2SLS, removing bad case
+deq3 <- ivreg(Q ~ P + D | D + F + A, data=Kmenta1, method="MM") # 2SLS MM estimation
+car::compareCoefs(deq, deq1, deq2, deq3)
+
 }
 \references{
 Greene, W.H. (1993) \emph{Econometric Analysis}, 2nd ed., Macmillan.

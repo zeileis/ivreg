@@ -4,7 +4,16 @@
 \alias{ivreg.fit}
 \title{Fitting Instrumental-Variable Regressions by 2SLS}
 \usage{
-ivreg.fit(x, y, z, weights, offset, ...)
+ivreg.fit(
+  x,
+  y,
+  z,
+  weights,
+  offset,
+  method = c("OLS", "M", "MM"),
+  rlm.args = list(),
+  ...
+)
 }
 \arguments{
 \item{x}{regressor matrix.}
@@ -18,6 +27,15 @@ process.}
 
 \item{offset}{an optional offset that can be used to specify an a priori
 known component to be included during fitting.}
+
+\item{method}{the method used to fit the stage 1 and 2 regression: 
+\code{"OLS"} for traditional 2SLS regression (the default), 
+\code{"M"} for M-estimation, or \code{"MM"} for MM-estimation, with the
+latter two robust-regression methods implemented via the \code{\link[MASS]{rlm}} 
+function in the \pkg{MASS} package.}
+
+\item{rlm.args}{a list of optional arguments to be passed to the \code{\link[MASS]{rlm}} 
+function in the \pkg{MASS} package if robust regression is used for the stage 1 and 2 regressions.}
 
 \item{\dots}{further arguments passed to \code{\link[stats:lmfit]{lm.fit}}
 or \code{\link[stats:lmfit]{lm.wfit}}, respectively.}
@@ -51,6 +69,11 @@ components:
 \item{endogenous}{columns of the \code{"regressors"} matrix that are endogenous.}
 \item{instruments}{columns of the \code{"instruments"} matrix that are
 instruments for the endogenous variables.}
+\item{method}{the method used for the stage 1 and 2 regressions, one of \code{"OLS"},
+\code{"M"}, or \code{"MM"}.}
+\item{rwts}{a matrix of robustness weights with columns for each of the stage-1
+regressions and for the stage-2 regression (in the last column) if the fitting method is 
+\code{"M"} or \code{"MM"}, \code{NULL} if the fitting method is \code{"OLS"}.}
 }
 \description{
 Fit instrumental-variable regression by two-stage least squares (2SLS). This is
@@ -81,6 +104,7 @@ ivreg.fit(x, y, z)$coefficients
 
 }
 \seealso{
-\code{\link{ivreg}}, \code{\link[stats:lmfit]{lm.fit}}, \code{\link[stats:lmfit]{lm.wfit}}
+\code{\link{ivreg}}, \code{\link[stats:lmfit]{lm.fit}}, 
+\code{\link[stats:lmfit]{lm.wfit}}, \code{\link[MASS]{rlm}}
 }
 \keyword{regression}
