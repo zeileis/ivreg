@@ -58,7 +58,8 @@ components:
 \item{rank}{numeric rank of the model matrix for the stage-2 regression.} 
 \item{df.residual}{residual degrees of freedom for fitted model.} 
 \item{cov.unscaled}{unscaled covariance matrix for the coefficients.} 
-\item{sigma}{residual standard error.}
+\item{sigma}{residual standard error; when method is \code{"M"} or \code{"MM"}, this
+is based on the MAD of the residuals (around 0) --- see \code{\link[stats]{mad}}.}
 \item{x}{projection of x matrix onto span of z.}
 \item{qr}{QR decomposition for the stage-2 regression.}
 \item{qr1}{QR decomposition for the stage-1 regression.}
@@ -105,6 +106,6 @@ ivreg.fit(x, y, z)$coefficients
 }
 \seealso{
 \code{\link{ivreg}}, \code{\link[stats:lmfit]{lm.fit}}, 
-\code{\link[stats:lmfit]{lm.wfit}}, \code{\link[MASS]{rlm}}
+\code{\link[stats:lmfit]{lm.wfit}}, \code{\link[MASS]{rlm}}, \code{\link[stats]{mad}}
 }
 \keyword{regression}

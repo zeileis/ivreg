@@ -14,6 +14,7 @@
 #' @aliases ivreg.fit
 #' 
 #' @importFrom MASS rlm
+#' @importFrom stats mad
 #' 
 #' @param x regressor matrix.
 #' @param y vector for the response variable.
@@ -48,7 +49,8 @@
 #' \item{rank}{numeric rank of the model matrix for the stage-2 regression.} 
 #' \item{df.residual}{residual degrees of freedom for fitted model.} 
 #' \item{cov.unscaled}{unscaled covariance matrix for the coefficients.} 
-#' \item{sigma}{residual standard error.}
+#' \item{sigma}{residual standard error; when method is \code{"M"} or \code{"MM"}, this
+#' is based on the MAD of the residuals (around 0) --- see \code{\link[stats]{mad}}.}
 #' \item{x}{projection of x matrix onto span of z.}
 #' \item{qr}{QR decomposition for the stage-2 regression.}
 #' \item{qr1}{QR decomposition for the stage-1 regression.}
@@ -65,7 +67,7 @@
 #' regressions and for the stage-2 regression (in the last column) if the fitting method is 
 #' \code{"M"} or \code{"MM"}, \code{NULL} if the fitting method is \code{"OLS"}.}
 #' @seealso \code{\link{ivreg}}, \code{\link[stats:lmfit]{lm.fit}}, 
-#' \code{\link[stats:lmfit]{lm.wfit}}, \code{\link[MASS]{rlm}}
+#' \code{\link[stats:lmfit]{lm.wfit}}, \code{\link[MASS]{rlm}}, \code{\link[stats]{mad}}
 #' @keywords regression
 #' @examples
 #' ## data
@@ -171,7 +173,12 @@ ivreg.fit <- function(x, y, z, weights, offset, method=c("OLS", "M", "MM"),
   res <- y - yhat
   ucov <- chol2inv(fit$qr$qr[1:length(ok), 1:length(ok), drop = FALSE])
   colnames(ucov) <- rownames(ucov) <- names(fit$coefficients[ok])
-  rss <- if(is.null(weights)) sum(res^2) else sum(weights * res^2)
+  sigma <- if (method == "OLS") {
+    rss <- if(is.null(weights)) sum(res^2) else sum(weights * res^2)
+    sqrt(rss/fit$df.residual)
+  } else {
+    if (is.null(weights)) mad(res, 0)  else mad(sqrt(weights)*res, 0)
+  }
 
   rval <- list(
     coefficients = fit$coefficients,
@@ -188,7 +195,7 @@ ivreg.fit <- function(x, y, z, weights, offset, method=c("OLS", "M", "MM"),
     rank = fit$rank,
     df.residual = fit$df.residual,
     cov.unscaled = ucov,
-    sigma = sqrt(rss/fit$df.residual), ## NOTE: Stata divides by n here and uses z tests rather than t tests...
+    sigma = sigma, ## NOTE: Stata divides by n here and uses z tests rather than t tests...
     # hatvalues = hat,
     x = xz,
     qr = fit$qr,
