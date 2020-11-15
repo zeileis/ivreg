@@ -128,7 +128,13 @@ influence.ivreg <- function(model, sigma. = n <= 1e3, type = c("stage2", "both",
   b <- coef(model) # model$coefficients
   res <- na.remove(residuals(model)) # na.remove(model$residuals)
   .sigma <- sqrt(model$sigma^2)
+  w <- na.remove(weights(model)) # na.remove(model$weights)
   hatvalues <-  na.remove(hatvalues(model, type=type))
+  if (!is.null(w)){
+    h <- rep(0, length(w))
+    h[w > 0] <- hatvalues
+    hatvalues <- h
+  }
 
   na.action <- model$na.action 
 
@@ -137,7 +143,6 @@ influence.ivreg <- function(model, sigma. = n <= 1e3, type = c("stage2", "both",
 
   names(hatvalues) <- rnames
 
-  w <- na.remove(weights(model)) # na.remove(model$weights)
   if (!is.null(w)){
     w <- sqrt(w)
     X <- diagprod(w, X)
@@ -549,3 +554,44 @@ deviance.ivreg <- function(object, ...){
   .Class <- "lm"
   NextMethod()
 }
+
+#' @rdname ivregDiagnostics
+#' @export
+hatvalues.rivreg <- function(model, ...){
+  wts <- weights(model)
+  rwts <- model$rwts
+  nms <- rownames(rwts)
+  rwts <- rwts[, ncol(rwts)]
+  n <- length(rwts)
+  wts <- if (is.null(wts)) rwts else wts*rwts
+  model$weights <- wts
+  class(model) <- "ivreg"
+  hat <- hatvalues(model, ...)
+  result <- rep(0, n)
+  result[wts > 0] <- hat
+  names(result) <- nms
+  result
+}
+
+#' @rdname ivregDiagnostics
+#' @export
+influence.rivreg <- function(model, ...){
+  mwts <- wts <- weights(model)
+  rwts <- model$rwts
+  nms <- rownames(rwts)
+  rwts <- rwts[, ncol(rwts)]
+  n <- length(rwts)
+  wts <- if (is.null(wts)) rwts else wts*rwts
+  model$weights <- wts
+  class(model) <- "ivreg"
+  infl <- influence(model)
+  if (is.null(mwts)) mwts <- 1
+  infl$rstudent <- mwts*residuals(model)/(infl$sigma * sqrt(1 - infl$hatvalues))
+  cookd <- infl$cookd
+  cookd[is.nan(cookd)] <- 0
+  infl$cookd <- cookd
+  dffits <- infl$dffits
+  dffits[is.nan(dffits)] <- 0
+  infl$dffits <- dffits
+  infl
+  }

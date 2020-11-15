@@ -161,6 +161,8 @@ ivreg.fit <- function(x, y, z, weights, offset, method=c("OLS", "M", "MM"),
   }
   if (method != "OLS") {
     rwts[, ncol(rwts)] <- fit$w
+    rownames(rwts) <- names(y)
+    colnames(rwts) <- c(names(endo), "stage_2")
     fit$df.residual <- n - length(na.omit(coef(fit)))
   } else {
     rwts <- NULL

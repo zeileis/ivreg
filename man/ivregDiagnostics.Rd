@@ -32,6 +32,8 @@
 \alias{ncvTest.ivreg}
 \alias{deviance.ivreg}
 \alias{dfbeta.ivreg}
+\alias{hatvalues.rivreg}
+\alias{influence.rivreg}
 \title{Deletion and Other Diagnostic Methods for \code{"ivreg"} Objects}
 \usage{
 \method{influence}{ivreg}(
@@ -115,6 +117,10 @@
 \method{ncvTest}{ivreg}(model, ...)
 
 \method{deviance}{ivreg}(object, ...)
+
+\method{hatvalues}{rivreg}(model, ...)
+
+\method{influence}{rivreg}(model, ...)
 }
 \arguments{
 \item{model, x, object}{A \code{"ivreg"} or \code{"influence.ivreg"} object.}
