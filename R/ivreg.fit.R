@@ -84,11 +84,11 @@
 #' ivreg.fit(x, y, z)$coefficients
 #' 
 #' @export
-ivreg.fit <- function(x, y, z, weights, offset, method=c("OLS", "M", "MM"),
+ivreg.fit <- function(x, y, z, weights, offset, method = c("OLS", "M", "MM"),
                       rlm.args=list(), ...)
 {
   
-  method <- match.arg(method)
+  method <- match.arg(method, c("OLS", "M", "MM"))
   
   ## model dimensions
   n <- NROW(y)
@@ -177,9 +177,9 @@ ivreg.fit <- function(x, y, z, weights, offset, method=c("OLS", "M", "MM"),
   colnames(ucov) <- rownames(ucov) <- names(fit$coefficients[ok])
   sigma <- if (method == "OLS") {
     rss <- if(is.null(weights)) sum(res^2) else sum(weights * res^2)
-    sqrt(rss/fit$df.residual)
+    sqrt(rss/fit$df.residual) ## NOTE: Stata divides by n here and uses z tests rather than t tests...
   } else {
-    if (is.null(weights)) mad(res, 0)  else mad(sqrt(weights)*res, 0)
+    if (is.null(weights)) mad(res, 0)  else mad(sqrt(weights) * res, 0)
   }
 
   rval <- list(
@@ -197,7 +197,7 @@ ivreg.fit <- function(x, y, z, weights, offset, method=c("OLS", "M", "MM"),
     rank = fit$rank,
     df.residual = fit$df.residual,
     cov.unscaled = ucov,
-    sigma = sigma, ## NOTE: Stata divides by n here and uses z tests rather than t tests...
+    sigma = sigma,
     # hatvalues = hat,
     x = xz,
     qr = fit$qr,
