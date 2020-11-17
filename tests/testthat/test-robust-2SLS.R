@@ -11,10 +11,14 @@ if (require(MASS)){
     expect_equal(coef(deqr1), coef(stg2), check.attributes=FALSE)
   })
   
-  test_that("hatvalues are computed correctly for robust 2SLS",{
+  test_that("hatvalues are computed correctly for robust 2SLS, stage 2",{
     hats <- c(hatvalues(lm(residuals(stg2) ~ model.matrix(stg2) - 1, weights=stg2$w)), 0)
     names(hats)[20] <- "1941"
     expect_equal(hats, hatvalues(deqr1))
+  })
+  
+  test_that("hatvalues are computed correctly for robust 2SLS, stage 1",{
+    expect_equal(hatvalues(stg1), hatvalues(deqr1, type="stage1"))
   })
   
 }
