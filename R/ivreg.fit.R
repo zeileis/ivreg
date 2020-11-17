@@ -63,9 +63,12 @@
 #' instruments for the endogenous variables.}
 #' \item{method}{the method used for the stage 1 and 2 regressions, one of \code{"OLS"},
 #' \code{"M"}, or \code{"MM"}.}
-#' \item{rwts}{a matrix of robustness weights with columns for each of the stage-1
+#' \item{rweights}{a matrix of robustness weights with columns for each of the stage-1
 #' regressions and for the stage-2 regression (in the last column) if the fitting method is 
 #' \code{"M"} or \code{"MM"}, \code{NULL} if the fitting method is \code{"OLS"}.}
+#' \item{hatvalues}{a matrix of hatvalues. For \code{method = "OLS"}, the matrix consists of two
+#' columns, for each of the stage-1 and stage-2 regression; for \code{method = "M"} or \code{"MM"},
+#' there is one column for \emph{each} stage=1 regression and for the stage-2 regression. }
 #' @seealso \code{\link{ivreg}}, \code{\link[stats:lmfit]{lm.fit}}, 
 #' \code{\link[stats:lmfit]{lm.wfit}}, \code{\link[MASS]{rlm}}, \code{\link[stats]{mad}}
 #' @keywords regression
@@ -117,6 +120,11 @@ ivreg.fit <- function(x, y, z, weights, offset, method = c("OLS", "M", "MM"),
     xz <- x
   }
   
+  if (method == "OLS"){
+    hats <- if (!is.null(auxreg)) cbind(lm.influence(auxreg, do.coef = FALSE)$hat, 0)
+    else cbind(NA, matrix(0, nrow=n, ncol=1))
+  }
+  
   ## infer endogenous variables in x and instruments in z
   
   exog <- structure(seq_along(colnames(x)), .Names = colnames(x))
@@ -134,7 +142,7 @@ ivreg.fit <- function(x, y, z, weights, offset, method = c("OLS", "M", "MM"),
     rlm.args$method <- method
     if (!is.null(weights)) rlm.args$weights <- weights
     residuals <- matrix(0, n, p)
-    rwts <- matrix(0, n, length(endo) + 1)
+    hats <- rwts <- matrix(0, n, length(endo) + 1)
     coef <- coef(auxreg)
     j <- 0
     for (en in endo){
@@ -144,6 +152,7 @@ ivreg.fit <- function(x, y, z, weights, offset, method = c("OLS", "M", "MM"),
       residuals[ , en] <- residuals(st1)
       coef[, en] <- coef(st1)
       rwts[, j] <- st1$w
+      hats[, j] <- hatvalues(st1)
     } 
     auxreg$residuals <- residuals
     auxreg$coefficients <- coef
@@ -161,11 +170,13 @@ ivreg.fit <- function(x, y, z, weights, offset, method = c("OLS", "M", "MM"),
   }
   if (method != "OLS") {
     rwts[, ncol(rwts)] <- fit$w
-    rownames(rwts) <- names(y)
-    colnames(rwts) <- c(names(endo), "stage_2")
+    hats[, ncol(hats)] <- hatvalues(fit)
+    rownames(hats) <- rownames(rwts) <- names(y)
+    colnames(hats) <- colnames(rwts) <- c(names(endo), "stage_2")
     fit$df.residual <- n - length(na.omit(coef(fit)))
   } else {
-    rwts <- NULL
+    hats[, 2] <- lm.influence(fit, do.coef = FALSE)$hat
+    colnames(hats) <- c("stage_1", "stage_2")
   }
   
   ## model fit information
@@ -209,7 +220,8 @@ ivreg.fit <- function(x, y, z, weights, offset, method = c("OLS", "M", "MM"),
     endogenous = endo,
     instruments = inst,
     method = method,
-    rwts = rwts
+    rweights = if (method == "OLS") NULL else rwts,
+    hatvalues = hats
   )
   
   return(rval)

@@ -143,7 +143,7 @@ deq1 <- ivreg(Q ~ P + D | D + F + A, data=Kmenta1) # standard 2SLS, corrupted da
 deq2 <- ivreg(Q ~ P + D | D + F + A, data=Kmenta1, subset=-20) # standard 2SLS, removing bad case
 deq3 <- ivreg(Q ~ P + D | D + F + A, data=Kmenta1, method="MM") # 2SLS MM estimation
 car::compareCoefs(deq, deq1, deq2, deq3)
-round(deq3$rwts, 2) # robustness weights
+round(deq3$rweights, 2) # robustness weights
 
 }
 \references{
