@@ -1,8 +1,10 @@
-#' Instrumental-Variable Regression by 2SLS
+#' Instrumental-Variable Regression by 2SLS, 2SM, or 2SMM Estimation
 #' 
 #' Fit instrumental-variable regression by two-stage least squares (2SLS). This is
 #' equivalent to direct instrumental-variables estimation when the number of
-#' instruments is equal to the number of regressors.
+#' instruments is equal to the number of regressors. Alternative robust-regression
+#' estimators are also provided, based on M-estimation (2SM) and MM-estimation
+#' (2SMM).
 #' 
 #' \code{ivreg} is the high-level interface to the work-horse function
 #' \code{\link{ivreg.fit}}. A set of standard methods (including \code{print},
@@ -75,6 +77,14 @@
 #' \item{endogenous}{columns of the \code{"regressors"} matrix that are endogenous.}
 #' \item{instruments}{columns of the \code{"instruments"} matrix that are
 #' instruments for the endogenous variables.}
+#' #' \item{method}{the method used for the stage 1 and 2 regressions, one of \code{"OLS"},
+#' \code{"M"}, or \code{"MM"}.}
+#' \item{rweights}{a matrix of robustness weights with columns for each of the stage-1
+#' regressions and for the stage-2 regression (in the last column) if the fitting method is 
+#' \code{"M"} or \code{"MM"}, \code{NULL} if the fitting method is \code{"OLS"}.}
+#' \item{hatvalues}{a matrix of hatvalues. For \code{method = "OLS"}, the matrix consists of two
+#' columns, for each of the stage-1 and stage-2 regression; for \code{method = "M"} or \code{"MM"},
+#' there is one column for \emph{each} stage=1 regression and for the stage-2 regression. }
 #' \item{df.residual}{residual degrees of freedom for fitted model.} 
 #' \item{call}{the original function call.} 
 #' \item{formula}{the model formula.}

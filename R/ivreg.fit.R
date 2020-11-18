@@ -1,8 +1,9 @@
-#' Fitting Instrumental-Variable Regressions by 2SLS
+#' Fitting Instrumental-Variable Regressions by 2SLS, 2SM, or 2SMM Estimation
 #' 
 #' Fit instrumental-variable regression by two-stage least squares (2SLS). This is
 #' equivalent to direct instrumental-variables estimation when the number of
-#' instruments is equal to the number of predictors.
+#' instruments is equal to the number of predictors. Alternative robust-regression
+#' estimation is also supported, based on M-estimation (22M) or MM-estimation (2SMM).
 #' 
 #' \code{\link{ivreg}} is the high-level interface to the work-horse function
 #' \code{ivreg.fit}. \code{ivreg.fit} is essentially a convenience interface to
