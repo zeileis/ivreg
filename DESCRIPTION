@@ -1,10 +1,10 @@
 Package: ivreg
-Title: Two-Stage Least-Squares Regression with Diagnostics
-Version: 0.5-1
+Title: Instrumental-Variables Regression by 2SLS, 2SM, or 2SMM, with Diagnostics
+Version: 0.6-0
 Authors@R: c(person(given = "John", family = "Fox", role = c("aut", "cre"), email = "jfox@mcmaster.ca", comment = c(ORCID = "0000-0002-1196-8012")),
              person(given = "Christian", family = "Kleiber", role = "aut", email = "Christian.Kleiber@unibas.ch", comment = c(ORCID = "0000-0002-6781-4733")),
              person(given = "Achim", family = "Zeileis", role = "aut", email = "Achim.Zeileis@R-project.org", comment = c(ORCID = "0000-0003-0918-3766")))
-Description: Instrumental variable estimation for linear models by two-stage least-squares (2SLS) regression. The main ivreg() model-fitting function is designed to provide a workflow as similar as possible to standard lm() regression. A wide range of methods is provided for fitted ivreg model objects, including extensive functionality for computing and graphing regression diagnostics in addition to other standard model tools. 
+Description: Instrumental variable estimation for linear models by two-stage least-squares (2SLS) regression or by robust-regression via M-estimation (2SM) or MM-estimation (2SMM). The main ivreg() model-fitting function is designed to provide a workflow as similar as possible to standard lm() regression. A wide range of methods is provided for fitted ivreg model objects, including extensive functionality for computing and graphing regression diagnostics in addition to other standard model tools. 
 License: GPL (>= 2)
 Depends: R (>= 3.6.0)
 Imports: car (>= 3.0-9), 

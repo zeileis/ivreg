@@ -24,6 +24,7 @@
 \alias{model.matrix.ivreg_projected}
 \alias{Anova.ivreg}
 \alias{linearHypothesis.ivreg}
+\alias{weights.ivreg}
 \title{Methods for \code{"ivreg"} Objects}
 \usage{
 \method{coef}{ivreg}(object, component = c("stage2", "stage1"), complete = TRUE, ...)
@@ -95,6 +96,8 @@ find_formula.ivreg(x, ...)
 \method{alias}{ivreg}(object, ...)
 
 \method{qr}{ivreg}(x, ...)
+
+\method{weights}{ivreg}(object, type = c("variance", "robustness"), ...)
 }
 \arguments{
 \item{object, object2, model, mod}{An object of class \code{"ivreg"}.}
@@ -116,7 +119,9 @@ for \code{\link{coef}} and \code{\link{vcov}}, \code{"stage2"} or \code{"stage1"
 for \code{residuals}, one of \code{"response"} (the default), \code{"projected"}, \code{"regressors"},
 \code{"working"}, \code{"deviance"}, \code{"pearson"}, or \code{"partial"}; 
 \code{type = "working"} and \code{"response"} are equivalent, as are 
-\code{type = "deviance"} and \code{"pearson"}.}
+\code{type = "deviance"} and \code{"pearson"}; for \code{weights}, \code{"variance"} (the default)
+for invariance-variance weights (which is \code{NULL} for an unweighted fit) 
+or \code{"robustness"} for robustness weights (available for M or MM estimation).}
 
 \item{na.action}{\code{na} method to apply to predictor values for predictions; default is \code{\link{na.pass}}.}
 

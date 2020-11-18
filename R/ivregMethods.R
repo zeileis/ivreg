@@ -177,7 +177,9 @@ model.matrix.ivreg_projected <- function(object, ...) model.matrix.ivreg(object,
 #' for \code{residuals}, one of \code{"response"} (the default), \code{"projected"}, \code{"regressors"},
 #' \code{"working"}, \code{"deviance"}, \code{"pearson"}, or \code{"partial"}; 
 #' \code{type = "working"} and \code{"response"} are equivalent, as are 
-#' \code{type = "deviance"} and \code{"pearson"}.
+#' \code{type = "deviance"} and \code{"pearson"}; for \code{weights}, \code{"variance"} (the default)
+#' for invariance-variance weights (which is \code{NULL} for an unweighted fit) 
+#' or \code{"robustness"} for robustness weights (available for M or MM estimation).
 #' 
 #' @importFrom stats fitted
 #' @export
@@ -549,4 +551,11 @@ alias.ivreg <- function(object, ...){
 qr.ivreg <- function(x, ...){
     .Class <- "lm"
     NextMethod()
+}
+
+#' @rdname ivregMethods
+#' @export
+weights.ivreg <- function(object, type=c("variance", "robustness"), ...){
+  type <- match.arg(type, c("variance", "robustness"))
+  if (type == "variance") object$weights else object$rweights
 }

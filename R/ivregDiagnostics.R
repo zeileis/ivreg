@@ -130,7 +130,7 @@ influence.ivreg <- function(model, sigma. = n <= 1e3, type = c("stage2", "both",
   .sigma <- sqrt(model$sigma^2)
   w <- na.remove(weights(model)) # na.remove(model$weights)
   hatvalues <-  hatvalues(model, type=type)
-  if (!is.null(w)){
+  if (!is.null(w) && length(hatvalues) != length(w)){
     h <- rep(0, length(w))
     h[w > 0] <- hatvalues
     hatvalues <- h

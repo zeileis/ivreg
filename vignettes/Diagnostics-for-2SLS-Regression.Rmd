@@ -1,7 +1,7 @@
 ---
 title: "Diagnostics for 2SLS Regression"
 author: "John Fox, Christian Kleiber, Achim Zeileis"
-date: "last modified: 2020-10-01"
+date: "last modified: 2020-11-18"
 output:
   html_document:
     toc: true
@@ -12,8 +12,8 @@ biblio-style: "apalike"
 vignette: >
   %\VignetteIndexEntry{Diagnostics for 2SLS Regression}
   %\VignetteEngine{knitr::rmarkdown}
-  %\VignetteDepends{ivreg,car,effects,sandwich}
-  %\VignetteKeywords{two-stage least squares, instrumental variables, diagnostics}
+  %\VignetteDepends{ivreg,car,effects,sandwich,MASS}
+  %\VignetteKeywords{two-stage least squares, instrumental variables, diagnostics, robust regression}
   %\VignettePackage{ivreg}
   %\VignetteEncoding{UTF-8}
 ---
@@ -455,6 +455,30 @@ mcPlots(deq)
 ```
 
 The blue points in each panel represent the marginal scatterplot and the magenta points represent the (partial) added-variable plot, with the arrows showing the relationship between the two sets of points.
+
+## Robust Two-Stage Instrumental-Variables Regression
+
+The `ivreg()` function also implements robust two-stage regression with M and MM estimators for both stages, via the `rlm()` function in the **MASS** package [@VenablesRiply2002], by specifying, respectively, the argument `type = "M"` or `type = "MM"`. The M or MM estimator is applied separately to each first-stage regression and to the second-stage regression, thus down-weighting outliers in all of the regressions. The default for the `type` argument to `ivreg()`, `type = "OLS"`, produces the traditional 2SLS estimator.
+
+To illustrate, we apply a two-stage MM regression to the estimation of the demand equation in the corrupted Kmenta data, and compare the result to the traditional 2SLS estimator applied to the uncorrupted data, to the 2SLS estimator applied to the corrupted data, and to the 2SLS estimator deleting the bad case:
+```{r}
+deq.mm <- update(deq1, method = "MM")
+summary(deq.mm)
+compareCoefs(deq, deq1, deq1.20, deq.mm)
+```
+The estimates produced by the robust two-stage estimator are very similar to those for the 2SLS estimator applied to the uncorrupted data and when the bad case is deleted from the corrupted data.
+
+It's instructive to look at the robustness weights for the first- and second-stage MM estimators:
+```{r}
+weights(deq.mm, type = "robustness")
+```
+Thus, 1941 is so discrepant in the second stage that it receives 0 weight in the robust fit.
+
+Most of the diagnostic and other methods for `"ivreg"` objects also work with robust two-stage regression models. For example, here is a graph of hatvalues, studentized residuals, and Cook's distances:
+```{r}
+influencePlot(deq.mm)
+```
+Because the hatvalue for 1941 in the robust fit is 0, so is the Cook's $D$ for this case, and the "bubble" for 1941 has 0 area (and is therefore invisible). The bad case, however, have a very large (negative) studentized residual of nearly $-8$.
 
 ## Concluding Remarks
 
