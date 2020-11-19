@@ -1,7 +1,7 @@
 ---
 title: "Diagnostics for 2SLS Regression"
 author: "John Fox, Christian Kleiber, Achim Zeileis"
-date: "last modified: 2020-11-18"
+date: "last modified: 2020-11-19"
 output:
   html_document:
     toc: true
@@ -458,7 +458,11 @@ The blue points in each panel represent the marginal scatterplot and the magenta
 
 ## Robust Two-Stage Instrumental-Variables Regression
 
-The `ivreg()` function also implements robust two-stage regression with M and MM estimators for both stages, via the `rlm()` function in the **MASS** package [@VenablesRiply2002], by specifying, respectively, the argument `type = "M"` or `type = "MM"`. The M or MM estimator is applied separately to each first-stage regression and to the second-stage regression, thus down-weighting outliers in all of the regressions. The default for the `type` argument to `ivreg()`, `type = "OLS"`, produces the traditional 2SLS estimator.
+The `ivreg()` function also implements robust two-stage regression with M and MM estimators [@HuberRonchetti2009] for both stages, via the `rlm()` function in the **MASS** package [@VenablesRipley2002], by specifying, respectively, the argument `type = "M"` or `type = "MM"`. The M or MM estimator is applied separately to each first-stage regression and to the second-stage regression, thus down-weighting outliers in all of the regressions. The default for the `type` argument to `ivreg()`, `type = "OLS"`, produces the traditional 2SLS estimator.
+
+The details of implementation are largely straightforward. Applying the M or MM estimator to the first stage requires a separate regression for each endogenous regressor, rather than a single multivariate regression, because the robustness weights are generally different for each of the first-stage regressions. 
+
+As well, rather than basing the estimated error standard deviation $\widehat{\sigma}$ on the sum of squared model residuals, we use a robust estimate of $\sigma$ based on the median absolute residual---the median absolute deviation (or MAD) of the residuals around a "center" of 0. The MAD of the residuals is multiplied by 1.4826 to provide a properly scaled estimate of $\sigma$ when the error distribution is normal: That is, the MAD estimates the 0.75 quantile of the error distribution, and $1/\Phi^{-1}(0.75) = 1.4825$, where $\Phi^{-1}(\cdot)$ is the quantile function of the standard-normal distribution.
 
 To illustrate, we apply a two-stage MM regression to the estimation of the demand equation in the corrupted Kmenta data, and compare the result to the traditional 2SLS estimator applied to the uncorrupted data, to the 2SLS estimator applied to the corrupted data, and to the 2SLS estimator deleting the bad case:
 ```{r}
@@ -474,11 +478,13 @@ weights(deq.mm, type = "robustness")
 ```
 Thus, 1941 is so discrepant in the second stage that it receives 0 weight in the robust fit.
 
-Most of the diagnostic and other methods for `"ivreg"` objects also work with robust two-stage regression models. For example, here is a graph of hatvalues, studentized residuals, and Cook's distances:
+Most of the diagnostic and other methods for `"ivreg"` objects also work with robust two-stage regression models. To compute deletion statistics like studentized residuals, dfbeta, and Cook's $D$, we use the robustness weights for the M or MM second-stage regression (multiplied by prespecified variance weights, if these are employed) as if they were weights in a 2SLS fit. This is, of course, an approximation: To get exact deletion statistics would require literally omitting each case in turn and recalculating the first- and second-stage robust regressions, an unattractive prospect, because the robust regressions are iterative.
+
+Here, for example, is a graph of second-stage hatvalues, studentized residuals, and Cook's distances for the 2SMM estimator applied to the corrupted Kmenta data:
 ```{r}
 influencePlot(deq.mm)
 ```
-Because the hatvalue for 1941 in the robust fit is 0, so is the Cook's $D$ for this case, and the "bubble" for 1941 has 0 area (and is therefore invisible). The bad case, however, have a very large (negative) studentized residual of nearly $-8$.
+Because the hatvalue for 1941 in the robust second-stage fit is 0, so is the Cook's $D$ for this case, and the "bubble" for 1941 has 0 area (and is therefore invisible). The bad case, however, have a very large (negative) studentized residual of nearly $-8$.
 
 ## Concluding Remarks
 
