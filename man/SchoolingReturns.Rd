@@ -85,7 +85,7 @@ summary(m_red)
 ## Table 5.3 in Verbeek (2004) / similar to Table 3(5) in Card (1995)
 ## Returns to education: 13.3\%
 m_iv <- ivreg(log(wage) ~ education + poly(experience, 2, raw = TRUE) + ethnicity + smsa + south |
-  poly(age, 2, raw = TRUE) + ethnicity + smsa + south + nearcollege,
+  nearcollege + poly(age, 2, raw = TRUE) + ethnicity + smsa + south,
   data = SchoolingReturns)
 summary(m_iv)
 }

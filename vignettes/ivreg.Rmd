@@ -136,6 +136,20 @@ library("ivreg")
 m_iv <- ivreg(log(wage) ~ education + poly(experience, 2) + ethnicity + smsa + south |
   nearcollege + poly(age, 2) + ethnicity + smsa + south,
   data = SchoolingReturns)
+```
+
+Equivalently, the same model can also be specified slightly more concisely using three parts on the
+right-hand side indicating the exogenous variables, the endogenous variables, and the additional
+instrument variables only (in addition to the exogenous variables).
+
+```{r ivreg-alternative, eval=FALSE}
+m_iv <- ivreg(log(wage) ~ ethnicity + smsa + south | education + poly(experience, 2) |
+  nearcollege + poly(age, 2), data = SchoolingReturns)
+```
+
+Both models yield the following results:
+
+```{r ivreg-summary}
 summary(m_iv)
 ```
 

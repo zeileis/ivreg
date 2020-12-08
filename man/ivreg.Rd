@@ -125,17 +125,17 @@ have to be included as instruments for themselves.
 
 For example, if there is
 one exogenous regressor \code{ex} and one endogenous regressor \code{en}
-with instrument \code{in}, the appropriate formula would be \code{y ~ ex +
-en | ex + in}. Alternatively, a formula with three parts on the right-hand
+with instrument \code{in}, the appropriate formula would be \code{y ~ en +
+ex | in + ex}. Alternatively, a formula with three parts on the right-hand
 side can also be used: \code{y ~ ex | en | in}. The latter is typically more convenient, if
 there is a large number of exogenous regressors.
 
 Moreover, two further equivalent specification strategies are possible that are
 typically less convenient compared to the strategies above. One option is to use
 an update formula with a \code{.} in the second part of the formula is used:
-\code{y ~ ex + en | . - en + in}. Another option is to use a separate formula
+\code{y ~ en + ex | . - en + in}. Another option is to use a separate formula
 for the instruments (only for backward compatibility with earlier versions):
-\code{formula = y ~ ex + en, instruments = ~ en + in}.
+\code{formula = y ~ en + ex, instruments = ~ in + ex}.
 
 Internally, all specifications are converted to the version with two parts
 on the right-hand side.

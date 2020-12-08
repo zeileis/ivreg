@@ -21,17 +21,17 @@
 #'
 #' For example, if there is
 #' one exogenous regressor \code{ex} and one endogenous regressor \code{en}
-#' with instrument \code{in}, the appropriate formula would be \code{y ~ ex +
-#' en | ex + in}. Alternatively, a formula with three parts on the right-hand
+#' with instrument \code{in}, the appropriate formula would be \code{y ~ en +
+#' ex | in + ex}. Alternatively, a formula with three parts on the right-hand
 #' side can also be used: \code{y ~ ex | en | in}. The latter is typically more convenient, if
 #' there is a large number of exogenous regressors.
 #'
 #' Moreover, two further equivalent specification strategies are possible that are
 #' typically less convenient compared to the strategies above. One option is to use
 #' an update formula with a \code{.} in the second part of the formula is used:
-#' \code{y ~ ex + en | . - en + in}. Another option is to use a separate formula
+#' \code{y ~ en + ex | . - en + in}. Another option is to use a separate formula
 #' for the instruments (only for backward compatibility with earlier versions):
-#' \code{formula = y ~ ex + en, instruments = ~ en + in}.
+#' \code{formula = y ~ en + ex, instruments = ~ in + ex}.
 #' 
 #' Internally, all specifications are converted to the version with two parts
 #' on the right-hand side.
@@ -164,18 +164,18 @@ ivreg <- function(formula, instruments, data, subset, na.action, weights, offset
     formula <- Formula::as.Formula(formula)
   }
   if(length(formula)[2L] == 3L) formula <- Formula::as.Formula(
-    formula(formula, rhs = c(1L, 2L), collapse = TRUE),
-    formula(formula, lhs = 0, rhs = c(1L, 3L), collapse = TRUE)
+    formula(formula, rhs = c(2L, 1L), collapse = TRUE),
+    formula(formula, lhs = 0L, rhs = c(3L, 1L), collapse = TRUE)
   )
-  stopifnot(length(formula)[1] == 1L, length(formula)[2] %in% 1:2)
+  stopifnot(length(formula)[1L] == 1L, length(formula)[2L] %in% 1L:2L)
   
   ## try to handle dots in formula
   has_dot <- function(formula) inherits(try(terms(formula), silent = TRUE), "try-error")
   if(has_dot(formula)) {
-    f1 <- formula(formula, rhs = 1)
-    f2 <- formula(formula, lhs = 0, rhs = 2)
+    f1 <- formula(formula, rhs = 1L)
+    f2 <- formula(formula, lhs = 0L, rhs = 2L)
     if(!has_dot(f1) & has_dot(f2)) formula <- Formula::as.Formula(f1,
-      update(formula(formula, lhs = 0, rhs = 1), f2))
+      update(formula(formula, lhs = 0L, rhs = 1L), f2))
   }
   
   ## call model.frame()
