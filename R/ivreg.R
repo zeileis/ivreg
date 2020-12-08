@@ -17,13 +17,24 @@
 #' formula with two parts on the right-hand side, e.g., \code{y ~ x1 + x2 | z1
 #' + z2 + z3}, where \code{x1} and \code{x2} are the explanatory variables and \code{z1},
 #' \code{z2}, and \code{z3} are the instrumental variables. Note that exogenous regressors
-#' have to be included as instruments for themselves. For example, if there is
+#' have to be included as instruments for themselves. 
+#'
+#' For example, if there is
 #' one exogenous regressor \code{ex} and one endogenous regressor \code{en}
 #' with instrument \code{in}, the appropriate formula would be \code{y ~ ex +
-#' en | ex + in}. Equivalently, this can be specified as \code{y ~ ex + en | .
-#' - en + in}, i.e., by providing an update formula with a \code{.} in the
-#' second part of the formula. The latter is typically more convenient, if
+#' en | ex + in}. Alternatively, a formula with three parts on the right-hand
+#' side can also be used: \code{y ~ ex | en | in}. The latter is typically more convenient, if
 #' there is a large number of exogenous regressors.
+#'
+#' Moreover, two further equivalent specification strategies are possible that are
+#' typically less convenient compared to the strategies above. One option is to use
+#' an update formula with a \code{.} in the second part of the formula is used:
+#' \code{y ~ ex + en | . - en + in}. Another option is to use a separate formula
+#' for the instruments (only for backward compatibility with earlier versions):
+#' \code{formula = y ~ ex + en, instruments = ~ en + in}.
+#' 
+#' Internally, all specifications are converted to the version with two parts
+#' on the right-hand side.
 #' 
 #' @aliases ivreg
 #' @param formula,instruments formula specification(s) of the regression
@@ -117,6 +128,9 @@
 #' anova(m, m2)
 #' car::Anova(m)
 #' 
+#' ## same model specified by formula with three-part right-hand side
+#' ivreg(log(packs) ~ log(rincome) | log(rprice) | salestax, data = CigaretteDemand)
+#' 
 #' # Robust 2SLS regression
 #' data("Kmenta", package = "ivreg")
 #' Kmenta1 <- Kmenta
@@ -149,6 +163,10 @@ ivreg <- function(formula, instruments, data, subset, na.action, weights, offset
   } else {
     formula <- Formula::as.Formula(formula)
   }
+  if(length(formula)[2L] == 3L) formula <- Formula::as.Formula(
+    formula(formula, rhs = c(1L, 2L), collapse = TRUE),
+    formula(formula, lhs = 0, rhs = c(1L, 3L), collapse = TRUE)
+  )
   stopifnot(length(formula)[1] == 1L, length(formula)[2] %in% 1:2)
   
   ## try to handle dots in formula

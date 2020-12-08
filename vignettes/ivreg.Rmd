@@ -87,6 +87,10 @@ instrumental variables. Both components on the right-hand side of the model form
 an implied intercept, unless, as in a linear model estimated by `lm()`, the intercept is
 explicitly excluded via `-1`. Exogenous explanatory variables, such as `x1` in the example, 
 must be included among the instruments. A worked example is described immediately below.
+As listing exogenous variables in both parts on the right-hand side of the formula
+may become tedious if there are many of them, an additional convenience option is to
+use a three-part right side like `y ~ x1 | x2 | z1 + z2`, listing the exogenous, endogenous,
+and instrument variables (for the endogenous variables only), respectively.
 
 
 ## Illustration: Returns to schooling
