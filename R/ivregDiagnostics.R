@@ -128,7 +128,13 @@ influence.ivreg <- function(model, sigma. = n <= 1e3, type = c("stage2", "both",
   b <- coef(model) # model$coefficients
   res <- na.remove(residuals(model)) # na.remove(model$residuals)
   .sigma <- sqrt(model$sigma^2)
-  hatvalues <-  na.remove(hatvalues(model, type=type))
+  w <- na.remove(weights(model)) # na.remove(model$weights)
+  hatvalues <-  hatvalues(model, type=type)
+  if (!is.null(w) && length(hatvalues) != length(w)){
+    h <- rep(0, length(w))
+    h[w > 0] <- hatvalues
+    hatvalues <- h
+  }
 
   na.action <- model$na.action 
 
@@ -136,8 +142,8 @@ influence.ivreg <- function(model, sigma. = n <= 1e3, type = c("stage2", "both",
   cnames <- colnames(X)
 
   names(hatvalues) <- rnames
+  hatvalues <- na.remove(hatvalues)
 
-  w <- na.remove(weights(model)) # na.remove(model$weights)
   if (!is.null(w)){
     w <- sqrt(w)
     X <- diagprod(w, X)
@@ -229,7 +235,7 @@ influence.ivreg <- function(model, sigma. = n <= 1e3, type = c("stage2", "both",
     }
   }
 
-  rstudent <- w*res/(sigma * sqrt(1 - hatvalues))
+  rstudent <- w*res/(sigma * sqrt(1 - naresid(na.action, hatvalues)))
   cookd <- (sigma^2/.sigma^2)*dffits^2/p
   
   rownames(dfbeta) <- rnames
@@ -280,22 +286,38 @@ dfbeta.ivreg <- function(model, ...) {
 #' @rdname ivregDiagnostics
 #' @importFrom stats df.residual hatvalues lm.influence na.omit naresid
 #' @export
-hatvalues.ivreg <- function(model, type = c("stage2", "both", "maximum"), ...){
+hatvalues.ivreg <- function(model, type = c("stage2", "both", "maximum", "stage1"), ...){
   type <- match.arg(type)
+  hats <- model$hatvalues
+  nms <- names(model$residuals)
   hatvalues <- if (type == "stage2") {
-    .Class <- "lm"
-    NextMethod()
+    # .Class <- "lm"
+    # NextMethod()
+    hats[, "stage_2"]
+  } else if(type == "stage1"){
+    return(hats[, -ncol(hats)])
   } else {
     n <- model$nobs
     p <- model$p
     q <- model$q
     mean1 <- q/n
     mean2 <- p/n
-    hat2 <- lm.influence(model)$hat/mean2
-    model[c("qr", "rank", "residuals", "coefficients")] <-
-      list(model$qr1, model$rank1, na.omit(residuals(model, type="projected")), 
-           model$coefficients1)
-    hat1 <- lm.influence(model)$hat/mean1
+    # hat2 <- lm.influence(model)$hat/mean2
+    hat2 <- hats[, "stage_2"]/mean2
+    # model[c("qr", "rank", "residuals", "coefficients")] <-
+    #   list(model$qr1, model$rank1, na.omit(residuals(model, type="projected")), 
+    #        model$coefficients1)
+    # hat1 <- lm.influence(model)$hat/mean1
+    hat1 <- if (model$method == "OLS"){
+      hats[, "stage_1"]
+    } else {
+      nendog <- ncol(hats) - 1
+      if (type == "both"){
+        exp(rowMeans(log(hats[, 1:nendog, drop=FALSE])))/mean1
+      } else {
+        apply(hats[, 1:nendog, drop=FALSE], 1, pmax)/mean1
+      }
+    }
     hat <- if (type == "both") {
       sqrt(hat1*hat2)
     } else {
@@ -304,7 +326,8 @@ hatvalues.ivreg <- function(model, type = c("stage2", "both", "maximum"), ...){
     mean2*hat
   }
   na.action <- model$na.action
-  if(inherits(na.action, "exclude")) hatvalues[na.action]  <- NA
+  names(hatvalues) <- nms
+  if (inherits(na.action, "exclude")) hatvalues[na.action]  <- NA
   hatvalues
 }
 
@@ -548,4 +571,69 @@ ncvTest.ivreg <- function(model, ...){
 deviance.ivreg <- function(object, ...){
   .Class <- "lm"
   NextMethod()
+}
+
+# #' @rdname ivregDiagnostics
+# #' @export
+# hatvalues.rivreg <- function(model, ...){
+#   wts <- weights(model)
+#   rwts <- model$rweights
+#   nms <- rownames(rwts)
+#   rwts <- rwts[, ncol(rwts)]
+#   n <- length(rwts)
+#   wts <- if (is.null(wts)) rwts else wts*rwts
+#   model$weights <- wts
+#   class(model) <- "ivreg"
+#   hat <- hatvalues(model, ...)
+#   result <- rep(0, n)
+#   result[wts > 0] <- hat
+#   names(result) <- nms
+#   result
+# }
+
+#' @rdname ivregDiagnostics
+#' @export
+influence.rivreg <- function(model, ...){
+  mwts <- wts <- weights(model)
+  rwts <- model$rweights
+  nms <- rownames(rwts)
+  rwts <- rwts[, ncol(rwts)]
+  n <- length(rwts)
+  wts <- if (is.null(wts)) rwts else wts*rwts
+  model$weights <- wts
+  class(model) <- "ivreg"
+  infl <- influence(model)
+  if (is.null(mwts)) mwts <- 1
+  infl$rstudent <- mwts*residuals(model)/(infl$sigma * sqrt(1 - infl$hatvalues))
+  cookd <- infl$cookd
+  cookd[is.nan(cookd)] <- 0
+  infl$cookd <- cookd
+  dffits <- infl$dffits
+  dffits[is.nan(dffits)] <- 0
+  infl$dffits <- dffits
+  infl
+}
+
+hatvalues.rlm <- function(model, ...){
+  # this unexported method is necessary because
+  # the inherited lm method doesn't take
+  # account of robustness weights
+  wts <- weights(model)
+  if (is.null(wts)) wts <- 1
+  rwts <- model$w
+  nms <- names(y <- residuals(model))
+  n <- length(rwts)
+  wts <-  wts*rwts
+  if (any(wts == 0)){
+    X <- model.matrix(model)
+    # using residuals for y as a place holder
+    # to get WLS hatvalues
+    model <- lm(y ~ X - 1, weights = wts)
+  }
+  hat <- lm.influence(model, do.coef = FALSE)$hat
+  # doesn't include hatvalues for cases with 0 weights
+  result <- rep(0, n)
+  result[wts > 0] <- hat
+  names(result) <- nms
+  result
 }

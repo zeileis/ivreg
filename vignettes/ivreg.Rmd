@@ -87,6 +87,10 @@ instrumental variables. Both components on the right-hand side of the model form
 an implied intercept, unless, as in a linear model estimated by `lm()`, the intercept is
 explicitly excluded via `-1`. Exogenous explanatory variables, such as `x1` in the example, 
 must be included among the instruments. A worked example is described immediately below.
+As listing exogenous variables in both parts on the right-hand side of the formula
+may become tedious if there are many of them, an additional convenience option is to
+use a three-part right side like `y ~ x1 | x2 | z1 + z2`, listing the exogenous, endogenous,
+and instrument variables (for the endogenous variables only), respectively.
 
 
 ## Illustration: Returns to schooling
@@ -132,6 +136,20 @@ library("ivreg")
 m_iv <- ivreg(log(wage) ~ education + poly(experience, 2) + ethnicity + smsa + south |
   nearcollege + poly(age, 2) + ethnicity + smsa + south,
   data = SchoolingReturns)
+```
+
+Equivalently, the same model can also be specified slightly more concisely using three parts on the
+right-hand side indicating the exogenous variables, the endogenous variables, and the additional
+instrument variables only (in addition to the exogenous variables).
+
+```{r ivreg-alternative, eval=FALSE}
+m_iv <- ivreg(log(wage) ~ ethnicity + smsa + south | education + poly(experience, 2) |
+  nearcollege + poly(age, 2), data = SchoolingReturns)
+```
+
+Both models yield the following results:
+
+```{r ivreg-summary}
 summary(m_iv)
 ```
 

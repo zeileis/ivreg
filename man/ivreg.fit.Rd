@@ -2,9 +2,18 @@
 % Please edit documentation in R/ivreg.fit.R
 \name{ivreg.fit}
 \alias{ivreg.fit}
-\title{Fitting Instrumental-Variable Regressions by 2SLS}
+\title{Fitting Instrumental-Variable Regressions by 2SLS, 2SM, or 2SMM Estimation}
 \usage{
-ivreg.fit(x, y, z, weights, offset, ...)
+ivreg.fit(
+  x,
+  y,
+  z,
+  weights,
+  offset,
+  method = c("OLS", "M", "MM"),
+  rlm.args = list(),
+  ...
+)
 }
 \arguments{
 \item{x}{regressor matrix.}
@@ -18,6 +27,15 @@ process.}
 
 \item{offset}{an optional offset that can be used to specify an a priori
 known component to be included during fitting.}
+
+\item{method}{the method used to fit the stage 1 and 2 regression: 
+\code{"OLS"} for traditional 2SLS regression (the default), 
+\code{"M"} for M-estimation, or \code{"MM"} for MM-estimation, with the
+latter two robust-regression methods implemented via the \code{\link[MASS]{rlm}} 
+function in the \pkg{MASS} package.}
+
+\item{rlm.args}{a list of optional arguments to be passed to the \code{\link[MASS]{rlm}} 
+function in the \pkg{MASS} package if robust regression is used for the stage 1 and 2 regressions.}
 
 \item{\dots}{further arguments passed to \code{\link[stats:lmfit]{lm.fit}}
 or \code{\link[stats:lmfit]{lm.wfit}}, respectively.}
@@ -40,7 +58,8 @@ components:
 \item{rank}{numeric rank of the model matrix for the stage-2 regression.} 
 \item{df.residual}{residual degrees of freedom for fitted model.} 
 \item{cov.unscaled}{unscaled covariance matrix for the coefficients.} 
-\item{sigma}{residual standard error.}
+\item{sigma}{residual standard error; when method is \code{"M"} or \code{"MM"}, this
+is based on the MAD of the residuals (around 0) --- see \code{\link[stats]{mad}}.}
 \item{x}{projection of x matrix onto span of z.}
 \item{qr}{QR decomposition for the stage-2 regression.}
 \item{qr1}{QR decomposition for the stage-1 regression.}
@@ -51,11 +70,20 @@ components:
 \item{endogenous}{columns of the \code{"regressors"} matrix that are endogenous.}
 \item{instruments}{columns of the \code{"instruments"} matrix that are
 instruments for the endogenous variables.}
+\item{method}{the method used for the stage 1 and 2 regressions, one of \code{"OLS"},
+\code{"M"}, or \code{"MM"}.}
+\item{rweights}{a matrix of robustness weights with columns for each of the stage-1
+regressions and for the stage-2 regression (in the last column) if the fitting method is 
+\code{"M"} or \code{"MM"}, \code{NULL} if the fitting method is \code{"OLS"}.}
+\item{hatvalues}{a matrix of hatvalues. For \code{method = "OLS"}, the matrix consists of two
+columns, for each of the stage-1 and stage-2 regression; for \code{method = "M"} or \code{"MM"},
+there is one column for \emph{each} stage=1 regression and for the stage-2 regression. }
 }
 \description{
 Fit instrumental-variable regression by two-stage least squares (2SLS). This is
 equivalent to direct instrumental-variables estimation when the number of
-instruments is equal to the number of predictors.
+instruments is equal to the number of predictors. Alternative robust-regression
+estimation is also supported, based on M-estimation (22M) or MM-estimation (2SMM).
 }
 \details{
 \code{\link{ivreg}} is the high-level interface to the work-horse function
@@ -81,6 +109,7 @@ ivreg.fit(x, y, z)$coefficients
 
 }
 \seealso{
-\code{\link{ivreg}}, \code{\link[stats:lmfit]{lm.fit}}, \code{\link[stats:lmfit]{lm.wfit}}
+\code{\link{ivreg}}, \code{\link[stats:lmfit]{lm.fit}}, 
+\code{\link[stats:lmfit]{lm.wfit}}, \code{\link[MASS]{rlm}}, \code{\link[stats]{mad}}
 }
 \keyword{regression}

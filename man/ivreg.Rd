@@ -2,7 +2,7 @@
 % Please edit documentation in R/ivreg.R
 \name{ivreg}
 \alias{ivreg}
-\title{Instrumental-Variable Regression by 2SLS}
+\title{Instrumental-Variable Regression by 2SLS, 2SM, or 2SMM Estimation}
 \usage{
 ivreg(
   formula,
@@ -80,6 +80,14 @@ class \code{"lm"}, with the following components:
 \item{endogenous}{columns of the \code{"regressors"} matrix that are endogenous.}
 \item{instruments}{columns of the \code{"instruments"} matrix that are
 instruments for the endogenous variables.}
+#' \item{method}{the method used for the stage 1 and 2 regressions, one of \code{"OLS"},
+\code{"M"}, or \code{"MM"}.}
+\item{rweights}{a matrix of robustness weights with columns for each of the stage-1
+regressions and for the stage-2 regression (in the last column) if the fitting method is 
+\code{"M"} or \code{"MM"}, \code{NULL} if the fitting method is \code{"OLS"}.}
+\item{hatvalues}{a matrix of hatvalues. For \code{method = "OLS"}, the matrix consists of two
+columns, for each of the stage-1 and stage-2 regression; for \code{method = "M"} or \code{"MM"},
+there is one column for \emph{each} stage=1 regression and for the stage-2 regression. }
 \item{df.residual}{residual degrees of freedom for fitted model.} 
 \item{call}{the original function call.} 
 \item{formula}{the model formula.}
@@ -97,7 +105,9 @@ containing the model matrices from the respective components (if \code{x = TRUE}
 \description{
 Fit instrumental-variable regression by two-stage least squares (2SLS). This is
 equivalent to direct instrumental-variables estimation when the number of
-instruments is equal to the number of regressors.
+instruments is equal to the number of regressors. Alternative robust-regression
+estimators are also provided, based on M-estimation (2SM) and MM-estimation
+(2SMM).
 }
 \details{
 \code{ivreg} is the high-level interface to the work-horse function
@@ -111,13 +121,24 @@ Regressors and instruments for \code{ivreg} are most easily specified in a
 formula with two parts on the right-hand side, e.g., \code{y ~ x1 + x2 | z1
 + z2 + z3}, where \code{x1} and \code{x2} are the explanatory variables and \code{z1},
 \code{z2}, and \code{z3} are the instrumental variables. Note that exogenous regressors
-have to be included as instruments for themselves. For example, if there is
+have to be included as instruments for themselves. 
+
+For example, if there is
 one exogenous regressor \code{ex} and one endogenous regressor \code{en}
-with instrument \code{in}, the appropriate formula would be \code{y ~ ex +
-en | ex + in}. Equivalently, this can be specified as \code{y ~ ex + en | .
-- en + in}, i.e., by providing an update formula with a \code{.} in the
-second part of the formula. The latter is typically more convenient, if
+with instrument \code{in}, the appropriate formula would be \code{y ~ en +
+ex | in + ex}. Alternatively, a formula with three parts on the right-hand
+side can also be used: \code{y ~ ex | en | in}. The latter is typically more convenient, if
 there is a large number of exogenous regressors.
+
+Moreover, two further equivalent specification strategies are possible that are
+typically less convenient compared to the strategies above. One option is to use
+an update formula with a \code{.} in the second part of the formula is used:
+\code{y ~ en + ex | . - en + in}. Another option is to use a separate formula
+for the instruments (only for backward compatibility with earlier versions):
+\code{formula = y ~ en + ex, instruments = ~ in + ex}.
+
+Internally, all specifications are converted to the version with two parts
+on the right-hand side.
 }
 \examples{
 ## data
@@ -133,6 +154,20 @@ summary(m, vcov = sandwich::sandwich, df = Inf)
 m2 <- update(m, . ~ . - log(rincome) | . - log(rincome))
 anova(m, m2)
 car::Anova(m)
+
+## same model specified by formula with three-part right-hand side
+ivreg(log(packs) ~ log(rincome) | log(rprice) | salestax, data = CigaretteDemand)
+
+# Robust 2SLS regression
+data("Kmenta", package = "ivreg")
+Kmenta1 <- Kmenta
+Kmenta1[20, "Q"] <- 95 # corrupted data
+deq <- ivreg(Q ~ P + D | D + F + A, data=Kmenta) # demand equation, uncorrupted data
+deq1 <- ivreg(Q ~ P + D | D + F + A, data=Kmenta1) # standard 2SLS, corrupted data
+deq2 <- ivreg(Q ~ P + D | D + F + A, data=Kmenta1, subset=-20) # standard 2SLS, removing bad case
+deq3 <- ivreg(Q ~ P + D | D + F + A, data=Kmenta1, method="MM") # 2SLS MM estimation
+car::compareCoefs(deq, deq1, deq2, deq3)
+round(deq3$rweights, 2) # robustness weights
 
 }
 \references{
