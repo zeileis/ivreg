@@ -55,13 +55,6 @@ coef.ivreg <- function(object, component = c("stage2", "stage1"), complete = TRU
   return(cf)
 }
 
-myvcov <- function(object) list(
-  "s2t" = vcov.ivreg(object, component = "stage2", complete = TRUE),
-  "s2f" = vcov.ivreg(object, component = "stage2", complete = FALSE),
-  "s1t" = vcov.ivreg(object, component = "stage1", complete = TRUE),
-  "s1f" = vcov.ivreg(object, component = "stage1", complete = FALSE)
-)
-
 #' @rdname ivregMethods
 #' @export
 vcov.ivreg <- function(object, component = c("stage2", "stage1"), complete = TRUE, ...) {
