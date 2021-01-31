@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Fitting Instrumental-Variable Regressions by 2SLS — ivreg.fit • ivreg</title>
+<title>Fitting Instrumental-Variable Regressions by 2SLS, 2SM, or 2SMM Estimation — ivreg.fit • ivreg</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -48,10 +48,11 @@
   <link href="../extra.css" rel="stylesheet">
   
 
-<meta property="og:title" content="Fitting Instrumental-Variable Regressions by 2SLS — ivreg.fit" />
+<meta property="og:title" content="Fitting Instrumental-Variable Regressions by 2SLS, 2SM, or 2SMM Estimation — ivreg.fit" />
 <meta property="og:description" content="Fit instrumental-variable regression by two-stage least squares (2SLS). This is
 equivalent to direct instrumental-variables estimation when the number of
-instruments is equal to the number of predictors." />
+instruments is equal to the number of predictors. Alternative robust-regression
+estimation is also supported, based on M-estimation (22M) or MM-estimation (2SMM)." />
 <meta property="og:image" content="https://john-d-fox.github.io/ivreg/logo.png" />
 <meta name="twitter:card" content="summary" />
 <meta name="twitter:creator" content="@AchimZeileis" />
@@ -87,7 +88,7 @@ instruments is equal to the number of predictors." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ivreg</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5-1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.6-0</span>
       </span>
     </div>
 
@@ -141,7 +142,7 @@ instruments is equal to the number of predictors." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Fitting Instrumental-Variable Regressions by 2SLS</h1>
+    <h1>Fitting Instrumental-Variable Regressions by 2SLS, 2SM, or 2SMM Estimation</h1>
     <small class="dont-index">Source: <a href='https://github.com/john-d-fox/ivreg/blob/master/R/ivreg.fit.R'><code>R/ivreg.fit.R</code></a></small>
     <div class="hidden name"><code>ivreg.fit.Rd</code></div>
     </div>
@@ -149,10 +150,20 @@ instruments is equal to the number of predictors." />
     <div class="ref-description">
     <p>Fit instrumental-variable regression by two-stage least squares (2SLS). This is
 equivalent to direct instrumental-variables estimation when the number of
-instruments is equal to the number of predictors.</p>
+instruments is equal to the number of predictors. Alternative robust-regression
+estimation is also supported, based on M-estimation (22M) or MM-estimation (2SMM).</p>
     </div>
 
-    <pre class="usage"><span class='fu'>ivreg.fit</span>(<span class='kw'>x</span>, <span class='kw'>y</span>, <span class='kw'>z</span>, <span class='kw'>weights</span>, <span class='kw'>offset</span>, <span class='kw'>...</span>)</pre>
+    <pre class="usage"><span class='fu'>ivreg.fit</span>(
+  <span class='kw'>x</span>,
+  <span class='kw'>y</span>,
+  <span class='kw'>z</span>,
+  <span class='kw'>weights</span>,
+  <span class='kw'>offset</span>,
+  method = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"OLS"</span>, <span class='st'>"M"</span>, <span class='st'>"MM"</span>),
+  rlm.args = <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(),
+  <span class='kw'>...</span>
+)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -180,6 +191,19 @@ process.</p></td>
 known component to be included during fitting.</p></td>
     </tr>
     <tr>
+      <th>method</th>
+      <td><p>the method used to fit the stage 1 and 2 regression: 
+<code>"OLS"</code> for traditional 2SLS regression (the default), 
+<code>"M"</code> for M-estimation, or <code>"MM"</code> for MM-estimation, with the
+latter two robust-regression methods implemented via the <code><a href='https://rdrr.io/pkg/MASS/man/rlm.html'>rlm</a></code> 
+function in the <span class="pkg">MASS</span> package.</p></td>
+    </tr>
+    <tr>
+      <th>rlm.args</th>
+      <td><p>a list of optional arguments to be passed to the <code><a href='https://rdrr.io/pkg/MASS/man/rlm.html'>rlm</a></code> 
+function in the <span class="pkg">MASS</span> package if robust regression is used for the stage 1 and 2 regressions.</p></td>
+    </tr>
+    <tr>
       <th>...</th>
       <td><p>further arguments passed to <code>lm.fit</code>
 or <code>lm.wfit</code>, respectively.</p></td>
@@ -205,7 +229,8 @@ components:</p>
 <dt>rank</dt><dd><p>numeric rank of the model matrix for the stage-2 regression.</p></dd> 
 <dt>df.residual</dt><dd><p>residual degrees of freedom for fitted model.</p></dd> 
 <dt>cov.unscaled</dt><dd><p>unscaled covariance matrix for the coefficients.</p></dd> 
-<dt>sigma</dt><dd><p>residual standard error.</p></dd>
+<dt>sigma</dt><dd><p>residual standard error; when method is <code>"M"</code> or <code>"MM"</code>, this
+is based on the MAD of the residuals (around 0) --- see <code><a href='https://rdrr.io/r/stats/mad.html'>mad</a></code>.</p></dd>
 <dt>x</dt><dd><p>projection of x matrix onto span of z.</p></dd>
 <dt>qr</dt><dd><p>QR decomposition for the stage-2 regression.</p></dd>
 <dt>qr1</dt><dd><p>QR decomposition for the stage-1 regression.</p></dd>
@@ -216,6 +241,14 @@ components:</p>
 <dt>endogenous</dt><dd><p>columns of the <code>"regressors"</code> matrix that are endogenous.</p></dd>
 <dt>instruments</dt><dd><p>columns of the <code>"instruments"</code> matrix that are
 instruments for the endogenous variables.</p></dd>
+<dt>method</dt><dd><p>the method used for the stage 1 and 2 regressions, one of <code>"OLS"</code>,
+<code>"M"</code>, or <code>"MM"</code>.</p></dd>
+<dt>rweights</dt><dd><p>a matrix of robustness weights with columns for each of the stage-1
+regressions and for the stage-2 regression (in the last column) if the fitting method is 
+<code>"M"</code> or <code>"MM"</code>, <code>NULL</code> if the fitting method is <code>"OLS"</code>.</p></dd>
+<dt>hatvalues</dt><dd><p>a matrix of hatvalues. For <code>method = "OLS"</code>, the matrix consists of two
+columns, for each of the stage-1 and stage-2 regression; for <code>method = "M"</code> or <code>"MM"</code>,
+there is one column for <em>each</em> stage=1 regression and for the stage-2 regression.</p></dd>
 
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
@@ -227,7 +260,8 @@ for first projecting <code>x</code> onto the image of
 <code>x</code>, and computing the residual standard deviation.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p><code><a href='ivreg.html'>ivreg</a></code>, <code>lm.fit</code>, <code>lm.wfit</code></p></div>
+    <div class='dont-index'><p><code><a href='ivreg.html'>ivreg</a></code>, <code>lm.fit</code>, 
+<code>lm.wfit</code>, <code><a href='https://rdrr.io/pkg/MASS/man/rlm.html'>rlm</a></code>, <code><a href='https://rdrr.io/r/stats/mad.html'>mad</a></code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'>## data</span>

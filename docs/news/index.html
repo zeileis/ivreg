@@ -84,7 +84,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ivreg</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5-1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.6-0</span>
       </span>
     </div>
 
@@ -142,16 +142,21 @@
       <small>Source: <a href='https://github.com/john-d-fox/ivreg/blob/master/NEWS.md'><code>NEWS.md</code></a></small>
     </div>
 
-    <div id="version-05-1" class="section level1">
-<h1 class="page-header" data-toc-text="0.5-1">
-<a href="#version-05-1" class="anchor"></a>Version 0.5-1<small> Unreleased </small>
+    <div id="version-06-0" class="section level1">
+<h1 class="page-header" data-toc-text="0.6-0">
+<a href="#version-06-0" class="anchor"></a>Version 0.6-0<small> Unreleased </small>
 </h1>
 <ul>
+<li><p>Three-part right-hand side <code>formula</code>s are supported now to facilitate specification of models with many exogenous regressors. For example, if there is one exogenous regressor <code>ex</code> and one endogenous regressor <code>en</code> with instrument <code>in</code>, a formula with three parts on the right-hand side can now also be used: <code>y ~ ex | en | in</code>. This is equivalent to specifying: <code>y ~ en + ex | in + ex</code>.</p></li>
+<li><p>Robust-regression estimators are provided as an alternative to ordinary least squares (OLS) both in stage 1 and 2 by means of <code>rlm()</code> from package <a href="https://CRAN.R-project.org/package=MASS">MASS</a>. Specifically, in addition to 2-stage least squares (2SLS, <code>method = "OLS"</code>, default) <code><a href="../reference/ivreg.html">ivreg()</a></code> now supports 2-stage M-estimation (2SM, <code>method = "M"</code>) and 2-stage MM-estimation (2SMM, <code>method = "MM"</code>).</p></li>
+<li><p>Dedicated <code><a href="https://rdrr.io/r/stats/confint.html">confint()</a></code> method allowing specification of the variance-covariance matrix <code>vcov.</code> and degrees of freedom <code>df</code> to be used (as in the <code><a href="https://rdrr.io/r/base/summary.html">summary()</a></code> method).</p></li>
 <li><p>Include information about which <code>"regressors"</code> are endogenous variables and which <code>"instruments"</code> are instruments for the endogenous variables in the fitted model objects from <code><a href="../reference/ivreg.html">ivreg()</a></code> and <code><a href="../reference/ivreg.fit.html">ivreg.fit()</a></code>. Both provide elements <code>$endogenous</code> and <code>$instruments</code> which are named integer vectors provided that endogenous/instrument variables exist, and integers of length zero if not.</p></li>
 <li><p>Include <code>df.residual1</code> element in <code>ivreg</code> objects with the residual degrees of freedom from the stage-1 regression.</p></li>
-<li><p>Add <code><a href="https://rdrr.io/r/stats/coef.html">coef(..., component = "stage1")</a></code> and <code><a href="https://rdrr.io/r/stats/vcov.html">vcov(..., component = "stage1")</a></code> for the estimated coefficients and corresponding variance-covariance matrix from the stage-1 regression (only for the endogenous regressors). (Prompted by a request from Grant McDermott.)</p></li>
+<li><p>Add <code><a href="https://rdrr.io/r/stats/coef.html">coef(..., component = "stage1")</a></code>, <code><a href="https://rdrr.io/r/stats/vcov.html">vcov(..., component = "stage1")</a></code>, and <code><a href="https://rdrr.io/r/stats/confint.html">confint(..., component = "stage1")</a></code> for the estimated coefficients and corresponding variance-covariance matrix and confidence intervals from the stage-1 regression (only for the endogenous regressors). (Prompted by a request from Grant McDermott.)</p></li>
 <li><p>Add <code><a href="https://rdrr.io/r/stats/residuals.html">residuals(..., type = "stage1")</a></code> with the residuals from the stage-1 regression (only for the endogenous regressors).</p></li>
-<li><p>The <code><a href="https://rdrr.io/r/stats/coef.html">coef()</a></code> and <code><a href="https://rdrr.io/r/stats/vcov.html">vcov()</a></code> method gained a <code>complete = TRUE</code> argument assuring that the elements pertaining to aliased coefficients are included. By setting <code>complete = FALSE</code> these elements are dropped.</p></li>
+<li><p>The <code><a href="https://rdrr.io/r/stats/coef.html">coef()</a></code>, <code><a href="https://rdrr.io/r/stats/vcov.html">vcov()</a></code>, and <code><a href="https://rdrr.io/r/stats/confint.html">confint()</a></code> methods gained a <code>complete = TRUE</code> argument assuring that the elements pertaining to aliased coefficients are included. By setting <code>complete = FALSE</code> these elements are dropped.</p></li>
+<li><p>Include demonstration how to use <code><a href="../reference/ivreg.html">ivreg()</a></code> results in model summary tables and plots using the <a href="https://CRAN.R-project.org/package=modelsummary">modelsummary</a> package.</p></li>
+<li><p>Small edits to the Diagnostics vignette.</p></li>
 </ul>
 </div>
     <div id="version-05-0" class="section level1">

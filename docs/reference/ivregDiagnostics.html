@@ -97,7 +97,7 @@ Diagnostics for 2SLS Regression." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ivreg</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5-1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.6-0</span>
       </span>
     </div>
 
@@ -195,7 +195,7 @@ independent.</p>
 <span class='fu'><a href='https://rdrr.io/r/stats/influence.measures.html'>dfbeta</a></span>(<span class='kw'>model</span>, <span class='kw'>...</span>)
 
 <span class='co'># S3 method for ivreg</span>
-<span class='fu'><a href='https://rdrr.io/r/stats/influence.measures.html'>hatvalues</a></span>(<span class='kw'>model</span>, type = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"stage2"</span>, <span class='st'>"both"</span>, <span class='st'>"maximum"</span>), <span class='kw'>...</span>)
+<span class='fu'><a href='https://rdrr.io/r/stats/influence.measures.html'>hatvalues</a></span>(<span class='kw'>model</span>, type = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"stage2"</span>, <span class='st'>"both"</span>, <span class='st'>"maximum"</span>, <span class='st'>"stage1"</span>), <span class='kw'>...</span>)
 
 <span class='co'># S3 method for influence.ivreg</span>
 <span class='fu'><a href='https://rdrr.io/r/stats/influence.measures.html'>rstudent</a></span>(<span class='kw'>model</span>, <span class='kw'>...</span>)
@@ -283,7 +283,10 @@ independent.</p>
 <span class='fu'>ncvTest</span>(<span class='kw'>model</span>, <span class='kw'>...</span>)
 
 <span class='co'># S3 method for ivreg</span>
-<span class='fu'><a href='https://rdrr.io/r/stats/deviance.html'>deviance</a></span>(<span class='kw'>object</span>, <span class='kw'>...</span>)</pre>
+<span class='fu'><a href='https://rdrr.io/r/stats/deviance.html'>deviance</a></span>(<span class='kw'>object</span>, <span class='kw'>...</span>)
+
+<span class='co'># S3 method for rivreg</span>
+<span class='fu'><a href='https://rdrr.io/r/stats/lm.influence.html'>influence</a></span>(<span class='kw'>model</span>, <span class='kw'>...</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">

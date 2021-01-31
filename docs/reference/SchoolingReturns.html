@@ -86,7 +86,7 @@ but using some variables dating back to earlier years." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ivreg</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5-1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.6-0</span>
       </span>
     </div>
 
@@ -282,14 +282,14 @@ main coefficients of interest, namely that of years of education.</p>
 <span class='co'>## Table 5.3 in Verbeek (2004) / similar to Table 3(5) in Card (1995)</span>
 <span class='co'>## Returns to education: 13.3%</span>
 <span class='kw'>m_iv</span> <span class='op'>&lt;-</span> <span class='fu'><a href='ivreg.html'>ivreg</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/Log.html'>log</a></span>(<span class='kw'>wage</span>) <span class='op'>~</span> <span class='kw'>education</span> <span class='op'>+</span> <span class='fu'><a href='https://rdrr.io/r/stats/poly.html'>poly</a></span>(<span class='kw'>experience</span>, <span class='fl'>2</span>, raw = <span class='fl'>TRUE</span>) <span class='op'>+</span> <span class='kw'>ethnicity</span> <span class='op'>+</span> <span class='kw'>smsa</span> <span class='op'>+</span> <span class='kw'>south</span> <span class='op'>|</span>
-  <span class='fu'><a href='https://rdrr.io/r/stats/poly.html'>poly</a></span>(<span class='kw'>age</span>, <span class='fl'>2</span>, raw = <span class='fl'>TRUE</span>) <span class='op'>+</span> <span class='kw'>ethnicity</span> <span class='op'>+</span> <span class='kw'>smsa</span> <span class='op'>+</span> <span class='kw'>south</span> <span class='op'>+</span> <span class='kw'>nearcollege</span>,
+  <span class='kw'>nearcollege</span> <span class='op'>+</span> <span class='fu'><a href='https://rdrr.io/r/stats/poly.html'>poly</a></span>(<span class='kw'>age</span>, <span class='fl'>2</span>, raw = <span class='fl'>TRUE</span>) <span class='op'>+</span> <span class='kw'>ethnicity</span> <span class='op'>+</span> <span class='kw'>smsa</span> <span class='op'>+</span> <span class='kw'>south</span>,
   data = <span class='kw'>SchoolingReturns</span>)
 <span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>(<span class='kw'>m_iv</span>)
 </div><div class='output co'>#&gt; 
 #&gt; Call:
 #&gt; ivreg(formula = log(wage) ~ education + poly(experience, 2, raw = TRUE) + 
-#&gt;     ethnicity + smsa + south | poly(age, 2, raw = TRUE) + ethnicity + 
-#&gt;     smsa + south + nearcollege, data = SchoolingReturns)
+#&gt;     ethnicity + smsa + south | nearcollege + poly(age, 2, raw = TRUE) + 
+#&gt;     ethnicity + smsa + south, data = SchoolingReturns)
 #&gt; 
 #&gt; Residuals:
 #&gt;      Min       1Q   Median       3Q      Max 

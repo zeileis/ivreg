@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Instrumental-Variable Regression by 2SLS — ivreg • ivreg</title>
+<title>Instrumental-Variable Regression by 2SLS, 2SM, or 2SMM Estimation — ivreg • ivreg</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -48,10 +48,12 @@
   <link href="../extra.css" rel="stylesheet">
   
 
-<meta property="og:title" content="Instrumental-Variable Regression by 2SLS — ivreg" />
+<meta property="og:title" content="Instrumental-Variable Regression by 2SLS, 2SM, or 2SMM Estimation — ivreg" />
 <meta property="og:description" content="Fit instrumental-variable regression by two-stage least squares (2SLS). This is
 equivalent to direct instrumental-variables estimation when the number of
-instruments is equal to the number of regressors." />
+instruments is equal to the number of regressors. Alternative robust-regression
+estimators are also provided, based on M-estimation (2SM) and MM-estimation
+(2SMM)." />
 <meta property="og:image" content="https://john-d-fox.github.io/ivreg/logo.png" />
 <meta name="twitter:card" content="summary" />
 <meta name="twitter:creator" content="@AchimZeileis" />
@@ -87,7 +89,7 @@ instruments is equal to the number of regressors." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ivreg</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5-1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.6-0</span>
       </span>
     </div>
 
@@ -141,7 +143,7 @@ instruments is equal to the number of regressors." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Instrumental-Variable Regression by 2SLS</h1>
+    <h1>Instrumental-Variable Regression by 2SLS, 2SM, or 2SMM Estimation</h1>
     <small class="dont-index">Source: <a href='https://github.com/john-d-fox/ivreg/blob/master/R/ivreg.R'><code>R/ivreg.R</code></a></small>
     <div class="hidden name"><code>ivreg.Rd</code></div>
     </div>
@@ -149,7 +151,9 @@ instruments is equal to the number of regressors." />
     <div class="ref-description">
     <p>Fit instrumental-variable regression by two-stage least squares (2SLS). This is
 equivalent to direct instrumental-variables estimation when the number of
-instruments is equal to the number of regressors.</p>
+instruments is equal to the number of regressors. Alternative robust-regression
+estimators are also provided, based on M-estimation (2SM) and MM-estimation
+(2SMM).</p>
     </div>
 
     <pre class="usage"><span class='fu'>ivreg</span>(
@@ -251,6 +255,14 @@ class <code>"lm"</code>, with the following components:</p>
 <dt>endogenous</dt><dd><p>columns of the <code>"regressors"</code> matrix that are endogenous.</p></dd>
 <dt>instruments</dt><dd><p>columns of the <code>"instruments"</code> matrix that are
 instruments for the endogenous variables.</p></dd>
+#' <dt>method</dt><dd><p>the method used for the stage 1 and 2 regressions, one of <code>"OLS"</code>,
+<code>"M"</code>, or <code>"MM"</code>.</p></dd>
+<dt>rweights</dt><dd><p>a matrix of robustness weights with columns for each of the stage-1
+regressions and for the stage-2 regression (in the last column) if the fitting method is 
+<code>"M"</code> or <code>"MM"</code>, <code>NULL</code> if the fitting method is <code>"OLS"</code>.</p></dd>
+<dt>hatvalues</dt><dd><p>a matrix of hatvalues. For <code>method = "OLS"</code>, the matrix consists of two
+columns, for each of the stage-1 and stage-2 regression; for <code>method = "M"</code> or <code>"MM"</code>,
+there is one column for <em>each</em> stage=1 regression and for the stage-2 regression.</p></dd>
 <dt>df.residual</dt><dd><p>residual degrees of freedom for fitted model.</p></dd> 
 <dt>call</dt><dd><p>the original function call.</p></dd> 
 <dt>formula</dt><dd><p>the model formula.</p></dd>
@@ -277,13 +289,21 @@ diagnotics, see <code><a href='influence.ivreg.html'>ivregDiagnostics</a></code>
 formula with two parts on the right-hand side, e.g., <code>y ~ x1 + x2 | z1
 + z2 + z3</code>, where <code>x1</code> and <code>x2</code> are the explanatory variables and <code>z1</code>,
 <code>z2</code>, and <code>z3</code> are the instrumental variables. Note that exogenous regressors
-have to be included as instruments for themselves. For example, if there is
+have to be included as instruments for themselves.</p>
+<p>For example, if there is
 one exogenous regressor <code>ex</code> and one endogenous regressor <code>en</code>
-with instrument <code>in</code>, the appropriate formula would be <code>y ~ ex +
-en | ex + in</code>. Equivalently, this can be specified as <code>y ~ ex + en | .
-- en + in</code>, i.e., by providing an update formula with a <code>.</code> in the
-second part of the formula. The latter is typically more convenient, if
+with instrument <code>in</code>, the appropriate formula would be <code>y ~ en +
+ex | in + ex</code>. Alternatively, a formula with three parts on the right-hand
+side can also be used: <code>y ~ ex | en | in</code>. The latter is typically more convenient, if
 there is a large number of exogenous regressors.</p>
+<p>Moreover, two further equivalent specification strategies are possible that are
+typically less convenient compared to the strategies above. One option is to use
+an update formula with a <code>.</code> in the second part of the formula is used:
+<code>y ~ en + ex | . - en + in</code>. Another option is to use a separate formula
+for the instruments (only for backward compatibility with earlier versions):
+<code>formula = y ~ en + ex, instruments = ~ in + ex</code>.</p>
+<p>Internally, all specifications are converted to the version with two parts
+on the right-hand side.</p>
     <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
 
     <p>Greene, W.H. (1993) <em>Econometric Analysis</em>, 2nd ed., Macmillan.</p>
@@ -326,7 +346,7 @@ there is a large number of exogenous regressors.</p>
 #&gt; Residual standard error: 0.1896 on 45 degrees of freedom
 #&gt; Multiple R-Squared: 0.4189,	Adjusted R-squared: 0.3931 
 #&gt; Wald test: 6.534 on 2 and 45 DF,  p-value: 0.003227 
-#&gt; </div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>(<span class='kw'>m</span>, vcov = <span class='kw'>sandwich</span>::<span class='kw'><a href='https://rdrr.io/pkg/sandwich/man/sandwich.html'>sandwich</a></span>, df = <span class='fl'>Inf</span>)
+#&gt; </div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>(<span class='kw'>m</span>, vcov = <span class='kw'>sandwich</span>::<span class='kw'><a href='http://sandwich.R-Forge.R-project.org//reference/sandwich.html'>sandwich</a></span>, df = <span class='fl'>Inf</span>)
 </div><div class='output co'>#&gt; 
 #&gt; Call:
 #&gt; ivreg(formula = log(packs) ~ log(rprice) + log(rincome) | salestax + 
@@ -373,6 +393,62 @@ there is a large number of exogenous regressors.</p>
 #&gt; Residuals    45                    
 #&gt; ---
 #&gt; Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1</div><div class='input'>
+<span class='co'>## same model specified by formula with three-part right-hand side</span>
+<span class='fu'>ivreg</span>(<span class='fu'><a href='https://rdrr.io/r/base/Log.html'>log</a></span>(<span class='kw'>packs</span>) <span class='op'>~</span> <span class='fu'><a href='https://rdrr.io/r/base/Log.html'>log</a></span>(<span class='kw'>rincome</span>) <span class='op'>|</span> <span class='fu'><a href='https://rdrr.io/r/base/Log.html'>log</a></span>(<span class='kw'>rprice</span>) <span class='op'>|</span> <span class='kw'>salestax</span>, data = <span class='kw'>CigaretteDemand</span>)
+</div><div class='output co'>#&gt; 
+#&gt; Call:
+#&gt; ivreg(formula = log(packs) ~ log(rincome) | log(rprice) | salestax,     data = CigaretteDemand)
+#&gt; 
+#&gt; Coefficients:
+#&gt;  (Intercept)   log(rprice)  log(rincome)  
+#&gt;       9.4307       -1.1434        0.2145  
+#&gt; </div><div class='input'>
+<span class='co'># Robust 2SLS regression</span>
+<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='st'>"Kmenta"</span>, package = <span class='st'>"ivreg"</span>)
+<span class='kw'>Kmenta1</span> <span class='op'>&lt;-</span> <span class='kw'>Kmenta</span>
+<span class='kw'>Kmenta1</span>[<span class='fl'>20</span>, <span class='st'>"Q"</span>] <span class='op'>&lt;-</span> <span class='fl'>95</span> <span class='co'># corrupted data</span>
+<span class='kw'>deq</span> <span class='op'>&lt;-</span> <span class='fu'>ivreg</span>(<span class='kw'>Q</span> <span class='op'>~</span> <span class='kw'>P</span> <span class='op'>+</span> <span class='kw'>D</span> <span class='op'>|</span> <span class='kw'>D</span> <span class='op'>+</span> <span class='kw'>F</span> <span class='op'>+</span> <span class='kw'>A</span>, data=<span class='kw'>Kmenta</span>) <span class='co'># demand equation, uncorrupted data</span>
+<span class='kw'>deq1</span> <span class='op'>&lt;-</span> <span class='fu'>ivreg</span>(<span class='kw'>Q</span> <span class='op'>~</span> <span class='kw'>P</span> <span class='op'>+</span> <span class='kw'>D</span> <span class='op'>|</span> <span class='kw'>D</span> <span class='op'>+</span> <span class='kw'>F</span> <span class='op'>+</span> <span class='kw'>A</span>, data=<span class='kw'>Kmenta1</span>) <span class='co'># standard 2SLS, corrupted data</span>
+<span class='kw'>deq2</span> <span class='op'>&lt;-</span> <span class='fu'>ivreg</span>(<span class='kw'>Q</span> <span class='op'>~</span> <span class='kw'>P</span> <span class='op'>+</span> <span class='kw'>D</span> <span class='op'>|</span> <span class='kw'>D</span> <span class='op'>+</span> <span class='kw'>F</span> <span class='op'>+</span> <span class='kw'>A</span>, data=<span class='kw'>Kmenta1</span>, subset=<span class='op'>-</span><span class='fl'>20</span>) <span class='co'># standard 2SLS, removing bad case</span>
+<span class='kw'>deq3</span> <span class='op'>&lt;-</span> <span class='fu'>ivreg</span>(<span class='kw'>Q</span> <span class='op'>~</span> <span class='kw'>P</span> <span class='op'>+</span> <span class='kw'>D</span> <span class='op'>|</span> <span class='kw'>D</span> <span class='op'>+</span> <span class='kw'>F</span> <span class='op'>+</span> <span class='kw'>A</span>, data=<span class='kw'>Kmenta1</span>, method=<span class='st'>"MM"</span>) <span class='co'># 2SLS MM estimation</span>
+<span class='kw'>car</span>::<span class='fu'><a href='https://rdrr.io/pkg/car/man/compareCoefs.html'>compareCoefs</a></span>(<span class='kw'>deq</span>, <span class='kw'>deq1</span>, <span class='kw'>deq2</span>, <span class='kw'>deq3</span>)
+</div><div class='output co'>#&gt; Calls:
+#&gt; 1: ivreg(formula = Q ~ P + D | D + F + A, data = Kmenta)
+#&gt; 2: ivreg(formula = Q ~ P + D | D + F + A, data = Kmenta1)
+#&gt; 3: ivreg(formula = Q ~ P + D | D + F + A, data = Kmenta1, subset = -20)
+#&gt; 4: ivreg(formula = Q ~ P + D | D + F + A, data = Kmenta1, method = "MM")
+#&gt; 
+#&gt;             Model 1 Model 2 Model 3 Model 4
+#&gt; (Intercept)   94.63  117.96   92.42   91.09
+#&gt; SE             7.92   11.64    9.67   10.62
+#&gt;                                            
+#&gt; P           -0.2436 -0.4054 -0.2300 -0.2374
+#&gt; SE           0.0965  0.1417  0.1047  0.1135
+#&gt;                                            
+#&gt; D            0.3140  0.2351  0.3233  0.3468
+#&gt; SE           0.0469  0.0690  0.0527  0.0569
+#&gt;                                            </div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/Round.html'>round</a></span>(<span class='kw'>deq3</span><span class='op'>$</span><span class='kw'>rweights</span>, <span class='fl'>2</span>) <span class='co'># robustness weights</span>
+</div><div class='output co'>#&gt;         P stage_2
+#&gt; 1922 0.97    0.98
+#&gt; 1923 0.97    0.98
+#&gt; 1924 1.00    0.87
+#&gt; 1925 1.00    0.96
+#&gt; 1926 0.98    0.90
+#&gt; 1927 1.00    0.98
+#&gt; 1928 0.97    0.95
+#&gt; 1929 0.64    0.53
+#&gt; 1930 0.80    0.91
+#&gt; 1931 0.89    0.77
+#&gt; 1932 0.98    1.00
+#&gt; 1933 1.00    0.91
+#&gt; 1934 0.97    0.92
+#&gt; 1935 0.89    1.00
+#&gt; 1936 0.72    0.88
+#&gt; 1937 0.84    0.53
+#&gt; 1938 0.94    1.00
+#&gt; 1939 0.53    0.69
+#&gt; 1940 1.00    0.98
+#&gt; 1941 0.98    0.00</div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

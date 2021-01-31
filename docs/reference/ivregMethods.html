@@ -86,7 +86,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ivreg</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5-1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.6-0</span>
       </span>
     </div>
 
@@ -157,13 +157,25 @@
 <span class='fu'><a href='https://rdrr.io/r/stats/vcov.html'>vcov</a></span>(<span class='kw'>object</span>, component = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"stage2"</span>, <span class='st'>"stage1"</span>), complete = <span class='fl'>TRUE</span>, <span class='kw'>...</span>)
 
 <span class='co'># S3 method for ivreg</span>
-<span class='fu'><a href='https://rdrr.io/pkg/sandwich/man/bread.html'>bread</a></span>(<span class='kw'>x</span>, <span class='kw'>...</span>)
+<span class='fu'><a href='https://rdrr.io/r/stats/confint.html'>confint</a></span>(
+  <span class='kw'>object</span>,
+  <span class='kw'>parm</span>,
+  level = <span class='fl'>0.95</span>,
+  component = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"stage2"</span>, <span class='st'>"stage1"</span>),
+  complete = <span class='fl'>TRUE</span>,
+  vcov. = <span class='kw'>NULL</span>,
+  df = <span class='kw'>NULL</span>,
+  <span class='kw'>...</span>
+)
 
 <span class='co'># S3 method for ivreg</span>
-<span class='fu'><a href='https://rdrr.io/pkg/sandwich/man/estfun.html'>estfun</a></span>(<span class='kw'>x</span>, <span class='kw'>...</span>)
+<span class='fu'><a href='http://sandwich.R-Forge.R-project.org//reference/bread.html'>bread</a></span>(<span class='kw'>x</span>, <span class='kw'>...</span>)
 
 <span class='co'># S3 method for ivreg</span>
-<span class='fu'><a href='https://rdrr.io/pkg/sandwich/man/vcovHC.html'>vcovHC</a></span>(<span class='kw'>x</span>, <span class='kw'>...</span>)
+<span class='fu'><a href='http://sandwich.R-Forge.R-project.org//reference/estfun.html'>estfun</a></span>(<span class='kw'>x</span>, <span class='kw'>...</span>)
+
+<span class='co'># S3 method for ivreg</span>
+<span class='fu'><a href='http://sandwich.R-Forge.R-project.org//reference/vcovHC.html'>vcovHC</a></span>(<span class='kw'>x</span>, <span class='kw'>...</span>)
 
 <span class='co'># S3 method for ivreg</span>
 <span class='fu'><a href='https://rdrr.io/r/stats/terms.html'>terms</a></span>(<span class='kw'>x</span>, component = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"regressors"</span>, <span class='st'>"instruments"</span>, <span class='st'>"full"</span>), <span class='kw'>...</span>)
@@ -240,7 +252,10 @@
 <span class='fu'><a href='https://rdrr.io/r/stats/alias.html'>alias</a></span>(<span class='kw'>object</span>, <span class='kw'>...</span>)
 
 <span class='co'># S3 method for ivreg</span>
-<span class='fu'><a href='https://rdrr.io/r/base/qr.html'>qr</a></span>(<span class='kw'>x</span>, <span class='kw'>...</span>)</pre>
+<span class='fu'><a href='https://rdrr.io/r/base/qr.html'>qr</a></span>(<span class='kw'>x</span>, <span class='kw'>...</span>)
+
+<span class='co'># S3 method for ivreg</span>
+<span class='fu'><a href='https://rdrr.io/r/stats/weights.html'>weights</a></span>(<span class='kw'>object</span>, type = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"variance"</span>, <span class='st'>"robustness"</span>), <span class='kw'>...</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -265,6 +280,14 @@ for <code><a href='https://rdrr.io/r/stats/coef.html'>coef</a></code> and <code>
       <td><p>arguments to pass down.</p></td>
     </tr>
     <tr>
+      <th>vcov.</th>
+      <td><p>Optional coefficient covariance matrix, or a function to compute the covariance matrix, to use in computing the model summary.</p></td>
+    </tr>
+    <tr>
+      <th>df</th>
+      <td><p>Optional residual degrees of freedom to use in computing model summary.</p></td>
+    </tr>
+    <tr>
       <th>x</th>
       <td><p>An object of class <code>"ivreg"</code> or <code>"summary.ivreg"</code>.</p></td>
     </tr>
@@ -278,7 +301,9 @@ for <code><a href='https://rdrr.io/r/stats/coef.html'>coef</a></code> and <code>
 for <code>residuals</code>, one of <code>"response"</code> (the default), <code>"projected"</code>, <code>"regressors"</code>,
 <code>"working"</code>, <code>"deviance"</code>, <code>"pearson"</code>, or <code>"partial"</code>; 
 <code>type = "working"</code> and <code>"response"</code> are equivalent, as are 
-<code>type = "deviance"</code> and <code>"pearson"</code>.</p></td>
+<code>type = "deviance"</code> and <code>"pearson"</code>; for <code>weights</code>, <code>"variance"</code> (the default)
+for invariance-variance weights (which is <code>NULL</code> for an unweighted fit) 
+or <code>"robustness"</code> for robustness weights (available for M or MM estimation).</p></td>
     </tr>
     <tr>
       <th>na.action</th>
@@ -287,14 +312,6 @@ for <code>residuals</code>, one of <code>"response"</code> (the default), <code>
     <tr>
       <th>digits</th>
       <td><p>For printing.</p></td>
-    </tr>
-    <tr>
-      <th>vcov.</th>
-      <td><p>Optional coefficient covariance matrix, or a function to compute the covariance matrix, to use in computing the model summary.</p></td>
-    </tr>
-    <tr>
-      <th>df</th>
-      <td><p>Optional residual degrees of freedom to use in computing model summary.</p></td>
     </tr>
     <tr>
       <th>diagnostics</th>

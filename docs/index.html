@@ -5,7 +5,7 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Two-Stage Least-Squares Regression with Diagnostics • ivreg</title>
+<title>Instrumental-Variables Regression by 2SLS, 2SM, or 2SMM, with Diagnostics • ivreg</title>
 <!-- favicons --><link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
 <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
 <link rel="apple-touch-icon" type="image/png" sizes="180x180" href="apple-touch-icon.png">
@@ -18,8 +18,8 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
 <!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="pkgdown.css" rel="stylesheet">
 <script src="pkgdown.js"></script><link href="extra.css" rel="stylesheet">
-<meta property="og:title" content="Two-Stage Least-Squares Regression with Diagnostics">
-<meta property="og:description" content="Instrumental variable estimation for linear models by two-stage least-squares (2SLS) regression. The main ivreg() model-fitting function is designed to provide a workflow as similar as possible to standard lm() regression. A wide range of methods is provided for fitted ivreg model objects, including extensive functionality for computing and graphing regression diagnostics in addition to other standard model tools. ">
+<meta property="og:title" content="Instrumental-Variables Regression by 2SLS, 2SM, or 2SMM, with Diagnostics">
+<meta property="og:description" content="Instrumental variable estimation for linear models by two-stage least-squares (2SLS) regression or by robust-regression via M-estimation (2SM) or MM-estimation (2SMM). The main ivreg() model-fitting function is designed to provide a workflow as similar as possible to standard lm() regression. A wide range of methods is provided for fitted ivreg model objects, including extensive functionality for computing and graphing regression diagnostics in addition to other standard model tools. ">
 <meta property="og:image" content="https://john-d-fox.github.io/ivreg/logo.png">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:creator" content="@AchimZeileis">
@@ -42,7 +42,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">ivreg</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5-1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.6-0</span>
       </span>
     </div>
 
@@ -100,8 +100,8 @@
 <a href="#two-stage-least-squares-regression-with-diagnostics" class="anchor"></a>Two-Stage Least-Squares Regression with Diagnostics</h2>
 <p>An implementation of instrumental variables regression using two-stage least-squares (2SLS) estimation, based on the <code><a href="reference/ivreg.html">ivreg()</a></code> function previously in the <a href="https://CRAN.R-project.org/package=AER">AER</a> package. In addition to standard regression functionality (parameter estimation, inference, predictions, etc.) the package provides various regression diagnostics, including hat values, deletion diagnostics such as studentized residuals and Cook’s distances; graphical diagnostics such as component-plus-residual plots and added-variable plots; and effect plots with partial residuals.</p>
 <p><strong>Instrumental variables regression:</strong></p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode R"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" title="1"><span class="kw">library</span>(<span class="st">"ivreg"</span>)</a>
-<a class="sourceLine" id="cb1-2" title="2"><span class="kw">ivreg</span>(Q <span class="op">~</span><span class="st"> </span>P <span class="op">+</span><span class="st"> </span>D <span class="op">|</span><span class="st"> </span>D <span class="op">+</span><span class="st"> </span>F <span class="op">+</span><span class="st"> </span>A, <span class="dt">data =</span> Kmenta)</a></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true"></a><span class="kw">library</span>(<span class="st">"ivreg"</span>)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true"></a><span class="kw">ivreg</span>(Q <span class="op">~</span><span class="st"> </span>P <span class="op">+</span><span class="st"> </span>D <span class="op">|</span><span class="st"> </span>D <span class="op">+</span><span class="st"> </span>F <span class="op">+</span><span class="st"> </span>A, <span class="dt">data =</span> Kmenta)</span></code></pre></div>
 <p><strong>Via two-stage least squares (2SLS):</strong></p>
 <p><img alt="2SLS" src="reference/figures/README-2sls.svg" style="border:10px solid transparent"></p>
 <p><strong>With diagnostics:</strong></p>
