@@ -1,4 +1,17 @@
-# Version 0.5-1
+# Version 0.6-0
+
+* Three-part right-hand side `formula`s are supported now to facilitate specification
+  of models with many exogenous regressors. For example, if there is one exogenous
+  regressor `ex` and one endogenous regressor `en` with instrument `in`, a formula
+  with three parts on the right-hand side can now also be used: `y ~ ex | en | in`.
+  This is equivalent to specifying: `y ~ en + ex | in + ex`.
+
+* Robust-regression estimators are provided as an alternative to ordinary
+  least squares (OLS) both in stage 1 and 2 by means of `rlm()` from package
+  [MASS](https://CRAN.R-project.org/package=MASS). Specifically, in addition to
+  2-stage least squares (2SLS, `method = "OLS"`, default) `ivreg()` now supports
+  2-stage M-estimation (2SM, `method = "M"`) and 2-stage MM-estimation (2SMM,
+  `method = "MM"`).
 
 * Include information about which `"regressors"` are endogenous variables and
   which `"instruments"` are instruments for the endogenous variables in the
@@ -21,6 +34,10 @@
 * The `coef()` and `vcov()` method gained a `complete = TRUE` argument assuring
   that the elements pertaining to aliased coefficients are included. By setting
   `complete = FALSE` these elements are dropped.
+
+* Include demonstration how to use `ivreg()` results in model summary tables
+  and plots using the [modelsummary](https://CRAN.R-project.org/package=modelsummary)
+  package.
   
 * Small edits to the Diagnostics vignette.
 
