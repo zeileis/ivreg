@@ -20,7 +20,8 @@ Suggests:
     parallel,
     rmarkdown,
     sandwich, 
-    testthat
+    testthat,
+    modelsummary
 Encoding: UTF-8
 LazyData: true
 VignetteBuilder: knitr

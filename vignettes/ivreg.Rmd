@@ -10,7 +10,7 @@ output:
 vignette: >
   %\VignetteIndexEntry{ivreg: Two-Stage Least-Squares Regression with Diagnostics}
   %\VignetteEngine{knitr::rmarkdown}
-  %\VignetteDepends{ivreg,car,effects,sandwich}
+  %\VignetteDepends{ivreg,car,effects,sandwich,modelsummary}
   %\VignetteKeywords{two-stage least squares, instrumental variables, diagnostics}
   %\VignettePackage{ivreg}
   %\VignetteEncoding{UTF-8}
@@ -158,9 +158,21 @@ coefficient for the returns to schooling, namely `r round(100 * coef(m_iv)["educ
 Notice as well that the standard errors of the coefficients are larger for 2SLS estimation
 than for OLS, and that, partly as a consequence, evidence for the effects of `ethnicity`
 and the quadratic component of `experience` is now weak. These differences are brought
-out more clearly when using the `compareCoefs()` function from the **car** package:
+out more clearly when showing coefficients and standard errors side by side, e.g., using the
+`compareCoefs()` function from the **car** package or the `msummary()` function from the
+[**modelsummary**](https://CRAN.R-project.org/package=modelsummary) package:
 
-```{r compareCoefs}
-car::compareCoefs(m_ols, m_iv)
+```{r modelsummary}
+library("modelsummary")
+m_list <- list(OLS = m_ols, IV = m_iv)
+msummary(m_list)
 ```
 
+The change in coefficients and associated standard errors can also be brought out graphically
+using the `modelplot()` function from **modelsummary** which shows the coefficient estimates
+along with their 95% confidence intervals. Below we omit the intercept and experience terms
+as these are on a different scale than the other coefficients. 
+
+```{r modelplot, fig.height=5, fig.width = 7}
+modelplot(m_list, coef_omit = "Intercept|experience")
+```
