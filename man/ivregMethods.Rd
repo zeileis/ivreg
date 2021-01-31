@@ -20,6 +20,7 @@
 \alias{find_formula.ivreg}
 \alias{alias.ivreg}
 \alias{qr.ivreg}
+\alias{confint.ivreg}
 \alias{vcovHC.ivreg}
 \alias{model.matrix.ivreg_projected}
 \alias{Anova.ivreg}
@@ -30,6 +31,17 @@
 \method{coef}{ivreg}(object, component = c("stage2", "stage1"), complete = TRUE, ...)
 
 \method{vcov}{ivreg}(object, component = c("stage2", "stage1"), complete = TRUE, ...)
+
+\method{confint}{ivreg}(
+  object,
+  parm,
+  level = 0.95,
+  component = c("stage2", "stage1"),
+  complete = TRUE,
+  vcov. = NULL,
+  df = NULL,
+  ...
+)
 
 \method{bread}{ivreg}(x, ...)
 
@@ -111,6 +123,10 @@ for \code{\link{coef}} and \code{\link{vcov}}, \code{"stage2"} or \code{"stage1"
 
 \item{...}{arguments to pass down.}
 
+\item{vcov.}{Optional coefficient covariance matrix, or a function to compute the covariance matrix, to use in computing the model summary.}
+
+\item{df}{Optional residual degrees of freedom to use in computing model summary.}
+
 \item{x}{An object of class \code{"ivreg"} or \code{"summary.ivreg"}.}
 
 \item{newdata}{Values of predictors for which to obtain predicted values.}
@@ -126,10 +142,6 @@ or \code{"robustness"} for robustness weights (available for M or MM estimation)
 \item{na.action}{\code{na} method to apply to predictor values for predictions; default is \code{\link{na.pass}}.}
 
 \item{digits}{For printing.}
-
-\item{vcov.}{Optional coefficient covariance matrix, or a function to compute the covariance matrix, to use in computing the model summary.}
-
-\item{df}{Optional residual degrees of freedom to use in computing model summary.}
 
 \item{diagnostics}{Report 2SLS "diagnostic" tests in model summary (default is \code{TRUE}). 
 These tests are not to be confused with the \emph{regression diagnostics} provided elsewhere in the \pkg{ivreg}

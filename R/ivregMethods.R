@@ -39,7 +39,7 @@
 #' @rdname ivregMethods
 #' @export
 coef.ivreg <- function(object, component = c("stage2", "stage1"), complete = TRUE, ...) {
-  component <- match.arg(component)
+  component <- match.arg(component, c("stage2", "stage1"))
   ## default: stage 2
   if(component == "stage2") {
     cf <- object$coefficients
@@ -58,7 +58,7 @@ coef.ivreg <- function(object, component = c("stage2", "stage1"), complete = TRU
 #' @rdname ivregMethods
 #' @export
 vcov.ivreg <- function(object, component = c("stage2", "stage1"), complete = TRUE, ...) {
-  component <- match.arg(component)
+  component <- match.arg(component, c("stage2", "stage1"))
   ## default: stage 2
   if(component == "stage2") {
     vc <- object$sigma^2 * object$cov.unscaled
@@ -86,6 +86,35 @@ vcov.ivreg <- function(object, component = c("stage2", "stage1"), complete = TRU
   }
   vc <- .vcov.aliased(!ok, vc, complete = complete)
   return(vc)
+}
+
+#' @rdname ivregMethods
+#' @export
+confint.ivreg <- function (object, parm, level = 0.95,
+  component = c("stage2", "stage1"), complete = TRUE, vcov. = NULL, df = NULL, ...) 
+{
+  component <- match.arg(component, c("stage2", "stage1"))
+  est <- coef(object, component = component, complete = complete)
+  se <- if(is.null(vcov.)) {
+    vcov(object, component = component, complete = complete)
+  } else {
+    if(is.function(vcov.)) {
+      vcov.(object, ...)
+    } else {
+      vcov.
+    }
+  }
+  se <- sqrt(diag(se))
+  a <- (1 - level)/2
+  a <- c(a, 1 - a)
+  if(is.null(df)) df <- if(component == "stage2") object$df.residual else object$df.residual1
+  crit <- if(is.finite(df) && df > 0) qt(a, df = df) else qnorm(a)
+  ci <- cbind(est + crit[1L] * se, est + crit[2L] * se)
+  colnames(ci) <- paste(format(100 * a, trim = TRUE, scientific = FALSE, digits = 3L), "%")
+  if(missing(parm) || is.null(parm)) parm <- seq_along(est)
+  if(is.character(parm)) parm <- which(names(est) %in% parm)
+  ci <- ci[parm, , drop = FALSE]
+  ci
 }
 
 #' @rdname ivregMethods

@@ -13,6 +13,10 @@
   2-stage M-estimation (2SM, `method = "M"`) and 2-stage MM-estimation (2SMM,
   `method = "MM"`).
 
+* Dedicated `confint()` method allowing specification of the variance-covariance
+  matrix `vcov.` and degrees of freedom `df` to be used (as in the `summary()`
+  method).
+
 * Include information about which `"regressors"` are endogenous variables and
   which `"instruments"` are instruments for the endogenous variables in the
   fitted model objects from `ivreg()` and `ivreg.fit()`. Both provide elements
@@ -23,17 +27,18 @@
 * Include `df.residual1` element in `ivreg` objects with the residual degrees
   of freedom from the stage-1 regression.
 
-* Add `coef(..., component = "stage1")` and `vcov(..., component = "stage1")`
-  for the estimated coefficients and corresponding variance-covariance matrix
-  from the stage-1 regression (only for the endogenous regressors). (Prompted
-  by a request from Grant McDermott.)
+* Add `coef(..., component = "stage1")`, `vcov(..., component = "stage1")`, and
+  `confint(..., component = "stage1")` for the estimated coefficients and
+  corresponding variance-covariance matrix and confidence intervals from the
+  stage-1 regression (only for the endogenous regressors). (Prompted by a request
+  from Grant McDermott.)
   
 * Add `residuals(..., type = "stage1")` with the residuals from the stage-1
   regression (only for the endogenous regressors).
 
-* The `coef()` and `vcov()` method gained a `complete = TRUE` argument assuring
-  that the elements pertaining to aliased coefficients are included. By setting
-  `complete = FALSE` these elements are dropped.
+* The `coef()`, `vcov()`, and `confint()` methods gained a `complete = TRUE` argument
+  assuring that the elements pertaining to aliased coefficients are included.
+  By setting `complete = FALSE` these elements are dropped.
 
 * Include demonstration how to use `ivreg()` results in model summary tables
   and plots using the [modelsummary](https://CRAN.R-project.org/package=modelsummary)
