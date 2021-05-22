@@ -4,7 +4,7 @@ pkgdown_sha: 5bd377e7cb6d268565018b73e4bb99d2788182ed
 articles:
   Diagnostics-for-2SLS-Regression: Diagnostics-for-2SLS-Regression.html
   ivreg: ivreg.html
-last_built: 2021-05-22T18:49Z
+last_built: 2021-05-22T19:58Z
 urls:
   reference: https://john-d-fox.github.io/ivreg/reference
   article: https://john-d-fox.github.io/ivreg/articles
