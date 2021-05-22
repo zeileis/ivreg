@@ -43,11 +43,11 @@
   ...
 )
 
-\method{bread}{ivreg}(x, ...)
+bread.ivreg(x, ...)
 
-\method{estfun}{ivreg}(x, ...)
+estfun.ivreg(x, ...)
 
-\method{vcovHC}{ivreg}(x, ...)
+vcovHC.ivreg(x, ...)
 
 \method{terms}{ivreg}(x, component = c("regressors", "instruments", "full"), ...)
 
@@ -89,11 +89,11 @@
   ...
 )
 
-\method{Effect}{ivreg}(focal.predictors, mod, ...)
+Effect.ivreg(focal.predictors, mod, ...)
 
 \method{formula}{ivreg}(x, component = c("complete", "regressors", "instruments"), ...)
 
-\method{find_formula}{ivreg}(x, ...)
+find_formula.ivreg(x, ...)
 
 \method{Anova}{ivreg}(mod, test.statistic = c("F", "Chisq"), ...)
 
@@ -122,6 +122,10 @@ for \code{\link{coef}} and \code{\link{vcov}}, \code{"stage2"} or \code{"stage1"
 \item{complete}{If \code{TRUE}, the default, the returned coefficient vector (for \code{coef()}) or coefficient-coevariance matrix (for \code{vcov}) includes elements for aliased regressors.}
 
 \item{...}{arguments to pass down.}
+
+\item{parm}{parameters for which confidence intervals are to be computed; a vector or numbers or names; the defaiult is all parameters.}
+
+\item{level}{confidence level; the default is \code{0.95}.}
 
 \item{vcov.}{Optional coefficient covariance matrix, or a function to compute the covariance matrix, to use in computing the model summary.}
 
