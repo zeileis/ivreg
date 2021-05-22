@@ -428,9 +428,12 @@ avPlots.ivreg <- function(model, terms, ...){
 #' @importFrom car avPlot
 #' @export
 avPlot.ivreg <- function(model, ...){
+  xz <- model.matrix(model, component = "projected")
+  if(is.null(model$x)) model$x <- list()
+  model$x$regressors <- xz
   .Class <- "lm"
   NextMethod()
-}
+} 
 
 #' @rdname ivregDiagnostics
 #' @importFrom car mcPlots
