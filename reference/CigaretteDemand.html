@@ -72,9 +72,16 @@ compared between 1995 and 1985." />
 
 
 
+
+  
+
+  
+
   </head>
 
   <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -146,7 +153,7 @@ compared between 1995 and 1985." />
 compared between 1995 and 1985.</p>
     </div>
 
-    <pre class="usage"><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='st'>"CigaretteDemand"</span>, package <span class='op'>=</span> <span class='st'>"ivreg"</span><span class='op'>)</span></pre>
+    <div class="ref-usage sourceCode"><pre class='sourceCode r'><code><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='st'>"CigaretteDemand"</span>, package <span class='op'>=</span> <span class='st'>"ivreg"</span><span class='op'>)</span></code></pre></div>
 
 
     <h2 class="hasAnchor" id="format"><a class="anchor" href="#format"></a>Format</h2>
@@ -157,9 +164,9 @@ compared between 1995 and 1985.</p>
   <dt>rincome</dt><dd><p>Real per capita income in 1995.</p></dd>
   <dt>salestax</dt><dd><p>Sales tax in 1995.</p></dd>
   <dt>cigtax</dt><dd><p>Cigarette-specific taxes (federal and average local excise taxes) in 1995.</p></dd>
-  <dt>packsdiff</dt><dd><p>Difference in <code><a href='https://rdrr.io/r/base/Log.html'>log(packs)</a></code> (between 1995 and 1985).</p></dd>
-  <dt>pricediff</dt><dd><p>Difference in <code><a href='https://rdrr.io/r/base/Log.html'>log(rprice)</a></code> (between 1995 and 1985).</p></dd>
-  <dt>incomediff</dt><dd><p>Difference in <code><a href='https://rdrr.io/r/base/Log.html'>log(rincome)</a></code> (between 1995 and 1985).</p></dd>
+  <dt>packsdiff</dt><dd><p>Difference in <code>log(packs)</code> (between 1995 and 1985).</p></dd>
+  <dt>pricediff</dt><dd><p>Difference in <code>log(rprice)</code> (between 1995 and 1985).</p></dd>
+  <dt>incomediff</dt><dd><p>Difference in <code>log(rincome)</code> (between 1995 and 1985).</p></dd>
   <dt>salestaxdiff</dt><dd><p>Difference in <code>salestax</code> (between 1995 and 1985).</p></dd>
   <dt>cigtaxdiff</dt><dd><p>Difference in <code>cigtax</code> (between 1995 and 1985).</p></dd>
   
@@ -189,85 +196,94 @@ is provided by Hanck et al. (2020, Chapter 12).</p>
     <div class='dont-index'><p><code><a href='https://rdrr.io/pkg/AER/man/CigarettesSW.html'>CigarettesSW</a></code>.</p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'>## load data</span>
-<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='st'>"CigaretteDemand"</span>, package <span class='op'>=</span> <span class='st'>"ivreg"</span><span class='op'>)</span>
-
-<span class='co'>## basic price elasticity: OLS vs. IV</span>
-<span class='va'>cig_ols</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/Log.html'>log</a></span><span class='op'>(</span><span class='va'>packs</span><span class='op'>)</span> <span class='op'>~</span> <span class='fu'><a href='https://rdrr.io/r/base/Log.html'>log</a></span><span class='op'>(</span><span class='va'>rprice</span><span class='op'>)</span>, data <span class='op'>=</span> <span class='va'>CigaretteDemand</span><span class='op'>)</span>
-<span class='va'>cig_iv</span> <span class='op'>&lt;-</span> <span class='fu'><a href='ivreg.html'>ivreg</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/Log.html'>log</a></span><span class='op'>(</span><span class='va'>packs</span><span class='op'>)</span> <span class='op'>~</span> <span class='fu'><a href='https://rdrr.io/r/base/Log.html'>log</a></span><span class='op'>(</span><span class='va'>rprice</span><span class='op'>)</span> <span class='op'>|</span> <span class='va'>salestax</span>, data <span class='op'>=</span> <span class='va'>CigaretteDemand</span><span class='op'>)</span>
-<span class='fu'><a href='https://rdrr.io/r/base/cbind.html'>cbind</a></span><span class='op'>(</span>OLS <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/stats/coef.html'>coef</a></span><span class='op'>(</span><span class='va'>cig_ols</span><span class='op'>)</span>, IV <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/stats/coef.html'>coef</a></span><span class='op'>(</span><span class='va'>cig_iv</span><span class='op'>)</span><span class='op'>)</span>
-</div><div class='output co'>#&gt;                   OLS        IV
-#&gt; (Intercept) 10.338924  9.719877
-#&gt; log(rprice) -1.213057 -1.083587</div><div class='input'>
-<span class='co'>## adjusting for income differences (exogenous)</span>
-<span class='va'>cig_iv2</span> <span class='op'>&lt;-</span> <span class='fu'><a href='ivreg.html'>ivreg</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/Log.html'>log</a></span><span class='op'>(</span><span class='va'>packs</span><span class='op'>)</span> <span class='op'>~</span> <span class='fu'><a href='https://rdrr.io/r/base/Log.html'>log</a></span><span class='op'>(</span><span class='va'>rprice</span><span class='op'>)</span> <span class='op'>+</span> <span class='fu'><a href='https://rdrr.io/r/base/Log.html'>log</a></span><span class='op'>(</span><span class='va'>rincome</span><span class='op'>)</span> <span class='op'>|</span> <span class='va'>salestax</span> <span class='op'>+</span> <span class='fu'><a href='https://rdrr.io/r/base/Log.html'>log</a></span><span class='op'>(</span><span class='va'>rincome</span><span class='op'>)</span>,
-  data <span class='op'>=</span> <span class='va'>CigaretteDemand</span><span class='op'>)</span>
-<span class='co'>## adding a second instrument for log(rprice)</span>
-<span class='va'>cig_iv3</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/update.html'>update</a></span><span class='op'>(</span><span class='va'>cig_iv2</span>, <span class='va'>.</span> <span class='op'>~</span> <span class='va'>.</span> <span class='op'>|</span> <span class='va'>.</span> <span class='op'>+</span> <span class='va'>cigtax</span><span class='op'>)</span>
-
-<span class='co'>## comparison using heteroscedasticity-consistent standard errors</span>
-<span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='st'>"lmtest"</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span class='message'>Loading required package: zoo</span></div><div class='output co'>#&gt; <span class='message'></span>
-#&gt; <span class='message'>Attaching package: ‘zoo’</span></div><div class='output co'>#&gt; <span class='message'>The following objects are masked from ‘package:base’:</span>
-#&gt; <span class='message'></span>
-#&gt; <span class='message'>    as.Date, as.Date.numeric</span></div><div class='input'><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='st'><a href='http://sandwich.R-Forge.R-project.org/'>"sandwich"</a></span><span class='op'>)</span>
-<span class='fu'><a href='https://rdrr.io/pkg/lmtest/man/coeftest.html'>coeftest</a></span><span class='op'>(</span><span class='va'>cig_iv2</span>, vcov <span class='op'>=</span> <span class='va'>vcovHC</span>, type <span class='op'>=</span> <span class='st'>"HC1"</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; 
-#&gt; t test of coefficients:
-#&gt; 
-#&gt;              Estimate Std. Error t value  Pr(&gt;|t|)    
-#&gt; (Intercept)   9.43066    1.25939  7.4883 1.935e-09 ***
-#&gt; log(rprice)  -1.14338    0.37230 -3.0711  0.003611 ** 
-#&gt; log(rincome)  0.21452    0.31175  0.6881  0.494917    
-#&gt; ---
-#&gt; Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
-#&gt; </div><div class='input'><span class='fu'><a href='https://rdrr.io/pkg/lmtest/man/coeftest.html'>coeftest</a></span><span class='op'>(</span><span class='va'>cig_iv3</span>, vcov <span class='op'>=</span> <span class='va'>vcovHC</span>, type <span class='op'>=</span> <span class='st'>"HC1"</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; 
-#&gt; t test of coefficients:
-#&gt; 
-#&gt;              Estimate Std. Error t value  Pr(&gt;|t|)    
-#&gt; (Intercept)   9.89496    0.95922 10.3157 1.947e-13 ***
-#&gt; log(rprice)  -1.27742    0.24961 -5.1177 6.211e-06 ***
-#&gt; log(rincome)  0.28040    0.25389  1.1044    0.2753    
-#&gt; ---
-#&gt; Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
-#&gt; </div><div class='input'>
-<span class='co'>## long-run price elasticity using differences between 1995 and 1985</span>
-<span class='va'>cig_ivdiff1</span> <span class='op'>&lt;-</span> <span class='fu'><a href='ivreg.html'>ivreg</a></span><span class='op'>(</span><span class='va'>packsdiff</span> <span class='op'>~</span> <span class='va'>pricediff</span> <span class='op'>+</span> <span class='va'>incomediff</span> <span class='op'>|</span> <span class='va'>incomediff</span> <span class='op'>+</span> <span class='va'>salestaxdiff</span>,
-  data <span class='op'>=</span> <span class='va'>CigaretteDemand</span><span class='op'>)</span>
-<span class='va'>cig_ivdiff2</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/update.html'>update</a></span><span class='op'>(</span><span class='va'>cig_ivdiff1</span>, <span class='va'>.</span> <span class='op'>~</span> <span class='va'>.</span> <span class='op'>|</span> <span class='va'>.</span> <span class='op'>-</span> <span class='va'>salestaxdiff</span> <span class='op'>+</span> <span class='va'>cigtaxdiff</span><span class='op'>)</span>
-<span class='va'>cig_ivdiff3</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/update.html'>update</a></span><span class='op'>(</span><span class='va'>cig_ivdiff1</span>, <span class='va'>.</span> <span class='op'>~</span> <span class='va'>.</span> <span class='op'>|</span> <span class='va'>.</span> <span class='op'>+</span> <span class='va'>cigtaxdiff</span><span class='op'>)</span>
-<span class='fu'><a href='https://rdrr.io/pkg/lmtest/man/coeftest.html'>coeftest</a></span><span class='op'>(</span><span class='va'>cig_ivdiff1</span>, vcov <span class='op'>=</span> <span class='va'>vcovHC</span>, type <span class='op'>=</span> <span class='st'>"HC1"</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; 
-#&gt; t test of coefficients:
-#&gt; 
-#&gt;              Estimate Std. Error t value  Pr(&gt;|t|)    
-#&gt; (Intercept) -0.117962   0.068217 -1.7292   0.09062 .  
-#&gt; pricediff   -0.938014   0.207502 -4.5205 4.454e-05 ***
-#&gt; incomediff   0.525970   0.339494  1.5493   0.12832    
-#&gt; ---
-#&gt; Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
-#&gt; </div><div class='input'><span class='fu'><a href='https://rdrr.io/pkg/lmtest/man/coeftest.html'>coeftest</a></span><span class='op'>(</span><span class='va'>cig_ivdiff2</span>, vcov <span class='op'>=</span> <span class='va'>vcovHC</span>, type <span class='op'>=</span> <span class='st'>"HC1"</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; 
-#&gt; t test of coefficients:
-#&gt; 
-#&gt;              Estimate Std. Error t value  Pr(&gt;|t|)    
-#&gt; (Intercept) -0.017049   0.067217 -0.2536    0.8009    
-#&gt; pricediff   -1.342515   0.228661 -5.8712 4.848e-07 ***
-#&gt; incomediff   0.428146   0.298718  1.4333    0.1587    
-#&gt; ---
-#&gt; Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
-#&gt; </div><div class='input'><span class='fu'><a href='https://rdrr.io/pkg/lmtest/man/coeftest.html'>coeftest</a></span><span class='op'>(</span><span class='va'>cig_ivdiff3</span>, vcov <span class='op'>=</span> <span class='va'>vcovHC</span>, type <span class='op'>=</span> <span class='st'>"HC1"</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; 
-#&gt; t test of coefficients:
-#&gt; 
-#&gt;              Estimate Std. Error t value  Pr(&gt;|t|)    
-#&gt; (Intercept) -0.052003   0.062488 -0.8322    0.4097    
-#&gt; pricediff   -1.202403   0.196943 -6.1053 2.178e-07 ***
-#&gt; incomediff   0.462030   0.309341  1.4936    0.1423    
-#&gt; ---
-#&gt; Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
-#&gt; </div></pre>
+    <div class="ref-examples sourceCode"><pre class='sourceCode r'><code><span class='r-in'><span class='co'>## load data</span></span>
+<span class='r-in'><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='st'>"CigaretteDemand"</span>, package <span class='op'>=</span> <span class='st'>"ivreg"</span><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'>## basic price elasticity: OLS vs. IV</span></span>
+<span class='r-in'><span class='va'>cig_ols</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/Log.html'>log</a></span><span class='op'>(</span><span class='va'>packs</span><span class='op'>)</span> <span class='op'>~</span> <span class='fu'><a href='https://rdrr.io/r/base/Log.html'>log</a></span><span class='op'>(</span><span class='va'>rprice</span><span class='op'>)</span>, data <span class='op'>=</span> <span class='va'>CigaretteDemand</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>cig_iv</span> <span class='op'>&lt;-</span> <span class='fu'><a href='ivreg.html'>ivreg</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/Log.html'>log</a></span><span class='op'>(</span><span class='va'>packs</span><span class='op'>)</span> <span class='op'>~</span> <span class='fu'><a href='https://rdrr.io/r/base/Log.html'>log</a></span><span class='op'>(</span><span class='va'>rprice</span><span class='op'>)</span> <span class='op'>|</span> <span class='va'>salestax</span>, data <span class='op'>=</span> <span class='va'>CigaretteDemand</span><span class='op'>)</span></span>
+<span class='r-in'><span class='fu'><a href='https://rdrr.io/r/base/cbind.html'>cbind</a></span><span class='op'>(</span>OLS <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/stats/coef.html'>coef</a></span><span class='op'>(</span><span class='va'>cig_ols</span><span class='op'>)</span>, IV <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/stats/coef.html'>coef</a></span><span class='op'>(</span><span class='va'>cig_iv</span><span class='op'>)</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>                   OLS        IV</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> (Intercept) 10.338924  9.719877</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> log(rprice) -1.213057 -1.083587</span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'>## adjusting for income differences (exogenous)</span></span>
+<span class='r-in'><span class='va'>cig_iv2</span> <span class='op'>&lt;-</span> <span class='fu'><a href='ivreg.html'>ivreg</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/Log.html'>log</a></span><span class='op'>(</span><span class='va'>packs</span><span class='op'>)</span> <span class='op'>~</span> <span class='fu'><a href='https://rdrr.io/r/base/Log.html'>log</a></span><span class='op'>(</span><span class='va'>rprice</span><span class='op'>)</span> <span class='op'>+</span> <span class='fu'><a href='https://rdrr.io/r/base/Log.html'>log</a></span><span class='op'>(</span><span class='va'>rincome</span><span class='op'>)</span> <span class='op'>|</span> <span class='va'>salestax</span> <span class='op'>+</span> <span class='fu'><a href='https://rdrr.io/r/base/Log.html'>log</a></span><span class='op'>(</span><span class='va'>rincome</span><span class='op'>)</span>,</span>
+<span class='r-in'>  data <span class='op'>=</span> <span class='va'>CigaretteDemand</span><span class='op'>)</span></span>
+<span class='r-in'><span class='co'>## adding a second instrument for log(rprice)</span></span>
+<span class='r-in'><span class='va'>cig_iv3</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/update.html'>update</a></span><span class='op'>(</span><span class='va'>cig_iv2</span>, <span class='va'>.</span> <span class='op'>~</span> <span class='va'>.</span> <span class='op'>|</span> <span class='va'>.</span> <span class='op'>+</span> <span class='va'>cigtax</span><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'>## comparison using heteroscedasticity-consistent standard errors</span></span>
+<span class='r-in'><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='st'>"lmtest"</span><span class='op'>)</span></span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> Loading required package: zoo</span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> Attaching package: ‘zoo’</span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> The following objects are masked from ‘package:base’:</span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span>     as.Date, as.Date.numeric</span>
+<span class='r-in'><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='st'><a href='https://sandwich.R-Forge.R-project.org/'>"sandwich"</a></span><span class='op'>)</span></span>
+<span class='r-in'><span class='fu'><a href='https://rdrr.io/pkg/lmtest/man/coeftest.html'>coeftest</a></span><span class='op'>(</span><span class='va'>cig_iv2</span>, vcov <span class='op'>=</span> <span class='va'>vcovHC</span>, type <span class='op'>=</span> <span class='st'>"HC1"</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> t test of coefficients:</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>              Estimate Std. Error t value  Pr(&gt;|t|)    </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> (Intercept)   9.43066    1.25939  7.4883 1.935e-09 ***</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> log(rprice)  -1.14338    0.37230 -3.0711  0.003611 ** </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> log(rincome)  0.21452    0.31175  0.6881  0.494917    </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> ---</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-in'><span class='fu'><a href='https://rdrr.io/pkg/lmtest/man/coeftest.html'>coeftest</a></span><span class='op'>(</span><span class='va'>cig_iv3</span>, vcov <span class='op'>=</span> <span class='va'>vcovHC</span>, type <span class='op'>=</span> <span class='st'>"HC1"</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> t test of coefficients:</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>              Estimate Std. Error t value  Pr(&gt;|t|)    </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> (Intercept)   9.89496    0.95922 10.3157 1.947e-13 ***</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> log(rprice)  -1.27742    0.24961 -5.1177 6.211e-06 ***</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> log(rincome)  0.28040    0.25389  1.1044    0.2753    </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> ---</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'>## long-run price elasticity using differences between 1995 and 1985</span></span>
+<span class='r-in'><span class='va'>cig_ivdiff1</span> <span class='op'>&lt;-</span> <span class='fu'><a href='ivreg.html'>ivreg</a></span><span class='op'>(</span><span class='va'>packsdiff</span> <span class='op'>~</span> <span class='va'>pricediff</span> <span class='op'>+</span> <span class='va'>incomediff</span> <span class='op'>|</span> <span class='va'>incomediff</span> <span class='op'>+</span> <span class='va'>salestaxdiff</span>,</span>
+<span class='r-in'>  data <span class='op'>=</span> <span class='va'>CigaretteDemand</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>cig_ivdiff2</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/update.html'>update</a></span><span class='op'>(</span><span class='va'>cig_ivdiff1</span>, <span class='va'>.</span> <span class='op'>~</span> <span class='va'>.</span> <span class='op'>|</span> <span class='va'>.</span> <span class='op'>-</span> <span class='va'>salestaxdiff</span> <span class='op'>+</span> <span class='va'>cigtaxdiff</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>cig_ivdiff3</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/update.html'>update</a></span><span class='op'>(</span><span class='va'>cig_ivdiff1</span>, <span class='va'>.</span> <span class='op'>~</span> <span class='va'>.</span> <span class='op'>|</span> <span class='va'>.</span> <span class='op'>+</span> <span class='va'>cigtaxdiff</span><span class='op'>)</span></span>
+<span class='r-in'><span class='fu'><a href='https://rdrr.io/pkg/lmtest/man/coeftest.html'>coeftest</a></span><span class='op'>(</span><span class='va'>cig_ivdiff1</span>, vcov <span class='op'>=</span> <span class='va'>vcovHC</span>, type <span class='op'>=</span> <span class='st'>"HC1"</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> t test of coefficients:</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>              Estimate Std. Error t value  Pr(&gt;|t|)    </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> (Intercept) -0.117962   0.068217 -1.7292   0.09062 .  </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> pricediff   -0.938014   0.207502 -4.5205 4.454e-05 ***</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> incomediff   0.525970   0.339494  1.5493   0.12832    </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> ---</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-in'><span class='fu'><a href='https://rdrr.io/pkg/lmtest/man/coeftest.html'>coeftest</a></span><span class='op'>(</span><span class='va'>cig_ivdiff2</span>, vcov <span class='op'>=</span> <span class='va'>vcovHC</span>, type <span class='op'>=</span> <span class='st'>"HC1"</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> t test of coefficients:</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>              Estimate Std. Error t value  Pr(&gt;|t|)    </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> (Intercept) -0.017049   0.067217 -0.2536    0.8009    </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> pricediff   -1.342515   0.228661 -5.8712 4.848e-07 ***</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> incomediff   0.428146   0.298718  1.4333    0.1587    </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> ---</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-in'><span class='fu'><a href='https://rdrr.io/pkg/lmtest/man/coeftest.html'>coeftest</a></span><span class='op'>(</span><span class='va'>cig_ivdiff3</span>, vcov <span class='op'>=</span> <span class='va'>vcovHC</span>, type <span class='op'>=</span> <span class='st'>"HC1"</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> t test of coefficients:</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>              Estimate Std. Error t value  Pr(&gt;|t|)    </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> (Intercept) -0.052003   0.062488 -0.8322    0.4097    </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> pricediff   -1.202403   0.196943 -6.1053 2.178e-07 ***</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> incomediff   0.462030   0.309341  1.4936    0.1423    </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> ---</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+</code></pre></div>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -279,11 +295,11 @@ is provided by Hanck et al. (2020, Chapter 12).</p>
 
       <footer>
       <div class="copyright">
-  <p>Developed by John Fox, Christian Kleiber, Achim Zeileis.</p>
+  <p><p>Developed by John Fox, Christian Kleiber, Achim Zeileis.</p></p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.9000.</p>
+  <p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 1.6.1.9001.</p></p>
 </div>
 
       </footer>
@@ -291,6 +307,8 @@ is provided by Hanck et al. (2020, Chapter 12).</p>
 
   
 
+
+  
 
   </body>
 </html>

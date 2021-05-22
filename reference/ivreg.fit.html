@@ -74,9 +74,16 @@ estimation is also supported, based on M-estimation (22M) or MM-estimation (2SMM
 
 
 
+
+  
+
+  
+
   </head>
 
   <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -150,7 +157,7 @@ instruments is equal to the number of predictors. Alternative robust-regression
 estimation is also supported, based on M-estimation (22M) or MM-estimation (2SMM).</p>
     </div>
 
-    <pre class="usage"><span class='fu'>ivreg.fit</span><span class='op'>(</span>
+    <div class="ref-usage sourceCode"><pre class='sourceCode r'><code><span class='fu'>ivreg.fit</span><span class='op'>(</span>
   <span class='va'>x</span>,
   <span class='va'>y</span>,
   <span class='va'>z</span>,
@@ -159,7 +166,7 @@ estimation is also supported, based on M-estimation (22M) or MM-estimation (2SMM
   method <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"OLS"</span>, <span class='st'>"M"</span>, <span class='st'>"MM"</span><span class='op'>)</span>,
   rlm.args <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span><span class='op'>)</span>,
   <span class='va'>...</span>
-<span class='op'>)</span></pre>
+<span class='op'>)</span></code></pre></div>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -260,21 +267,22 @@ for first projecting <code>x</code> onto the image of
 <code>lm.wfit</code>, <code><a href='https://rdrr.io/pkg/MASS/man/rlm.html'>rlm</a></code>, <code><a href='https://rdrr.io/r/stats/mad.html'>mad</a></code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'>## data</span>
-<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='st'>"CigaretteDemand"</span>, package <span class='op'>=</span> <span class='st'>"ivreg"</span><span class='op'>)</span>
-
-<span class='co'>## high-level interface</span>
-<span class='va'>m</span> <span class='op'>&lt;-</span> <span class='fu'><a href='ivreg.html'>ivreg</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/Log.html'>log</a></span><span class='op'>(</span><span class='va'>packs</span><span class='op'>)</span> <span class='op'>~</span> <span class='fu'><a href='https://rdrr.io/r/base/Log.html'>log</a></span><span class='op'>(</span><span class='va'>rprice</span><span class='op'>)</span> <span class='op'>+</span> <span class='fu'><a href='https://rdrr.io/r/base/Log.html'>log</a></span><span class='op'>(</span><span class='va'>rincome</span><span class='op'>)</span> <span class='op'>|</span> <span class='va'>salestax</span> <span class='op'>+</span> <span class='fu'><a href='https://rdrr.io/r/base/Log.html'>log</a></span><span class='op'>(</span><span class='va'>rincome</span><span class='op'>)</span>,
-  data <span class='op'>=</span> <span class='va'>CigaretteDemand</span><span class='op'>)</span>
-
-<span class='co'>## low-level interface</span>
-<span class='va'>y</span> <span class='op'>&lt;-</span> <span class='va'>m</span><span class='op'>$</span><span class='va'>y</span>
-<span class='va'>x</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/model.matrix.html'>model.matrix</a></span><span class='op'>(</span><span class='va'>m</span>, component <span class='op'>=</span> <span class='st'>"regressors"</span><span class='op'>)</span>
-<span class='va'>z</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/model.matrix.html'>model.matrix</a></span><span class='op'>(</span><span class='va'>m</span>, component <span class='op'>=</span> <span class='st'>"instruments"</span><span class='op'>)</span>
-<span class='fu'>ivreg.fit</span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>y</span>, <span class='va'>z</span><span class='op'>)</span><span class='op'>$</span><span class='va'>coefficients</span>
-</div><div class='output co'>#&gt;  (Intercept)  log(rprice) log(rincome) 
-#&gt;    9.4306583   -1.1433751    0.2145153 </div><div class='input'>
-</div></pre>
+    <div class="ref-examples sourceCode"><pre class='sourceCode r'><code><span class='r-in'><span class='co'>## data</span></span>
+<span class='r-in'><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='st'>"CigaretteDemand"</span>, package <span class='op'>=</span> <span class='st'>"ivreg"</span><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'>## high-level interface</span></span>
+<span class='r-in'><span class='va'>m</span> <span class='op'>&lt;-</span> <span class='fu'><a href='ivreg.html'>ivreg</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/Log.html'>log</a></span><span class='op'>(</span><span class='va'>packs</span><span class='op'>)</span> <span class='op'>~</span> <span class='fu'><a href='https://rdrr.io/r/base/Log.html'>log</a></span><span class='op'>(</span><span class='va'>rprice</span><span class='op'>)</span> <span class='op'>+</span> <span class='fu'><a href='https://rdrr.io/r/base/Log.html'>log</a></span><span class='op'>(</span><span class='va'>rincome</span><span class='op'>)</span> <span class='op'>|</span> <span class='va'>salestax</span> <span class='op'>+</span> <span class='fu'><a href='https://rdrr.io/r/base/Log.html'>log</a></span><span class='op'>(</span><span class='va'>rincome</span><span class='op'>)</span>,</span>
+<span class='r-in'>  data <span class='op'>=</span> <span class='va'>CigaretteDemand</span><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'>## low-level interface</span></span>
+<span class='r-in'><span class='va'>y</span> <span class='op'>&lt;-</span> <span class='va'>m</span><span class='op'>$</span><span class='va'>y</span></span>
+<span class='r-in'><span class='va'>x</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/model.matrix.html'>model.matrix</a></span><span class='op'>(</span><span class='va'>m</span>, component <span class='op'>=</span> <span class='st'>"regressors"</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>z</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/model.matrix.html'>model.matrix</a></span><span class='op'>(</span><span class='va'>m</span>, component <span class='op'>=</span> <span class='st'>"instruments"</span><span class='op'>)</span></span>
+<span class='r-in'><span class='fu'>ivreg.fit</span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>y</span>, <span class='va'>z</span><span class='op'>)</span><span class='op'>$</span><span class='va'>coefficients</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  (Intercept)  log(rprice) log(rincome) </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>    9.4306583   -1.1433751    0.2145153 </span>
+<span class='r-in'></span>
+</code></pre></div>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -286,11 +294,11 @@ for first projecting <code>x</code> onto the image of
 
       <footer>
       <div class="copyright">
-  <p>Developed by John Fox, Christian Kleiber, Achim Zeileis.</p>
+  <p><p>Developed by John Fox, Christian Kleiber, Achim Zeileis.</p></p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.9000.</p>
+  <p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 1.6.1.9001.</p></p>
 </div>
 
       </footer>
@@ -298,6 +306,8 @@ for first projecting <code>x</code> onto the image of
 
   
 
+
+  
 
   </body>
 </html>
