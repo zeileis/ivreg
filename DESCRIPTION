@@ -21,7 +21,8 @@ Suggests:
     rmarkdown,
     sandwich, 
     testthat,
-    modelsummary
+    modelsummary,
+    ggplot2
 Encoding: UTF-8
 LazyData: true
 VignetteBuilder: knitr
