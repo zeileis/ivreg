@@ -96,7 +96,7 @@ estimation is also supported, based on M-estimation (22M) or MM-estimation (2SMM
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -125,7 +125,7 @@ estimation is also supported, based on M-estimation (22M) or MM-estimation (2SMM
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/john-d-fox/ivreg/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -154,16 +154,16 @@ instruments is equal to the number of predictors. Alternative robust-regression
 estimation is also supported, based on M-estimation (22M) or MM-estimation (2SMM).</p>
     </div>
 
-    <pre class="usage"><span class='fu'>ivreg.fit</span>(
-  <span class='kw'>x</span>,
-  <span class='kw'>y</span>,
-  <span class='kw'>z</span>,
-  <span class='kw'>weights</span>,
-  <span class='kw'>offset</span>,
-  method = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"OLS"</span>, <span class='st'>"M"</span>, <span class='st'>"MM"</span>),
-  rlm.args = <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(),
-  <span class='kw'>...</span>
-)</pre>
+    <pre class="usage"><span class='fu'>ivreg.fit</span><span class='op'>(</span>
+  <span class='va'>x</span>,
+  <span class='va'>y</span>,
+  <span class='va'>z</span>,
+  <span class='va'>weights</span>,
+  <span class='va'>offset</span>,
+  method <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"OLS"</span>, <span class='st'>"M"</span>, <span class='st'>"MM"</span><span class='op'>)</span>,
+  rlm.args <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span><span class='op'>)</span>,
+  <span class='va'>...</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -265,17 +265,17 @@ for first projecting <code>x</code> onto the image of
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'>## data</span>
-<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='st'>"CigaretteDemand"</span>, package = <span class='st'>"ivreg"</span>)
+<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='st'>"CigaretteDemand"</span>, package <span class='op'>=</span> <span class='st'>"ivreg"</span><span class='op'>)</span>
 
 <span class='co'>## high-level interface</span>
-<span class='kw'>m</span> <span class='op'>&lt;-</span> <span class='fu'><a href='ivreg.html'>ivreg</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/Log.html'>log</a></span>(<span class='kw'>packs</span>) <span class='op'>~</span> <span class='fu'><a href='https://rdrr.io/r/base/Log.html'>log</a></span>(<span class='kw'>rprice</span>) <span class='op'>+</span> <span class='fu'><a href='https://rdrr.io/r/base/Log.html'>log</a></span>(<span class='kw'>rincome</span>) <span class='op'>|</span> <span class='kw'>salestax</span> <span class='op'>+</span> <span class='fu'><a href='https://rdrr.io/r/base/Log.html'>log</a></span>(<span class='kw'>rincome</span>),
-  data = <span class='kw'>CigaretteDemand</span>)
+<span class='va'>m</span> <span class='op'>&lt;-</span> <span class='fu'><a href='ivreg.html'>ivreg</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/Log.html'>log</a></span><span class='op'>(</span><span class='va'>packs</span><span class='op'>)</span> <span class='op'>~</span> <span class='fu'><a href='https://rdrr.io/r/base/Log.html'>log</a></span><span class='op'>(</span><span class='va'>rprice</span><span class='op'>)</span> <span class='op'>+</span> <span class='fu'><a href='https://rdrr.io/r/base/Log.html'>log</a></span><span class='op'>(</span><span class='va'>rincome</span><span class='op'>)</span> <span class='op'>|</span> <span class='va'>salestax</span> <span class='op'>+</span> <span class='fu'><a href='https://rdrr.io/r/base/Log.html'>log</a></span><span class='op'>(</span><span class='va'>rincome</span><span class='op'>)</span>,
+  data <span class='op'>=</span> <span class='va'>CigaretteDemand</span><span class='op'>)</span>
 
 <span class='co'>## low-level interface</span>
-<span class='kw'>y</span> <span class='op'>&lt;-</span> <span class='kw'>m</span><span class='op'>$</span><span class='kw'>y</span>
-<span class='kw'>x</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/model.matrix.html'>model.matrix</a></span>(<span class='kw'>m</span>, component = <span class='st'>"regressors"</span>)
-<span class='kw'>z</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/model.matrix.html'>model.matrix</a></span>(<span class='kw'>m</span>, component = <span class='st'>"instruments"</span>)
-<span class='fu'>ivreg.fit</span>(<span class='kw'>x</span>, <span class='kw'>y</span>, <span class='kw'>z</span>)<span class='op'>$</span><span class='kw'>coefficients</span>
+<span class='va'>y</span> <span class='op'>&lt;-</span> <span class='va'>m</span><span class='op'>$</span><span class='va'>y</span>
+<span class='va'>x</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/model.matrix.html'>model.matrix</a></span><span class='op'>(</span><span class='va'>m</span>, component <span class='op'>=</span> <span class='st'>"regressors"</span><span class='op'>)</span>
+<span class='va'>z</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/model.matrix.html'>model.matrix</a></span><span class='op'>(</span><span class='va'>m</span>, component <span class='op'>=</span> <span class='st'>"instruments"</span><span class='op'>)</span>
+<span class='fu'>ivreg.fit</span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>y</span>, <span class='va'>z</span><span class='op'>)</span><span class='op'>$</span><span class='va'>coefficients</span>
 </div><div class='output co'>#&gt;  (Intercept)  log(rprice) log(rincome) 
 #&gt;    9.4306583   -1.1433751    0.2145153 </div><div class='input'>
 </div></pre>

@@ -97,7 +97,7 @@ estimators are also provided, based on M-estimation (2SM) and MM-estimation
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -126,7 +126,7 @@ estimators are also provided, based on M-estimation (2SM) and MM-estimation
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/john-d-fox/ivreg/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -156,20 +156,20 @@ estimators are also provided, based on M-estimation (2SM) and MM-estimation
 (2SMM).</p>
     </div>
 
-    <pre class="usage"><span class='fu'>ivreg</span>(
-  <span class='kw'>formula</span>,
-  <span class='kw'>instruments</span>,
-  <span class='kw'>data</span>,
-  <span class='kw'>subset</span>,
-  <span class='kw'>na.action</span>,
-  <span class='kw'>weights</span>,
-  <span class='kw'>offset</span>,
-  contrasts = <span class='kw'>NULL</span>,
-  model = <span class='fl'>TRUE</span>,
-  y = <span class='fl'>TRUE</span>,
-  x = <span class='fl'>FALSE</span>,
-  <span class='kw'>...</span>
-)</pre>
+    <pre class="usage"><span class='fu'>ivreg</span><span class='op'>(</span>
+  <span class='va'>formula</span>,
+  <span class='va'>instruments</span>,
+  <span class='va'>data</span>,
+  <span class='va'>subset</span>,
+  <span class='va'>na.action</span>,
+  <span class='va'>weights</span>,
+  <span class='va'>offset</span>,
+  contrasts <span class='op'>=</span> <span class='cn'>NULL</span>,
+  model <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  y <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  x <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  <span class='va'>...</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -314,12 +314,12 @@ on the right-hand side.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'>## data</span>
-<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='st'>"CigaretteDemand"</span>, package = <span class='st'>"ivreg"</span>)
+<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='st'>"CigaretteDemand"</span>, package <span class='op'>=</span> <span class='st'>"ivreg"</span><span class='op'>)</span>
 
 <span class='co'>## model </span>
-<span class='kw'>m</span> <span class='op'>&lt;-</span> <span class='fu'>ivreg</span>(<span class='fu'><a href='https://rdrr.io/r/base/Log.html'>log</a></span>(<span class='kw'>packs</span>) <span class='op'>~</span> <span class='fu'><a href='https://rdrr.io/r/base/Log.html'>log</a></span>(<span class='kw'>rprice</span>) <span class='op'>+</span> <span class='fu'><a href='https://rdrr.io/r/base/Log.html'>log</a></span>(<span class='kw'>rincome</span>) <span class='op'>|</span> <span class='kw'>salestax</span> <span class='op'>+</span> <span class='fu'><a href='https://rdrr.io/r/base/Log.html'>log</a></span>(<span class='kw'>rincome</span>),
-  data = <span class='kw'>CigaretteDemand</span>)
-<span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>(<span class='kw'>m</span>)
+<span class='va'>m</span> <span class='op'>&lt;-</span> <span class='fu'>ivreg</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/Log.html'>log</a></span><span class='op'>(</span><span class='va'>packs</span><span class='op'>)</span> <span class='op'>~</span> <span class='fu'><a href='https://rdrr.io/r/base/Log.html'>log</a></span><span class='op'>(</span><span class='va'>rprice</span><span class='op'>)</span> <span class='op'>+</span> <span class='fu'><a href='https://rdrr.io/r/base/Log.html'>log</a></span><span class='op'>(</span><span class='va'>rincome</span><span class='op'>)</span> <span class='op'>|</span> <span class='va'>salestax</span> <span class='op'>+</span> <span class='fu'><a href='https://rdrr.io/r/base/Log.html'>log</a></span><span class='op'>(</span><span class='va'>rincome</span><span class='op'>)</span>,
+  data <span class='op'>=</span> <span class='va'>CigaretteDemand</span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span><span class='op'>(</span><span class='va'>m</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; 
 #&gt; Call:
 #&gt; ivreg(formula = log(packs) ~ log(rprice) + log(rincome) | salestax + 
@@ -346,7 +346,7 @@ on the right-hand side.</p>
 #&gt; Residual standard error: 0.1896 on 45 degrees of freedom
 #&gt; Multiple R-Squared: 0.4189,	Adjusted R-squared: 0.3931 
 #&gt; Wald test: 6.534 on 2 and 45 DF,  p-value: 0.003227 
-#&gt; </div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>(<span class='kw'>m</span>, vcov = <span class='kw'>sandwich</span>::<span class='kw'><a href='http://sandwich.R-Forge.R-project.org//reference/sandwich.html'>sandwich</a></span>, df = <span class='fl'>Inf</span>)
+#&gt; </div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span><span class='op'>(</span><span class='va'>m</span>, vcov <span class='op'>=</span> <span class='fu'>sandwich</span><span class='fu'>::</span><span class='va'><a href='https://sandwich.R-Forge.R-project.org//reference/sandwich.html'>sandwich</a></span>, df <span class='op'>=</span> <span class='cn'>Inf</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; 
 #&gt; Call:
 #&gt; ivreg(formula = log(packs) ~ log(rprice) + log(rincome) | salestax + 
@@ -375,15 +375,15 @@ on the right-hand side.</p>
 #&gt; Wald test:     2 on NA DF,  p-value: NA 
 #&gt; </div><div class='input'>
 <span class='co'>## ANOVA</span>
-<span class='kw'>m2</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/update.html'>update</a></span>(<span class='kw'>m</span>, <span class='kw'>.</span> <span class='op'>~</span> <span class='kw'>.</span> <span class='op'>-</span> <span class='fu'><a href='https://rdrr.io/r/base/Log.html'>log</a></span>(<span class='kw'>rincome</span>) <span class='op'>|</span> <span class='kw'>.</span> <span class='op'>-</span> <span class='fu'><a href='https://rdrr.io/r/base/Log.html'>log</a></span>(<span class='kw'>rincome</span>))
-<span class='fu'><a href='https://rdrr.io/r/stats/anova.html'>anova</a></span>(<span class='kw'>m</span>, <span class='kw'>m2</span>)
+<span class='va'>m2</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/update.html'>update</a></span><span class='op'>(</span><span class='va'>m</span>, <span class='va'>.</span> <span class='op'>~</span> <span class='va'>.</span> <span class='op'>-</span> <span class='fu'><a href='https://rdrr.io/r/base/Log.html'>log</a></span><span class='op'>(</span><span class='va'>rincome</span><span class='op'>)</span> <span class='op'>|</span> <span class='va'>.</span> <span class='op'>-</span> <span class='fu'><a href='https://rdrr.io/r/base/Log.html'>log</a></span><span class='op'>(</span><span class='va'>rincome</span><span class='op'>)</span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/r/stats/anova.html'>anova</a></span><span class='op'>(</span><span class='va'>m</span>, <span class='va'>m2</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; Analysis of Variance Table
 #&gt; 
 #&gt; Model 1: log(packs) ~ log(rprice) + log(rincome) | salestax + log(rincome)
 #&gt; Model 2: log(packs) ~ log(rprice) | salestax
 #&gt;   Res.Df    RSS Df Sum of Sq      F Pr(&gt;F)
 #&gt; 1     45 1.6172                           
-#&gt; 2     46 1.6668 -1 -0.049558 0.6379 0.4287</div><div class='input'><span class='kw'>car</span>::<span class='fu'><a href='https://rdrr.io/pkg/car/man/Anova.html'>Anova</a></span>(<span class='kw'>m</span>)
+#&gt; 2     46 1.6668 -1 -0.049558 0.6379 0.4287</div><div class='input'><span class='fu'>car</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/car/man/Anova.html'>Anova</a></span><span class='op'>(</span><span class='va'>m</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; Analysis of Deviance Table (Type II tests)
 #&gt; 
 #&gt; Response: log(packs)
@@ -394,7 +394,7 @@ on the right-hand side.</p>
 #&gt; ---
 #&gt; Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1</div><div class='input'>
 <span class='co'>## same model specified by formula with three-part right-hand side</span>
-<span class='fu'>ivreg</span>(<span class='fu'><a href='https://rdrr.io/r/base/Log.html'>log</a></span>(<span class='kw'>packs</span>) <span class='op'>~</span> <span class='fu'><a href='https://rdrr.io/r/base/Log.html'>log</a></span>(<span class='kw'>rincome</span>) <span class='op'>|</span> <span class='fu'><a href='https://rdrr.io/r/base/Log.html'>log</a></span>(<span class='kw'>rprice</span>) <span class='op'>|</span> <span class='kw'>salestax</span>, data = <span class='kw'>CigaretteDemand</span>)
+<span class='fu'>ivreg</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/Log.html'>log</a></span><span class='op'>(</span><span class='va'>packs</span><span class='op'>)</span> <span class='op'>~</span> <span class='fu'><a href='https://rdrr.io/r/base/Log.html'>log</a></span><span class='op'>(</span><span class='va'>rincome</span><span class='op'>)</span> <span class='op'>|</span> <span class='fu'><a href='https://rdrr.io/r/base/Log.html'>log</a></span><span class='op'>(</span><span class='va'>rprice</span><span class='op'>)</span> <span class='op'>|</span> <span class='va'>salestax</span>, data <span class='op'>=</span> <span class='va'>CigaretteDemand</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; 
 #&gt; Call:
 #&gt; ivreg(formula = log(packs) ~ log(rincome) | log(rprice) | salestax,     data = CigaretteDemand)
@@ -404,14 +404,14 @@ on the right-hand side.</p>
 #&gt;       9.4307       -1.1434        0.2145  
 #&gt; </div><div class='input'>
 <span class='co'># Robust 2SLS regression</span>
-<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='st'>"Kmenta"</span>, package = <span class='st'>"ivreg"</span>)
-<span class='kw'>Kmenta1</span> <span class='op'>&lt;-</span> <span class='kw'>Kmenta</span>
-<span class='kw'>Kmenta1</span>[<span class='fl'>20</span>, <span class='st'>"Q"</span>] <span class='op'>&lt;-</span> <span class='fl'>95</span> <span class='co'># corrupted data</span>
-<span class='kw'>deq</span> <span class='op'>&lt;-</span> <span class='fu'>ivreg</span>(<span class='kw'>Q</span> <span class='op'>~</span> <span class='kw'>P</span> <span class='op'>+</span> <span class='kw'>D</span> <span class='op'>|</span> <span class='kw'>D</span> <span class='op'>+</span> <span class='kw'>F</span> <span class='op'>+</span> <span class='kw'>A</span>, data=<span class='kw'>Kmenta</span>) <span class='co'># demand equation, uncorrupted data</span>
-<span class='kw'>deq1</span> <span class='op'>&lt;-</span> <span class='fu'>ivreg</span>(<span class='kw'>Q</span> <span class='op'>~</span> <span class='kw'>P</span> <span class='op'>+</span> <span class='kw'>D</span> <span class='op'>|</span> <span class='kw'>D</span> <span class='op'>+</span> <span class='kw'>F</span> <span class='op'>+</span> <span class='kw'>A</span>, data=<span class='kw'>Kmenta1</span>) <span class='co'># standard 2SLS, corrupted data</span>
-<span class='kw'>deq2</span> <span class='op'>&lt;-</span> <span class='fu'>ivreg</span>(<span class='kw'>Q</span> <span class='op'>~</span> <span class='kw'>P</span> <span class='op'>+</span> <span class='kw'>D</span> <span class='op'>|</span> <span class='kw'>D</span> <span class='op'>+</span> <span class='kw'>F</span> <span class='op'>+</span> <span class='kw'>A</span>, data=<span class='kw'>Kmenta1</span>, subset=<span class='op'>-</span><span class='fl'>20</span>) <span class='co'># standard 2SLS, removing bad case</span>
-<span class='kw'>deq3</span> <span class='op'>&lt;-</span> <span class='fu'>ivreg</span>(<span class='kw'>Q</span> <span class='op'>~</span> <span class='kw'>P</span> <span class='op'>+</span> <span class='kw'>D</span> <span class='op'>|</span> <span class='kw'>D</span> <span class='op'>+</span> <span class='kw'>F</span> <span class='op'>+</span> <span class='kw'>A</span>, data=<span class='kw'>Kmenta1</span>, method=<span class='st'>"MM"</span>) <span class='co'># 2SLS MM estimation</span>
-<span class='kw'>car</span>::<span class='fu'><a href='https://rdrr.io/pkg/car/man/compareCoefs.html'>compareCoefs</a></span>(<span class='kw'>deq</span>, <span class='kw'>deq1</span>, <span class='kw'>deq2</span>, <span class='kw'>deq3</span>)
+<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='st'>"Kmenta"</span>, package <span class='op'>=</span> <span class='st'>"ivreg"</span><span class='op'>)</span>
+<span class='va'>Kmenta1</span> <span class='op'>&lt;-</span> <span class='va'>Kmenta</span>
+<span class='va'>Kmenta1</span><span class='op'>[</span><span class='fl'>20</span>, <span class='st'>"Q"</span><span class='op'>]</span> <span class='op'>&lt;-</span> <span class='fl'>95</span> <span class='co'># corrupted data</span>
+<span class='va'>deq</span> <span class='op'>&lt;-</span> <span class='fu'>ivreg</span><span class='op'>(</span><span class='va'>Q</span> <span class='op'>~</span> <span class='va'>P</span> <span class='op'>+</span> <span class='va'>D</span> <span class='op'>|</span> <span class='va'>D</span> <span class='op'>+</span> <span class='cn'>F</span> <span class='op'>+</span> <span class='va'>A</span>, data<span class='op'>=</span><span class='va'>Kmenta</span><span class='op'>)</span> <span class='co'># demand equation, uncorrupted data</span>
+<span class='va'>deq1</span> <span class='op'>&lt;-</span> <span class='fu'>ivreg</span><span class='op'>(</span><span class='va'>Q</span> <span class='op'>~</span> <span class='va'>P</span> <span class='op'>+</span> <span class='va'>D</span> <span class='op'>|</span> <span class='va'>D</span> <span class='op'>+</span> <span class='cn'>F</span> <span class='op'>+</span> <span class='va'>A</span>, data<span class='op'>=</span><span class='va'>Kmenta1</span><span class='op'>)</span> <span class='co'># standard 2SLS, corrupted data</span>
+<span class='va'>deq2</span> <span class='op'>&lt;-</span> <span class='fu'>ivreg</span><span class='op'>(</span><span class='va'>Q</span> <span class='op'>~</span> <span class='va'>P</span> <span class='op'>+</span> <span class='va'>D</span> <span class='op'>|</span> <span class='va'>D</span> <span class='op'>+</span> <span class='cn'>F</span> <span class='op'>+</span> <span class='va'>A</span>, data<span class='op'>=</span><span class='va'>Kmenta1</span>, subset<span class='op'>=</span><span class='op'>-</span><span class='fl'>20</span><span class='op'>)</span> <span class='co'># standard 2SLS, removing bad case</span>
+<span class='va'>deq3</span> <span class='op'>&lt;-</span> <span class='fu'>ivreg</span><span class='op'>(</span><span class='va'>Q</span> <span class='op'>~</span> <span class='va'>P</span> <span class='op'>+</span> <span class='va'>D</span> <span class='op'>|</span> <span class='va'>D</span> <span class='op'>+</span> <span class='cn'>F</span> <span class='op'>+</span> <span class='va'>A</span>, data<span class='op'>=</span><span class='va'>Kmenta1</span>, method<span class='op'>=</span><span class='st'>"MM"</span><span class='op'>)</span> <span class='co'># 2SLS MM estimation</span>
+<span class='fu'>car</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/car/man/compareCoefs.html'>compareCoefs</a></span><span class='op'>(</span><span class='va'>deq</span>, <span class='va'>deq1</span>, <span class='va'>deq2</span>, <span class='va'>deq3</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; Calls:
 #&gt; 1: ivreg(formula = Q ~ P + D | D + F + A, data = Kmenta)
 #&gt; 2: ivreg(formula = Q ~ P + D | D + F + A, data = Kmenta1)
@@ -427,7 +427,7 @@ on the right-hand side.</p>
 #&gt;                                            
 #&gt; D            0.3140  0.2351  0.3233  0.3468
 #&gt; SE           0.0469  0.0690  0.0527  0.0569
-#&gt;                                            </div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/Round.html'>round</a></span>(<span class='kw'>deq3</span><span class='op'>$</span><span class='kw'>rweights</span>, <span class='fl'>2</span>) <span class='co'># robustness weights</span>
+#&gt;                                            </div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/Round.html'>round</a></span><span class='op'>(</span><span class='va'>deq3</span><span class='op'>$</span><span class='va'>rweights</span>, <span class='fl'>2</span><span class='op'>)</span> <span class='co'># robustness weights</span>
 </div><div class='output co'>#&gt;         P stage_2
 #&gt; 1922 0.97    0.98
 #&gt; 1923 0.97    0.98

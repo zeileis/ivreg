@@ -105,7 +105,7 @@ Diagnostics for 2SLS Regression." />
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -134,7 +134,7 @@ Diagnostics for 2SLS Regression." />
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/john-d-fox/ivreg/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -173,120 +173,120 @@ independent.</p>
     </div>
 
     <pre class="usage"><span class='co'># S3 method for ivreg</span>
-<span class='fu'><a href='https://rdrr.io/r/stats/lm.influence.html'>influence</a></span>(
-  <span class='kw'>model</span>,
-  sigma. = <span class='kw'>n</span> <span class='op'>&lt;=</span> <span class='fl'>1000</span>,
-  type = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"stage2"</span>, <span class='st'>"both"</span>, <span class='st'>"maximum"</span>),
-  applyfun = <span class='kw'>NULL</span>,
-  ncores = <span class='kw'>NULL</span>,
-  <span class='kw'>...</span>
-)
+<span class='fu'><a href='https://rdrr.io/r/stats/lm.influence.html'>influence</a></span><span class='op'>(</span>
+  <span class='va'>model</span>,
+  sigma. <span class='op'>=</span> <span class='va'>n</span> <span class='op'>&lt;=</span> <span class='fl'>1000</span>,
+  type <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"stage2"</span>, <span class='st'>"both"</span>, <span class='st'>"maximum"</span><span class='op'>)</span>,
+  applyfun <span class='op'>=</span> <span class='cn'>NULL</span>,
+  ncores <span class='op'>=</span> <span class='cn'>NULL</span>,
+  <span class='va'>...</span>
+<span class='op'>)</span>
 
 <span class='co'># S3 method for ivreg</span>
-<span class='fu'><a href='https://rdrr.io/r/stats/influence.measures.html'>rstudent</a></span>(<span class='kw'>model</span>, <span class='kw'>...</span>)
+<span class='fu'><a href='https://rdrr.io/r/stats/influence.measures.html'>rstudent</a></span><span class='op'>(</span><span class='va'>model</span>, <span class='va'>...</span><span class='op'>)</span>
 
 <span class='co'># S3 method for ivreg</span>
-<span class='fu'><a href='https://rdrr.io/r/stats/influence.measures.html'>cooks.distance</a></span>(<span class='kw'>model</span>, <span class='kw'>...</span>)
+<span class='fu'><a href='https://rdrr.io/r/stats/influence.measures.html'>cooks.distance</a></span><span class='op'>(</span><span class='va'>model</span>, <span class='va'>...</span><span class='op'>)</span>
 
 <span class='co'># S3 method for influence.ivreg</span>
-<span class='fu'><a href='https://rdrr.io/r/stats/influence.measures.html'>dfbeta</a></span>(<span class='kw'>model</span>, <span class='kw'>...</span>)
+<span class='fu'><a href='https://rdrr.io/r/stats/influence.measures.html'>dfbeta</a></span><span class='op'>(</span><span class='va'>model</span>, <span class='va'>...</span><span class='op'>)</span>
 
 <span class='co'># S3 method for ivreg</span>
-<span class='fu'><a href='https://rdrr.io/r/stats/influence.measures.html'>dfbeta</a></span>(<span class='kw'>model</span>, <span class='kw'>...</span>)
+<span class='fu'><a href='https://rdrr.io/r/stats/influence.measures.html'>dfbeta</a></span><span class='op'>(</span><span class='va'>model</span>, <span class='va'>...</span><span class='op'>)</span>
 
 <span class='co'># S3 method for ivreg</span>
-<span class='fu'><a href='https://rdrr.io/r/stats/influence.measures.html'>hatvalues</a></span>(<span class='kw'>model</span>, type = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"stage2"</span>, <span class='st'>"both"</span>, <span class='st'>"maximum"</span>, <span class='st'>"stage1"</span>), <span class='kw'>...</span>)
+<span class='fu'><a href='https://rdrr.io/r/stats/influence.measures.html'>hatvalues</a></span><span class='op'>(</span><span class='va'>model</span>, type <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"stage2"</span>, <span class='st'>"both"</span>, <span class='st'>"maximum"</span>, <span class='st'>"stage1"</span><span class='op'>)</span>, <span class='va'>...</span><span class='op'>)</span>
 
 <span class='co'># S3 method for influence.ivreg</span>
-<span class='fu'><a href='https://rdrr.io/r/stats/influence.measures.html'>rstudent</a></span>(<span class='kw'>model</span>, <span class='kw'>...</span>)
+<span class='fu'><a href='https://rdrr.io/r/stats/influence.measures.html'>rstudent</a></span><span class='op'>(</span><span class='va'>model</span>, <span class='va'>...</span><span class='op'>)</span>
 
 <span class='co'># S3 method for influence.ivreg</span>
-<span class='fu'><a href='https://rdrr.io/r/stats/influence.measures.html'>hatvalues</a></span>(<span class='kw'>model</span>, <span class='kw'>...</span>)
+<span class='fu'><a href='https://rdrr.io/r/stats/influence.measures.html'>hatvalues</a></span><span class='op'>(</span><span class='va'>model</span>, <span class='va'>...</span><span class='op'>)</span>
 
 <span class='co'># S3 method for influence.ivreg</span>
-<span class='fu'><a href='https://rdrr.io/r/stats/influence.measures.html'>cooks.distance</a></span>(<span class='kw'>model</span>, <span class='kw'>...</span>)
+<span class='fu'><a href='https://rdrr.io/r/stats/influence.measures.html'>cooks.distance</a></span><span class='op'>(</span><span class='va'>model</span>, <span class='va'>...</span><span class='op'>)</span>
 
 <span class='co'># S3 method for influence.ivreg</span>
-<span class='fu'>qqPlot</span>(
-  <span class='kw'>x</span>,
-  ylab = <span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste</a></span>(<span class='st'>"Studentized Residuals("</span>, <span class='fu'><a href='https://rdrr.io/r/base/deparse.html'>deparse</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/substitute.html'>substitute</a></span>(<span class='kw'>x</span>)), <span class='st'>")"</span>, sep = <span class='st'>""</span>),
-  distribution = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"t"</span>, <span class='st'>"norm"</span>),
-  <span class='kw'>...</span>
-)
+<span class='fu'>qqPlot</span><span class='op'>(</span>
+  <span class='va'>x</span>,
+  ylab <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste</a></span><span class='op'>(</span><span class='st'>"Studentized Residuals("</span>, <span class='fu'><a href='https://rdrr.io/r/base/deparse.html'>deparse</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/substitute.html'>substitute</a></span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span><span class='op'>)</span>, <span class='st'>")"</span>, sep <span class='op'>=</span> <span class='st'>""</span><span class='op'>)</span>,
+  distribution <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"t"</span>, <span class='st'>"norm"</span><span class='op'>)</span>,
+  <span class='va'>...</span>
+<span class='op'>)</span>
 
 <span class='co'># S3 method for ivreg</span>
-<span class='fu'>influencePlot</span>(<span class='kw'>x</span>, <span class='kw'>...</span>)
+<span class='fu'>influencePlot</span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>...</span><span class='op'>)</span>
 
 <span class='co'># S3 method for influence.ivreg</span>
-<span class='fu'>influencePlot</span>(<span class='kw'>model</span>, <span class='kw'>...</span>)
+<span class='fu'>influencePlot</span><span class='op'>(</span><span class='va'>model</span>, <span class='va'>...</span><span class='op'>)</span>
 
 <span class='co'># S3 method for ivreg</span>
-<span class='fu'>infIndexPlot</span>(<span class='kw'>model</span>, <span class='kw'>...</span>)
+<span class='fu'>infIndexPlot</span><span class='op'>(</span><span class='va'>model</span>, <span class='va'>...</span><span class='op'>)</span>
 
 <span class='co'># S3 method for influence.ivreg</span>
-<span class='fu'>infIndexPlot</span>(<span class='kw'>model</span>, <span class='kw'>...</span>)
+<span class='fu'>infIndexPlot</span><span class='op'>(</span><span class='va'>model</span>, <span class='va'>...</span><span class='op'>)</span>
 
 <span class='co'># S3 method for influence.ivreg</span>
-<span class='fu'><a href='https://rdrr.io/r/stats/model.matrix.html'>model.matrix</a></span>(<span class='kw'>object</span>, <span class='kw'>...</span>)
+<span class='fu'><a href='https://rdrr.io/r/stats/model.matrix.html'>model.matrix</a></span><span class='op'>(</span><span class='va'>object</span>, <span class='va'>...</span><span class='op'>)</span>
 
 <span class='co'># S3 method for ivreg</span>
-<span class='fu'>avPlots</span>(<span class='kw'>model</span>, <span class='kw'>terms</span>, <span class='kw'>...</span>)
+<span class='fu'>avPlots</span><span class='op'>(</span><span class='va'>model</span>, <span class='va'>terms</span>, <span class='va'>...</span><span class='op'>)</span>
 
 <span class='co'># S3 method for ivreg</span>
-<span class='fu'>avPlot</span>(<span class='kw'>model</span>, <span class='kw'>...</span>)
+<span class='fu'>avPlot</span><span class='op'>(</span><span class='va'>model</span>, <span class='va'>...</span><span class='op'>)</span>
 
 <span class='co'># S3 method for ivreg</span>
-<span class='fu'>mcPlots</span>(<span class='kw'>model</span>, <span class='kw'>terms</span>, <span class='kw'>...</span>)
+<span class='fu'>mcPlots</span><span class='op'>(</span><span class='va'>model</span>, <span class='va'>terms</span>, <span class='va'>...</span><span class='op'>)</span>
 
 <span class='co'># S3 method for ivreg</span>
-<span class='fu'>mcPlot</span>(<span class='kw'>model</span>, <span class='kw'>...</span>)
+<span class='fu'>mcPlot</span><span class='op'>(</span><span class='va'>model</span>, <span class='va'>...</span><span class='op'>)</span>
 
 <span class='co'># S3 method for ivreg</span>
-<span class='fu'>Boot</span>(
-  <span class='kw'>object</span>,
-  f = <span class='kw'>coef</span>,
-  labels = <span class='fu'><a href='https://rdrr.io/r/base/names.html'>names</a></span>(<span class='fu'>f</span>(<span class='kw'>object</span>)),
-  R = <span class='fl'>999</span>,
-  method = <span class='st'>"case"</span>,
-  ncores = <span class='fl'>1</span>,
-  <span class='kw'>...</span>
-)
+<span class='fu'>Boot</span><span class='op'>(</span>
+  <span class='va'>object</span>,
+  f <span class='op'>=</span> <span class='va'>coef</span>,
+  labels <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/names.html'>names</a></span><span class='op'>(</span><span class='fu'>f</span><span class='op'>(</span><span class='va'>object</span><span class='op'>)</span><span class='op'>)</span>,
+  R <span class='op'>=</span> <span class='fl'>999</span>,
+  method <span class='op'>=</span> <span class='st'>"case"</span>,
+  ncores <span class='op'>=</span> <span class='fl'>1</span>,
+  <span class='va'>...</span>
+<span class='op'>)</span>
 
 <span class='co'># S3 method for ivreg</span>
-<span class='fu'>crPlots</span>(<span class='kw'>model</span>, <span class='kw'>terms</span>, <span class='kw'>...</span>)
+<span class='fu'>crPlots</span><span class='op'>(</span><span class='va'>model</span>, <span class='va'>terms</span>, <span class='va'>...</span><span class='op'>)</span>
 
 <span class='co'># S3 method for ivreg</span>
-<span class='fu'>crPlot</span>(<span class='kw'>model</span>, <span class='kw'>...</span>)
+<span class='fu'>crPlot</span><span class='op'>(</span><span class='va'>model</span>, <span class='va'>...</span><span class='op'>)</span>
 
 <span class='co'># S3 method for ivreg</span>
-<span class='fu'>ceresPlots</span>(<span class='kw'>model</span>, <span class='kw'>terms</span>, <span class='kw'>...</span>)
+<span class='fu'>ceresPlots</span><span class='op'>(</span><span class='va'>model</span>, <span class='va'>terms</span>, <span class='va'>...</span><span class='op'>)</span>
 
 <span class='co'># S3 method for ivreg</span>
-<span class='fu'>ceresPlot</span>(<span class='kw'>model</span>, <span class='kw'>...</span>)
+<span class='fu'>ceresPlot</span><span class='op'>(</span><span class='va'>model</span>, <span class='va'>...</span><span class='op'>)</span>
 
 <span class='co'># S3 method for ivreg</span>
-<span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span>(<span class='kw'>x</span>, <span class='kw'>...</span>)
+<span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>...</span><span class='op'>)</span>
 
 <span class='co'># S3 method for ivreg</span>
-<span class='fu'>qqPlot</span>(<span class='kw'>x</span>, distribution = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"t"</span>, <span class='st'>"norm"</span>), <span class='kw'>...</span>)
+<span class='fu'>qqPlot</span><span class='op'>(</span><span class='va'>x</span>, distribution <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"t"</span>, <span class='st'>"norm"</span><span class='op'>)</span>, <span class='va'>...</span><span class='op'>)</span>
 
 <span class='co'># S3 method for ivreg</span>
-<span class='fu'>outlierTest</span>(<span class='kw'>x</span>, <span class='kw'>...</span>)
+<span class='fu'>outlierTest</span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>...</span><span class='op'>)</span>
 
 <span class='co'># S3 method for ivreg</span>
-<span class='fu'>influencePlot</span>(<span class='kw'>x</span>, <span class='kw'>...</span>)
+<span class='fu'>influencePlot</span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>...</span><span class='op'>)</span>
 
 <span class='co'># S3 method for ivreg</span>
-<span class='fu'>spreadLevelPlot</span>(<span class='kw'>x</span>, main = <span class='st'>"Spread-Level Plot"</span>, <span class='kw'>...</span>)
+<span class='fu'>spreadLevelPlot</span><span class='op'>(</span><span class='va'>x</span>, main <span class='op'>=</span> <span class='st'>"Spread-Level Plot"</span>, <span class='va'>...</span><span class='op'>)</span>
 
 <span class='co'># S3 method for ivreg</span>
-<span class='fu'>ncvTest</span>(<span class='kw'>model</span>, <span class='kw'>...</span>)
+<span class='fu'>ncvTest</span><span class='op'>(</span><span class='va'>model</span>, <span class='va'>...</span><span class='op'>)</span>
 
 <span class='co'># S3 method for ivreg</span>
-<span class='fu'><a href='https://rdrr.io/r/stats/deviance.html'>deviance</a></span>(<span class='kw'>object</span>, <span class='kw'>...</span>)
+<span class='fu'><a href='https://rdrr.io/r/stats/deviance.html'>deviance</a></span><span class='op'>(</span><span class='va'>object</span>, <span class='va'>...</span><span class='op'>)</span>
 
 <span class='co'># S3 method for rivreg</span>
-<span class='fu'><a href='https://rdrr.io/r/stats/lm.influence.html'>influence</a></span>(<span class='kw'>model</span>, <span class='kw'>...</span>)</pre>
+<span class='fu'><a href='https://rdrr.io/r/stats/lm.influence.html'>influence</a></span><span class='op'>(</span><span class='va'>model</span>, <span class='va'>...</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -384,8 +384,8 @@ draw graphs.</p>
   <code><a href='https://rdrr.io/pkg/car/man/ncvTest.html'>ncvTest</a></code>.</p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>kmenta.eq1</span> <span class='op'>&lt;-</span> <span class='fu'><a href='ivreg.html'>ivreg</a></span>(<span class='kw'>Q</span> <span class='op'>~</span> <span class='kw'>P</span> <span class='op'>+</span> <span class='kw'>D</span> <span class='op'>|</span> <span class='kw'>D</span> <span class='op'>+</span> <span class='kw'>F</span> <span class='op'>+</span> <span class='kw'>A</span>, data = <span class='kw'>Kmenta</span>)
-<span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>(<span class='kw'>kmenta.eq1</span>)
+    <pre class="examples"><div class='input'><span class='va'>kmenta.eq1</span> <span class='op'>&lt;-</span> <span class='fu'><a href='ivreg.html'>ivreg</a></span><span class='op'>(</span><span class='va'>Q</span> <span class='op'>~</span> <span class='va'>P</span> <span class='op'>+</span> <span class='va'>D</span> <span class='op'>|</span> <span class='va'>D</span> <span class='op'>+</span> <span class='cn'>F</span> <span class='op'>+</span> <span class='va'>A</span>, data <span class='op'>=</span> <span class='va'>Kmenta</span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span><span class='op'>(</span><span class='va'>kmenta.eq1</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; 
 #&gt; Call:
 #&gt; ivreg(formula = Q ~ P + D | D + F + A, data = Kmenta)
@@ -411,39 +411,39 @@ draw graphs.</p>
 #&gt; Residual standard error: 1.966 on 17 degrees of freedom
 #&gt; Multiple R-Squared: 0.7548,	Adjusted R-squared: 0.726 
 #&gt; Wald test: 23.81 on 2 and 17 DF,  p-value: 1.178e-05 
-#&gt; </div><div class='input'><span class='kw'>car</span>::<span class='fu'><a href='https://rdrr.io/pkg/car/man/avPlots.html'>avPlots</a></span>(<span class='kw'>kmenta.eq1</span>)
-</div><div class='img'><img src='ivregDiagnostics-1.png' alt='' width='700' height='433' /></div><div class='input'><span class='kw'>car</span>::<span class='fu'><a href='https://rdrr.io/pkg/car/man/mcPlots.html'>mcPlots</a></span>(<span class='kw'>kmenta.eq1</span>)
-</div><div class='img'><img src='ivregDiagnostics-2.png' alt='' width='700' height='433' /></div><div class='input'><span class='kw'>car</span>::<span class='fu'><a href='https://rdrr.io/pkg/car/man/crPlots.html'>crPlots</a></span>(<span class='kw'>kmenta.eq1</span>)
-</div><div class='img'><img src='ivregDiagnostics-3.png' alt='' width='700' height='433' /></div><div class='input'><span class='kw'>car</span>::<span class='fu'><a href='https://rdrr.io/pkg/car/man/ceresPlots.html'>ceresPlots</a></span>(<span class='kw'>kmenta.eq1</span>)
-</div><div class='img'><img src='ivregDiagnostics-4.png' alt='' width='700' height='433' /></div><div class='input'><span class='kw'>car</span>::<span class='fu'><a href='https://rdrr.io/pkg/car/man/influencePlot.html'>influencePlot</a></span>(<span class='kw'>kmenta.eq1</span>)
+#&gt; </div><div class='input'><span class='fu'>car</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/car/man/avPlots.html'>avPlots</a></span><span class='op'>(</span><span class='va'>kmenta.eq1</span><span class='op'>)</span>
+</div><div class='img'><img src='ivregDiagnostics-1.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'>car</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/car/man/mcPlots.html'>mcPlots</a></span><span class='op'>(</span><span class='va'>kmenta.eq1</span><span class='op'>)</span>
+</div><div class='img'><img src='ivregDiagnostics-2.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'>car</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/car/man/crPlots.html'>crPlots</a></span><span class='op'>(</span><span class='va'>kmenta.eq1</span><span class='op'>)</span>
+</div><div class='img'><img src='ivregDiagnostics-3.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'>car</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/car/man/ceresPlots.html'>ceresPlots</a></span><span class='op'>(</span><span class='va'>kmenta.eq1</span><span class='op'>)</span>
+</div><div class='img'><img src='ivregDiagnostics-4.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'>car</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/car/man/influencePlot.html'>influencePlot</a></span><span class='op'>(</span><span class='va'>kmenta.eq1</span><span class='op'>)</span>
 </div><div class='img'><img src='ivregDiagnostics-5.png' alt='' width='700' height='433' /></div><div class='output co'>#&gt;         StudRes        Hat      CookD
 #&gt; 1929 -1.7359357 0.09079703 0.06956671
 #&gt; 1933 -1.3686682 0.26453459 0.21973049
 #&gt; 1937 -2.0995532 0.13849570 0.17147564
 #&gt; 1938 -0.2010944 0.39711512 0.01508349
-#&gt; 1941 -0.4505155 0.46498004 0.05257374</div><div class='input'><span class='kw'>car</span>::<span class='fu'><a href='https://rdrr.io/pkg/car/man/infIndexPlot.html'>influenceIndexPlot</a></span>(<span class='kw'>kmenta.eq1</span>)
-</div><div class='img'><img src='ivregDiagnostics-6.png' alt='' width='700' height='433' /></div><div class='input'><span class='kw'>car</span>::<span class='fu'><a href='https://rdrr.io/pkg/car/man/qqPlot.html'>qqPlot</a></span>(<span class='kw'>kmenta.eq1</span>)
+#&gt; 1941 -0.4505155 0.46498004 0.05257374</div><div class='input'><span class='fu'>car</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/car/man/infIndexPlot.html'>influenceIndexPlot</a></span><span class='op'>(</span><span class='va'>kmenta.eq1</span><span class='op'>)</span>
+</div><div class='img'><img src='ivregDiagnostics-6.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'>car</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/car/man/qqPlot.html'>qqPlot</a></span><span class='op'>(</span><span class='va'>kmenta.eq1</span><span class='op'>)</span>
 </div><div class='img'><img src='ivregDiagnostics-7.png' alt='' width='700' height='433' /></div><div class='output co'>#&gt; 1937 1929 
-#&gt;   16    8 </div><div class='input'><span class='kw'>car</span>::<span class='fu'><a href='https://rdrr.io/pkg/car/man/spreadLevelPlot.html'>spreadLevelPlot</a></span>(<span class='kw'>kmenta.eq1</span>)
+#&gt;   16    8 </div><div class='input'><span class='fu'>car</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/car/man/spreadLevelPlot.html'>spreadLevelPlot</a></span><span class='op'>(</span><span class='va'>kmenta.eq1</span><span class='op'>)</span>
 </div><div class='img'><img src='ivregDiagnostics-8.png' alt='' width='700' height='433' /></div><div class='output co'>#&gt; 
-#&gt; Suggested power transformation:  -2.44685 </div><div class='input'><span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span>(<span class='kw'>effects</span>::<span class='fu'><a href='https://rdrr.io/pkg/effects/man/predictorEffects.html'>predictorEffects</a></span>(<span class='kw'>kmenta.eq1</span>, residuals = <span class='fl'>TRUE</span>))
+#&gt; Suggested power transformation:  -2.44685 </div><div class='input'><span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span><span class='op'>(</span><span class='fu'>effects</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/effects/man/predictorEffects.html'>predictorEffects</a></span><span class='op'>(</span><span class='va'>kmenta.eq1</span>, residuals <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; <span class='message'>Registered S3 methods overwritten by 'lme4':</span>
 #&gt; <span class='message'>  method                          from</span>
 #&gt; <span class='message'>  cooks.distance.influence.merMod car </span>
 #&gt; <span class='message'>  influence.merMod                car </span>
 #&gt; <span class='message'>  dfbeta.influence.merMod         car </span>
-#&gt; <span class='message'>  dfbetas.influence.merMod        car </span></div><div class='img'><img src='ivregDiagnostics-9.png' alt='' width='700' height='433' /></div><div class='input'><span class='kw'>set.seed</span> <span class='op'>&lt;-</span> <span class='fl'>12321</span> <span class='co'># for reproducibility</span>
-<span class='fu'><a href='https://rdrr.io/r/stats/confint.html'>confint</a></span>(<span class='kw'>car</span>::<span class='fu'><a href='https://rdrr.io/pkg/car/man/Boot.html'>Boot</a></span>(<span class='kw'>kmenta.eq1</span>, R = <span class='fl'>250</span>)) <span class='co'># 250 reps for brevity</span>
+#&gt; <span class='message'>  dfbetas.influence.merMod        car </span></div><div class='img'><img src='ivregDiagnostics-9.png' alt='' width='700' height='433' /></div><div class='input'><span class='va'>set.seed</span> <span class='op'>&lt;-</span> <span class='fl'>12321</span> <span class='co'># for reproducibility</span>
+<span class='fu'><a href='https://rdrr.io/r/stats/confint.html'>confint</a></span><span class='op'>(</span><span class='fu'>car</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/car/man/Boot.html'>Boot</a></span><span class='op'>(</span><span class='va'>kmenta.eq1</span>, R <span class='op'>=</span> <span class='fl'>250</span><span class='op'>)</span><span class='op'>)</span> <span class='co'># 250 reps for brevity</span>
 </div><div class='output co'>#&gt; Bootstrap bca confidence intervals
 #&gt; 
 #&gt;                  2.5 %       97.5 %
 #&gt; (Intercept) 74.1021451 107.77780398
 #&gt; P           -0.4454188   0.02161098
-#&gt; D            0.1902243   0.40024278</div><div class='input'><span class='kw'>car</span>::<span class='fu'><a href='https://rdrr.io/pkg/car/man/outlierTest.html'>outlierTest</a></span>(<span class='kw'>kmenta.eq1</span>)
+#&gt; D            0.1902243   0.40024278</div><div class='input'><span class='fu'>car</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/car/man/outlierTest.html'>outlierTest</a></span><span class='op'>(</span><span class='va'>kmenta.eq1</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; No Studentized residuals with Bonferroni p &lt; 0.05
 #&gt; Largest |rstudent|:
 #&gt;       rstudent unadjusted p-value Bonferroni p
-#&gt; 1937 -2.099553           0.051985           NA</div><div class='input'><span class='kw'>car</span>::<span class='fu'><a href='https://rdrr.io/pkg/car/man/ncvTest.html'>ncvTest</a></span>(<span class='kw'>kmenta.eq1</span>)
+#&gt; 1937 -2.099553           0.051985           NA</div><div class='input'><span class='fu'>car</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/car/man/ncvTest.html'>ncvTest</a></span><span class='op'>(</span><span class='va'>kmenta.eq1</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; Non-constant Variance Score Test 
 #&gt; Variance formula: ~ fitted.values 
 #&gt; Chisquare = 0.2390325, Df = 1, p = 0.62491</div><div class='input'>

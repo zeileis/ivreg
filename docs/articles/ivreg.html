@@ -50,7 +50,7 @@
       <ul class="nav navbar-nav">
 <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -79,7 +79,7 @@
 <ul class="nav navbar-nav navbar-right">
 <li>
   <a href="https://github.com/john-d-fox/ivreg/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -93,8 +93,7 @@
 
       
 
-      </header><script src="ivreg_files/header-attrs-2.5/header-attrs.js"></script><script src="ivreg_files/accessible-code-block-0.0.1/empty-anchor.js"></script><link href="ivreg_files/anchor-sections-1.0/anchor-sections.css" rel="stylesheet">
-<script src="ivreg_files/anchor-sections-1.0/anchor-sections.js"></script><script src="ivreg_files/kePrint-0.0.1/kePrint.js"></script><link href="ivreg_files/lightable-0.0.1/lightable.css" rel="stylesheet">
+      </header><script src="ivreg_files/header-attrs-2.8/header-attrs.js"></script><script src="ivreg_files/accessible-code-block-0.0.1/empty-anchor.js"></script><script src="ivreg_files/kePrint-0.0.1/kePrint.js"></script><link href="ivreg_files/lightable-0.0.1/lightable.css" rel="stylesheet">
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
@@ -125,13 +124,11 @@
 <h2 class="hasAnchor">
 <a href="#installation" class="anchor"></a>Installation</h2>
 <p>The stable release version of <a href="https://CRAN.R-project.org/package=ivreg"><strong>ivreg</strong></a> is hosted on the Comprehensive R Archive Network (CRAN) at <a href="https://CRAN.R-project.org/package=ivreg" class="uri">https://CRAN.R-project.org/package=ivreg</a> and can be installed along with all dependencies via</p>
-<div class="sourceCode" id="cb1"><pre class="downlit">
-<span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span>(<span class="st">"ivreg"</span>, dependencies = <span class="fl">TRUE</span>)
-</pre></div>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"ivreg"</span>, dependencies <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
 <p>The development version of <strong>ivreg</strong> is hosted on GitHub at <a href="https://github.com/john-d-fox/ivreg/" class="uri">https://github.com/john-d-fox/ivreg/</a>. It can be conveniently installed installed via the <code>install_github()</code> function in the <a href="https://CRAN.R-project.org/package=remotes"><strong>remotes</strong></a> package:</p>
-<div class="sourceCode" id="cb2"><pre class="downlit">
-<span class="kw">remotes</span>::<span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html">install_github</a></span>(<span class="st">"https://github.com/john-d-fox/ivreg/"</span>)
-</pre></div>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html">install_github</a></span><span class="op">(</span><span class="st">"https://github.com/john-d-fox/ivreg/"</span><span class="op">)</span></code></pre></div>
 </div>
 <div id="instrumental-variables-regression" class="section level2">
 <h2 class="hasAnchor">
@@ -143,10 +140,9 @@
 <h2 class="hasAnchor">
 <a href="#illustration-returns-to-schooling" class="anchor"></a>Illustration: Returns to schooling</h2>
 <p>As an initial demonstration of the <strong>ivreg</strong> package, we investigate the effect of schooling on earnings in a classical model for wage determination. The data are from the United States, and are provided in the package as <code>SchoolingReturns</code>. This data set was originally studied by David Card, and was subsequently employed, as here, to illustrate 2SLS estimation in introductory econometrics textbooks. The relevant variables for this illustration are:</p>
-<div class="sourceCode" id="cb3"><pre class="downlit">
-<span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span>(<span class="st">"SchoolingReturns"</span>, package = <span class="st">"ivreg"</span>)
-<span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span>(<span class="kw">SchoolingReturns</span>[, <span class="fl">1</span><span class="op">:</span><span class="fl">8</span>])
-</pre></div>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="st">"SchoolingReturns"</span>, package <span class="op">=</span> <span class="st">"ivreg"</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">SchoolingReturns</span><span class="op">[</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">8</span><span class="op">]</span><span class="op">)</span></code></pre></div>
 <pre><code>##       wage          education       experience     ethnicity     smsa     
 ##  Min.   : 100.0   Min.   : 1.00   Min.   : 0.000   other:2307   no : 864  
 ##  1st Qu.: 394.2   1st Qu.:12.00   1st Qu.: 6.000   afam : 703   yes:2146  
@@ -162,11 +158,10 @@
 ##             3rd Qu.:31.00              
 ##             Max.   :34.00</code></pre>
 <p>A standard wage equation uses a semi-logarithmic linear regression for <code>wage</code>, estimated by ordinary least squares (OLS), with years of <code>education</code> as the primary explanatory variable, adjusting for a quadratic term in labor-market <code>experience</code>, as well as for factors coding <code>ethnicity</code>, residence in a city (<code>smsa</code>), and residence in the U.S. <code>south</code>:</p>
-<div class="sourceCode" id="cb5"><pre class="downlit">
-<span class="kw">m_ols</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span>(<span class="kw">wage</span>) <span class="op">~</span> <span class="kw">education</span> <span class="op">+</span> <span class="fu"><a href="https://rdrr.io/r/stats/poly.html">poly</a></span>(<span class="kw">experience</span>, <span class="fl">2</span>) <span class="op">+</span> <span class="kw">ethnicity</span> <span class="op">+</span> <span class="kw">smsa</span> <span class="op">+</span> <span class="kw">south</span>,
-  data = <span class="kw">SchoolingReturns</span>)
-<span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span>(<span class="kw">m_ols</span>)
-</pre></div>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">m_ols</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span><span class="va">wage</span><span class="op">)</span> <span class="op">~</span> <span class="va">education</span> <span class="op">+</span> <span class="fu"><a href="https://rdrr.io/r/stats/poly.html">poly</a></span><span class="op">(</span><span class="va">experience</span>, <span class="fl">2</span><span class="op">)</span> <span class="op">+</span> <span class="va">ethnicity</span> <span class="op">+</span> <span class="va">smsa</span> <span class="op">+</span> <span class="va">south</span>,
+  data <span class="op">=</span> <span class="va">SchoolingReturns</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">m_ols</span><span class="op">)</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## lm(formula = log(wage) ~ education + poly(experience, 2) + ethnicity + 
@@ -193,21 +188,18 @@
 ## F-statistic: 204.9 on 6 and 3003 DF,  p-value: &lt; 2.2e-16</code></pre>
 <p>Thus, OLS estimation yields an estimate of 7.4% per year for returns to schooling. This estimate is problematic, however, because it can be argued that <code>education</code> is endogenous (and hence also <code>experience</code>, which is taken to be <code>age</code> minus <code>education</code> minus 6). We therefore use geographical proximity to a college when growing up as an exogenous instrument for <code>education</code>. Additionally, <code>age</code> is the natural exogenous instrument for <code>experience</code>, while the remaining explanatory variables can be considered exogenous and are thus used as instruments for themselves. Although it’s a useful strategy to select an effective instrument or instruments for each endogenous explanatory variable, in 2SLS regression all of the instrumental variables are used to estimate all of the regression coefficients in the model.</p>
 <p>To fit this model with <code><a href="../reference/ivreg.html">ivreg()</a></code> we can simply extend the formula from <code><a href="https://rdrr.io/r/stats/lm.html">lm()</a></code> above, adding a second part after the <code><a href="https://rdrr.io/r/base/Logic.html">|</a></code> separator to specify the instrumental variables:</p>
-<div class="sourceCode" id="cb7"><pre class="downlit">
-<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="st"><a href="https://john-d-fox.github.io/ivreg">"ivreg"</a></span>)
-<span class="kw">m_iv</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/ivreg.html">ivreg</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span>(<span class="kw">wage</span>) <span class="op">~</span> <span class="kw">education</span> <span class="op">+</span> <span class="fu"><a href="https://rdrr.io/r/stats/poly.html">poly</a></span>(<span class="kw">experience</span>, <span class="fl">2</span>) <span class="op">+</span> <span class="kw">ethnicity</span> <span class="op">+</span> <span class="kw">smsa</span> <span class="op">+</span> <span class="kw">south</span> <span class="op">|</span>
-  <span class="kw">nearcollege</span> <span class="op">+</span> <span class="fu"><a href="https://rdrr.io/r/stats/poly.html">poly</a></span>(<span class="kw">age</span>, <span class="fl">2</span>) <span class="op">+</span> <span class="kw">ethnicity</span> <span class="op">+</span> <span class="kw">smsa</span> <span class="op">+</span> <span class="kw">south</span>,
-  data = <span class="kw">SchoolingReturns</span>)
-</pre></div>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="st"><a href="https://john-d-fox.github.io/ivreg/">"ivreg"</a></span><span class="op">)</span>
+<span class="va">m_iv</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/ivreg.html">ivreg</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span><span class="va">wage</span><span class="op">)</span> <span class="op">~</span> <span class="va">education</span> <span class="op">+</span> <span class="fu"><a href="https://rdrr.io/r/stats/poly.html">poly</a></span><span class="op">(</span><span class="va">experience</span>, <span class="fl">2</span><span class="op">)</span> <span class="op">+</span> <span class="va">ethnicity</span> <span class="op">+</span> <span class="va">smsa</span> <span class="op">+</span> <span class="va">south</span> <span class="op">|</span>
+  <span class="va">nearcollege</span> <span class="op">+</span> <span class="fu"><a href="https://rdrr.io/r/stats/poly.html">poly</a></span><span class="op">(</span><span class="va">age</span>, <span class="fl">2</span><span class="op">)</span> <span class="op">+</span> <span class="va">ethnicity</span> <span class="op">+</span> <span class="va">smsa</span> <span class="op">+</span> <span class="va">south</span>,
+  data <span class="op">=</span> <span class="va">SchoolingReturns</span><span class="op">)</span></code></pre></div>
 <p>Equivalently, the same model can also be specified slightly more concisely using three parts on the right-hand side indicating the exogenous variables, the endogenous variables, and the additional instrument variables only (in addition to the exogenous variables).</p>
-<div class="sourceCode" id="cb8"><pre class="downlit">
-<span class="kw">m_iv</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/ivreg.html">ivreg</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span>(<span class="kw">wage</span>) <span class="op">~</span> <span class="kw">ethnicity</span> <span class="op">+</span> <span class="kw">smsa</span> <span class="op">+</span> <span class="kw">south</span> <span class="op">|</span> <span class="kw">education</span> <span class="op">+</span> <span class="fu"><a href="https://rdrr.io/r/stats/poly.html">poly</a></span>(<span class="kw">experience</span>, <span class="fl">2</span>) <span class="op">|</span>
-  <span class="kw">nearcollege</span> <span class="op">+</span> <span class="fu"><a href="https://rdrr.io/r/stats/poly.html">poly</a></span>(<span class="kw">age</span>, <span class="fl">2</span>), data = <span class="kw">SchoolingReturns</span>)
-</pre></div>
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">m_iv</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/ivreg.html">ivreg</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span><span class="va">wage</span><span class="op">)</span> <span class="op">~</span> <span class="va">ethnicity</span> <span class="op">+</span> <span class="va">smsa</span> <span class="op">+</span> <span class="va">south</span> <span class="op">|</span> <span class="va">education</span> <span class="op">+</span> <span class="fu"><a href="https://rdrr.io/r/stats/poly.html">poly</a></span><span class="op">(</span><span class="va">experience</span>, <span class="fl">2</span><span class="op">)</span> <span class="op">|</span>
+  <span class="va">nearcollege</span> <span class="op">+</span> <span class="fu"><a href="https://rdrr.io/r/stats/poly.html">poly</a></span><span class="op">(</span><span class="va">age</span>, <span class="fl">2</span><span class="op">)</span>, data <span class="op">=</span> <span class="va">SchoolingReturns</span><span class="op">)</span></code></pre></div>
 <p>Both models yield the following results:</p>
-<div class="sourceCode" id="cb9"><pre class="downlit">
-<span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span>(<span class="kw">m_iv</span>)
-</pre></div>
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">m_iv</span><span class="op">)</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## ivreg(formula = log(wage) ~ education + poly(experience, 2) + 
@@ -241,12 +233,11 @@
 ## Residual standard error: 0.4032 on 3003 degrees of freedom
 ## Multiple R-Squared: 0.1764,  Adjusted R-squared: 0.1747 
 ## Wald test: 148.1 on 6 and 3003 DF,  p-value: &lt; 2.2e-16</code></pre>
-<p>Thus, using two-stage least squares to estimate the regression yields a much larger coefficient for the returns to schooling, namely 13.3% per year. Notice as well that the standard errors of the coefficients are larger for 2SLS estimation than for OLS, and that, partly as a consequence, evidence for the effects of <code>ethnicity</code> and the quadratic component of <code>experience</code> is now weak. These differences are brought out more clearly when showing coefficients and standard errors side by side, e.g., using the <code><a href="https://rdrr.io/pkg/car/man/compareCoefs.html">compareCoefs()</a></code> function from the <strong>car</strong> package or the <code><a href="https://rdrr.io/pkg/modelsummary/man/msummary.html">msummary()</a></code> function from the <a href="https://CRAN.R-project.org/package=modelsummary"><strong>modelsummary</strong></a> package:</p>
-<div class="sourceCode" id="cb11"><pre class="downlit">
-<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="st"><a href="https://vincentarelbundock.github.io/modelsummary">"modelsummary"</a></span>)
-<span class="kw">m_list</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(OLS = <span class="kw">m_ols</span>, IV = <span class="kw">m_iv</span>)
-<span class="fu"><a href="https://rdrr.io/pkg/modelsummary/man/msummary.html">msummary</a></span>(<span class="kw">m_list</span>)
-</pre></div>
+<p>Thus, using two-stage least squares to estimate the regression yields a much larger coefficient for the returns to schooling, namely 13.3% per year. Notice as well that the standard errors of the coefficients are larger for 2SLS estimation than for OLS, and that, partly as a consequence, evidence for the effects of <code>ethnicity</code> and the quadratic component of <code>experience</code> is now weak. These differences are brought out more clearly when showing coefficients and standard errors side by side, e.g., using the <code><a href="https://rdrr.io/pkg/car/man/compareCoefs.html">compareCoefs()</a></code> function from the <strong>car</strong> package or the <code><a href="https://vincentarelbundock.github.io/modelsummary/reference/msummary.html">msummary()</a></code> function from the <a href="https://CRAN.R-project.org/package=modelsummary"><strong>modelsummary</strong></a> package:</p>
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="st"><a href="https://vincentarelbundock.github.io/modelsummary/">"modelsummary"</a></span><span class="op">)</span>
+<span class="va">m_list</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>OLS <span class="op">=</span> <span class="va">m_ols</span>, IV <span class="op">=</span> <span class="va">m_iv</span><span class="op">)</span>
+<span class="fu"><a href="https://vincentarelbundock.github.io/modelsummary/reference/msummary.html">msummary</a></span><span class="op">(</span><span class="va">m_list</span><span class="op">)</span></code></pre></div>
 <table class="table table">
 <thead><tr>
 <th style="text-align:left;">
@@ -481,10 +472,9 @@ F
 </tr>
 </tbody>
 </table>
-<p>The change in coefficients and associated standard errors can also be brought out graphically using the <code><a href="https://rdrr.io/pkg/modelsummary/man/modelplot.html">modelplot()</a></code> function from <strong>modelsummary</strong> which shows the coefficient estimates along with their 95% confidence intervals. Below we omit the intercept and experience terms as these are on a different scale than the other coefficients.</p>
-<div class="sourceCode" id="cb12"><pre class="downlit">
-<span class="fu"><a href="https://rdrr.io/pkg/modelsummary/man/modelplot.html">modelplot</a></span>(<span class="kw">m_list</span>, coef_omit = <span class="st">"Intercept|experience"</span>)
-</pre></div>
+<p>The change in coefficients and associated standard errors can also be brought out graphically using the <code><a href="https://vincentarelbundock.github.io/modelsummary/reference/modelplot.html">modelplot()</a></code> function from <strong>modelsummary</strong> which shows the coefficient estimates along with their 95% confidence intervals. Below we omit the intercept and experience terms as these are on a different scale than the other coefficients.</p>
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://vincentarelbundock.github.io/modelsummary/reference/modelplot.html">modelplot</a></span><span class="op">(</span><span class="va">m_list</span>, coef_omit <span class="op">=</span> <span class="st">"Intercept|experience"</span><span class="op">)</span></code></pre></div>
 <p><img src="ivreg_files/figure-html/modelplot-1.png" width="672"></p>
 </div>
   </div>
