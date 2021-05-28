@@ -147,7 +147,7 @@
 
     <div id="version-06-0" class="section level1">
 <h1 class="page-header" data-toc-text="0.6-0">
-<a href="#version-06-0" class="anchor" aria-hidden="true"></a>Version 0.6-0<small> Unreleased </small></h1>
+<a href="#version-06-0" class="anchor" aria-hidden="true"></a>Version 0.6-0<small> 2021-05-28 </small></h1>
 <ul><li><p>Three-part right-hand side <code>formula</code>s are supported now to facilitate specification of models with many exogenous regressors. For example, if there is one exogenous regressor <code>ex</code> and one endogenous regressor <code>en</code> with instrument <code>in</code>, a formula with three parts on the right-hand side can now also be used: <code>y ~ ex | en | in</code>. This is equivalent to specifying: <code>y ~ en + ex | in + ex</code>.</p></li>
 <li><p>Robust-regression estimators are provided as an alternative to ordinary least squares (OLS) both in stage 1 and 2 by means of <code>rlm()</code> from package <a href="https://CRAN.R-project.org/package=MASS" class="external-link">MASS</a>. Specifically, in addition to 2-stage least squares (2SLS, <code>method = "OLS"</code>, default) <code><a href="../reference/ivreg.html">ivreg()</a></code> now supports 2-stage M-estimation (2SM, <code>method = "M"</code>) and 2-stage MM-estimation (2SMM, <code>method = "MM"</code>).</p></li>
 <li><p>Dedicated <code><a href="https://rdrr.io/r/stats/confint.html" class="external-link">confint()</a></code> method allowing specification of the variance-covariance matrix <code>vcov.</code> and degrees of freedom <code>df</code> to be used (as in the <code><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary()</a></code> method).</p></li>
