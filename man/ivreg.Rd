@@ -16,6 +16,7 @@ ivreg(
   model = TRUE,
   y = TRUE,
   x = FALSE,
+  method = c("OLS", "M", "MM"),
   ...
 )
 }
@@ -50,6 +51,12 @@ known component to be included during fitting.}
 the fit (the model frame, the model matrices, the response) are returned. These
 components are necessary for computing regression diagnostics.}
 
+\item{method}{the method used to fit the stage 1 and 2 regression: 
+\code{"OLS"} for traditional 2SLS regression (the default), 
+\code{"M"} for M-estimation, or \code{"MM"} for MM-estimation, with the
+latter two robust-regression methods implemented via the \code{\link[MASS]{rlm}} 
+function in the \pkg{MASS} package.}
+
 \item{\dots}{further arguments passed to \code{\link{ivreg.fit}}.}
 }
 \value{
@@ -80,7 +87,7 @@ class \code{"lm"}, with the following components:
 \item{endogenous}{columns of the \code{"regressors"} matrix that are endogenous.}
 \item{instruments}{columns of the \code{"instruments"} matrix that are
 instruments for the endogenous variables.}
-#' \item{method}{the method used for the stage 1 and 2 regressions, one of \code{"OLS"},
+\item{method}{the method used for the stage 1 and 2 regressions, one of \code{"OLS"},
 \code{"M"}, or \code{"MM"}.}
 \item{rweights}{a matrix of robustness weights with columns for each of the stage-1
 regressions and for the stage-2 regression (in the last column) if the fitting method is 

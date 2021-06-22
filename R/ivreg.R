@@ -59,6 +59,11 @@
 #' @param model,x,y logicals.  If \code{TRUE} the corresponding components of
 #' the fit (the model frame, the model matrices, the response) are returned. These
 #' components are necessary for computing regression diagnostics.
+#' @param method the method used to fit the stage 1 and 2 regression: 
+#' \code{"OLS"} for traditional 2SLS regression (the default), 
+#' \code{"M"} for M-estimation, or \code{"MM"} for MM-estimation, with the
+#' latter two robust-regression methods implemented via the \code{\link[MASS]{rlm}} 
+#' function in the \pkg{MASS} package.
 #' @param \dots further arguments passed to \code{\link{ivreg.fit}}.
 #' 
 #' @return \code{ivreg} returns an object of class \code{"ivreg"} that inherits from
@@ -88,7 +93,7 @@
 #' \item{endogenous}{columns of the \code{"regressors"} matrix that are endogenous.}
 #' \item{instruments}{columns of the \code{"instruments"} matrix that are
 #' instruments for the endogenous variables.}
-#' #' \item{method}{the method used for the stage 1 and 2 regressions, one of \code{"OLS"},
+#' \item{method}{the method used for the stage 1 and 2 regressions, one of \code{"OLS"},
 #' \code{"M"}, or \code{"MM"}.}
 #' \item{rweights}{a matrix of robustness weights with columns for each of the stage-1
 #' regressions and for the stage-2 regression (in the last column) if the fitting method is 
@@ -145,8 +150,10 @@
 #' @importFrom stats .getXlevels model.weights
 #' @export
 ivreg <- function(formula, instruments, data, subset, na.action, weights, offset,
-  contrasts = NULL, model = TRUE, y = TRUE, x = FALSE, ...)
+  contrasts = NULL, model = TRUE, y = TRUE, x = FALSE, method = c("OLS", "M", "MM"), 
+  ...)
 {
+  method <- match.arg(method)
   ## set up model.frame() call  
   cl <- match.call()
   if(missing(data)) data <- environment(formula)
@@ -204,7 +211,7 @@ ivreg <- function(formula, instruments, data, subset, na.action, weights, offset
   offset <- as.vector(offset)
 
   ## call default interface
-  rval <- ivreg.fit(X, Y, Z, weights, offset, ...)
+  rval <- ivreg.fit(X, Y, Z, weights, offset, method, ...)
 
   ## enhance information stored in fitted model object
   rval$call <- cl

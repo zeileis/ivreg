@@ -1,3 +1,9 @@
+# Version 0.6-1
+
+* `method` is now an argument to `ivreg()`, not just to `ivreg.fit()=`.
+
+* Small fixes.
+
 # Version 0.6-0
 
 * Three-part right-hand side `formula`s are supported now to facilitate specification
