@@ -153,7 +153,7 @@ ivreg <- function(formula, instruments, data, subset, na.action, weights, offset
   contrasts = NULL, model = TRUE, y = TRUE, x = FALSE, method = c("OLS", "M", "MM"), 
   ...)
 {
-  method <- match.arg(method)
+  method <- match.arg(method, c("OLS", "M", "MM"))
   ## set up model.frame() call  
   cl <- match.call()
   if(missing(data)) data <- environment(formula)

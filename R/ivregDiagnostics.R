@@ -118,7 +118,7 @@ diagprod <- function(d, X){
 influence.ivreg <- function(model, sigma. = n <= 1e3, type = c("stage2", "both", "maximum"), 
                             applyfun = NULL, ncores = NULL, ...){
 
-  type <- match.arg(type)
+  type <- match.arg(type, c("stage2", "both", "maximum"))
 
   Z <- model.matrix(model, component = "instruments") # model$model.matrix.instruments
   X <- model.matrix(model, component = "regressors") # model$model.matrix
@@ -287,7 +287,7 @@ dfbeta.ivreg <- function(model, ...) {
 #' @importFrom stats df.residual hatvalues lm.influence na.omit naresid
 #' @export
 hatvalues.ivreg <- function(model, type = c("stage2", "both", "maximum", "stage1"), ...){
-  type <- match.arg(type)
+  type <- match.arg(type, c("stage2", "both", "maximum", "stage1"))
   hats <- model$hatvalues
   nms <- names(model$residuals)
   hatvalues <- if (type == "stage2") {
@@ -360,7 +360,7 @@ cooks.distance.influence.ivreg <- {
 qqPlot.influence.ivreg <- function(x,
                                    ylab = paste("Studentized Residuals(", deparse(substitute(x)), ")", sep = ""),
                                    distribution = c("t", "norm"), ...){
-  distribution <- match.arg(distribution)
+  distribution <- match.arg(distribution, c("t", "norm"))
   rstudent <- rstudent(x)
   if (distribution == "t"){
     car::qqPlot(rstudent, ylab = ylab, distribution = "t", df = df.residual(x), ...)
@@ -465,7 +465,7 @@ mcPlot.ivreg <- function(model, ...){
 #' @export
 Boot.ivreg <- function(object, f = coef, labels = names(f(object)), R = 999, 
                        method = "case", ncores = 1, ...){
-  method <- match.arg(method)
+  method <- match.arg(method, "case")
   NextMethod()
 }
 
@@ -530,7 +530,7 @@ plot.ivreg <- function(x, ...){
 #' @importFrom car qqPlot
 #' @export
 qqPlot.ivreg <- function(x, distribution=c("t", "norm"), ...){
-  distribution <- match.arg(distribution)
+  distribution <- match.arg(distribution, c("t", "norm"))
   rstudent <- rstudent(x)
   df <- df.residual(x)
   qqPlot(rstudent, distribution=distribution, df=df, ylab="Studentized Residuals", ...)
