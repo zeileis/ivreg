@@ -1,8 +1,10 @@
 # Version 0.6-1
 
-* `method` is now an argument to `ivreg()`, not just to `ivreg.fit()=`.
+* `method` is now an explicit argument to `ivreg()` and not just passed through `...`
+  to `ivreg.fit()`.
 
 * Small fixes.
+
 
 # Version 0.6-0
 
