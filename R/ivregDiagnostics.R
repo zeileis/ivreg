@@ -127,7 +127,7 @@ influence.ivreg <- function(model, sigma. = n <= 1e3, type = c("stage2", "both",
   if (is.null(y)) stop("response variable not in model object")
   b <- coef(model) # model$coefficients
   res <- na.remove(residuals(model)) # na.remove(model$residuals)
-  .sigma <- sqrt(model$sigma^2)
+  .sigma <- model$sigma
   w <- na.remove(weights(model)) # na.remove(model$weights)
   hatvalues <-  hatvalues(model, type=type)
   if (!is.null(w) && length(hatvalues) != length(w)){
