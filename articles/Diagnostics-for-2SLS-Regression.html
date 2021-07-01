@@ -427,27 +427,21 @@ E(y) = \alpha^\prime + \beta_1^\prime x_1 + \beta_2^\prime x_2 + \cdots + \beta_
 <p><code><a href="https://rdrr.io/pkg/car/man/crPlots.html" class="external-link">crPlots()</a></code> and <code><a href="https://rdrr.io/pkg/car/man/ceresPlots.html" class="external-link">ceresPlots()</a></code> work only for additive models; the <code><a href="https://rdrr.io/pkg/effects/man/predictorEffects.html" class="external-link">predictorEffects()</a></code> function in the <strong>effects</strong> package plots partial residuals for more complex models. In the current example, which is an additive model, we get essentially the same graphs as before, except for the scaling of the <span class="math inline">\(y\)</span> axis:</p>
 <div class="sourceCode" id="cb35"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="st"><a href="https://www.r-project.org" class="external-link">"effects"</a></span><span class="op">)</span></code></pre></div>
-<pre><code>## Registered S3 methods overwritten by 'lme4':
-##   method                          from
-##   cooks.distance.influence.merMod car 
-##   influence.merMod                car 
-##   dfbeta.influence.merMod         car 
-##   dfbetas.influence.merMod        car</code></pre>
 <pre><code>## lattice theme set by effectsTheme()
 ## See ?effectsTheme for details.</code></pre>
-<div class="sourceCode" id="cb38"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb37"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/effects/man/predictorEffects.html" class="external-link">predictorEffects</a></span><span class="op">(</span><span class="va">deq</span>, residuals<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span>, 
      partial.residuals<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>span<span class="op">=</span><span class="fl">1</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <p><img src="Diagnostics-for-2SLS-Regression_files/figure-html/unnamed-chunk-19-1.png" width="768"></p>
 <p>The shaded blue regions in the predictor effect plots represent pointwise 95% confidence envelopes around the fitted partial-regression lines.</p>
 <p>Suppose, however, that we fit the wrong model to the data:</p>
-<div class="sourceCode" id="cb39"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb38"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">deq2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/update.html" class="external-link">update</a></span><span class="op">(</span><span class="va">deq</span>, <span class="va">.</span> <span class="op">~</span> <span class="fu"><a href="https://rdrr.io/r/base/AsIs.html" class="external-link">I</a></span><span class="op">(</span><span class="op">(</span><span class="va">P</span> <span class="op">-</span> <span class="fl">85</span><span class="op">)</span><span class="op">^</span><span class="fl">4</span><span class="op">/</span><span class="fl">10</span><span class="op">^</span><span class="fl">5</span><span class="op">)</span> <span class="op">+</span> <span class="va">D</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/pkg/car/man/crPlots.html" class="external-link">crPlots</a></span><span class="op">(</span><span class="va">deq2</span>, smooth<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>span<span class="op">=</span><span class="fl">1</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <p><img src="Diagnostics-for-2SLS-Regression_files/figure-html/unnamed-chunk-20-1.png" width="768"></p>
 <p>Because the ratio <span class="math inline">\(\max(P)/\min(P) = 113.49/86.50 = 1.3\)</span> is not much larger than 1, we subtracted a number slightly smaller than <span class="math inline">\(\min(P)\)</span> from <span class="math inline">\(P\)</span> prior to raising the variable to the 4th power to induce substantial nonlinearity into the fitted partial regression curve. The resulting component-plus-residual plot for the transformed <span class="math inline">\(P\)</span> clearly reflects the resulting lack of fit, while the plot for <span class="math inline">\(D\)</span> is still reasonably linear.</p>
 <p>Predictor effect plots with partial residuals show a different view of the same situation by placing <code>P</code> rather than the transformed <code>P</code> on the horizontal axis, and revealing that the fitted nonlinear partial regression function fails to capture the linear pattern of the data:</p>
-<div class="sourceCode" id="cb40"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb39"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/effects/man/predictorEffects.html" class="external-link">predictorEffects</a></span><span class="op">(</span><span class="va">deq2</span>, residuals<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span>, 
      partial.residuals<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>span<span class="op">=</span><span class="fl">1</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <p><img src="Diagnostics-for-2SLS-Regression_files/figure-html/unnamed-chunk-21-1.png" width="768"></p>
@@ -458,19 +452,19 @@ E(y) = \alpha^\prime + \beta_1^\prime x_1 + \beta_2^\prime x_2 + \cdots + \beta_
 <h2 class="hasAnchor">
 <a href="#nonconstant-error-variance" class="anchor" aria-hidden="true"></a>Nonconstant Error Variance</h2>
 <p>Standard least-squares nonconstant variance (“heteroscedasticity”) diagnostics extend straightforwardly to 2SLS regression. We can, for example, plot studentized residuals versus fitted values to discern a tendency for the variability of the former to change (typically to increase) with the level of the latter. For the demand equation in Kmenta’s model,</p>
-<div class="sourceCode" id="cb41"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb40"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/fitted.values.html" class="external-link">fitted</a></span><span class="op">(</span><span class="va">deq</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/stats/influence.measures.html" class="external-link">rstudent</a></span><span class="op">(</span><span class="va">deq</span><span class="op">)</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/graphics/abline.html" class="external-link">abline</a></span><span class="op">(</span>h<span class="op">=</span><span class="fl">0</span><span class="op">)</span></code></pre></div>
 <p><img src="Diagnostics-for-2SLS-Regression_files/figure-html/unnamed-chunk-22-1.png" width="384"></p>
 <p>which seems unproblematic.</p>
 <p>A variation of this graph, suggested by <span class="citation">Fox (2016)</span>, adapts Tukey’s <em>spread-level plot</em> <span class="citation">(Tukey 1977)</span> to graph the log of the absolute studentized residuals versus the log of the fitted values, assuming that the latter are positive. If a line fit to the plot has slope <span class="math inline">\(b\)</span>, then a variance-stablilizing power transformation is given by <span class="math inline">\(y^\lambda = y^{1 - b}\)</span>. Thus if <span class="math inline">\(b &gt; 0\)</span>, the suggested transformation is <em>down</em> Tukey’s ladder of powers and roots, with, for example, <span class="math inline">\(\lambda = 1 - b = 1/2\)</span> representing the square-root transformation, <span class="math inline">\(\lambda = 1 - b = 0\)</span> the log transformation, and so on. For Kmenta’s model, we have</p>
-<div class="sourceCode" id="cb42"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb41"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/car/man/spreadLevelPlot.html" class="external-link">spreadLevelPlot</a></span><span class="op">(</span><span class="va">deq</span>, smooth<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>span<span class="op">=</span><span class="fl">1</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <p><img src="Diagnostics-for-2SLS-Regression_files/figure-html/unnamed-chunk-23-1.png" width="384"></p>
 <pre><code>## 
 ## Suggested power transformation:  -2.44685</code></pre>
 <p>which suggests a slight tendency of spread to increase with level. The transformation <span class="math inline">\(\lambda = - 2.45\)</span> seems strong, until we notice that the values of <span class="math inline">\(Q\)</span> are far from 0, and that the ratio of the largest to smallest values <span class="math inline">\(Q_{\mathrm{max}}/Q_{\mathrm{min}} = 106.23/92.42 = 1.15\)</span> is close to 1, so that <span class="math inline">\(Q^{-2.45}\)</span> is nearly a linear transformation of <span class="math inline">\(Q\)</span>—that is, effectively no transformation at all:</p>
-<div class="sourceCode" id="cb44"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb43"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/with.html" class="external-link">with</a></span><span class="op">(</span><span class="va">Kmenta</span>, <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">Q</span>, <span class="va">Q</span><span class="op">^</span><span class="op">-</span><span class="fl">2.5</span><span class="op">)</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/graphics/abline.html" class="external-link">abline</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/lm.html" class="external-link">lm</a></span><span class="op">(</span><span class="va">Q</span><span class="op">^</span><span class="op">-</span><span class="fl">2.5</span> <span class="op">~</span> <span class="va">Q</span>, data<span class="op">=</span><span class="va">Kmenta</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <p><img src="Diagnostics-for-2SLS-Regression_files/figure-html/unnamed-chunk-24-1.png" width="384"></p>
@@ -478,12 +472,12 @@ E(y) = \alpha^\prime + \beta_1^\prime x_1 + \beta_2^\prime x_2 + \cdots + \beta_
 V(\varepsilon) = g(\gamma_0 + \gamma_1 z_1 + \cdots + \gamma_s z_s) 
 \]</span> where the function <span class="math inline">\(g()\)</span> is unspecified and the variables <span class="math inline">\(z_1, \ldots, z_s\)</span> are predictors of the error variance. In the most common application, independently proposed by <span class="citation">Cook and Weisberg (1983)</span>, there is one <span class="math inline">\(z\)</span>, the fitted values <span class="math inline">\(\widehat{y}\)</span> from the regression, although it is also common to use the regressors <span class="math inline">\(x\)</span> from the primary regression as <span class="math inline">\(z\)</span>s. The test is implemented by regressing the squared standardized residuals <span class="math inline">\(e_i^2/\widehat{\sigma}^2\)</span> on the <span class="math inline">\(z\)</span>s, where <span class="math inline">\(\widehat{\sigma}^2 = \sum e_i^2/n\)</span>. The regression sum of squares for this auxiliary regression divided by 2 is then asymptotically distributed as <span class="math inline">\(\chi^2_s\)</span> under the null hypothesis of constant error variance.</p>
 <p>The Breusch-Pagan/Cook-Weisberg test is easily adaptable to 2SLS regression, as implemented by the <code><a href="https://rdrr.io/pkg/car/man/ncvTest.html" class="external-link">ncvTest()</a></code> function in the <strong>car</strong> package. For Kmenta’s demand equation:</p>
-<div class="sourceCode" id="cb45"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb44"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/car/man/ncvTest.html" class="external-link">ncvTest</a></span><span class="op">(</span><span class="va">deq</span><span class="op">)</span></code></pre></div>
 <pre><code>## Non-constant Variance Score Test 
 ## Variance formula: ~ fitted.values 
 ## Chisquare = 0.2390325, Df = 1, p = 0.62491</code></pre>
-<div class="sourceCode" id="cb47"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb46"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/car/man/ncvTest.html" class="external-link">ncvTest</a></span><span class="op">(</span><span class="va">deq</span>, var <span class="op">=</span> <span class="op">~</span> <span class="va">P</span> <span class="op">+</span> <span class="va">D</span><span class="op">)</span></code></pre></div>
 <pre><code>## Non-constant Variance Score Test 
 ## Variance formula: ~ P + D 
@@ -496,7 +490,7 @@ V(\varepsilon) = g(\gamma_0 + \gamma_1 z_1 + \cdots + \gamma_s z_s)
 <li><p>Finally, we can employ a <em>“sandwich” estimator</em> of the coefficient covariance matrix in 2SLS <span class="citation">(or the <em>bootstrap</em>: see, e.g., Davison and Hinkley 1997)</span> to correct standard errors for nonconstant error variance, much as in least-squares regression as proposed by <span class="citation">Huber (1967)</span> and <span class="citation">White (1980; also see Long and Ervin 2000)</span>.</p></li>
 </ul>
 <p>The <strong>ivreg</strong> package supports the <code><a href="https://sandwich.R-Forge.R-project.org//reference/sandwich.html" class="external-link">sandwich()</a></code> function in the <strong>sandwich</strong> package <span class="citation">(Zeileis 2006)</span>. For the Kmenta example, where evidence of nonconstant error variance is slight, the sandwich standard errors are similar to, indeed slightly smaller than, the conventional 2SLS standard errors:</p>
-<div class="sourceCode" id="cb49"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb48"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">deq</span>, vcov<span class="op">=</span><span class="fu">sandwich</span><span class="fu">::</span><span class="va"><a href="https://sandwich.R-Forge.R-project.org//reference/sandwich.html" class="external-link">sandwich</a></span><span class="op">)</span></code></pre></div>
 <pre><code>## 
 ## Call:
@@ -523,7 +517,7 @@ V(\varepsilon) = g(\gamma_0 + \gamma_1 z_1 + \cdots + \gamma_s z_s)
 ## Residual standard error: 1.966 on 17 degrees of freedom
 ## Multiple R-Squared: 0.7548,  Adjusted R-squared: 0.726 
 ## Wald test: 34.41 on 2 and 17 DF,  p-value: 1.055e-06</code></pre>
-<div class="sourceCode" id="cb51"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb50"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">SEs</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Round.html" class="external-link">round</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/cbind.html" class="external-link">cbind</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/MathFun.html" class="external-link">sqrt</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/diag.html" class="external-link">diag</a></span><span class="op">(</span><span class="fu">sandwich</span><span class="fu">::</span><span class="fu"><a href="https://sandwich.R-Forge.R-project.org//reference/sandwich.html" class="external-link">sandwich</a></span><span class="op">(</span><span class="va">deq</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>, 
                    <span class="fu"><a href="https://rdrr.io/r/base/MathFun.html" class="external-link">sqrt</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/diag.html" class="external-link">diag</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/vcov.html" class="external-link">vcov</a></span><span class="op">(</span><span class="va">deq</span><span class="op">)</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>, 
              <span class="fl">4</span><span class="op">)</span>
@@ -534,7 +528,7 @@ V(\varepsilon) = g(\gamma_0 + \gamma_1 z_1 + \cdots + \gamma_s z_s)
 ## P             0.0759       0.0965
 ## D             0.0429       0.0469</code></pre>
 <p>We’ll modify Kmenta’s data to reflect nonconstant error variance, regenerating the data as Kmenta did originally from the reduced-form equations, expressing the endogenous variables <span class="math inline">\(P\)</span> and <span class="math inline">\(Q\)</span> as functions of the exogenous variables <span class="math inline">\(D\)</span>, <span class="math inline">\(F\)</span>, and <span class="math inline">\(A\)</span>, and reduced-form errors <span class="math inline">\(\nu_1\)</span> and <span class="math inline">\(\nu_2\)</span>:</p>
-<div class="sourceCode" id="cb53"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb52"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">Kmenta2</span> <span class="op">&lt;-</span> <span class="va">Kmenta</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"D"</span>, <span class="st">"F"</span>, <span class="st">"A"</span><span class="op">)</span><span class="op">]</span>
 <span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">492365</span><span class="op">)</span> <span class="co"># for reproducibility</span>
 <span class="va">Kmenta2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/with.html" class="external-link">within</a></span><span class="op">(</span><span class="va">Kmenta2</span>, <span class="op">{</span>
@@ -550,11 +544,11 @@ V(\varepsilon) = g(\gamma_0 + \gamma_1 z_1 + \cdots + \gamma_s z_s)
     <span class="va">P</span> <span class="op">&lt;-</span> <span class="va">EP</span> <span class="op">+</span> <span class="va">v2</span>
 <span class="op">}</span><span class="op">)</span></code></pre></div>
 <p>Plotting the sampled reduced-form errors <code>v1</code> against the expectation of <code>Q</code> shows a clear heterscedastic pattern:</p>
-<div class="sourceCode" id="cb54"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb53"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/with.html" class="external-link">with</a></span><span class="op">(</span><span class="va">Kmenta2</span>, <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">EQ</span>, <span class="va">v1</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <p><img src="Diagnostics-for-2SLS-Regression_files/figure-html/unnamed-chunk-28-1.png" width="384"></p>
 <p>Then refitting the demand equation to the new data set, we get</p>
-<div class="sourceCode" id="cb55"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb54"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">deq2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/update.html" class="external-link">update</a></span><span class="op">(</span><span class="va">deq</span>, data<span class="op">=</span><span class="va">Kmenta2</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">deq2</span><span class="op">)</span></code></pre></div>
 <pre><code>## 
@@ -583,19 +577,19 @@ V(\varepsilon) = g(\gamma_0 + \gamma_1 z_1 + \cdots + \gamma_s z_s)
 ## Multiple R-Squared: 0.521,   Adjusted R-squared: 0.4646 
 ## Wald test: 6.695 on 2 and 17 DF,  p-value: 0.007172</code></pre>
 <p>and the nonconstant error variance is clearly reflected in diagnostics; for example,</p>
-<div class="sourceCode" id="cb57"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb56"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/car/man/spreadLevelPlot.html" class="external-link">spreadLevelPlot</a></span><span class="op">(</span><span class="va">deq2</span><span class="op">)</span></code></pre></div>
 <p><img src="Diagnostics-for-2SLS-Regression_files/figure-html/unnamed-chunk-30-1.png" width="384"></p>
 <pre><code>## 
 ## Suggested power transformation:  -22.57328</code></pre>
-<div class="sourceCode" id="cb59"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb58"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/car/man/ncvTest.html" class="external-link">ncvTest</a></span><span class="op">(</span><span class="va">deq2</span><span class="op">)</span></code></pre></div>
 <pre><code>## Non-constant Variance Score Test 
 ## Variance formula: ~ fitted.values 
 ## Chisquare = 6.690435, Df = 1, p = 0.0096932</code></pre>
 <p>The extreme value of the suggested power transformation of <span class="math inline">\(Q\)</span> from the spread-level plot, <span class="math inline">\(\lambda =-23\)</span>, reflects (as we noted previously) the fact that <span class="math inline">\(\max(Q)/\min(Q)\)</span> isn’t much larger than 1.</p>
 <p>In our example, the sandwich standard errors are not very different from the conventional standard errors:</p>
-<div class="sourceCode" id="cb61"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb60"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">SEs2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Round.html" class="external-link">round</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/cbind.html" class="external-link">cbind</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/MathFun.html" class="external-link">sqrt</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/diag.html" class="external-link">diag</a></span><span class="op">(</span><span class="fu">sandwich</span><span class="fu">::</span><span class="fu"><a href="https://sandwich.R-Forge.R-project.org//reference/sandwich.html" class="external-link">sandwich</a></span><span class="op">(</span><span class="va">deq2</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>, 
                    <span class="fu"><a href="https://rdrr.io/r/base/MathFun.html" class="external-link">sqrt</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/diag.html" class="external-link">diag</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/vcov.html" class="external-link">vcov</a></span><span class="op">(</span><span class="va">deq2</span><span class="op">)</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>, 
              <span class="fl">4</span><span class="op">)</span>
@@ -606,7 +600,7 @@ V(\varepsilon) = g(\gamma_0 + \gamma_1 z_1 + \cdots + \gamma_s z_s)
 ## P             0.1702       0.1398
 ## D             0.0848       0.0797</code></pre>
 <p>As mentioned, bootstrapping provides an alternative to sandwich standard errors as a correction for nonconstant error variance, and the <strong>ivreg</strong> package supplies an <code>"ivreg"</code> method for the <code><a href="https://rdrr.io/pkg/car/man/Boot.html" class="external-link">Boot()</a></code> function in the <strong>car</strong> package, implementing the case-resampling bootstrap, and returning an object of class <code>"boot"</code> suitable for use with functions in the <strong>boot</strong> package <span class="citation">(Davison and Hinkley 1997; Canty and Ripley 2020)</span>. By default, <span class="math inline">\(R = 999\)</span> bootstrap replications are generated. For example:</p>
-<div class="sourceCode" id="cb63"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb62"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">set.seed</span> <span class="op">&lt;-</span> <span class="fl">869255</span> <span class="co"># for reproducibility</span>
 <span class="va">b.deq2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/car/man/Boot.html" class="external-link">Boot</a></span><span class="op">(</span><span class="va">deq2</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">deq2</span>, vcov.<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/stats/vcov.html" class="external-link">vcov</a></span><span class="op">(</span><span class="va">b.deq2</span><span class="op">)</span><span class="op">)</span></code></pre></div>
@@ -637,7 +631,7 @@ V(\varepsilon) = g(\gamma_0 + \gamma_1 z_1 + \cdots + \gamma_s z_s)
 ## Wald test:  4.32 on 2 and 17 DF,  p-value: 0.03042</code></pre>
 <p>The bootstrap standard errors are larger than the conventional or sandwich standard errors for this example.</p>
 <p>Boostrap confidence intervals can also be computed from the object returned by <code><a href="https://rdrr.io/pkg/car/man/Boot.html" class="external-link">Boot()</a></code>, by default reporting <span class="math inline">\(BC_a\)</span> (<em>bias-corrected, accelerated</em>) intervals (see the documentation for <code><a href="https://rdrr.io/pkg/car/man/hist.boot.html" class="external-link">confint.boot()</a></code> in the <strong>car</strong> package):</p>
-<div class="sourceCode" id="cb65"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb64"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/confint.html" class="external-link">confint</a></span><span class="op">(</span><span class="va">b.deq2</span><span class="op">)</span></code></pre></div>
 <pre><code>## Bootstrap bca confidence intervals
 ## 
@@ -655,7 +649,7 @@ b_{\mathrm{W2SLS}} = [X^\top W Z(Z^\top W Z)^{-1} Z^\top W X]^{-1} X^\top W Z (Z
 \]</span> Alternatively, we can treat the two stages of 2SLS as <em>weighted least squares (WLS)</em> problems, in each stage minimizing the weighted sum of squared residuals. The <code><a href="../reference/ivreg.html">ivreg()</a></code> function computes the weighted 2SLS estimator in this manner.</p>
 <p>Phillips’s updating formulas for 2SLS regression could also be modified for the weighted case, but a simpler approach (which is evident in the formula for <span class="math inline">\(b_{\mathrm{W2SLS}}\)</span> above) is to convert the weighted 2SLS problem into an unweighted problem, by transforming the data to constant variance using <span class="math inline">\(W^{1/2} = \mathrm{diag}\{\sqrt{w_i}\}\)</span>, the Cholesky square root of <span class="math inline">\(W\)</span>. The square root of <span class="math inline">\(W\)</span> is particularly simple because <span class="math inline">\(W\)</span> is diagonal. Then in Phillips’s updating formulas, we replace <span class="math inline">\(y\)</span> with <span class="math inline">\(y^* = W^{1/2}y\)</span>, <span class="math inline">\(X\)</span> with <span class="math inline">\(X^* = W^{1/2}X\)</span>, and <span class="math inline">\(Z\)</span> with <span class="math inline">\(Z^* = W^{1/2}Z\)</span>.</p>
 <p>For the modified <code>Kmenta2</code> data, we know that the variances of the errors in the demand equation are inversely proportional to the variable <code>w</code>. This is of course artificial knowledge, reflecting the manner in which the data were constructed. The weighted 2SLS estimator is therefore computed as</p>
-<div class="sourceCode" id="cb67"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb66"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">deqw</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/update.html" class="external-link">update</a></span><span class="op">(</span><span class="va">deq</span>, data<span class="op">=</span><span class="va">Kmenta2</span>, weights<span class="op">=</span><span class="fl">1</span><span class="op">/</span><span class="va">w</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">deqw</span><span class="op">)</span></code></pre></div>
 <pre><code>## 
@@ -684,16 +678,16 @@ b_{\mathrm{W2SLS}} = [X^\top W Z(Z^\top W Z)^{-1} Z^\top W X]^{-1} X^\top W Z (Z
 ## Multiple R-Squared: 0.7166,  Adjusted R-squared: 0.6833 
 ## Wald test: 18.79 on 2 and 17 DF,  p-value: 4.95e-05</code></pre>
 <p>Plotting studentized residuals against fitted values and testing for nonconstant error variance don’t indicate a heteroscedasticity problem, but there is a relatively large studentized residual of about <span class="math inline">\(-3\)</span> that stands out somewhat from the other values:</p>
-<div class="sourceCode" id="cb69"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb68"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/car/man/ncvTest.html" class="external-link">ncvTest</a></span><span class="op">(</span><span class="va">deqw</span><span class="op">)</span></code></pre></div>
 <pre><code>## Non-constant Variance Score Test 
 ## Variance formula: ~ fitted.values 
 ## Chisquare = 4.21029, Df = 1, p = 0.040179</code></pre>
-<div class="sourceCode" id="cb71"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb70"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/fitted.values.html" class="external-link">fitted</a></span><span class="op">(</span><span class="va">deqw</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/stats/influence.measures.html" class="external-link">rstudent</a></span><span class="op">(</span><span class="va">deqw</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <p><img src="Diagnostics-for-2SLS-Regression_files/figure-html/unnamed-chunk-36-1.png" width="384"></p>
 <p>A Bonferroni outlier test suggests that the studentized residual isn’t unusually large, and once more we’re in the unusual situation of knowing that the model is correct.</p>
-<div class="sourceCode" id="cb72"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb71"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/car/man/outlierTest.html" class="external-link">outlierTest</a></span><span class="op">(</span><span class="va">deqw</span><span class="op">)</span></code></pre></div>
 <pre><code>## No Studentized residuals with Bonferroni p &lt; 0.05
 ## Largest |rstudent|:
@@ -706,13 +700,13 @@ b_{\mathrm{W2SLS}} = [X^\top W Z(Z^\top W Z)^{-1} Z^\top W X]^{-1} X^\top W Z (Z
 <p>In addition to unusual-data diagnostics, <span class="citation">Belsley, Kuh, and Welsch (1980)</span> briefly extend their approach to collinearity diagnostics to 2SLS regression. We believe that this approach, which assimilates collinearity to numerical instability, is flawed, in that it takes into account “collinearity with the intercept.” That is, regressors with values far from 0 have large sums of products with the constant regressor, producing a large standard error of the intercept, and simply reflecting the fact that the intercept extrapolates the fitted regression surface far beyond the range of the data.</p>
 <p><span class="citation">Fox and Monette (1992)</span> describe an alternative approach to collinearity diagnostics in linear models fit by least squares based on <em>generalized variance-inflation factors</em>. The implementation of generalized variance inflation fators in the <code><a href="https://rdrr.io/pkg/car/man/vif.html" class="external-link">vif()</a></code> function in the <strong>car</strong> package, which employs the estimated covariance matrix of the coefficients, applies in general to models with linear predictors, including linear models estimated by 2SLS.</p>
 <p>For example, for the demand equation in Kmenta’s model:</p>
-<div class="sourceCode" id="cb74"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb73"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/MathFun.html" class="external-link">sqrt</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/car/man/vif.html" class="external-link">vif</a></span><span class="op">(</span><span class="va">deq</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <pre><code>##        P        D 
 ## 1.231124 1.231124</code></pre>
 <p>Taking the square-roots of the VIFs puts them on the coefficient standard-error scale. That is, the standard errors of the coefficients of <span class="math inline">\(P\)</span> and <span class="math inline">\(D\)</span> are 23% larger than they would be if the estimated coefficients were uncorrelated (which is equivalent to the columns of <span class="math inline">\(\widehat{X}\)</span> for <span class="math inline">\(P\)</span> and <span class="math inline">\(D\)</span> in the second-stage regression being uncorrelated). When, as here, each term in the model has just one coefficient, generalized and ordinary variance-inflation factors coincide. The equality of the VIFs for <span class="math inline">\(P\)</span> and <span class="math inline">\(D\)</span> is peculiar to the case of two regressors (beyond the regression constant).</p>
 <p><em>Marginal/conditional</em> plots, produced by the <code><a href="https://rdrr.io/pkg/car/man/mcPlots.html" class="external-link">mcPlots()</a></code> function in the <strong>car</strong> package, superimpose the added-variable plots on corresponding marginal scatterplots for the regressors. These graphs allow us to visualize the reduction in precision of estimation of each coefficient due to collinearity, which reduces the conditional variation of a regressor relative to its marginal variation. for example, for the demand equation:</p>
-<div class="sourceCode" id="cb76"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb75"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/car/man/mcPlots.html" class="external-link">mcPlots</a></span><span class="op">(</span><span class="va">deq</span><span class="op">)</span></code></pre></div>
 <p><img src="Diagnostics-for-2SLS-Regression_files/figure-html/unnamed-chunk-39-1.png" width="768"></p>
 <p>The blue points in each panel represent the marginal scatterplot and the magenta points represent the (partial) added-variable plot, with the arrows showing the relationship between the two sets of points.</p>
@@ -724,7 +718,7 @@ b_{\mathrm{W2SLS}} = [X^\top W Z(Z^\top W Z)^{-1} Z^\top W X]^{-1} X^\top W Z (Z
 <p>The details of implementation are largely straightforward. Applying the M or MM estimator to the first stage requires a separate regression for each endogenous regressor, rather than a single multivariate regression, because the robustness weights are generally different for each of the first-stage regressions.</p>
 <p>As well, rather than basing the estimated error standard deviation <span class="math inline">\(\widehat{\sigma}\)</span> on the sum of squared model residuals, we use a robust estimate of <span class="math inline">\(\sigma\)</span> based on the median absolute residual—the median absolute deviation (or MAD) of the residuals around a “center” of 0. The MAD of the residuals is multiplied by 1.4826 to provide a properly scaled estimate of <span class="math inline">\(\sigma\)</span> when the error distribution is normal: That is, the MAD estimates the 0.75 quantile of the error distribution, and <span class="math inline">\(1/\Phi^{-1}(0.75) = 1.4825\)</span>, where <span class="math inline">\(\Phi^{-1}(\cdot)\)</span> is the quantile function of the standard-normal distribution.</p>
 <p>To illustrate, we apply a two-stage MM regression to the estimation of the demand equation in the corrupted Kmenta data, and compare the result to the traditional 2SLS estimator applied to the uncorrupted data, to the 2SLS estimator applied to the corrupted data, and to the 2SLS estimator deleting the bad case:</p>
-<div class="sourceCode" id="cb77"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb76"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">deq.mm</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/update.html" class="external-link">update</a></span><span class="op">(</span><span class="va">deq1</span>, method <span class="op">=</span> <span class="st">"MM"</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">deq.mm</span><span class="op">)</span></code></pre></div>
 <pre><code>## 
@@ -752,7 +746,7 @@ b_{\mathrm{W2SLS}} = [X^\top W Z(Z^\top W Z)^{-1} Z^\top W X]^{-1} X^\top W Z (Z
 ## Residual standard error: 2.08 on 17 degrees of freedom
 ## Multiple R-Squared: 0.09864, Adjusted R-squared: -0.007398 
 ## Wald test: 18.59 on 2 and 17 DF,  p-value: 5.262e-05</code></pre>
-<div class="sourceCode" id="cb79"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb78"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/car/man/compareCoefs.html" class="external-link">compareCoefs</a></span><span class="op">(</span><span class="va">deq</span>, <span class="va">deq1</span>, <span class="va">deq1.20</span>, <span class="va">deq.mm</span><span class="op">)</span></code></pre></div>
 <pre><code>## Calls:
 ## 1: ivreg(formula = Q ~ P + D | D + F + A, data = Kmenta)
@@ -772,7 +766,7 @@ b_{\mathrm{W2SLS}} = [X^\top W Z(Z^\top W Z)^{-1} Z^\top W X]^{-1} X^\top W Z (Z
 ## </code></pre>
 <p>The estimates produced by the robust two-stage estimator are very similar to those for the 2SLS estimator applied to the uncorrupted data and when the bad case is deleted from the corrupted data.</p>
 <p>It’s instructive to look at the robustness weights for the first- and second-stage MM estimators:</p>
-<div class="sourceCode" id="cb81"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb80"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/weights.html" class="external-link">weights</a></span><span class="op">(</span><span class="va">deq.mm</span>, type <span class="op">=</span> <span class="st">"robustness"</span><span class="op">)</span></code></pre></div>
 <pre><code>##              P   stage_2
 ## 1922 0.9744449 0.9843442
@@ -798,7 +792,7 @@ b_{\mathrm{W2SLS}} = [X^\top W Z(Z^\top W Z)^{-1} Z^\top W X]^{-1} X^\top W Z (Z
 <p>Thus, 1941 is so discrepant in the second stage that it receives 0 weight in the robust fit.</p>
 <p>Most of the diagnostic and other methods for <code>"ivreg"</code> objects also work with robust two-stage regression models. To compute deletion statistics like studentized residuals, dfbeta, and Cook’s <span class="math inline">\(D\)</span>, we use the robustness weights for the M or MM second-stage regression (multiplied by prespecified variance weights, if these are employed) as if they were weights in a 2SLS fit. This is, of course, an approximation: To get exact deletion statistics would require literally omitting each case in turn and recalculating the first- and second-stage robust regressions, an unattractive prospect, because the robust regressions are iterative.</p>
 <p>Here, for example, is a graph of second-stage hatvalues, studentized residuals, and Cook’s distances for the 2SMM estimator applied to the corrupted Kmenta data:</p>
-<div class="sourceCode" id="cb83"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb82"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/car/man/influencePlot.html" class="external-link">influencePlot</a></span><span class="op">(</span><span class="va">deq.mm</span><span class="op">)</span></code></pre></div>
 <p><img src="Diagnostics-for-2SLS-Regression_files/figure-html/unnamed-chunk-42-1.png" width="384"></p>
 <pre><code>##         StudRes        Hat      CookD
