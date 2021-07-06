@@ -211,7 +211,8 @@ influence.ivreg <- function(model, sigma. = n <= 1e3, type = c("stage2", "both",
   } else {
     sigma <- rep(.sigma, n)
   }
-  dffits <- diag(tcrossprod(X, dfbeta)) / (sigma * sqrt(h_X))
+  dffits <- vapply(idx, function(i) {
+    X[i, ] %*% dfbeta[i, ] / (sigma[i] * sqrt(h_X[i]))}, numeric(1L))
 
   rstudent <- res / (sigma * sqrt(1 - naresid(na.action, hatvalues)))
   cookd <- (sigma^2 / .sigma^2) * dffits^2 / p
