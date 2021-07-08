@@ -2,6 +2,8 @@
 
 * `method` is now an explicit argument to `ivreg()` and not just passed through `...`
   to `ivreg.fit()`.
+  
+* More efficient computation of regression diagnostics (thanks to improvements implemented by Nikolas Kuschnig).
 
 * Small fixes.
 
