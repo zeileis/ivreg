@@ -15,15 +15,15 @@ diagprod <- function(d, X){
 
 #' Deletion and Other Diagnostic Methods for \code{"ivreg"} Objects
 #'
-#' @aliases ivregDiagnostics influence.ivreg rstudent.ivreg cooks.distance.ivreg 
+#' @aliases ivregDiagnostics influence.ivreg rstudent.ivreg cooks.distance.ivreg
 #' dfbeta.influence.ivreg hatvalues.ivreg rstudent.influence.ivreg hatvalues.influence.ivreg
 #' cooks.distance.influence.ivreg qqPlot.ivreg qqPlot.influence.ivreg influencePlot.ivreg
 #' influencePlot.influence.ivreg infIndexPlot.ivreg infIndexPlot.influence.ivreg
-#' model.matrix.influence.ivreg avPlots.ivreg avPlot.ivreg mcPlots.ivreg mcPlot.ivreg Boot.ivreg 
-#' crPlots.ivreg crPlot.ivreg ceresPlots.ivreg ceresPlot.ivreg plot.ivreg  
-#' outlierTest.ivreg influencePlot.ivreg 
+#' model.matrix.influence.ivreg avPlots.ivreg avPlot.ivreg mcPlots.ivreg mcPlot.ivreg Boot.ivreg
+#' crPlots.ivreg crPlot.ivreg ceresPlots.ivreg ceresPlot.ivreg plot.ivreg
+#' outlierTest.ivreg influencePlot.ivreg
 #' spreadLevelPlot.ivreg ncvTest.ivreg deviance.ivreg
-#' 
+#'
 #' @param model,x,object A \code{"ivreg"} or \code{"influence.ivreg"} object.
 #' @param sigma. If \code{TRUE} (the default for 1000 or fewer cases), the deleted value
 #' of the residual standard deviation is computed for each case; if \code{FALSE}, the
@@ -31,18 +31,18 @@ diagprod <- function(d, X){
 #' @param applyfun Optional loop replacement function that should work like
 #' \code{\link[base]{lapply}} with arguments \code{function(X, FUN, ...)}. The default
 #' is to use a loop unless the \code{ncores} argument is specified (see below).
-#' @param ncores 
+#' @param ncores
 #' Numeric, number of cores to be used in parallel computations. If set
 #' to an integer the \code{applyfun} is set to use either \code{\link[parallel:clusterApply]{parLapply}}
-#' (on Windows) or 
+#' (on Windows) or
 #' #ifdef windows
 #' \code{\link[parallel:mcdummies]{mclapply}}
 #' #endif
 #' #ifdef unix
 #' \code{\link[parallel]{mclapply}}
-#' #endif 
+#' #endif
 #' (otherwise) with the desired number of cores.
-#' 
+#'
 #' @param type If \code{"stage2"} (the default), hatvalues are for the second stage regression;
 #' if \code{"both"}, the hatvalues are the geometric mean of the casewise hatvalues for the
 #' two stages; if \code{"maximum"}, the hatvalues are the larger of the casewise
@@ -50,7 +50,7 @@ diagprod <- function(d, X){
 #' the hatvalues for each stage are first divided by their average (number of coefficients in
 #' stage regression/number of cases); the geometric mean or casewise maximum values are then
 #' multiplied by the average hatvalue from the second stage.
-#' @param terms Terms for which added-variable plots are to be constructed; the default, 
+#' @param terms Terms for which added-variable plots are to be constructed; the default,
 #' if the argument isn't specified, is the \code{"regressors"} component of the model formula.
 #' @param main Main title for the graph.
 #' @param ... arguments to be passed down.
@@ -84,16 +84,16 @@ diagprod <- function(d, X){
 #' from the t distribution with degrees of freedom equal to the residual degrees of
 #' freedom for the model and so are approximate, because the studentized residuals aren't
 #' independent.
-#' 
-#' For additional information, see the vignette 
+#'
+#' For additional information, see the vignette
 #' \href{../doc/Diagnostics-for-2SLS-Regression.pdf}{Diagnostics for 2SLS Regression}.
 #' @importFrom stats influence
 #' @export
 #' @seealso \code{\link{ivreg}}, \code{\link[car]{avPlots}},
 #'   \code{\link[car]{crPlots}}, \code{\link[effects]{predictorEffects}},
 #'   \code{\link[car]{qqPlot}}, \code{\link[car]{influencePlot}},
-#'   \code{\link[car]{infIndexPlot}}, \code{\link[car]{Boot}}, 
-#'   \code{\link[car]{outlierTest}}, \code{\link[car]{spreadLevelPlot}}, 
+#'   \code{\link[car]{infIndexPlot}}, \code{\link[car]{Boot}},
+#'   \code{\link[car]{outlierTest}}, \code{\link[car]{spreadLevelPlot}},
 #'   \code{\link[car]{ncvTest}}.
 #' @examples
 #' kmenta.eq1 <- ivreg(Q ~ P + D | D + F + A, data = Kmenta)
@@ -111,22 +111,26 @@ diagprod <- function(d, X){
 #' confint(car::Boot(kmenta.eq1, R = 250)) # 250 reps for brevity
 #' car::outlierTest(kmenta.eq1)
 #' car::ncvTest(kmenta.eq1)
-#' 
+#'
 #' @rdname ivregDiagnostics
 #' @importFrom stats influence
 #' @export
-influence.ivreg <- function(model, sigma. = n <= 1e3, type = c("stage2", "both", "maximum"), 
+influence.ivreg <- function(model, sigma. = n <= 1e3, type = c("stage2", "both", "maximum"),
                             applyfun = NULL, ncores = NULL, ...){
 
   type <- match.arg(type, c("stage2", "both", "maximum"))
 
   Z <- model.matrix(model, component = "instruments") # model$model.matrix.instruments
   X <- model.matrix(model, component = "regressors") # model$model.matrix
-  X.fit <- model.matrix(model, component = "projected") # model$fitted1 
+  X_proj <- model.matrix(model, component = "projected") # model$fitted1
   y <- model$y
+  vcov_unscaled <- model$cov.unscaled
   if (is.null(y)) stop("response variable not in model object")
   b <- coef(model) # model$coefficients
   res <- na.remove(residuals(model)) # na.remove(model$residuals)
+  # Residuals of first stage and the projection
+  X_resid <- if (is.null(model$residuals1)) X - X_proj else model$residuals1
+  res_p <- if (is.null(model$residuals2)) y - X_proj %*% b else model$residuals2
   .sigma <- model$sigma
   w <- na.remove(weights(model)) # na.remove(model$weights)
   hatvalues <-  hatvalues(model, type=type)
@@ -136,7 +140,7 @@ influence.ivreg <- function(model, sigma. = n <= 1e3, type = c("stage2", "both",
     hatvalues <- h
   }
 
-  na.action <- model$na.action 
+  na.action <- model$na.action
 
   rnames <- rownames(X)
   cnames <- colnames(X)
@@ -148,96 +152,71 @@ influence.ivreg <- function(model, sigma. = n <= 1e3, type = c("stage2", "both",
     w <- sqrt(w)
     X <- diagprod(w, X)
     Z <- diagprod(w, Z)
-    X.fit <- diagprod(w, X.fit)
-    y <- w*y
-  }
-  else w <- 1
+    X_proj <- diagprod(w, X_proj)
+    X_resid <- diagprod(w, X_resid)
+    res_p <- w * res_p
+    res <- w * res
+    y <- w * y
+  } else w <- 1
 
-  rss <- sum((w*res)^2)
-  ZtZinv <- solve(crossprod(Z)) #TODO: avoid matrix inversions?
-  XtZ <- crossprod(X, Z)
-  A <- XtZ %*% ZtZinv %*% t(XtZ)
-  Ainv <- solve(A)
-  pi <- ZtZinv %*% crossprod(Z, y)
-  r <- XtZ %*% ZtZinv %*% t(Z)
-  XfXfinv <- solve(crossprod(X.fit))
+  rss <- sum(res^2)
+  qr_Z <- qr(Z)
+  # Residuals of y ~ Z
+  res_z <- qr.resid(qr_Z, y)
+  qr_A <- qr(crossprod(X, X_proj)) # A = X' Pz X -- we reuse the QR
 
   n <- model$nobs
   p <- length(b)  # model$p
-  
+  idx <- seq_len(n)
+
   ## set up parallel apply if specified
   if(!is.null(ncores) && is.null(applyfun)) {
     applyfun <- if(ncores == 1L) {
       lapply
     } else if(.Platform$OS.type == "windows") {
-      cl <- parallel::makeCluster(ncores) 
+      cl <- parallel::makeCluster(ncores)
       on.exit(parallel::stopCluster(cl))
       function(X, FUN, ...) parallel::parLapply(cl, X, FUN, ...)
     } else {
-      function(X, FUN, ...) parallel::mclapply(X, FUN, ..., mc.cores = ncores)    
+      function(X, FUN, ...) parallel::mclapply(X, FUN, ..., mc.cores = ncores)
     }
   }
 
-  if (is.function(applyfun)){
-    result <- applyfun(1:n, function(i) {
-      c <- as.vector(Z[i, ] %*% ZtZinv %*% Z[i, ])
-      Xmr <- X[i, ] - r[, i]
-      XiAinvXi <- as.vector(X[i, ] %*% Ainv %*% X[i, ])
-      XmrAinvXi <- as.vector(Xmr %*% Ainv %*% X[i, ])
-      XmrAinvXmr <- as.vector(Xmr %*% Ainv %*% Xmr)
-      delta <- 1 - XiAinvXi + XmrAinvXi^2/(1 - c + XmrAinvXmr)
-      denom <- (1 - c + XmrAinvXmr)*delta
-      h <- Xmr * (1 - XiAinvXi) / denom + X[i, ] * XmrAinvXi / denom
-      j <- Xmr * XmrAinvXi / denom - X[i, ]/delta
-      g <- h * as.vector((y[i] - Z[i, ] %*% pi) - (y[i] - r[, i] %*% b)) +
-        (h + j)*as.vector(y[i] - X[i, ] %*% b)
-      dfbeta.i <- - as.vector(Ainv %*% g)
-      sigma.i <- if (sigma.){
-        ss <- rss + as.vector(g %*% Ainv %*% crossprod(X[-i, ]) %*% Ainv %*% g) -
-          2 * as.vector(g %*% Ainv %*% t(X[-i, ]) %*% (y[-i] - X[-i, ] %*% b))  -
-          as.vector(y[i] - X[i, ] %*% b)^2
-        sqrt(ss/(n - p - 1))
-      } else .sigma
-      dffits.i <- as.vector(X[i, ] %*% dfbeta.i)/
-        (sigma.i * as.vector(sqrt(X[i, ] %*% XfXfinv %*% X[i, ])))
-      c(dfbeta.i, sigma.i, dffits.i)
-    })
-    result <- do.call("rbind", result)
-    nc <- ncol(result)
-    dfbeta <- result[, -c(nc - 1, nc)]
-    sigma <- result[, nc - 1]
-    dffits <- result[, nc]
+  Ai_X <- qr.solve(qr_A, t(X))
+  Ai_Xr <- qr.solve(qr_A, t(X_resid))
+  h_Pz <- rowSums(qr.Q(qr_Z)^2) # Diagonal of the projection matrix P_z
+  # diag(X (A)^-1 X')
+  h_X <- vapply(idx, function(i) {X[i, ] %*% Ai_X[, i]}, numeric(1L))
+  # diag(X_resid (A)^-1 X')
+  h_XrX <- vapply(idx, function(i) {X_resid[i, ] %*% Ai_X[, i]}, numeric(1L))
+  # diag(X_resid (A)^-1 X_resid)
+  h_XrXr <- vapply(idx, function(i) {X_resid[i, ] %*% Ai_Xr[, i]}, numeric(1L))
+
+  denom <- (1 - h_Pz + h_XrXr)
+  # If delta is tiny we may have numerical issues
+  delta <- 1 - h_X + (h_XrX^2) / denom
+  h <- ((1 - h_X) * X_resid + (h_XrX) * X) / (denom * delta)
+  j <- ((h_XrX * X_resid) / denom - X) / delta
+  # Now we have DFBETA, loosely following Phillips (1977)
+  g <- h * as.numeric(res_z - res_p) + (h + j) * res
+  dfbeta <- t(-qr.solve(qr_A, t(g)))
+
+  if(isTRUE(sigma.)) {
+    dfb_sq <- vapply(idx, function(i) {
+      -dfbeta[i, ] %*% crossprod(X[-i, ]) %*% -dfbeta[i, ]}, numeric(1L))
+    dfb_resid <- vapply(idx, function(i) {
+      -dfbeta[i, ] %*% crossprod(X[-i, ], res[-i])}, numeric(1L))
+    rss_i <- rss + dfb_sq - 2 * dfb_resid - res^2
+    sigma <- sqrt(rss_i / (n - p - 1L))
   } else {
-    dfbeta <- matrix(0, n, p)
-    dffits <- cookd <- rep(0, n)
     sigma <- rep(.sigma, n)
-    for (i in 1:n){ #TODO: move this loop to cpp code?
-      c <- as.vector(Z[i, ] %*% ZtZinv %*% Z[i, ])
-      Xmr <- X[i, ] - r[, i]
-      XiAinvXi <- as.vector(X[i, ] %*% Ainv %*% X[i, ])
-      XmrAinvXi <- as.vector(Xmr %*% Ainv %*% X[i, ])
-      XmrAinvXmr <- as.vector(Xmr %*% Ainv %*% Xmr)
-      delta <- 1 - XiAinvXi + XmrAinvXi^2/(1 - c + XmrAinvXmr)
-      denom <- (1 - c + XmrAinvXmr)*delta
-      h <- Xmr * (1 - XiAinvXi) / denom + X[i, ] * XmrAinvXi / denom
-      j <- Xmr * XmrAinvXi / denom - X[i, ]/delta
-      g <- h * as.vector((y[i] - Z[i, ] %*% pi) - (y[i] - r[, i] %*% b)) +
-        (h + j)*as.vector(y[i] - X[i, ] %*% b)
-      dfbeta[i, ] <- - Ainv %*% g
-      if (sigma.){
-        ss <- rss + as.vector(g %*% Ainv %*% crossprod(X[-i, ]) %*% Ainv %*% g) -
-          2 * as.vector(g %*% Ainv %*% t(X[-i, ]) %*% (y[-i] - X[-i, ] %*% b))  -
-          as.vector(y[i] - X[i, ] %*% b)^2
-        sigma[i] <- sqrt(ss/(n - p - 1))
-      }
-      dffits[i] <- as.vector(X[i, ] %*% dfbeta[i, ])/
-        (sigma[i] * as.vector(sqrt(X[i, ] %*% XfXfinv %*% X[i, ])))
-    }
   }
+  dffits <- vapply(idx, function(i) {
+    X[i, ] %*% dfbeta[i, ] / (sigma[i] * sqrt(h_X[i]))}, numeric(1L))
 
-  rstudent <- w*res/(sigma * sqrt(1 - naresid(na.action, hatvalues)))
-  cookd <- (sigma^2/.sigma^2)*dffits^2/p
-  
+  rstudent <- res / (sigma * sqrt(1 - naresid(na.action, hatvalues)))
+  cookd <- (sigma^2 / .sigma^2) * dffits^2 / p
+
   rownames(dfbeta) <- rnames
   colnames(dfbeta) <- cnames
   names(dffits) <- names(sigma) <- names(cookd) <- rnames
@@ -305,7 +284,7 @@ hatvalues.ivreg <- function(model, type = c("stage2", "both", "maximum", "stage1
     # hat2 <- lm.influence(model)$hat/mean2
     hat2 <- hats[, "stage_2"]/mean2
     # model[c("qr", "rank", "residuals", "coefficients")] <-
-    #   list(model$qr1, model$rank1, na.omit(residuals(model, type="projected")), 
+    #   list(model$qr1, model$rank1, na.omit(residuals(model, type="projected")),
     #        model$coefficients1)
     # hat1 <- lm.influence(model)$hat/mean1
     hat1 <- if (model$method == "OLS"){
@@ -433,7 +412,7 @@ avPlot.ivreg <- function(model, ...){
   model$x$regressors <- xz
   .Class <- "lm"
   NextMethod()
-} 
+}
 
 #' @rdname ivregDiagnostics
 #' @importFrom car mcPlots
@@ -463,7 +442,7 @@ mcPlot.ivreg <- function(model, ...){
 #' @param method only \code{"case"} (case resampling) is supported: see \code{\link[car]{Boot}}.
 #' @param f,labels,R see \code{\link[car]{Boot}}.
 #' @export
-Boot.ivreg <- function(object, f = coef, labels = names(f(object)), R = 999, 
+Boot.ivreg <- function(object, f = coef, labels = names(f(object)), R = 999,
                        method = "case", ncores = 1, ...){
   method <- match.arg(method, "case")
   NextMethod()
