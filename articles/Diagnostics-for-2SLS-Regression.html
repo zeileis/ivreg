@@ -796,11 +796,11 @@ b_{\mathrm{W2SLS}} = [X^\top W Z(Z^\top W Z)^{-1} Z^\top W X]^{-1} X^\top W Z (Z
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/car/man/influencePlot.html" class="external-link">influencePlot</a></span><span class="op">(</span><span class="va">deq.mm</span><span class="op">)</span></code></pre></div>
 <p><img src="Diagnostics-for-2SLS-Regression_files/figure-html/unnamed-chunk-42-1.png" width="384"></p>
 <pre><code>##         StudRes        Hat      CookD
-## 1931  1.6769830 0.13345298 0.07290800
-## 1932  0.2891293 0.35576176 0.01044167
-## 1933 -1.3354009 0.28104141 0.13369492
-## 1937 -2.7081132 0.09236777 0.06468814
-## 1938 -0.3803781 0.47603246 0.03617557
+## 1931  1.6778245 0.13345298 0.07043221
+## 1932  0.2892163 0.35576176 0.01023249
+## 1933 -1.3354194 0.28104141 0.13365515
+## 1937 -2.7083737 0.09236777 0.06489585
+## 1938 -0.3801649 0.47603246 0.03387451
 ## 1941 -7.6841103 0.00000000 0.00000000</code></pre>
 <p>Because the hatvalue for 1941 in the robust second-stage fit is 0, so is the Cook’s <span class="math inline">\(D\)</span> for this case, and the “bubble” for 1941 has 0 area (and is therefore invisible). The bad case, however, have a very large (negative) studentized residual of nearly <span class="math inline">\(-8\)</span>.</p>
 </div>
