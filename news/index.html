@@ -149,6 +149,7 @@
 <a href="#version-06-1" class="anchor" aria-hidden="true"></a>Version 0.6-1<small> Unreleased </small></h1>
 <ul><li><p><code>method</code> is now an explicit argument to <code><a href="../reference/ivreg.html">ivreg()</a></code> and not just passed through <code>...</code> to <code><a href="../reference/ivreg.fit.html">ivreg.fit()</a></code>.</p></li>
 <li><p>More efficient computation of regression diagnostics (thanks to improvements implemented by Nikolas Kuschnig).</p></li>
+<li><p>In models without any exogenous variables (i.e., not even an exogenous <code>(Intercept)</code>) the <code>$instruments</code> element in the fitted model object was erroneously empty, leading to some incorrect subsequent computations. Also the <code>$endogenous</code> element was an unnamed (rather than named) vector. Both problems have been fixed now. (Reported by Luke Sonnet.)</p></li>
 <li><p>Small fixes.</p></li>
 </ul></div>
     <div id="version-06-0" class="section level1">
