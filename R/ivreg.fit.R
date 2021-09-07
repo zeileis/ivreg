@@ -131,7 +131,9 @@ ivreg.fit <- function(x, y, z, weights, offset, method = c("OLS", "M", "MM"),
   exog <- structure(seq_along(colnames(x)), .Names = colnames(x))
   if(!is.null(auxreg)) {
     endo <- which(colMeans(as.matrix(auxreg$residuals^2)) > sqrt(.Machine$double.eps))
-    inst <- which(rowMeans(as.matrix(coef(auxreg)^2)[, -endo, drop = FALSE]) < sqrt(.Machine$double.eps))
+    inst <- rowMeans(as.matrix(coef(auxreg)^2)[, -endo, drop = FALSE])
+    inst <- which(inst < sqrt(.Machine$double.eps) | is.nan(inst))
+    endo <- exog[endo]
     exog <- exog[-endo]
   } else {
     endo <- inst <- integer()
