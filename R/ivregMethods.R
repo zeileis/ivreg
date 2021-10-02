@@ -240,11 +240,14 @@ print.ivreg <- function(x, digits = max(3, getOption("digits") - 3), ...)
 
 #' @rdname ivregMethods
 #' @export
-summary.ivreg <- function(object, vcov. = NULL, df = NULL, diagnostics = TRUE, ...)
+summary.ivreg <- function(object, vcov. = NULL, df = NULL, diagnostics = NULL, ...)
 {
-
-  if (length(formula(object, component="instruments")) == 0) diagnostics <- FALSE 
-      # prevent some "inherited" "lm" methods from failing
+  # prevent some "inherited" "lm" methods from failing
+  if(is.null(diagnostics)) diagnostics <- (length(object$endogenous) > 0L) && (length(object$instruments) > 0L)
+  if(diagnostics && ((length(object$endogenous) <= 0L) || (length(object$instruments) <= 0L) || (length(formula(object, component="instruments")) <= 0L))) {
+    diagnostics <- FALSE
+    warning("diagnostics cannot be computed without endogenous/instrument variables")
+  }
   
   ## weighted residuals
   res <- object$residuals
