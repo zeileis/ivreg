@@ -150,6 +150,7 @@
 <ul><li><p><code>method</code> is now an explicit argument to <code><a href="../reference/ivreg.html">ivreg()</a></code> and not just passed through <code>...</code> to <code><a href="../reference/ivreg.fit.html">ivreg.fit()</a></code>.</p></li>
 <li><p>More efficient computation of regression diagnostics (thanks to improvements implemented by Nikolas Kuschnig).</p></li>
 <li><p>In models without any exogenous variables (i.e., not even an exogenous <code>(Intercept)</code>) the <code>$instruments</code> element in the fitted model object was erroneously empty, leading to some incorrect subsequent computations. Also the <code>$endogenous</code> element was an unnamed (rather than named) vector. Both problems have been fixed now. (Reported by Luke Sonnet.)</p></li>
+<li><p>In the <code><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary()</a></code> method the default is now <code>diagnostics = NULL</code> (rather than always <code>TRUE</code>). It is now only set to <code>TRUE</code> if there are both endogenous and instrument variables, and <code>FALSE</code> otherwise. (Reported by Brantly Callaway.)</p></li>
 <li><p>Small fixes.</p></li>
 </ul></div>
     <div id="version-06-0" class="section level1">
@@ -169,7 +170,7 @@
     <div id="version-05-0" class="section level1">
 <h1 class="page-header" data-toc-text="0.5-0">
 <a href="#version-05-0" class="anchor" aria-hidden="true"></a>Version 0.5-0<small> 2020-09-03 </small></h1>
-<ul><li><p>Initial version of the <code>ivreg</code> package: An implementation of instrumental variables regression using two-stage least-squares (2SLS) estimation, based on the <code><a href="../reference/ivreg.html">ivreg()</a></code> function previously in the <a href="https://CRAN.R-project.org/package=AER" class="external-link">AER</a> package. In addition to standard regression functionality (parameter estimation, inference, predictions, etc.) the package provides various regression diagnostics, including hat values, deletion diagnostics such as studentized residuals and Cook’s distances; graphical diagnostics such as component-plus-residual plots and added-variable plots; and effect plots with partial residuals.</p></li>
+<ul><li><p>Initial version of the <code>ivreg</code> package: An implementation of instrumental variables regression using two-stage least-squares (2SLS) estimation, based on the <code><a href="../reference/ivreg.html">ivreg()</a></code> function previously in the <a href="https://CRAN.R-project.org/package=AER" class="external-link">AER</a> package. In addition to standard regression functionality (parameter estimation, inference, predictions, etc.) the package provides various regression diagnostics, including hat values, deletion diagnostics such as studentized residuals and Cookâs distances; graphical diagnostics such as component-plus-residual plots and added-variable plots; and effect plots with partial residuals.</p></li>
 <li><p>An overview of the package, documentation, examples, and vignettes are provided at <a href="https://john-d-fox.github.io/ivreg/" class="uri">https://john-d-fox.github.io/ivreg/</a>.</p></li>
 </ul></div>
   </div>
