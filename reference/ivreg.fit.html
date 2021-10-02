@@ -96,7 +96,7 @@ estimation is also supported, based on M-estimation (22M) or MM-estimation (2SMM
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ivreg</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.6-1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.6-1</span>
       </span>
     </div>
 
@@ -216,41 +216,152 @@ or <code>lm.wfit</code>, respectively.</p></td>
 
     <p><code>ivreg.fit</code> returns an unclassed list with the following
 components:</p>
-<dt>coefficients</dt><dd><p>parameter estimates, from the stage-2 regression.</p></dd> 
-<dt>residuals</dt><dd><p>vector of model residuals.</p></dd> 
+<dl>
+<dt>coefficients</dt><dd><p>parameter estimates, from the stage-2 regression.</p></dd>
+</dl>
+ 
+
+<dl>
+<dt>residuals</dt><dd><p>vector of model residuals.</p></dd>
+</dl>
+ 
+
+<dl>
 <dt>residuals1</dt><dd><p>matrix of residuals from the stage-1 regression.</p></dd>
+</dl>
+
+
+<dl>
 <dt>residuals2</dt><dd><p>vector of residuals from the stage-2 regression.</p></dd>
+</dl>
+
+
+<dl>
 <dt>fitted.values</dt><dd><p>vector of predicted means for the response.</p></dd>
-<dt>weights</dt><dd><p>either the vector of weights used (if any) or <code>NULL</code> (if none).</p></dd> 
-<dt>offset</dt><dd><p>either the offset used (if any) or <code>NULL</code> (if none).</p></dd> 
-<dt>estfun</dt><dd><p>a matrix containing the empirical estimating functions.</p></dd> 
-<dt>n</dt><dd><p>number of observations.</p></dd> 
-<dt>nobs</dt><dd><p>number of observations with non-zero weights.</p></dd> 
+</dl>
+
+
+<dl>
+<dt>weights</dt><dd><p>either the vector of weights used (if any) or <code>NULL</code> (if none).</p></dd>
+</dl>
+ 
+
+<dl>
+<dt>offset</dt><dd><p>either the offset used (if any) or <code>NULL</code> (if none).</p></dd>
+</dl>
+ 
+
+<dl>
+<dt>estfun</dt><dd><p>a matrix containing the empirical estimating functions.</p></dd>
+</dl>
+ 
+
+<dl>
+<dt>n</dt><dd><p>number of observations.</p></dd>
+</dl>
+ 
+
+<dl>
+<dt>nobs</dt><dd><p>number of observations with non-zero weights.</p></dd>
+</dl>
+ 
+
+<dl>
 <dt>p</dt><dd><p>number of columns in the model matrix x of regressors.</p></dd>
+</dl>
+
+
+<dl>
 <dt>q</dt><dd><p>number of columns in the instrumental variables model matrix z</p></dd>
-<dt>rank</dt><dd><p>numeric rank of the model matrix for the stage-2 regression.</p></dd> 
-<dt>df.residual</dt><dd><p>residual degrees of freedom for fitted model.</p></dd> 
-<dt>cov.unscaled</dt><dd><p>unscaled covariance matrix for the coefficients.</p></dd> 
+</dl>
+
+
+<dl>
+<dt>rank</dt><dd><p>numeric rank of the model matrix for the stage-2 regression.</p></dd>
+</dl>
+ 
+
+<dl>
+<dt>df.residual</dt><dd><p>residual degrees of freedom for fitted model.</p></dd>
+</dl>
+ 
+
+<dl>
+<dt>cov.unscaled</dt><dd><p>unscaled covariance matrix for the coefficients.</p></dd>
+</dl>
+ 
+
+<dl>
 <dt>sigma</dt><dd><p>residual standard error; when method is <code>"M"</code> or <code>"MM"</code>, this
 is based on the MAD of the residuals (around 0) --- see <code><a href='https://rdrr.io/r/stats/mad.html'>mad</a></code>.</p></dd>
+</dl>
+
+
+<dl>
 <dt>x</dt><dd><p>projection of x matrix onto span of z.</p></dd>
+</dl>
+
+
+<dl>
 <dt>qr</dt><dd><p>QR decomposition for the stage-2 regression.</p></dd>
+</dl>
+
+
+<dl>
 <dt>qr1</dt><dd><p>QR decomposition for the stage-1 regression.</p></dd>
+</dl>
+
+
+<dl>
 <dt>rank1</dt><dd><p>numeric rank of the model matrix for the stage-1 regression.</p></dd>
+</dl>
+
+
+<dl>
 <dt>coefficients1</dt><dd><p>matrix of coefficients from the stage-1 regression.</p></dd>
-<dt>df.residual1</dt><dd><p>residual degrees of freedom for the stage-1 regression.</p></dd> 
+</dl>
+
+
+<dl>
+<dt>df.residual1</dt><dd><p>residual degrees of freedom for the stage-1 regression.</p></dd>
+</dl>
+ 
+
+<dl>
 <dt>exogenous</dt><dd><p>columns of the <code>"regressors"</code> matrix that are exogenous.</p></dd>
+</dl>
+
+
+<dl>
 <dt>endogenous</dt><dd><p>columns of the <code>"regressors"</code> matrix that are endogenous.</p></dd>
+</dl>
+
+
+<dl>
 <dt>instruments</dt><dd><p>columns of the <code>"instruments"</code> matrix that are
 instruments for the endogenous variables.</p></dd>
+</dl>
+
+
+<dl>
 <dt>method</dt><dd><p>the method used for the stage 1 and 2 regressions, one of <code>"OLS"</code>,
 <code>"M"</code>, or <code>"MM"</code>.</p></dd>
+</dl>
+
+
+<dl>
 <dt>rweights</dt><dd><p>a matrix of robustness weights with columns for each of the stage-1
 regressions and for the stage-2 regression (in the last column) if the fitting method is 
 <code>"M"</code> or <code>"MM"</code>, <code>NULL</code> if the fitting method is <code>"OLS"</code>.</p></dd>
+</dl>
+
+
+<dl>
 <dt>hatvalues</dt><dd><p>a matrix of hatvalues. For <code>method = "OLS"</code>, the matrix consists of two
 columns, for each of the stage-1 and stage-2 regression; for <code>method = "M"</code> or <code>"MM"</code>,
 there is one column for <em>each</em> stage=1 regression and for the stage-2 regression.</p></dd>
+</dl>
+
 
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
@@ -297,7 +408,7 @@ for first projecting <code>x</code> onto the image of
 </div>
 
 <div class="pkgdown">
-  <p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 1.6.1.9001.</p></p>
+  <p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 1.9000.9000.9000.</p></p>
 </div>
 
       </footer>
