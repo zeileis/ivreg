@@ -3,13 +3,18 @@
 * `method` is now an explicit argument to `ivreg()` and not just passed through `...`
   to `ivreg.fit()`.
   
-* More efficient computation of regression diagnostics (thanks to improvements implemented by Nikolas Kuschnig).
+* More efficient computation of regression diagnostics (thanks to improvements
+  implemented by Nikolas Kuschnig).
 
 * In models without any exogenous variables (i.e., not even an exogenous `(Intercept)`)
   the `$instruments` element in the fitted model object was erroneously empty, leading
   to some incorrect subsequent computations. Also the `$endogenous` element was an
   unnamed (rather than named) vector. Both problems have been fixed now.
   (Reported by Luke Sonnet.)
+
+* In the `summary()` method the default is now `diagnostics = NULL` (rather than
+  always `TRUE`). It is now only set to `TRUE` if there are both endogenous and
+  instrument variables, and `FALSE` otherwise. (Reported by Brantly Callaway.)
 
 * Small fixes.
 
