@@ -77,7 +77,7 @@ regressions and for the stage-2 regression (in the last column) if the fitting m
 \code{"M"} or \code{"MM"}, \code{NULL} if the fitting method is \code{"OLS"}.}
 \item{hatvalues}{a matrix of hatvalues. For \code{method = "OLS"}, the matrix consists of two
 columns, for each of the stage-1 and stage-2 regression; for \code{method = "M"} or \code{"MM"},
-there is one column for \emph{each} stage=1 regression and for the stage-2 regression. }
+there is one column for \emph{each} stage-1 regression and for the stage-2 regression. }
 }
 \description{
 Fit instrumental-variable regression by two-stage least squares (2SLS). This is

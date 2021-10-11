@@ -140,13 +140,13 @@ is to use a loop unless the \code{ncores} argument is specified (see below).}
 
 \item{ncores}{Numeric, number of cores to be used in parallel computations. If set
 to an integer the \code{applyfun} is set to use either \code{\link[parallel:clusterApply]{parLapply}}
-(on Windows) or 
+(on Windows) or
 #ifdef windows
 \code{\link[parallel:mcdummies]{mclapply}}
 #endif
 #ifdef unix
 \code{\link[parallel]{mclapply}}
-#endif 
+#endif
 (otherwise) with the desired number of cores.}
 
 \item{...}{arguments to be passed down.}
@@ -155,7 +155,7 @@ to an integer the \code{applyfun} is set to use either \code{\link[parallel:clus
 
 \item{distribution}{\code{"t"} (the default) or \code{"norm"}.}
 
-\item{terms}{Terms for which added-variable plots are to be constructed; the default, 
+\item{terms}{Terms for which added-variable plots are to be constructed; the default,
 if the argument isn't specified, is the \code{"regressors"} component of the model formula.}
 
 \item{f, labels, R}{see \code{\link[car]{Boot}}.}
@@ -196,7 +196,7 @@ from the t distribution with degrees of freedom equal to the residual degrees of
 freedom for the model and so are approximate, because the studentized residuals aren't
 independent.
 
-For additional information, see the vignette 
+For additional information, see the vignette
 \href{../doc/Diagnostics-for-2SLS-Regression.pdf}{Diagnostics for 2SLS Regression}.
 }
 \examples{
@@ -221,7 +221,7 @@ car::ncvTest(kmenta.eq1)
 \code{\link{ivreg}}, \code{\link[car]{avPlots}},
   \code{\link[car]{crPlots}}, \code{\link[effects]{predictorEffects}},
   \code{\link[car]{qqPlot}}, \code{\link[car]{influencePlot}},
-  \code{\link[car]{infIndexPlot}}, \code{\link[car]{Boot}}, 
-  \code{\link[car]{outlierTest}}, \code{\link[car]{spreadLevelPlot}}, 
+  \code{\link[car]{infIndexPlot}}, \code{\link[car]{Boot}},
+  \code{\link[car]{outlierTest}}, \code{\link[car]{spreadLevelPlot}},
   \code{\link[car]{ncvTest}}.
 }

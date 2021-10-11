@@ -29,4 +29,4 @@ LazyData: true
 VignetteBuilder: knitr
 BugReports: https://github.com/john-d-fox/ivreg/issues/
 URL: https://john-d-fox.github.io/ivreg/
-RoxygenNote: 7.1.1
+RoxygenNote: 7.1.2
