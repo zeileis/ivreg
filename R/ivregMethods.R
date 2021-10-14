@@ -1,3 +1,14 @@
+# To process this file correctly with roxygen2 so that S3 methods that are registered conditionally 
+# generate proper usage lines in the .Rd file as  \method{...}{...} markup:
+#     
+# library("sandwich")
+# library("insight")
+# library("effects")
+# devtools::document() 
+# 
+# Then build the source package.
+
+
 #' Methods for \code{"ivreg"} Objects
 #' @aliases ivregMethods vcov.ivreg bread.ivreg estfun.ivreg terms.ivreg model.matrix.ivreg predict.ivreg
 #' print.ivreg summary.ivreg print.summary.ivreg anova.ivreg update.ivreg residuals.ivreg Effect.ivreg 

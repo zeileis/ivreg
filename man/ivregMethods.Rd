@@ -69,7 +69,7 @@
 
 \method{print}{ivreg}(x, digits = max(3, getOption("digits") - 3), ...)
 
-\method{summary}{ivreg}(object, vcov. = NULL, df = NULL, diagnostics = TRUE, ...)
+\method{summary}{ivreg}(object, vcov. = NULL, df = NULL, diagnostics = NULL, ...)
 
 \method{print}{summary.ivreg}(
   x,
