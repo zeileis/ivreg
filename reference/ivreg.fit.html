@@ -82,7 +82,8 @@ estimation is also supported, based on M-estimation (22M) or MM-estimation (2SMM
   <span class="va">...</span>
 <span class="op">)</span></code></pre></div>
 
-    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
+    <div id="arguments">
+    <h2>Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
     <table class="ref-arguments"><colgroup><col class="name"><col class="desc"></colgroup><tr><th>x</th>
       <td><p>regressor matrix.</p></td>
     </tr><tr><th>y</th>
@@ -107,8 +108,10 @@ function in the <span class="pkg">MASS</span> package if robust regression is us
     </tr><tr><th>...</th>
       <td><p>further arguments passed to <code>lm.fit</code>
 or <code>lm.wfit</code>, respectively.</p></td>
-    </tr></table><h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+    </tr></table></div>
 
+    <div id="value">
+    <h2>Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
     <p><code>ivreg.fit</code> returns an unclassed list with the following
 components:</p>
 <dl><dt>coefficients</dt><dd><p>parameter estimates, from the stage-2 regression.</p></dd>
@@ -146,20 +149,24 @@ regressions and for the stage-2 regression (in the last column) if the fitting m
 </dl><dl><dt>hatvalues</dt><dd><p>a matrix of hatvalues. For <code>method = "OLS"</code>, the matrix consists of two
 columns, for each of the stage-1 and stage-2 regression; for <code>method = "M"</code> or <code>"MM"</code>,
 there is one column for <em>each</em> stage-1 regression and for the stage-2 regression.</p></dd>
-</dl><h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
-
+</dl></div>
+    <div id="details">
+    <h2>Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
     <p><code><a href="ivreg.html">ivreg</a></code> is the high-level interface to the work-horse function
 <code>ivreg.fit</code>. <code>ivreg.fit</code> is essentially a convenience interface to
 <code>lm.fit</code> (or <code>lm.wfit</code>)
 for first projecting <code>x</code> onto the image of
 <code>z</code>, then running a regression of <code>y</code> on the projected
 <code>x</code>, and computing the residual standard deviation.</p>
-    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
-
+    </div>
+    <div id="see-also">
+    <h2>See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
     <div class="dont-index"><p><code><a href="ivreg.html">ivreg</a></code>, <code>lm.fit</code>, 
 <code>lm.wfit</code>, <code><a href="https://rdrr.io/pkg/MASS/man/rlm.html">rlm</a></code>, <code><a href="https://rdrr.io/r/stats/mad.html">mad</a></code></p></div>
+    </div>
 
-    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <div id="examples">
+    <h2>Examples<a class="anchor" aria-label="anchor" href="#examples"></a></h2>
     <div class="ref-examples sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="co">## data</span></span>
 <span class="r-in"><span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="st">"CigaretteDemand"</span>, package <span class="op">=</span> <span class="st">"ivreg"</span><span class="op">)</span></span>
 <span class="r-in"></span>
@@ -176,6 +183,7 @@ for first projecting <code>x</code> onto the image of
 <span class="r-out co"><span class="r-pr">#&gt;</span>    9.4306583   -1.1433751    0.2145153 </span>
 <span class="r-in"></span>
 </code></pre></div>
+    </div>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top"><h2 data-toc-skip>Contents</h2>

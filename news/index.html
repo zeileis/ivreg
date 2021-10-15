@@ -61,8 +61,8 @@
     </div>
 
     <div id="version-06-1" class="section level1">
-<h1 class="page-header" data-toc-text="0.6-1">
-<a href="#version-06-1" class="anchor" aria-hidden="true"></a>Version 0.6-1<small> Unreleased </small></h1>
+<h1 class="page-header" data-toc-text="0.6-1">Version 0.6-1<a class="anchor" aria-label="anchor" href="#version-06-1"></a>
+<small> 2021-10-15 </small></h1>
 <ul><li><p><code>method</code> is now an explicit argument to <code><a href="../reference/ivreg.html">ivreg()</a></code> and not just passed through <code>...</code> to <code><a href="../reference/ivreg.fit.html">ivreg.fit()</a></code>.</p></li>
 <li><p>More efficient computation of regression diagnostics (thanks to improvements implemented by Nikolas Kuschnig).</p></li>
 <li><p>In models without any exogenous variables (i.e., not even an exogenous <code>(Intercept)</code>) the <code>$instruments</code> element in the fitted model object was erroneously empty, leading to some incorrect subsequent computations. Also the <code>$endogenous</code> element was an unnamed (rather than named) vector. Both problems have been fixed now. (Reported by Luke Sonnet.)</p></li>
@@ -70,8 +70,8 @@
 <li><p>Small fixes.</p></li>
 </ul></div>
     <div id="version-06-0" class="section level1">
-<h1 class="page-header" data-toc-text="0.6-0">
-<a href="#version-06-0" class="anchor" aria-hidden="true"></a>Version 0.6-0<small> 2021-05-28 </small></h1>
+<h1 class="page-header" data-toc-text="0.6-0">Version 0.6-0<a class="anchor" aria-label="anchor" href="#version-06-0"></a>
+<small> 2021-05-28 </small></h1>
 <ul><li><p>Three-part right-hand side <code>formula</code>s are supported now to facilitate specification of models with many exogenous regressors. For example, if there is one exogenous regressor <code>ex</code> and one endogenous regressor <code>en</code> with instrument <code>in</code>, a formula with three parts on the right-hand side can now also be used: <code>y ~ ex | en | in</code>. This is equivalent to specifying: <code>y ~ en + ex | in + ex</code>.</p></li>
 <li><p>Robust-regression estimators are provided as an alternative to ordinary least squares (OLS) both in stage 1 and 2 by means of <code>rlm()</code> from package <a href="https://CRAN.R-project.org/package=MASS" class="external-link">MASS</a>. Specifically, in addition to 2-stage least squares (2SLS, <code>method = "OLS"</code>, default) <code><a href="../reference/ivreg.html">ivreg()</a></code> now supports 2-stage M-estimation (2SM, <code>method = "M"</code>) and 2-stage MM-estimation (2SMM, <code>method = "MM"</code>).</p></li>
 <li><p>Dedicated <code><a href="https://rdrr.io/r/stats/confint.html" class="external-link">confint()</a></code> method allowing specification of the variance-covariance matrix <code>vcov.</code> and degrees of freedom <code>df</code> to be used (as in the <code><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary()</a></code> method).</p></li>
@@ -84,8 +84,8 @@
 <li><p>Small edits to the Diagnostics vignette.</p></li>
 </ul></div>
     <div id="version-05-0" class="section level1">
-<h1 class="page-header" data-toc-text="0.5-0">
-<a href="#version-05-0" class="anchor" aria-hidden="true"></a>Version 0.5-0<small> 2020-09-03 </small></h1>
+<h1 class="page-header" data-toc-text="0.5-0">Version 0.5-0<a class="anchor" aria-label="anchor" href="#version-05-0"></a>
+<small> 2020-09-03 </small></h1>
 <ul><li><p>Initial version of the <code>ivreg</code> package: An implementation of instrumental variables regression using two-stage least-squares (2SLS) estimation, based on the <code><a href="../reference/ivreg.html">ivreg()</a></code> function previously in the <a href="https://CRAN.R-project.org/package=AER" class="external-link">AER</a> package. In addition to standard regression functionality (parameter estimation, inference, predictions, etc.) the package provides various regression diagnostics, including hat values, deletion diagnostics such as studentized residuals and Cook’s distances; graphical diagnostics such as component-plus-residual plots and added-variable plots; and effect plots with partial residuals.</p></li>
 <li><p>An overview of the package, documentation, examples, and vignettes are provided at <a href="https://john-d-fox.github.io/ivreg/" class="uri">https://john-d-fox.github.io/ivreg/</a>.</p></li>
 </ul></div>

@@ -205,7 +205,8 @@ independent.</p>
 <span class="co"># S3 method for rivreg</span>
 <span class="fu"><a href="https://rdrr.io/r/stats/lm.influence.html">influence</a></span><span class="op">(</span><span class="va">model</span>, <span class="va">...</span><span class="op">)</span></code></pre></div>
 
-    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
+    <div id="arguments">
+    <h2>Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
     <table class="ref-arguments"><colgroup><col class="name"><col class="desc"></colgroup><tr><th>model, x, object</th>
       <td><p>A <code>"ivreg"</code> or <code>"influence.ivreg"</code> object.</p></td>
     </tr><tr><th>sigma.</th>
@@ -245,8 +246,10 @@ if the argument isn't specified, is the <code>"regressors"</code> component of t
       <td><p>only <code>"case"</code> (case resampling) is supported: see <code><a href="https://rdrr.io/pkg/car/man/Boot.html">Boot</a></code>.</p></td>
     </tr><tr><th>main</th>
       <td><p>Main title for the graph.</p></td>
-    </tr></table><h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+    </tr></table></div>
 
+    <div id="value">
+    <h2>Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
     <p>In the case of <code>influence.ivreg</code>, an object of class <code>"influence.ivreg"</code>
 with the following components:</p><dl><dt><code>coefficients</code></dt><dd><p>the estimated regression coefficients</p></dd>
 <dt><code>model</code></dt><dd><p>the model matrix</p></dd>
@@ -262,16 +265,19 @@ with the following components:</p><dl><dt><code>coefficients</code></dt><dd><p>t
 <code>rstudent.influence.ivreg</code>, the corresponding diagnostic statistics.
 Many other methods (e.g., <code>crPlot.ivreg</code>, <code>avPlot.ivreg</code>, <code>Effect.ivreg</code>)
 draw graphs.</p>
-    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
-
+    </div>
+    <div id="see-also">
+    <h2>See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
     <div class="dont-index"><p><code><a href="ivreg.html">ivreg</a></code>, <code><a href="https://rdrr.io/pkg/car/man/avPlots.html">avPlots</a></code>,
   <code><a href="https://rdrr.io/pkg/car/man/crPlots.html">crPlots</a></code>, <code><a href="https://rdrr.io/pkg/effects/man/predictorEffects.html">predictorEffects</a></code>,
   <code><a href="https://rdrr.io/pkg/car/man/qqPlot.html">qqPlot</a></code>, <code><a href="https://rdrr.io/pkg/car/man/influencePlot.html">influencePlot</a></code>,
   <code><a href="https://rdrr.io/pkg/car/man/infIndexPlot.html">infIndexPlot</a></code>, <code><a href="https://rdrr.io/pkg/car/man/Boot.html">Boot</a></code>,
   <code><a href="https://rdrr.io/pkg/car/man/outlierTest.html">outlierTest</a></code>, <code><a href="https://rdrr.io/pkg/car/man/spreadLevelPlot.html">spreadLevelPlot</a></code>,
   <code><a href="https://rdrr.io/pkg/car/man/ncvTest.html">ncvTest</a></code>.</p></div>
+    </div>
 
-    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <div id="examples">
+    <h2>Examples<a class="anchor" aria-label="anchor" href="#examples"></a></h2>
     <div class="ref-examples sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="va">kmenta.eq1</span> <span class="op">&lt;-</span> <span class="fu"><a href="ivreg.html">ivreg</a></span><span class="op">(</span><span class="va">Q</span> <span class="op">~</span> <span class="va">P</span> <span class="op">+</span> <span class="va">D</span> <span class="op">|</span> <span class="va">D</span> <span class="op">+</span> <span class="cn">F</span> <span class="op">+</span> <span class="va">A</span>, data <span class="op">=</span> <span class="va">Kmenta</span><span class="op">)</span></span>
 <span class="r-in"><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">kmenta.eq1</span><span class="op">)</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
@@ -333,9 +339,9 @@ draw graphs.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Bootstrap bca confidence intervals</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                  2.5 %       97.5 %</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> (Intercept) 59.9730253 108.23570950</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> P           -0.4459689   0.06312527</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> D            0.1920333   0.41634570</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> (Intercept) 74.6682168 108.32109041</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> P           -0.4179342   0.02712798</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> D            0.1822026   0.39996503</span>
 <span class="r-in"><span class="fu">car</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/car/man/outlierTest.html">outlierTest</a></span><span class="op">(</span><span class="va">kmenta.eq1</span><span class="op">)</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> No Studentized residuals with Bonferroni p &lt; 0.05</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Largest |rstudent|:</span>
@@ -347,6 +353,7 @@ draw graphs.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Chisquare = 0.2390325, Df = 1, p = 0.62491</span>
 <span class="r-in"></span>
 </code></pre></div>
+    </div>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top"><h2 data-toc-skip>Contents</h2>
