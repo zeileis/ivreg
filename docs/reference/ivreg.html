@@ -89,7 +89,7 @@ estimators are also provided, based on M-estimation (2SM) and MM-estimation
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ivreg</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.6-0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.6-1</span>
       </span>
     </div>
 
@@ -168,6 +168,7 @@ estimators are also provided, based on M-estimation (2SM) and MM-estimation
   model <span class='op'>=</span> <span class='cn'>TRUE</span>,
   y <span class='op'>=</span> <span class='cn'>TRUE</span>,
   x <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  method <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"OLS"</span>, <span class='st'>"M"</span>, <span class='st'>"MM"</span><span class='op'>)</span>,
   <span class='va'>...</span>
 <span class='op'>)</span></pre>
 
@@ -221,6 +222,14 @@ the fit (the model frame, the model matrices, the response) are returned. These
 components are necessary for computing regression diagnostics.</p></td>
     </tr>
     <tr>
+      <th>method</th>
+      <td><p>the method used to fit the stage 1 and 2 regression: 
+<code>"OLS"</code> for traditional 2SLS regression (the default), 
+<code>"M"</code> for M-estimation, or <code>"MM"</code> for MM-estimation, with the
+latter two robust-regression methods implemented via the <code><a href='https://rdrr.io/pkg/MASS/man/rlm.html'>rlm</a></code> 
+function in the <span class="pkg">MASS</span> package.</p></td>
+    </tr>
+    <tr>
       <th>...</th>
       <td><p>further arguments passed to <code><a href='ivreg.fit.html'>ivreg.fit</a></code>.</p></td>
     </tr>
@@ -255,7 +264,7 @@ class <code>"lm"</code>, with the following components:</p>
 <dt>endogenous</dt><dd><p>columns of the <code>"regressors"</code> matrix that are endogenous.</p></dd>
 <dt>instruments</dt><dd><p>columns of the <code>"instruments"</code> matrix that are
 instruments for the endogenous variables.</p></dd>
-#' <dt>method</dt><dd><p>the method used for the stage 1 and 2 regressions, one of <code>"OLS"</code>,
+<dt>method</dt><dd><p>the method used for the stage 1 and 2 regressions, one of <code>"OLS"</code>,
 <code>"M"</code>, or <code>"MM"</code>.</p></dd>
 <dt>rweights</dt><dd><p>a matrix of robustness weights with columns for each of the stage-1
 regressions and for the stage-2 regression (in the last column) if the fitting method is 
