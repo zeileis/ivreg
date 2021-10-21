@@ -43,7 +43,7 @@ but using some variables dating back to earlier years."><meta property="og:image
   <a href="../news/index.html">Changelog</a>
 </li>
       </ul><ul class="nav navbar-nav navbar-right"><li>
-  <a href="https://github.com/john-d-fox/ivreg/">
+  <a href="https://github.com/john-d-fox/ivreg/" class="external-link">
     <span class="fab fa-github fa-lg"></span>
      
   </a>
@@ -58,7 +58,7 @@ but using some variables dating back to earlier years."><meta property="og:image
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>U.S. Returns to Schooling Data</h1>
-    <small class="dont-index">Source: <a href="https://github.com/john-d-fox/ivreg/blob/master/R/SchoolingReturns.R"><code>R/SchoolingReturns.R</code></a></small>
+    <small class="dont-index">Source: <a href="https://github.com/john-d-fox/ivreg/blob/master/R/SchoolingReturns.R" class="external-link"><code>R/SchoolingReturns.R</code></a></small>
     <div class="hidden name"><code>SchoolingReturns.Rd</code></div>
     </div>
 
@@ -67,11 +67,12 @@ but using some variables dating back to earlier years."><meta property="og:image
 but using some variables dating back to earlier years.</p>
     </div>
 
-    <div class="ref-usage sourceCode"><pre class="sourceCode r"><code><span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="st">"SchoolingReturns"</span>, package <span class="op">=</span> <span class="st">"ivreg"</span><span class="op">)</span></code></pre></div>
+    <div class="ref-usage sourceCode"><pre class="sourceCode r"><code><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="st">"SchoolingReturns"</span>, package <span class="op">=</span> <span class="st">"ivreg"</span><span class="op">)</span></code></pre></div>
 
 
+    <div id="ref-sections">
     <div id="format">
-    <h2>Format<a class="anchor" aria-label="anchor" href="#format"></a></h2>
+    <h2>Format</h2>
     <p>A data frame with 3010 rows and 22 columns.</p><dl><dt>wage</dt><dd><p>Raw wages in 1976 (in cents per hour).</p></dd>
   <dt>education</dt><dd><p>Education in 1976 (in years).</p></dd>
   <dt>experience</dt><dd><p>Years of labor market experience, computed as <code>age - education - 6</code>.</p></dd>
@@ -99,11 +100,11 @@ but using some variables dating back to earlier years.</p>
   
 </dl></div>
     <div id="source">
-    <h2>Source<a class="anchor" aria-label="anchor" href="#source"></a></h2>
+    <h2>Source</h2>
     <p>Supplementary material for Verbeek (2004).</p>
     </div>
     <div id="details">
-    <h2>Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
+    <h2>Details</h2>
     <p>Investigating the causal link of schooling on earnings in a classical model
 for wage determinants is problematic because it can be argued that schooling
 is endogenous. Hence, one possible strategy is to use an exogonous variable
@@ -126,24 +127,25 @@ characteristics improves the model significantly but does not affect much the
 main coefficients of interest, namely that of years of education.</p>
     </div>
     <div id="references">
-    <h2>References<a class="anchor" aria-label="anchor" href="#references"></a></h2>
+    <h2>References</h2>
     <p>Card, D. (1995). Using Geographical Variation in College Proximity to Estimate the Return to
   Schooling. In: Christofides, L.N., Grant, E.K., and Swidinsky, R. (eds.),
   <em>Aspects of Labour Market Behaviour: Essays in Honour of John Vanderkamp</em>,
   University of Toronto Press, Toronto, 201-222.</p>
 <p>Verbeek, M. (2004). <em>A Guide to Modern Econometrics</em>, 2nd ed. John Wiley.</p>
     </div>
+    </div>
 
     <div id="examples">
-    <h2>Examples<a class="anchor" aria-label="anchor" href="#examples"></a></h2>
+    <h2>Examples</h2>
     <div class="ref-examples sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="co">## load data</span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="st">"SchoolingReturns"</span>, package <span class="op">=</span> <span class="st">"ivreg"</span><span class="op">)</span></span>
+<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="st">"SchoolingReturns"</span>, package <span class="op">=</span> <span class="st">"ivreg"</span><span class="op">)</span></span>
 <span class="r-in"></span>
 <span class="r-in"><span class="co">## Table 5.1 in Verbeek (2004) / Table 2(1) in Card (1995)</span></span>
 <span class="r-in"><span class="co">## Returns to education: 7.4%</span></span>
-<span class="r-in"><span class="va">m_ols</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span><span class="va">wage</span><span class="op">)</span> <span class="op">~</span> <span class="va">education</span> <span class="op">+</span> <span class="fu"><a href="https://rdrr.io/r/stats/poly.html">poly</a></span><span class="op">(</span><span class="va">experience</span>, <span class="fl">2</span>, raw <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op">+</span> <span class="va">ethnicity</span> <span class="op">+</span> <span class="va">smsa</span> <span class="op">+</span> <span class="va">south</span>,</span>
+<span class="r-in"><span class="va">m_ols</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html" class="external-link">lm</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Log.html" class="external-link">log</a></span><span class="op">(</span><span class="va">wage</span><span class="op">)</span> <span class="op">~</span> <span class="va">education</span> <span class="op">+</span> <span class="fu"><a href="https://rdrr.io/r/stats/poly.html" class="external-link">poly</a></span><span class="op">(</span><span class="va">experience</span>, <span class="fl">2</span>, raw <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op">+</span> <span class="va">ethnicity</span> <span class="op">+</span> <span class="va">smsa</span> <span class="op">+</span> <span class="va">south</span>,</span>
 <span class="r-in">  data <span class="op">=</span> <span class="va">SchoolingReturns</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">m_ols</span><span class="op">)</span></span>
+<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">m_ols</span><span class="op">)</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Call:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> lm(formula = log(wage) ~ education + poly(experience, 2, raw = TRUE) + </span>
@@ -171,9 +173,9 @@ main coefficients of interest, namely that of years of education.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-in"></span>
 <span class="r-in"><span class="co">## Table 5.2 in Verbeek (2004) / similar to Table 3(1) in Card (1995)</span></span>
-<span class="r-in"><span class="va">m_red</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">education</span> <span class="op">~</span> <span class="fu"><a href="https://rdrr.io/r/stats/poly.html">poly</a></span><span class="op">(</span><span class="va">age</span>, <span class="fl">2</span>, raw <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op">+</span> <span class="va">ethnicity</span> <span class="op">+</span> <span class="va">smsa</span> <span class="op">+</span> <span class="va">south</span> <span class="op">+</span> <span class="va">nearcollege</span>,</span>
+<span class="r-in"><span class="va">m_red</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html" class="external-link">lm</a></span><span class="op">(</span><span class="va">education</span> <span class="op">~</span> <span class="fu"><a href="https://rdrr.io/r/stats/poly.html" class="external-link">poly</a></span><span class="op">(</span><span class="va">age</span>, <span class="fl">2</span>, raw <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op">+</span> <span class="va">ethnicity</span> <span class="op">+</span> <span class="va">smsa</span> <span class="op">+</span> <span class="va">south</span> <span class="op">+</span> <span class="va">nearcollege</span>,</span>
 <span class="r-in">  data <span class="op">=</span> <span class="va">SchoolingReturns</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">m_red</span><span class="op">)</span></span>
+<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">m_red</span><span class="op">)</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Call:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> lm(formula = education ~ poly(age, 2, raw = TRUE) + ethnicity + </span>
@@ -202,10 +204,10 @@ main coefficients of interest, namely that of years of education.</p>
 <span class="r-in"></span>
 <span class="r-in"><span class="co">## Table 5.3 in Verbeek (2004) / similar to Table 3(5) in Card (1995)</span></span>
 <span class="r-in"><span class="co">## Returns to education: 13.3%</span></span>
-<span class="r-in"><span class="va">m_iv</span> <span class="op">&lt;-</span> <span class="fu"><a href="ivreg.html">ivreg</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span><span class="va">wage</span><span class="op">)</span> <span class="op">~</span> <span class="va">education</span> <span class="op">+</span> <span class="fu"><a href="https://rdrr.io/r/stats/poly.html">poly</a></span><span class="op">(</span><span class="va">experience</span>, <span class="fl">2</span>, raw <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op">+</span> <span class="va">ethnicity</span> <span class="op">+</span> <span class="va">smsa</span> <span class="op">+</span> <span class="va">south</span> <span class="op">|</span></span>
-<span class="r-in">  <span class="va">nearcollege</span> <span class="op">+</span> <span class="fu"><a href="https://rdrr.io/r/stats/poly.html">poly</a></span><span class="op">(</span><span class="va">age</span>, <span class="fl">2</span>, raw <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op">+</span> <span class="va">ethnicity</span> <span class="op">+</span> <span class="va">smsa</span> <span class="op">+</span> <span class="va">south</span>,</span>
+<span class="r-in"><span class="va">m_iv</span> <span class="op">&lt;-</span> <span class="fu"><a href="ivreg.html">ivreg</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Log.html" class="external-link">log</a></span><span class="op">(</span><span class="va">wage</span><span class="op">)</span> <span class="op">~</span> <span class="va">education</span> <span class="op">+</span> <span class="fu"><a href="https://rdrr.io/r/stats/poly.html" class="external-link">poly</a></span><span class="op">(</span><span class="va">experience</span>, <span class="fl">2</span>, raw <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op">+</span> <span class="va">ethnicity</span> <span class="op">+</span> <span class="va">smsa</span> <span class="op">+</span> <span class="va">south</span> <span class="op">|</span></span>
+<span class="r-in">  <span class="va">nearcollege</span> <span class="op">+</span> <span class="fu"><a href="https://rdrr.io/r/stats/poly.html" class="external-link">poly</a></span><span class="op">(</span><span class="va">age</span>, <span class="fl">2</span>, raw <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op">+</span> <span class="va">ethnicity</span> <span class="op">+</span> <span class="va">smsa</span> <span class="op">+</span> <span class="va">south</span>,</span>
 <span class="r-in">  data <span class="op">=</span> <span class="va">SchoolingReturns</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">m_iv</span><span class="op">)</span></span>
+<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">m_iv</span><span class="op">)</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Call:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ivreg(formula = log(wage) ~ education + poly(experience, 2, raw = TRUE) + </span>

@@ -104,14 +104,14 @@
 
     
     
-<div id="introduction" class="section level2">
-<h2>Introduction<a class="anchor" aria-label="anchor" href="#introduction"></a>
+<div class="section level2">
+<h2 id="introduction">Introduction<a class="anchor" aria-label="anchor" href="#introduction"></a>
 </h2>
 <p>The <strong>ivreg</strong> package extends a variety of standard numeric and graphical regression diagnostics to linear models fit by <em>two-stage least-squares (2SLS)</em> regression, a commonly employed method of instrumental-variables estimation for potentially overidentified structural equations in which there are endogenous regressors. The <code><a href="../reference/ivreg.fit.html">ivreg.fit()</a></code> function in the package computes the 2SLS estimator employing a low-level interface not generally intended for direct use, and returns a list containing quantities that faciliate the computation of various diagnostics. The <code><a href="../reference/ivreg.html">ivreg()</a></code> function provides a user-friendly formula-based interface to <code><a href="../reference/ivreg.fit.html">ivreg.fit()</a></code>.</p>
 <p><code><a href="../reference/ivreg.html">ivreg()</a></code> is derived from and supersedes the <code><a href="../reference/ivreg.html">ivreg()</a></code> function in the <strong>AER</strong> package <span class="citation">(Kleiber and Zeileis 2008)</span>, making additional provision for regression diagnostics. The principal subject of this vignette is the rationale for the extension of various standard regression diagnostics to 2SLS and the use of functions in the <strong>ivreg</strong> package to compute them, along with functions in other packages, specifically the base-R <strong>stats</strong> package <span class="citation">(R Core Team 2020)</span> and the <strong>car</strong> and <strong>effects</strong> packages <span class="citation">(Fox and Weisberg 2019)</span>, that work with the <code>"ivreg"</code> objects produced by <code><a href="../reference/ivreg.html">ivreg()</a></code>.</p>
 </div>
-<div id="review-of-2sls-estimation" class="section level2">
-<h2>Review of 2SLS Estimation<a class="anchor" aria-label="anchor" href="#review-of-2sls-estimation"></a>
+<div class="section level2">
+<h2 id="review-of-2sls-estimation">Review of 2SLS Estimation<a class="anchor" aria-label="anchor" href="#review-of-2sls-estimation"></a>
 </h2>
 <p>We’ll need some basic results for 2SLS regression to develop diagnostics and so we review the method briefly here. 2SLS regression was invented independently in the 1950s by <span class="citation">Basmann (1957)</span> and Theil <span class="citation">(as cited in Theil 1971)</span>, who took slightly different but equivalent approaches, both described below, to derive the 2SLS estimator.</p>
 <p>We want to estimate the linear model <span class="math inline">\(y = X \beta + \varepsilon\)</span>, where <span class="math inline">\(y\)</span> is an <span class="math inline">\(n \times 1\)</span> vector of observations on a response variable, <span class="math inline">\(X\)</span> is an <span class="math inline">\(n \times p\)</span> matrix of regressors, typically with an initial columns of <span class="math inline">\(1\)</span>s for the regression constant, <span class="math inline">\(\beta\)</span> is a <span class="math inline">\(p \times 1\)</span> vector of regression coefficients to be estimated from the data, and <span class="math inline">\(\varepsilon\)</span> is an <span class="math inline">\(n \times 1\)</span> vector of errors assumed to be distributed <span class="math inline">\(N_n(0, \sigma^2 I_n)\)</span> where <span class="math inline">\(N_n\)</span> is the multivariate-normal distribution, <span class="math inline">\(0\)</span> is an <span class="math inline">\(n \times 1\)</span> vector of zeroes, and <span class="math inline">\(I_n\)</span> is the order-<span class="math inline">\(n\)</span> identity matrix. Suppose that some (perhaps all) of the regressors in <span class="math inline">\(X\)</span> are <em>endogenous</em>, in the sense that they are thought not to be independent of <span class="math inline">\(\varepsilon\)</span>. As a consequence, the <em>ordinary least-squares (OLS)</em> estimator <span class="math inline">\(b_{\mathrm{OLS}} = (X^\top X)^{-1} X^\top y\)</span> of <span class="math inline">\(\beta\)</span> is generally biased and inconsistent.</p>
@@ -123,8 +123,8 @@
 b_{\mathrm{2SLS}} = [X^\top Z(Z^\top Z)^{-1} Z^\top X]^{-1} X^\top Z (Z^\top Z)^{-1} Z^\top y
 \]</span> This is what the <code>tsls()</code> function in the <strong>sem</strong> package <span class="citation">(Fox, Nie, and Byrnes 2020)</span> does, but from the point of view of developing regression diagnostics, it’s advantageous to compute the 2SLS estimator by two distinct OLS regressions, which is the approach taken by <code><a href="../reference/ivreg.html">ivreg()</a></code>.</p>
 </div>
-<div id="unusual-data-diagnostics-for-2sls-regression" class="section level2">
-<h2>Unusual-Data Diagnostics for 2SLS Regression<a class="anchor" aria-label="anchor" href="#unusual-data-diagnostics-for-2sls-regression"></a>
+<div class="section level2">
+<h2 id="unusual-data-diagnostics-for-2sls-regression">Unusual-Data Diagnostics for 2SLS Regression<a class="anchor" aria-label="anchor" href="#unusual-data-diagnostics-for-2sls-regression"></a>
 </h2>
 <p>As far as we can tell, diagnostics for regression models fit by 2SLS are a relatively neglected topic, but were addressed briefly by <span class="citation">Belsley, Kuh, and Welsch (1980, 266–68)</span>. Deletion diagnostics directly assess the influence of each case on a fitted regression model by removing the case, refitting the model, and noting how the regression coefficients or other regression outputs, such as the residual standard deviation, change.</p>
 <p>Case-deletion diagnostics for influential data can always be obtained by brute-force computation, literally refitting the model with each case removed in turn, but this approach is inefficient and consequently unattractive in large samples. For some classes of statistical models, such as generalized linear models <span class="citation">(e.g., Pregibon 1981)</span>, computationally less demanding approximations to case-deletion diagnostics are available, and for linear models efficient “updating” formulas are available <span class="citation">(as described, e.g., by Belsley, Kuh, and Welsch 1980)</span> that permit the exact computation of case-deletion diagnostics.</p>
@@ -158,14 +158,14 @@ D_i = \frac{s_{-i}^2}{s^2} \times \frac{\mathrm{dffits}_i^2}{p}
 \mathrm{rstudent}_i = \frac{e_i}{s_{-i} \sqrt{1 - h_i}}
 \]</span> where <span class="math inline">\(e_i = y_i - x_i^\top b_{2SLS}\)</span> is the <em>response residual</em> for the <span class="math inline">\(i\)</span>-th case.</p>
 <p>As mentioned, <span class="citation">Belsley, Kuh, and Welsch (1980)</span> recommend using hatvalues from the second-stage regression. That’s a reasonable choice and the default in the <strong>ivreg</strong> package, but it risks missing cases that have high leverage in the first-stage but not the second-stage regression. Let <span class="math inline">\(h_i^{(1)}\)</span> represent the hatvalues from the first stage and <span class="math inline">\(h_i^{(2)}\)</span> those from the second stage. If the model includes an intercept, both sets of hatvalues are bounded by <span class="math inline">\(1/n\)</span> and <span class="math inline">\(1\)</span>, but the average hatvalue in the first stage is <span class="math inline">\(q/n\)</span> while the average in the second stage is <span class="math inline">\(p/n\)</span>. To make the hatvalues from the two stages comparable, we divide each by its average, <span class="math inline">\(h^{(1*)}_i = \frac{h_i^{(1)}}{q/n}\)</span> and <span class="math inline">\(h^{(2*)}_i = \frac{h_i^{(2)}}{p/n}\)</span>. Then we can define the two-stages hatvalue either as the (rescaled) larger of the two for each case, <span class="math inline">\(h_i = (p/n) \times \max \left( h^{(1*)}_i, h^{(2*)}_i \right)\)</span>, or as their (rescaled) geometric mean, <span class="math inline">\(h_i = (p/n) \times \sqrt{h^{(1*)}_i \times h^{(2*)}_i}\)</span>. The <strong>ivreg</strong> package provides both of these options.</p>
-<div id="unusual-data-diagnosics-in-the-ivreg-package" class="section level3">
-<h3>Unusual-Data Diagnosics in the <strong>ivreg</strong> Package<a class="anchor" aria-label="anchor" href="#unusual-data-diagnosics-in-the-ivreg-package"></a>
+<div class="section level3">
+<h3 id="unusual-data-diagnosics-in-the-ivreg-package">Unusual-Data Diagnosics in the <strong>ivreg</strong> Package<a class="anchor" aria-label="anchor" href="#unusual-data-diagnosics-in-the-ivreg-package"></a>
 </h3>
 <p>The <strong>ivreg</strong> package implements unusual-data diagnostics for 2SLS regression (i.e., class <code>"ivreg"</code> objects produced by <code><a href="../reference/ivreg.html">ivreg()</a></code>) as methods for various generic functions in the <strong>stats</strong> and <strong>car</strong> packages; these functions include <code><a href="https://rdrr.io/r/stats/influence.measures.html" class="external-link">cooks.distance()</a></code>, <code><a href="https://rdrr.io/r/stats/influence.measures.html" class="external-link">dfbeta()</a></code>, <code><a href="https://rdrr.io/r/stats/influence.measures.html" class="external-link">hatvalues()</a></code>, <code><a href="https://rdrr.io/r/stats/lm.influence.html" class="external-link">influence()</a></code>, and <code><a href="https://rdrr.io/r/stats/influence.measures.html" class="external-link">rstudent()</a></code> in <strong>stats</strong>, and <code><a href="https://rdrr.io/pkg/car/man/avPlots.html" class="external-link">avPlot()</a></code> and <code><a href="https://rdrr.io/pkg/car/man/qqPlot.html" class="external-link">qqPlot()</a></code> in <strong>car</strong>. In particular, <code><a href="../reference/ivregDiagnostics.html">influence.ivreg()</a></code> returns an object containing several diagnostic statistics, and it is thus more efficient to use the <code><a href="https://rdrr.io/r/stats/lm.influence.html" class="external-link">influence()</a></code> function than to compute the various diagnostics separately. Methods provided for class <code>"influence.ivreg"</code> objects include <code><a href="https://rdrr.io/r/stats/influence.measures.html" class="external-link">cooks.distance()</a></code>, <code><a href="https://rdrr.io/r/stats/influence.measures.html" class="external-link">dfbeta()</a></code>, <code><a href="https://rdrr.io/r/stats/influence.measures.html" class="external-link">hatvalues()</a></code>, <code><a href="https://rdrr.io/pkg/car/man/qqPlot.html" class="external-link">qqPlot()</a></code>, and <code><a href="https://rdrr.io/r/stats/influence.measures.html" class="external-link">rstudent()</a></code>.</p>
 <p>The package also provides methods for various standard R regression-model generics, including <code><a href="https://rdrr.io/r/stats/anova.html" class="external-link">anova()</a></code> (for model comparison), <code>predicted()</code> for computing predicted values, <code><a href="https://rdrr.io/r/stats/model.matrix.html" class="external-link">model.matrix()</a></code> (for the model or for the first- or second-stage regression), <code><a href="https://rdrr.io/r/base/print.html" class="external-link">print()</a></code>, <code><a href="https://rdrr.io/r/stats/residuals.html" class="external-link">residuals()</a></code> (of several kinds), <code><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary()</a></code>, <code><a href="https://rdrr.io/r/stats/update.html" class="external-link">update()</a></code>, and <code><a href="https://rdrr.io/r/stats/vcov.html" class="external-link">vcov()</a></code>. The <code><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary()</a></code> method makes provision for a user-specified coefficient covariance matrix or for a function to compute the coefficient covariance matrix, such as <code><a href="https://sandwich.R-Forge.R-project.org//reference/sandwich.html" class="external-link">sandwich()</a></code> in the <strong>sandwich</strong> package, to compute robust coefficient covariances. The latter is supported by methods for the <code><a href="https://sandwich.R-Forge.R-project.org//reference/bread.html" class="external-link">bread()</a></code> and <code><a href="https://sandwich.R-Forge.R-project.org//reference/estfun.html" class="external-link">estfun()</a></code> generics defined in <strong>sandwich</strong>.</p>
 </div>
-<div id="unusual-data-diagnostics-an-example" class="section level3">
-<h3>Unusual Data Diagnostics: An Example<a class="anchor" aria-label="anchor" href="#unusual-data-diagnostics-an-example"></a>
+<div class="section level3">
+<h3 id="unusual-data-diagnostics-an-example">Unusual Data Diagnostics: An Example<a class="anchor" aria-label="anchor" href="#unusual-data-diagnostics-an-example"></a>
 </h3>
 <p>The <strong>ivreg</strong> package contains the <code>Kmenta</code> data set, used in <span class="citation">Kmenta (1986, Ch. 13)</span> to illustrate estimation (by 2SLS and other methods) of a linear simultaneous equation econometric model. The data, which are partly contrived, represent an annual time series for the U.S. economy from 1922 to 1941, with the following variables:</p>
 <ul>
@@ -402,8 +402,8 @@ P &amp;= 85.00 + 0.75 D - 0.50 F - 0.90 A + \nu_2
 ## 2.028434 2.028434</code></pre>
 </div>
 </div>
-<div id="nonlinearity-diagnostics" class="section level2">
-<h2>Nonlinearity Diagnostics<a class="anchor" aria-label="anchor" href="#nonlinearity-diagnostics"></a>
+<div class="section level2">
+<h2 id="nonlinearity-diagnostics">Nonlinearity Diagnostics<a class="anchor" aria-label="anchor" href="#nonlinearity-diagnostics"></a>
 </h2>
 <p>The theoretical properties of <em>component-plus-residual plots</em> as nonlinearity diagnostics were systematically explored by <span class="citation">Cook (1993)</span> and <span class="citation">Cook and Croos-Dabrera (1998)</span>. Following these authors and focusing on the explanatory variable <span class="math inline">\(x_1\)</span>, let’s assume that the partial relationship of the response <span class="math inline">\(y\)</span> to <span class="math inline">\(x_1\)</span> is potentially nonlinear, as represented by the partial regression function <span class="math inline">\(f(x_1)\)</span>, and that the partial relationships of <span class="math inline">\(y\)</span> to the other <span class="math inline">\(x\)</span>s are linear, so that an accurate model for the data is: <span class="math display">\[
 E(y) = \alpha + f(x_1) + \beta_2 x_2 + \cdots + \beta_k x_k 
@@ -412,8 +412,8 @@ E(y) = \alpha + f(x_1) + \beta_2 x_2 + \cdots + \beta_k x_k
 E(y) = \alpha^\prime + \beta_1^\prime x_1 + \beta_2^\prime x_2 + \cdots + \beta_k^\prime x_k 
 \]</span> in our case by 2SLS regression, obtaining estimated regression coefficients <span class="math inline">\(a^\prime, b_1^\prime, b_2^\prime, \ldots, b_k^\prime\)</span>. Cook and Croos-Dabrera’s work shows that as long as the regression estimator is consistant and the <span class="math inline">\(x\)</span>s are linearly related, the partial residuals <span class="math inline">\(b^\prime_1 x_1 + e\)</span> can be plotted and smoothed against <span class="math inline">\(x_1\)</span> to visualize an estimate of <span class="math inline">\(f()\)</span>, where <span class="math inline">\(e = y - (a^\prime + b_1^\prime x_1 + b_2^\prime x_2 + \cdots b_k^\prime x_k)\)</span> are the response residuals. In practice, the component-plus-residual plot can break down as an accurate representation of <span class="math inline">\(f()\)</span> if there are strong nonlinear relationships between <span class="math inline">\(x_1\)</span> and the other <span class="math inline">\(x\)</span>s or if <span class="math inline">\(y\)</span> is nonlinearly related to another <span class="math inline">\(x\)</span> that is correlated with <span class="math inline">\(x_1\)</span>.</p>
 <p><span class="citation">Fox and Weisberg (2018)</span> extend component-plus-residual plots to more complex regression models, which can, for example, include interactions, by adding partial residuals to <em>predictor effect plots</em>. These graphs also can be applied to linear models fit by 2SLS regression.</p>
-<div id="diagnosing-nonlinearity-an-example" class="section level3">
-<h3>Diagnosing Nonlinearity: An Example<a class="anchor" aria-label="anchor" href="#diagnosing-nonlinearity-an-example"></a>
+<div class="section level3">
+<h3 id="diagnosing-nonlinearity-an-example">Diagnosing Nonlinearity: An Example<a class="anchor" aria-label="anchor" href="#diagnosing-nonlinearity-an-example"></a>
 </h3>
 <p>We turn once more to the demand equation for Kmenta’s data and model to illustrate component-plus-residual plots, and once more the data are well behaved. An <code>"ivreg"</code> method is provided for the <code><a href="https://rdrr.io/pkg/car/man/crPlots.html" class="external-link">crPlot()</a></code> function in the <strong>car</strong> package. In particular, <code><a href="https://rdrr.io/pkg/car/man/crPlots.html" class="external-link">crPlots()</a></code> constructs component-plus-residual plots for all of the numeric explanatory variables in an additive regression equation. For example,</p>
 <div class="sourceCode" id="cb33"><pre class="downlit sourceCode r">
@@ -448,8 +448,8 @@ E(y) = \alpha^\prime + \beta_1^\prime x_1 + \beta_2^\prime x_2 + \cdots + \beta_
 <p>Recall that the blue lines represent the fitted model and the magenta lines are for the smoothed partial residuals; discrepancy between the two lines is indicative of lack of fit.</p>
 </div>
 </div>
-<div id="nonconstant-error-variance" class="section level2">
-<h2>Nonconstant Error Variance<a class="anchor" aria-label="anchor" href="#nonconstant-error-variance"></a>
+<div class="section level2">
+<h2 id="nonconstant-error-variance">Nonconstant Error Variance<a class="anchor" aria-label="anchor" href="#nonconstant-error-variance"></a>
 </h2>
 <p>Standard least-squares nonconstant variance (“heteroscedasticity”) diagnostics extend straightforwardly to 2SLS regression. We can, for example, plot studentized residuals versus fitted values to discern a tendency for the variability of the former to change (typically to increase) with the level of the latter. For the demand equation in Kmenta’s model,</p>
 <div class="sourceCode" id="cb40"><pre class="downlit sourceCode r">
@@ -640,8 +640,8 @@ V(\varepsilon) = g(\gamma_0 + \gamma_1 z_1 + \cdots + \gamma_s z_s)
 ## P           -0.61242364   0.2463746
 ## D            0.05739467   0.4253580</code></pre>
 </div>
-<div id="weighted-2sls-regession" class="section level2">
-<h2>Weighted 2SLS Regession<a class="anchor" aria-label="anchor" href="#weighted-2sls-regession"></a>
+<div class="section level2">
+<h2 id="weighted-2sls-regession">Weighted 2SLS Regession<a class="anchor" aria-label="anchor" href="#weighted-2sls-regession"></a>
 </h2>
 <p>Suppose that we modify the regression model <span class="math inline">\(y = X \beta + \varepsilon\)</span> so that now <span class="math inline">\(N_n(0, \sigma^2 W^{-1})\)</span> where <span class="math inline">\(W = \mathrm{diag}\{w_i\}\)</span> is an <span class="math inline">\(n \times n\)</span> diagonal matrix of known inverse-variance weights; that is <span class="math inline">\(V(\varepsilon_i) = \sigma^2/w_i\)</span>. As before, some of the columns of <span class="math inline">\(X\)</span> may be correlated with the errors <span class="math inline">\(\varepsilon\)</span>, but we have sufficient instrumental variables <span class="math inline">\(Z\)</span> that are independent of the errors.</p>
 <p>Then the <em>weighted 2SLS</em> estimator is <span class="math display">\[
@@ -694,8 +694,8 @@ b_{\mathrm{W2SLS}} = [X^\top W Z(Z^\top W Z)^{-1} Z^\top W X]^{-1} X^\top W Z (Z
 ##       rstudent unadjusted p-value Bonferroni p
 ## 1937 -3.135343          0.0063887      0.12777</code></pre>
 </div>
-<div id="collinearity-diagnostics" class="section level2">
-<h2>Collinearity Diagnostics<a class="anchor" aria-label="anchor" href="#collinearity-diagnostics"></a>
+<div class="section level2">
+<h2 id="collinearity-diagnostics">Collinearity Diagnostics<a class="anchor" aria-label="anchor" href="#collinearity-diagnostics"></a>
 </h2>
 <p>In addition to unusual-data diagnostics, <span class="citation">Belsley, Kuh, and Welsch (1980)</span> briefly extend their approach to collinearity diagnostics to 2SLS regression. We believe that this approach, which assimilates collinearity to numerical instability, is flawed, in that it takes into account “collinearity with the intercept.” That is, regressors with values far from 0 have large sums of products with the constant regressor, producing a large standard error of the intercept, and simply reflecting the fact that the intercept extrapolates the fitted regression surface far beyond the range of the data.</p>
 <p><span class="citation">Fox and Monette (1992)</span> describe an alternative approach to collinearity diagnostics in linear models fit by least squares based on <em>generalized variance-inflation factors</em>. The implementation of generalized variance inflation fators in the <code><a href="https://rdrr.io/pkg/car/man/vif.html" class="external-link">vif()</a></code> function in the <strong>car</strong> package, which employs the estimated covariance matrix of the coefficients, applies in general to models with linear predictors, including linear models estimated by 2SLS.</p>
@@ -711,8 +711,8 @@ b_{\mathrm{W2SLS}} = [X^\top W Z(Z^\top W Z)^{-1} Z^\top W X]^{-1} X^\top W Z (Z
 <p><img src="Diagnostics-for-2SLS-Regression_files/figure-html/unnamed-chunk-39-1.png" width="768"></p>
 <p>The blue points in each panel represent the marginal scatterplot and the magenta points represent the (partial) added-variable plot, with the arrows showing the relationship between the two sets of points.</p>
 </div>
-<div id="robust-two-stage-instrumental-variables-regression" class="section level2">
-<h2>Robust Two-Stage Instrumental-Variables Regression<a class="anchor" aria-label="anchor" href="#robust-two-stage-instrumental-variables-regression"></a>
+<div class="section level2">
+<h2 id="robust-two-stage-instrumental-variables-regression">Robust Two-Stage Instrumental-Variables Regression<a class="anchor" aria-label="anchor" href="#robust-two-stage-instrumental-variables-regression"></a>
 </h2>
 <p>The <code><a href="../reference/ivreg.html">ivreg()</a></code> function also implements robust two-stage regression with M and MM estimators <span class="citation">(Huber and Ronchetti 2009)</span> for both stages, via the <code>rlm()</code> function in the <strong>MASS</strong> package <span class="citation">(Venables and Ripley 2002)</span>, by specifying, respectively, the argument <code>type = "M"</code> or <code>type = "MM"</code>. The M or MM estimator is applied separately to each first-stage regression and to the second-stage regression, thus down-weighting outliers in all of the regressions. The default for the <code>type</code> argument to <code><a href="../reference/ivreg.html">ivreg()</a></code>, <code>type = "OLS"</code>, produces the traditional 2SLS estimator.</p>
 <p>The details of implementation are largely straightforward. Applying the M or MM estimator to the first stage requires a separate regression for each endogenous regressor, rather than a single multivariate regression, because the robustness weights are generally different for each of the first-stage regressions.</p>
@@ -804,13 +804,13 @@ b_{\mathrm{W2SLS}} = [X^\top W Z(Z^\top W Z)^{-1} Z^\top W X]^{-1} X^\top W Z (Z
 ## 1941 -7.6841103 0.00000000 0.00000000</code></pre>
 <p>Because the hatvalue for 1941 in the robust second-stage fit is 0, so is the Cook’s <span class="math inline">\(D\)</span> for this case, and the “bubble” for 1941 has 0 area (and is therefore invisible). The bad case, however, have a very large (negative) studentized residual of nearly <span class="math inline">\(-8\)</span>.</p>
 </div>
-<div id="concluding-remarks" class="section level2">
-<h2>Concluding Remarks<a class="anchor" aria-label="anchor" href="#concluding-remarks"></a>
+<div class="section level2">
+<h2 id="concluding-remarks">Concluding Remarks<a class="anchor" aria-label="anchor" href="#concluding-remarks"></a>
 </h2>
 <p>Careful regression analysis requires methods for looking effectively at the data. Many potential problems can be addressed by examining the data <em>prior</em> to fitting a regression model, decreasing (if not eliminating) the necessity for <em>post-fit</em> diagnostics. No doubt careful data analysts employing 2SLS have always done this. Nevertheless, having methods that allow one to subject a regression model fit by 2SLS to criticism will in at least some cases suggest improvements to the model or perhaps corrections to the data.</p>
 </div>
-<div id="references" class="section level2 unnumbered">
-<h2>References<a class="anchor" aria-label="anchor" href="#references"></a>
+<div class="section level2 unnumbered">
+<h2 id="references">References<a class="anchor" aria-label="anchor" href="#references"></a>
 </h2>
 <div id="refs" class="references">
 <div id="ref-Basmann1957">
@@ -915,7 +915,7 @@ b_{\mathrm{W2SLS}} = [X^\top W Z(Z^\top W Z)^{-1} Z^\top W X]^{-1} X^\top W Z (Z
 
 <div class="pkgdown">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link external-link">pkgdown</a> 1.9000.9000.9000.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 1.9000.9000.9000.</p>
 </div>
 
       </footer>

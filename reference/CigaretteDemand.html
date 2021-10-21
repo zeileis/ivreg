@@ -43,7 +43,7 @@ compared between 1995 and 1985."><meta property="og:image" content="https://john
   <a href="../news/index.html">Changelog</a>
 </li>
       </ul><ul class="nav navbar-nav navbar-right"><li>
-  <a href="https://github.com/john-d-fox/ivreg/">
+  <a href="https://github.com/john-d-fox/ivreg/" class="external-link">
     <span class="fab fa-github fa-lg"></span>
      
   </a>
@@ -58,7 +58,7 @@ compared between 1995 and 1985."><meta property="og:image" content="https://john
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>U.S. Cigarette Demand Data</h1>
-    <small class="dont-index">Source: <a href="https://github.com/john-d-fox/ivreg/blob/master/R/CigaretteDemand.R"><code>R/CigaretteDemand.R</code></a></small>
+    <small class="dont-index">Source: <a href="https://github.com/john-d-fox/ivreg/blob/master/R/CigaretteDemand.R" class="external-link"><code>R/CigaretteDemand.R</code></a></small>
     <div class="hidden name"><code>CigaretteDemand.Rd</code></div>
     </div>
 
@@ -67,11 +67,12 @@ compared between 1995 and 1985."><meta property="og:image" content="https://john
 compared between 1995 and 1985.</p>
     </div>
 
-    <div class="ref-usage sourceCode"><pre class="sourceCode r"><code><span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="st">"CigaretteDemand"</span>, package <span class="op">=</span> <span class="st">"ivreg"</span><span class="op">)</span></code></pre></div>
+    <div class="ref-usage sourceCode"><pre class="sourceCode r"><code><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="st">"CigaretteDemand"</span>, package <span class="op">=</span> <span class="st">"ivreg"</span><span class="op">)</span></code></pre></div>
 
 
+    <div id="ref-sections">
     <div id="format">
-    <h2>Format<a class="anchor" aria-label="anchor" href="#format"></a></h2>
+    <h2>Format</h2>
     <p>A data frame with 48 rows and 10 columns.</p><dl><dt>packs</dt><dd><p>Number of cigarette packs per capita sold in 1995.</p></dd>
   <dt>rprice</dt><dd><p>Real price in 1995 (including sales tax).</p></dd>
   <dt>rincome</dt><dd><p>Real per capita income in 1995.</p></dd>
@@ -85,61 +86,62 @@ compared between 1995 and 1985.</p>
   
 </dl></div>
     <div id="source">
-    <h2>Source<a class="anchor" aria-label="anchor" href="#source"></a></h2>
+    <h2>Source</h2>
     <p>Online complements to Stock and Watson (2007).</p>
     </div>
     <div id="details">
-    <h2>Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
+    <h2>Details</h2>
     <p>The data are taken from the online complements to Stock and Watson (2007) and
-had been prepared as panel data (in long form) in <code><a href="https://rdrr.io/pkg/AER/man/CigarettesSW.html">CigarettesSW</a></code>
+had been prepared as panel data (in long form) in <code><a href="https://rdrr.io/pkg/AER/man/CigarettesSW.html" class="external-link">CigarettesSW</a></code>
 from the AER package (Kleiber and Zeileis 2008). Here, the data are provided by
 state (in wide form), readily preprocessed to contain all variables needed for
 illustrations of OLS and IV regressions. More related examples from Stock and
-Watson (2007) are provided in the AER package in <code><a href="https://rdrr.io/pkg/AER/man/StockWatson2007.html">StockWatson2007</a></code>.
+Watson (2007) are provided in the AER package in <code><a href="https://rdrr.io/pkg/AER/man/StockWatson2007.html" class="external-link">StockWatson2007</a></code>.
 A detailed discussion of the various cigarette demand examples with R code
 is provided by Hanck et al. (2020, Chapter 12).</p>
     </div>
     <div id="references">
-    <h2>References<a class="anchor" aria-label="anchor" href="#references"></a></h2>
+    <h2>References</h2>
     <p>Hanck, C., Arnold, M., Gerber, A., and Schmelzer, M. (2020).
-<em>Introduction to Econometrics with R</em>. <a href="https://www.econometrics-with-r.org/">https://www.econometrics-with-r.org/</a></p>
+<em>Introduction to Econometrics with R</em>. <a href="https://www.econometrics-with-r.org/" class="external-link">https://www.econometrics-with-r.org/</a></p>
 <p>Kleiber, C. and Zeileis, A. (2008). <em>Applied Econometrics with R</em>. Springer-Verlag</p>
 <p>Stock, J.H. and Watson, M.W. (2007). <em>Introduction to Econometrics</em>, 2nd ed., Addison Wesley.</p>
     </div>
     <div id="see-also">
-    <h2>See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
-    <div class="dont-index"><p><code><a href="https://rdrr.io/pkg/AER/man/CigarettesSW.html">CigarettesSW</a></code>.</p></div>
+    <h2>See also</h2>
+    <div class="dont-index"><p><code><a href="https://rdrr.io/pkg/AER/man/CigarettesSW.html" class="external-link">CigarettesSW</a></code>.</p></div>
+    </div>
     </div>
 
     <div id="examples">
-    <h2>Examples<a class="anchor" aria-label="anchor" href="#examples"></a></h2>
+    <h2>Examples</h2>
     <div class="ref-examples sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="co">## load data</span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="st">"CigaretteDemand"</span>, package <span class="op">=</span> <span class="st">"ivreg"</span><span class="op">)</span></span>
+<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="st">"CigaretteDemand"</span>, package <span class="op">=</span> <span class="st">"ivreg"</span><span class="op">)</span></span>
 <span class="r-in"></span>
 <span class="r-in"><span class="co">## basic price elasticity: OLS vs. IV</span></span>
-<span class="r-in"><span class="va">cig_ols</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span><span class="va">packs</span><span class="op">)</span> <span class="op">~</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span><span class="va">rprice</span><span class="op">)</span>, data <span class="op">=</span> <span class="va">CigaretteDemand</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">cig_iv</span> <span class="op">&lt;-</span> <span class="fu"><a href="ivreg.html">ivreg</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span><span class="va">packs</span><span class="op">)</span> <span class="op">~</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span><span class="va">rprice</span><span class="op">)</span> <span class="op">|</span> <span class="va">salestax</span>, data <span class="op">=</span> <span class="va">CigaretteDemand</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/base/cbind.html">cbind</a></span><span class="op">(</span>OLS <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/coef.html">coef</a></span><span class="op">(</span><span class="va">cig_ols</span><span class="op">)</span>, IV <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/coef.html">coef</a></span><span class="op">(</span><span class="va">cig_iv</span><span class="op">)</span><span class="op">)</span></span>
+<span class="r-in"><span class="va">cig_ols</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html" class="external-link">lm</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Log.html" class="external-link">log</a></span><span class="op">(</span><span class="va">packs</span><span class="op">)</span> <span class="op">~</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html" class="external-link">log</a></span><span class="op">(</span><span class="va">rprice</span><span class="op">)</span>, data <span class="op">=</span> <span class="va">CigaretteDemand</span><span class="op">)</span></span>
+<span class="r-in"><span class="va">cig_iv</span> <span class="op">&lt;-</span> <span class="fu"><a href="ivreg.html">ivreg</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Log.html" class="external-link">log</a></span><span class="op">(</span><span class="va">packs</span><span class="op">)</span> <span class="op">~</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html" class="external-link">log</a></span><span class="op">(</span><span class="va">rprice</span><span class="op">)</span> <span class="op">|</span> <span class="va">salestax</span>, data <span class="op">=</span> <span class="va">CigaretteDemand</span><span class="op">)</span></span>
+<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/base/cbind.html" class="external-link">cbind</a></span><span class="op">(</span>OLS <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/coef.html" class="external-link">coef</a></span><span class="op">(</span><span class="va">cig_ols</span><span class="op">)</span>, IV <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/coef.html" class="external-link">coef</a></span><span class="op">(</span><span class="va">cig_iv</span><span class="op">)</span><span class="op">)</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                   OLS        IV</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> (Intercept) 10.338924  9.719877</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> log(rprice) -1.213057 -1.083587</span>
 <span class="r-in"></span>
 <span class="r-in"><span class="co">## adjusting for income differences (exogenous)</span></span>
-<span class="r-in"><span class="va">cig_iv2</span> <span class="op">&lt;-</span> <span class="fu"><a href="ivreg.html">ivreg</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span><span class="va">packs</span><span class="op">)</span> <span class="op">~</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span><span class="va">rprice</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span><span class="va">rincome</span><span class="op">)</span> <span class="op">|</span> <span class="va">salestax</span> <span class="op">+</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span><span class="va">rincome</span><span class="op">)</span>,</span>
+<span class="r-in"><span class="va">cig_iv2</span> <span class="op">&lt;-</span> <span class="fu"><a href="ivreg.html">ivreg</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Log.html" class="external-link">log</a></span><span class="op">(</span><span class="va">packs</span><span class="op">)</span> <span class="op">~</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html" class="external-link">log</a></span><span class="op">(</span><span class="va">rprice</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html" class="external-link">log</a></span><span class="op">(</span><span class="va">rincome</span><span class="op">)</span> <span class="op">|</span> <span class="va">salestax</span> <span class="op">+</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html" class="external-link">log</a></span><span class="op">(</span><span class="va">rincome</span><span class="op">)</span>,</span>
 <span class="r-in">  data <span class="op">=</span> <span class="va">CigaretteDemand</span><span class="op">)</span></span>
 <span class="r-in"><span class="co">## adding a second instrument for log(rprice)</span></span>
-<span class="r-in"><span class="va">cig_iv3</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/update.html">update</a></span><span class="op">(</span><span class="va">cig_iv2</span>, <span class="va">.</span> <span class="op">~</span> <span class="va">.</span> <span class="op">|</span> <span class="va">.</span> <span class="op">+</span> <span class="va">cigtax</span><span class="op">)</span></span>
+<span class="r-in"><span class="va">cig_iv3</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/update.html" class="external-link">update</a></span><span class="op">(</span><span class="va">cig_iv2</span>, <span class="va">.</span> <span class="op">~</span> <span class="va">.</span> <span class="op">|</span> <span class="va">.</span> <span class="op">+</span> <span class="va">cigtax</span><span class="op">)</span></span>
 <span class="r-in"></span>
 <span class="r-in"><span class="co">## comparison using heteroscedasticity-consistent standard errors</span></span>
-<span class="r-in"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="st">"lmtest"</span><span class="op">)</span></span>
+<span class="r-in"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="st">"lmtest"</span><span class="op">)</span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Loading required package: zoo</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Attaching package: ‘zoo’</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> The following objects are masked from ‘package:base’:</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span>     as.Date, as.Date.numeric</span>
-<span class="r-in"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="st"><a href="https://sandwich.R-Forge.R-project.org/">"sandwich"</a></span><span class="op">)</span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/pkg/lmtest/man/coeftest.html">coeftest</a></span><span class="op">(</span><span class="va">cig_iv2</span>, vcov <span class="op">=</span> <span class="va">vcovHC</span>, type <span class="op">=</span> <span class="st">"HC1"</span><span class="op">)</span></span>
+<span class="r-in"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="st"><a href="https://sandwich.R-Forge.R-project.org/" class="external-link">"sandwich"</a></span><span class="op">)</span></span>
+<span class="r-in"><span class="fu"><a href="https://rdrr.io/pkg/lmtest/man/coeftest.html" class="external-link">coeftest</a></span><span class="op">(</span><span class="va">cig_iv2</span>, vcov <span class="op">=</span> <span class="va">vcovHC</span>, type <span class="op">=</span> <span class="st">"HC1"</span><span class="op">)</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> t test of coefficients:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
@@ -150,7 +152,7 @@ is provided by Hanck et al. (2020, Chapter 12).</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ---</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/pkg/lmtest/man/coeftest.html">coeftest</a></span><span class="op">(</span><span class="va">cig_iv3</span>, vcov <span class="op">=</span> <span class="va">vcovHC</span>, type <span class="op">=</span> <span class="st">"HC1"</span><span class="op">)</span></span>
+<span class="r-in"><span class="fu"><a href="https://rdrr.io/pkg/lmtest/man/coeftest.html" class="external-link">coeftest</a></span><span class="op">(</span><span class="va">cig_iv3</span>, vcov <span class="op">=</span> <span class="va">vcovHC</span>, type <span class="op">=</span> <span class="st">"HC1"</span><span class="op">)</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> t test of coefficients:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
@@ -165,9 +167,9 @@ is provided by Hanck et al. (2020, Chapter 12).</p>
 <span class="r-in"><span class="co">## long-run price elasticity using differences between 1995 and 1985</span></span>
 <span class="r-in"><span class="va">cig_ivdiff1</span> <span class="op">&lt;-</span> <span class="fu"><a href="ivreg.html">ivreg</a></span><span class="op">(</span><span class="va">packsdiff</span> <span class="op">~</span> <span class="va">pricediff</span> <span class="op">+</span> <span class="va">incomediff</span> <span class="op">|</span> <span class="va">incomediff</span> <span class="op">+</span> <span class="va">salestaxdiff</span>,</span>
 <span class="r-in">  data <span class="op">=</span> <span class="va">CigaretteDemand</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">cig_ivdiff2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/update.html">update</a></span><span class="op">(</span><span class="va">cig_ivdiff1</span>, <span class="va">.</span> <span class="op">~</span> <span class="va">.</span> <span class="op">|</span> <span class="va">.</span> <span class="op">-</span> <span class="va">salestaxdiff</span> <span class="op">+</span> <span class="va">cigtaxdiff</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">cig_ivdiff3</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/update.html">update</a></span><span class="op">(</span><span class="va">cig_ivdiff1</span>, <span class="va">.</span> <span class="op">~</span> <span class="va">.</span> <span class="op">|</span> <span class="va">.</span> <span class="op">+</span> <span class="va">cigtaxdiff</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/pkg/lmtest/man/coeftest.html">coeftest</a></span><span class="op">(</span><span class="va">cig_ivdiff1</span>, vcov <span class="op">=</span> <span class="va">vcovHC</span>, type <span class="op">=</span> <span class="st">"HC1"</span><span class="op">)</span></span>
+<span class="r-in"><span class="va">cig_ivdiff2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/update.html" class="external-link">update</a></span><span class="op">(</span><span class="va">cig_ivdiff1</span>, <span class="va">.</span> <span class="op">~</span> <span class="va">.</span> <span class="op">|</span> <span class="va">.</span> <span class="op">-</span> <span class="va">salestaxdiff</span> <span class="op">+</span> <span class="va">cigtaxdiff</span><span class="op">)</span></span>
+<span class="r-in"><span class="va">cig_ivdiff3</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/update.html" class="external-link">update</a></span><span class="op">(</span><span class="va">cig_ivdiff1</span>, <span class="va">.</span> <span class="op">~</span> <span class="va">.</span> <span class="op">|</span> <span class="va">.</span> <span class="op">+</span> <span class="va">cigtaxdiff</span><span class="op">)</span></span>
+<span class="r-in"><span class="fu"><a href="https://rdrr.io/pkg/lmtest/man/coeftest.html" class="external-link">coeftest</a></span><span class="op">(</span><span class="va">cig_ivdiff1</span>, vcov <span class="op">=</span> <span class="va">vcovHC</span>, type <span class="op">=</span> <span class="st">"HC1"</span><span class="op">)</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> t test of coefficients:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
@@ -178,7 +180,7 @@ is provided by Hanck et al. (2020, Chapter 12).</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ---</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/pkg/lmtest/man/coeftest.html">coeftest</a></span><span class="op">(</span><span class="va">cig_ivdiff2</span>, vcov <span class="op">=</span> <span class="va">vcovHC</span>, type <span class="op">=</span> <span class="st">"HC1"</span><span class="op">)</span></span>
+<span class="r-in"><span class="fu"><a href="https://rdrr.io/pkg/lmtest/man/coeftest.html" class="external-link">coeftest</a></span><span class="op">(</span><span class="va">cig_ivdiff2</span>, vcov <span class="op">=</span> <span class="va">vcovHC</span>, type <span class="op">=</span> <span class="st">"HC1"</span><span class="op">)</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> t test of coefficients:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
@@ -189,7 +191,7 @@ is provided by Hanck et al. (2020, Chapter 12).</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ---</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/pkg/lmtest/man/coeftest.html">coeftest</a></span><span class="op">(</span><span class="va">cig_ivdiff3</span>, vcov <span class="op">=</span> <span class="va">vcovHC</span>, type <span class="op">=</span> <span class="st">"HC1"</span><span class="op">)</span></span>
+<span class="r-in"><span class="fu"><a href="https://rdrr.io/pkg/lmtest/man/coeftest.html" class="external-link">coeftest</a></span><span class="op">(</span><span class="va">cig_ivdiff3</span>, vcov <span class="op">=</span> <span class="va">vcovHC</span>, type <span class="op">=</span> <span class="st">"HC1"</span><span class="op">)</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> t test of coefficients:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>

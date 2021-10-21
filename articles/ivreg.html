@@ -105,8 +105,8 @@
 
     
     
-<div id="overview" class="section level2">
-<h2>Overview<a class="anchor" aria-label="anchor" href="#overview"></a>
+<div class="section level2">
+<h2 id="overview">Overview<a class="anchor" aria-label="anchor" href="#overview"></a>
 </h2>
 <p>The <strong>ivreg</strong> package provides a comprehensive implementation of instrumental variables regression using two-stage least-squares (2SLS) estimation. The standard regression functionality (parameter estimation, inference, robust covariances, predictions, etc.) is derived from and supersedes the <code><a href="../reference/ivreg.html">ivreg()</a></code> function in the <a href="https://CRAN.R-project.org/package=AER" class="external-link"><strong>AER</strong></a> package. Additionally, various regression diagnostics are supported, including hat values, deletion diagnostics such as studentized residuals and Cook’s distances; graphical diagnostics such as component-plus-residual plots and added-variable plots; and effect plots with partial residuals.</p>
 <p>In order to provide all of this functionality the <strong>ivreg</strong> package integrates seamlessly with other packages by providing suitable S3 methods, specifically for generic functions in the <a href="https://www.R-project.org/" class="external-link">base-R</a> <strong>stats</strong> package, and in the <a href="https://CRAN.R-project.org/package=car" class="external-link"><strong>car</strong></a>, <a href="https://CRAN.R-project.org/package=effects" class="external-link"><strong>effects</strong></a>, <a href="https://CRAN.R-project.org/package=lmtest" class="external-link"><strong>lmtest</strong></a>, and <a href="https://CRAN.R-project.org/package=sandwich" class="external-link"><strong>sandwich</strong></a> packages, among others.</p>
@@ -116,8 +116,8 @@
 <li><a href="https://john-d-fox.github.io/ivreg/articles/Diagnostics-for-2SLS-Regression.html">Diagnostics for 2SLS Regression</a></li>
 </ul>
 </div>
-<div id="installation" class="section level2">
-<h2>Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
+<div class="section level2">
+<h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
 </h2>
 <p>The stable release version of <a href="https://CRAN.R-project.org/package=ivreg" class="external-link"><strong>ivreg</strong></a> is hosted on the Comprehensive R Archive Network (CRAN) at <a href="https://CRAN.R-project.org/package=ivreg" class="external-link uri">https://CRAN.R-project.org/package=ivreg</a> and can be installed along with all dependencies via</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
@@ -126,14 +126,14 @@
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">"https://github.com/john-d-fox/ivreg/"</span><span class="op">)</span></code></pre></div>
 </div>
-<div id="instrumental-variables-regression" class="section level2">
-<h2>Instrumental variables regression<a class="anchor" aria-label="anchor" href="#instrumental-variables-regression"></a>
+<div class="section level2">
+<h2 id="instrumental-variables-regression">Instrumental variables regression<a class="anchor" aria-label="anchor" href="#instrumental-variables-regression"></a>
 </h2>
 <p>The main function in the <strong>ivreg</strong> package is <code><a href="../reference/ivreg.html">ivreg()</a></code>, which is a high-level formula interface to the work-horse <code><a href="../reference/ivreg.fit.html">ivreg.fit()</a></code> function; both functions return a list of quantities similar to that returned by <code><a href="https://rdrr.io/r/stats/lm.html" class="external-link">lm()</a></code> (including coefficients, coefficient variance-covariance matrix, residuals, etc.). In the case of <code><a href="../reference/ivreg.html">ivreg()</a></code>, the returned list is of class <code>"ivreg"</code>, for which a wide range of standard methods is available, including <code><a href="https://rdrr.io/r/base/print.html" class="external-link">print()</a></code>, <code><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary()</a></code>, <code><a href="https://rdrr.io/r/stats/coef.html" class="external-link">coef()</a></code>, <code><a href="https://rdrr.io/r/stats/vcov.html" class="external-link">vcov()</a></code>, <code><a href="https://rdrr.io/r/stats/anova.html" class="external-link">anova()</a></code>, <code><a href="https://rdrr.io/r/stats/predict.html" class="external-link">predict()</a></code>, <code><a href="https://rdrr.io/r/stats/residuals.html" class="external-link">residuals()</a></code>, <code><a href="https://rdrr.io/r/stats/terms.html" class="external-link">terms()</a></code>, <code><a href="https://rdrr.io/r/stats/model.matrix.html" class="external-link">model.matrix()</a></code>, <code><a href="https://rdrr.io/r/stats/formula.html" class="external-link">formula()</a></code>, <code><a href="https://rdrr.io/r/stats/update.html" class="external-link">update()</a></code>, <code><a href="https://rdrr.io/r/stats/influence.measures.html" class="external-link">hatvalues()</a></code>, <code><a href="https://rdrr.io/r/stats/influence.measures.html" class="external-link">dfbeta()</a></code>, and <code><a href="https://rdrr.io/r/stats/influence.measures.html" class="external-link">rstudent()</a></code>. Moreover, methods for functionality from other packages is provided, and is described in more detail in a companion vignette.</p>
 <p>Regressors and instruments for <code><a href="../reference/ivreg.html">ivreg()</a></code> are most easily specified in a formula with two parts on the right-hand side, for example, <code>y ~ x1 + x2 | x1 + z1 + z2</code>, where <code>x1</code> and <code>x2</code> are, repectively, exogenous and endogenous explanatory variables, and <code>x1</code>, <code>z1</code>, and <code>z2</code> are instrumental variables. Both components on the right-hand side of the model formula include an implied intercept, unless, as in a linear model estimated by <code><a href="https://rdrr.io/r/stats/lm.html" class="external-link">lm()</a></code>, the intercept is explicitly excluded via <code>-1</code>. Exogenous explanatory variables, such as <code>x1</code> in the example, must be included among the instruments. A worked example is described immediately below. As listing exogenous variables in both parts on the right-hand side of the formula may become tedious if there are many of them, an additional convenience option is to use a three-part right side like <code>y ~ x1 | x2 | z1 + z2</code>, listing the exogenous, endogenous, and instrumental variables (for the endogenous variables only), respectively.</p>
 </div>
-<div id="illustration-returns-to-schooling" class="section level2">
-<h2>Illustration: Returns to schooling<a class="anchor" aria-label="anchor" href="#illustration-returns-to-schooling"></a>
+<div class="section level2">
+<h2 id="illustration-returns-to-schooling">Illustration: Returns to schooling<a class="anchor" aria-label="anchor" href="#illustration-returns-to-schooling"></a>
 </h2>
 <p>As an initial demonstration of the <strong>ivreg</strong> package, we investigate the effect of schooling on earnings in a classical model for wage determination. The data are from the United States, and are provided in the package as <code>SchoolingReturns</code>. This data set was originally studied by David Card, and was subsequently employed, as here, to illustrate 2SLS estimation in introductory econometrics textbooks. The relevant variables for this illustration are:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
@@ -492,7 +492,7 @@ F
 
 <div class="pkgdown">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link external-link">pkgdown</a> 1.9000.9000.9000.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 1.9000.9000.9000.</p>
 </div>
 
       </footer>
