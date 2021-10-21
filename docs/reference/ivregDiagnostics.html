@@ -60,7 +60,7 @@ The pointwise confidence envelope for the qqPlot method assumes an independent r
 from the t distribution with degrees of freedom equal to the residual degrees of
 freedom for the model and so are approximate, because the studentized residuals aren't
 independent.
-For additional information, see the vignette 
+For additional information, see the vignette
 Diagnostics for 2SLS Regression." />
 <meta property="og:image" content="https://john-d-fox.github.io/ivreg/logo.png" />
 <meta name="twitter:card" content="summary" />
@@ -97,7 +97,7 @@ Diagnostics for 2SLS Regression." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ivreg</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.6-0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.6-1</span>
       </span>
     </div>
 
@@ -168,7 +168,7 @@ The pointwise confidence envelope for the <code><a href='https://rdrr.io/pkg/car
 from the t distribution with degrees of freedom equal to the residual degrees of
 freedom for the model and so are approximate, because the studentized residuals aren't
 independent.</p>
-<p>For additional information, see the vignette 
+<p>For additional information, see the vignette
 <a href='../doc/Diagnostics-for-2SLS-Regression.pdf'>Diagnostics for 2SLS Regression</a>.</p>
     </div>
 
@@ -321,7 +321,7 @@ is to use a loop unless the <code>ncores</code> argument is specified (see below
       <th>ncores</th>
       <td><p>Numeric, number of cores to be used in parallel computations. If set
 to an integer the <code>applyfun</code> is set to use either <code><a href='https://rdrr.io/r/parallel/clusterApply.html'>parLapply</a></code>
-(on Windows) or 
+(on Windows) or
 <code><a href='https://rdrr.io/r/parallel/mclapply.html'>mclapply</a></code>
 (otherwise) with the desired number of cores.</p></td>
     </tr>
@@ -339,7 +339,7 @@ to an integer the <code>applyfun</code> is set to use either <code><a href='http
     </tr>
     <tr>
       <th>terms</th>
-      <td><p>Terms for which added-variable plots are to be constructed; the default, 
+      <td><p>Terms for which added-variable plots are to be constructed; the default,
 if the argument isn't specified, is the <code>"regressors"</code> component of the model formula.</p></td>
     </tr>
     <tr>
@@ -379,8 +379,8 @@ draw graphs.</p>
     <div class='dont-index'><p><code><a href='ivreg.html'>ivreg</a></code>, <code><a href='https://rdrr.io/pkg/car/man/avPlots.html'>avPlots</a></code>,
   <code><a href='https://rdrr.io/pkg/car/man/crPlots.html'>crPlots</a></code>, <code><a href='https://rdrr.io/pkg/effects/man/predictorEffects.html'>predictorEffects</a></code>,
   <code><a href='https://rdrr.io/pkg/car/man/qqPlot.html'>qqPlot</a></code>, <code><a href='https://rdrr.io/pkg/car/man/influencePlot.html'>influencePlot</a></code>,
-  <code><a href='https://rdrr.io/pkg/car/man/infIndexPlot.html'>infIndexPlot</a></code>, <code><a href='https://rdrr.io/pkg/car/man/Boot.html'>Boot</a></code>, 
-  <code><a href='https://rdrr.io/pkg/car/man/outlierTest.html'>outlierTest</a></code>, <code><a href='https://rdrr.io/pkg/car/man/spreadLevelPlot.html'>spreadLevelPlot</a></code>, 
+  <code><a href='https://rdrr.io/pkg/car/man/infIndexPlot.html'>infIndexPlot</a></code>, <code><a href='https://rdrr.io/pkg/car/man/Boot.html'>Boot</a></code>,
+  <code><a href='https://rdrr.io/pkg/car/man/outlierTest.html'>outlierTest</a></code>, <code><a href='https://rdrr.io/pkg/car/man/spreadLevelPlot.html'>spreadLevelPlot</a></code>,
   <code><a href='https://rdrr.io/pkg/car/man/ncvTest.html'>ncvTest</a></code>.</p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
@@ -427,12 +427,7 @@ draw graphs.</p>
 #&gt;   16    8 </div><div class='input'><span class='fu'>car</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/car/man/spreadLevelPlot.html'>spreadLevelPlot</a></span><span class='op'>(</span><span class='va'>kmenta.eq1</span><span class='op'>)</span>
 </div><div class='img'><img src='ivregDiagnostics-8.png' alt='' width='700' height='433' /></div><div class='output co'>#&gt; 
 #&gt; Suggested power transformation:  -2.44685 </div><div class='input'><span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span><span class='op'>(</span><span class='fu'>effects</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/effects/man/predictorEffects.html'>predictorEffects</a></span><span class='op'>(</span><span class='va'>kmenta.eq1</span>, residuals <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span class='message'>Registered S3 methods overwritten by 'lme4':</span>
-#&gt; <span class='message'>  method                          from</span>
-#&gt; <span class='message'>  cooks.distance.influence.merMod car </span>
-#&gt; <span class='message'>  influence.merMod                car </span>
-#&gt; <span class='message'>  dfbeta.influence.merMod         car </span>
-#&gt; <span class='message'>  dfbetas.influence.merMod        car </span></div><div class='img'><img src='ivregDiagnostics-9.png' alt='' width='700' height='433' /></div><div class='input'><span class='va'>set.seed</span> <span class='op'>&lt;-</span> <span class='fl'>12321</span> <span class='co'># for reproducibility</span>
+</div><div class='img'><img src='ivregDiagnostics-9.png' alt='' width='700' height='433' /></div><div class='input'><span class='va'>set.seed</span> <span class='op'>&lt;-</span> <span class='fl'>12321</span> <span class='co'># for reproducibility</span>
 <span class='fu'><a href='https://rdrr.io/r/stats/confint.html'>confint</a></span><span class='op'>(</span><span class='fu'>car</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/car/man/Boot.html'>Boot</a></span><span class='op'>(</span><span class='va'>kmenta.eq1</span>, R <span class='op'>=</span> <span class='fl'>250</span><span class='op'>)</span><span class='op'>)</span> <span class='co'># 250 reps for brevity</span>
 </div><div class='output co'>#&gt; Bootstrap bca confidence intervals
 #&gt; 
