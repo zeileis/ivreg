@@ -97,7 +97,7 @@
             
             <h4 data-toc-skip class="date">last modified: 2020-11-19</h4>
       
-      <small class="dont-index">Source: <a href="https://github.com/john-d-fox/ivreg/blob/master/vignettes/Diagnostics-for-2SLS-Regression.Rmd" class="external-link"><code>vignettes/Diagnostics-for-2SLS-Regression.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/john-d-fox/ivreg/blob/HEAD/vignettes/Diagnostics-for-2SLS-Regression.Rmd" class="external-link"><code>vignettes/Diagnostics-for-2SLS-Regression.Rmd</code></a></small>
       <div class="hidden name"><code>Diagnostics-for-2SLS-Regression.Rmd</code></div>
 
     </div>
@@ -185,27 +185,27 @@ D_i = \frac{s_{-i}^2}{s^2} \times \frac{\mathrm{dffits}_i^2}{p}
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="st"><a href="https://john-d-fox.github.io/ivreg/">"ivreg"</a></span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="st">"Kmenta"</span>, package <span class="op">=</span> <span class="st">"ivreg"</span><span class="op">)</span>
 <span class="va">Kmenta</span></code></pre></div>
-<pre><code>##            Q       P     D     F  A
-## 1922  98.485 100.323  87.4  98.0  1
-## 1923  99.187 104.264  97.6  99.1  2
-## 1924 102.163 103.435  96.7  99.1  3
-## 1925 101.504 104.506  98.2  98.1  4
-## 1926 104.240  98.001  99.8 110.8  5
-## 1927 103.243  99.456 100.5 108.2  6
-## 1928 103.993 101.066 103.2 105.6  7
-## 1929  99.900 104.763 107.8 109.8  8
-## 1930 100.350  96.446  96.6 108.7  9
-## 1931 102.820  91.228  88.9 100.6 10
-## 1932  95.435  93.085  75.1  81.0 11
-## 1933  92.424  98.801  76.9  68.6 12
-## 1934  94.535 102.908  84.6  70.9 13
-## 1935  98.757  98.756  90.6  81.4 14
-## 1936 105.797  95.119 103.1 102.3 15
-## 1937 100.225  98.451 105.1 105.0 16
-## 1938 103.522  86.498  96.4 110.5 17
-## 1939  99.929 104.016 104.4  92.5 18
-## 1940 105.223 105.769 110.7  89.3 19
-## 1941 106.232 113.490 127.1  93.0 20</code></pre>
+<pre><code><span class="co">##            Q       P     D     F  A</span>
+<span class="co">## 1922  98.485 100.323  87.4  98.0  1</span>
+<span class="co">## 1923  99.187 104.264  97.6  99.1  2</span>
+<span class="co">## 1924 102.163 103.435  96.7  99.1  3</span>
+<span class="co">## 1925 101.504 104.506  98.2  98.1  4</span>
+<span class="co">## 1926 104.240  98.001  99.8 110.8  5</span>
+<span class="co">## 1927 103.243  99.456 100.5 108.2  6</span>
+<span class="co">## 1928 103.993 101.066 103.2 105.6  7</span>
+<span class="co">## 1929  99.900 104.763 107.8 109.8  8</span>
+<span class="co">## 1930 100.350  96.446  96.6 108.7  9</span>
+<span class="co">## 1931 102.820  91.228  88.9 100.6 10</span>
+<span class="co">## 1932  95.435  93.085  75.1  81.0 11</span>
+<span class="co">## 1933  92.424  98.801  76.9  68.6 12</span>
+<span class="co">## 1934  94.535 102.908  84.6  70.9 13</span>
+<span class="co">## 1935  98.757  98.756  90.6  81.4 14</span>
+<span class="co">## 1936 105.797  95.119 103.1 102.3 15</span>
+<span class="co">## 1937 100.225  98.451 105.1 105.0 16</span>
+<span class="co">## 1938 103.522  86.498  96.4 110.5 17</span>
+<span class="co">## 1939  99.929 104.016 104.4  92.5 18</span>
+<span class="co">## 1940 105.223 105.769 110.7  89.3 19</span>
+<span class="co">## 1941 106.232 113.490 127.1  93.0 20</span></code></pre>
 <p>Kmenta estimated the following two-equation model, with the first equation representing demand and the second supply: <span class="math display">\[\begin{align}
 Q &amp;= \beta_{10} + \beta_{11} P + \beta_{12} D + \varepsilon_1 \\
 Q &amp;= \beta_{20} + \beta_{21} P + \beta_{22} F + \beta_{23} A + \varepsilon_2
@@ -225,60 +225,60 @@ P &amp;= 85.00 + 0.75 D - 0.50 F - 0.90 A + \nu_2
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">deq</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/ivreg.html">ivreg</a></span><span class="op">(</span><span class="va">Q</span> <span class="op">~</span> <span class="va">P</span> <span class="op">+</span> <span class="va">D</span> <span class="op">|</span> <span class="va">D</span> <span class="op">+</span> <span class="cn">F</span> <span class="op">+</span> <span class="va">A</span>, data<span class="op">=</span><span class="va">Kmenta</span><span class="op">)</span>     <span class="co"># demand equation</span>
 <span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">deq</span><span class="op">)</span></code></pre></div>
-<pre><code>## 
-## Call:
-## ivreg(formula = Q ~ P + D | D + F + A, data = Kmenta)
-## 
-## Residuals:
-##     Min      1Q  Median      3Q     Max 
-## -3.4305 -1.2432 -0.1895  1.5762  2.4920 
-## 
-## Coefficients:
-##             Estimate Std. Error t value Pr(&gt;|t|)    
-## (Intercept) 94.63330    7.92084  11.947 1.08e-09 ***
-## P           -0.24356    0.09648  -2.524   0.0218 *  
-## D            0.31399    0.04694   6.689 3.81e-06 ***
-## 
-## Diagnostic tests:
-##                  df1 df2 statistic  p-value    
-## Weak instruments   2  16    88.025 2.32e-09 ***
-## Wu-Hausman         1  16    11.422  0.00382 ** 
-## Sargan             1  NA     2.983  0.08414 .  
-## ---
-## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
-## 
-## Residual standard error: 1.966 on 17 degrees of freedom
-## Multiple R-Squared: 0.7548,  Adjusted R-squared: 0.726 
-## Wald test: 23.81 on 2 and 17 DF,  p-value: 1.178e-05</code></pre>
+<pre><code><span class="co">## </span>
+<span class="co">## Call:</span>
+<span class="co">## ivreg(formula = Q ~ P + D | D + F + A, data = Kmenta)</span>
+<span class="co">## </span>
+<span class="co">## Residuals:</span>
+<span class="co">##     Min      1Q  Median      3Q     Max </span>
+<span class="co">## -3.4305 -1.2432 -0.1895  1.5762  2.4920 </span>
+<span class="co">## </span>
+<span class="co">## Coefficients:</span>
+<span class="co">##             Estimate Std. Error t value Pr(&gt;|t|)    </span>
+<span class="co">## (Intercept) 94.63330    7.92084  11.947 1.08e-09 ***</span>
+<span class="co">## P           -0.24356    0.09648  -2.524   0.0218 *  </span>
+<span class="co">## D            0.31399    0.04694   6.689 3.81e-06 ***</span>
+<span class="co">## </span>
+<span class="co">## Diagnostic tests:</span>
+<span class="co">##                  df1 df2 statistic  p-value    </span>
+<span class="co">## Weak instruments   2  16    88.025 2.32e-09 ***</span>
+<span class="co">## Wu-Hausman         1  16    11.422  0.00382 ** </span>
+<span class="co">## Sargan             1  NA     2.983  0.08414 .  </span>
+<span class="co">## ---</span>
+<span class="co">## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span>
+<span class="co">## </span>
+<span class="co">## Residual standard error: 1.966 on 17 degrees of freedom</span>
+<span class="co">## Multiple R-Squared: 0.7548,  Adjusted R-squared: 0.726 </span>
+<span class="co">## Wald test: 23.81 on 2 and 17 DF,  p-value: 1.178e-05</span></code></pre>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">seq</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/ivreg.html">ivreg</a></span><span class="op">(</span><span class="va">Q</span> <span class="op">~</span> <span class="va">P</span> <span class="op">+</span> <span class="cn">F</span> <span class="op">+</span> <span class="va">A</span> <span class="op">|</span> <span class="va">D</span> <span class="op">+</span> <span class="cn">F</span> <span class="op">+</span> <span class="va">A</span>, data<span class="op">=</span><span class="va">Kmenta</span><span class="op">)</span> <span class="co"># supply equation</span>
 <span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">seq</span><span class="op">)</span></code></pre></div>
-<pre><code>## 
-## Call:
-## ivreg(formula = Q ~ P + F + A | D + F + A, data = Kmenta)
-## 
-## Residuals:
-##     Min      1Q  Median      3Q     Max 
-## -4.8724 -1.2593  0.6415  1.4745  3.4865 
-## 
-## Coefficients:
-##             Estimate Std. Error t value Pr(&gt;|t|)    
-## (Intercept) 49.53244   12.01053   4.124 0.000795 ***
-## P            0.24008    0.09993   2.402 0.028785 *  
-## F            0.25561    0.04725   5.410 5.79e-05 ***
-## A            0.25292    0.09966   2.538 0.021929 *  
-## 
-## Diagnostic tests:
-##                  df1 df2 statistic  p-value    
-## Weak instruments   1  16    256.34 2.86e-11 ***
-## Wu-Hausman         1  15     36.14 2.38e-05 ***
-## Sargan             0  NA        NA       NA    
-## ---
-## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
-## 
-## Residual standard error: 2.458 on 16 degrees of freedom
-## Multiple R-Squared: 0.6396,  Adjusted R-squared: 0.572 
-## Wald test:  10.7 on 3 and 16 DF,  p-value: 0.0004196</code></pre>
+<pre><code><span class="co">## </span>
+<span class="co">## Call:</span>
+<span class="co">## ivreg(formula = Q ~ P + F + A | D + F + A, data = Kmenta)</span>
+<span class="co">## </span>
+<span class="co">## Residuals:</span>
+<span class="co">##     Min      1Q  Median      3Q     Max </span>
+<span class="co">## -4.8724 -1.2593  0.6415  1.4745  3.4865 </span>
+<span class="co">## </span>
+<span class="co">## Coefficients:</span>
+<span class="co">##             Estimate Std. Error t value Pr(&gt;|t|)    </span>
+<span class="co">## (Intercept) 49.53244   12.01053   4.124 0.000795 ***</span>
+<span class="co">## P            0.24008    0.09993   2.402 0.028785 *  </span>
+<span class="co">## F            0.25561    0.04725   5.410 5.79e-05 ***</span>
+<span class="co">## A            0.25292    0.09966   2.538 0.021929 *  </span>
+<span class="co">## </span>
+<span class="co">## Diagnostic tests:</span>
+<span class="co">##                  df1 df2 statistic  p-value    </span>
+<span class="co">## Weak instruments   1  16    256.34 2.86e-11 ***</span>
+<span class="co">## Wu-Hausman         1  15     36.14 2.38e-05 ***</span>
+<span class="co">## Sargan             0  NA        NA       NA    </span>
+<span class="co">## ---</span>
+<span class="co">## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span>
+<span class="co">## </span>
+<span class="co">## Residual standard error: 2.458 on 16 degrees of freedom</span>
+<span class="co">## Multiple R-Squared: 0.6396,  Adjusted R-squared: 0.572 </span>
+<span class="co">## Wald test:  10.7 on 3 and 16 DF,  p-value: 0.0004196</span></code></pre>
 <p>By default, <code><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary()</a></code> prints the results of three “diagnostic” tests for 2SLS regression. These tests (which can be suppressed by setting the argument <code>diagnostics=FALSE</code>) are not the focus of the vignette and so we’ll comment on them only briefly:</p>
 <ul>
 <li><p>A good instrumental variable is highly correlated with one or more of the explanatory variables while remaining uncorrelated with the errors. If an endogenous regressor is only weakly related to the instrumental variables, then its coefficient will be estimated imprecisely. We hope for a large test statistic and small <span class="math inline">\(p\)</span>-value in the diagnostic test for weak instruments, as is the case for both regression equations in the Kmenta model.</p></li>
@@ -294,21 +294,21 @@ P &amp;= 85.00 + 0.75 D - 0.50 F - 0.90 A + \nu_2
 <p>As we mentioned, the <code>Kmenta</code> data are partly contrived by simulating the model, and so it’s probably not surprising that the data are well behaved. For example, a <em>QQ plot</em> of studentized residuals and an <em>“influence plot”</em> of hatvalues, studentized residuals, and Cook’s distances for the first structural equation are both unremarkable, except for a couple of high-leverage but in-line cases:</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="st"><a href="https://r-forge.r-project.org/projects/car/" class="external-link">"car"</a></span><span class="op">)</span> <span class="co"># for diagnostic generic functions</span></code></pre></div>
-<pre><code>## Loading required package: carData</code></pre>
+<pre><code><span class="co">## Loading required package: carData</span></code></pre>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/car/man/qqPlot.html" class="external-link">qqPlot</a></span><span class="op">(</span><span class="va">deq</span><span class="op">)</span></code></pre></div>
 <p><img src="Diagnostics-for-2SLS-Regression_files/figure-html/unnamed-chunk-5-1.png" width="384"></p>
-<pre><code>## 1937 1929 
-##   16    8</code></pre>
+<pre><code><span class="co">## 1937 1929 </span>
+<span class="co">##   16    8</span></code></pre>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/car/man/influencePlot.html" class="external-link">influencePlot</a></span><span class="op">(</span><span class="va">deq</span><span class="op">)</span></code></pre></div>
 <p><img src="Diagnostics-for-2SLS-Regression_files/figure-html/unnamed-chunk-6-1.png" width="384"></p>
-<pre><code>##         StudRes        Hat      CookD
-## 1929 -1.7359357 0.09079703 0.06956671
-## 1933 -1.3686682 0.26453459 0.21973049
-## 1937 -2.0995532 0.13849570 0.17147564
-## 1938 -0.2010944 0.39711512 0.01508349
-## 1941 -0.4505155 0.46498004 0.05257374</code></pre>
+<pre><code><span class="co">##         StudRes        Hat      CookD</span>
+<span class="co">## 1929 -1.7359357 0.09079703 0.06956671</span>
+<span class="co">## 1933 -1.3686682 0.26453459 0.21973049</span>
+<span class="co">## 1937 -2.0995532 0.13849570 0.17147564</span>
+<span class="co">## 1938 -0.2010944 0.39711512 0.01508349</span>
+<span class="co">## 1941 -0.4505155 0.46498004 0.05257374</span></code></pre>
 <p>The circles in the influence plot have areas proportional to Cook’s D, the horizontal lines are drawn at 0 and <span class="math inline">\(\pm 2\)</span> on the studentized residuals scale (the horizontal line at <span class="math inline">\(\mathrm{rstudent} = 2\)</span> is off the graph), and the vertical lines are at <span class="math inline">\(2 \times \bar{h}\)</span> and <span class="math inline">\(3 \times \bar{h}\)</span>. We invite the reader to repeat these graphs, and the example below, for the second structural equation.</p>
 <p>To generate a more interesting example, we’ll change the value of <span class="math inline">\(Q\)</span> for the high-leverage 20th case (i.e, for 1941) from <span class="math inline">\(Q_{20} = 106.232\)</span> to <span class="math inline">\(Q_{20} = 95\)</span>, a value that’s well within the range of <span class="math inline">\(Q\)</span> in the data but out of line with the rest of the data:</p>
 <div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
@@ -318,38 +318,38 @@ P &amp;= 85.00 + 0.75 D - 0.50 F - 0.90 A + \nu_2
 <div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">deq1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/update.html" class="external-link">update</a></span><span class="op">(</span><span class="va">deq</span>, data<span class="op">=</span><span class="va">Kmenta1</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/pkg/car/man/compareCoefs.html" class="external-link">compareCoefs</a></span><span class="op">(</span><span class="va">deq</span>, <span class="va">deq1</span><span class="op">)</span></code></pre></div>
-<pre><code>## Calls:
-## 1: ivreg(formula = Q ~ P + D | D + F + A, data = Kmenta)
-## 2: ivreg(formula = Q ~ P + D | D + F + A, data = Kmenta1)
-## 
-##             Model 1 Model 2
-## (Intercept)   94.63  117.96
-## SE             7.92   11.64
-##                            
-## P           -0.2436 -0.4054
-## SE           0.0965  0.1417
-##                            
-## D            0.3140  0.2351
-## SE           0.0469  0.0690
-## </code></pre>
+<pre><code><span class="co">## Calls:</span>
+<span class="co">## 1: ivreg(formula = Q ~ P + D | D + F + A, data = Kmenta)</span>
+<span class="co">## 2: ivreg(formula = Q ~ P + D | D + F + A, data = Kmenta1)</span>
+<span class="co">## </span>
+<span class="co">##             Model 1 Model 2</span>
+<span class="co">## (Intercept)   94.63  117.96</span>
+<span class="co">## SE             7.92   11.64</span>
+<span class="co">##                            </span>
+<span class="co">## P           -0.2436 -0.4054</span>
+<span class="co">## SE           0.0965  0.1417</span>
+<span class="co">##                            </span>
+<span class="co">## D            0.3140  0.2351</span>
+<span class="co">## SE           0.0469  0.0690</span>
+<span class="co">## </span></code></pre>
 <p>The problematic 20th case (the year 1941) is clearly revealed by unusual-data regression diagnostics:</p>
 <div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/car/man/qqPlot.html" class="external-link">qqPlot</a></span><span class="op">(</span><span class="va">deq1</span><span class="op">)</span></code></pre></div>
 <p><img src="Diagnostics-for-2SLS-Regression_files/figure-html/unnamed-chunk-9-1.png" width="384"></p>
-<pre><code>## 1941 1940 
-##   20   19</code></pre>
+<pre><code><span class="co">## 1941 1940 </span>
+<span class="co">##   20   19</span></code></pre>
 <div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/car/man/outlierTest.html" class="external-link">outlierTest</a></span><span class="op">(</span><span class="va">deq1</span><span class="op">)</span></code></pre></div>
-<pre><code>##       rstudent unadjusted p-value Bonferroni p
-## 1941 -4.599583         0.00029602    0.0059204</code></pre>
+<pre><code><span class="co">##       rstudent unadjusted p-value Bonferroni p</span>
+<span class="co">## 1941 -4.599583         0.00029602    0.0059204</span></code></pre>
 <div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/car/man/influencePlot.html" class="external-link">influencePlot</a></span><span class="op">(</span><span class="va">deq1</span><span class="op">)</span></code></pre></div>
 <p><img src="Diagnostics-for-2SLS-Regression_files/figure-html/unnamed-chunk-11-1.png" width="384"></p>
-<pre><code>##         StudRes       Hat     CookD
-## 1933 -1.4737565 0.2645346 0.2447875
-## 1938 -0.9139638 0.3971151 0.2269833
-## 1940  1.6021281 0.1280020 0.1155278
-## 1941 -4.5995825 0.4649800 2.8361307</code></pre>
+<pre><code><span class="co">##         StudRes       Hat     CookD</span>
+<span class="co">## 1933 -1.4737565 0.2645346 0.2447875</span>
+<span class="co">## 1938 -0.9139638 0.3971151 0.2269833</span>
+<span class="co">## 1940  1.6021281 0.1280020 0.1155278</span>
+<span class="co">## 1941 -4.5995825 0.4649800 2.8361307</span></code></pre>
 <div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/car/man/avPlots.html" class="external-link">avPlots</a></span><span class="op">(</span><span class="va">deq1</span><span class="op">)</span></code></pre></div>
 <p><img src="Diagnostics-for-2SLS-Regression_files/figure-html/unnamed-chunk-12-1.png" width="768"></p>
@@ -357,21 +357,21 @@ P &amp;= 85.00 + 0.75 D - 0.50 F - 0.90 A + \nu_2
 <div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">deq1.20</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/update.html" class="external-link">update</a></span><span class="op">(</span><span class="va">deq1</span>, subset <span class="op">=</span> <span class="op">-</span><span class="fl">20</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/pkg/car/man/compareCoefs.html" class="external-link">compareCoefs</a></span><span class="op">(</span><span class="va">deq</span>, <span class="va">deq1</span>, <span class="va">deq1.20</span><span class="op">)</span></code></pre></div>
-<pre><code>## Calls:
-## 1: ivreg(formula = Q ~ P + D | D + F + A, data = Kmenta)
-## 2: ivreg(formula = Q ~ P + D | D + F + A, data = Kmenta1)
-## 3: ivreg(formula = Q ~ P + D | D + F + A, data = Kmenta1, subset = -20)
-## 
-##             Model 1 Model 2 Model 3
-## (Intercept)   94.63  117.96   92.42
-## SE             7.92   11.64    9.67
-##                                    
-## P           -0.2436 -0.4054 -0.2300
-## SE           0.0965  0.1417  0.1047
-##                                    
-## D            0.3140  0.2351  0.3233
-## SE           0.0469  0.0690  0.0527
-## </code></pre>
+<pre><code><span class="co">## Calls:</span>
+<span class="co">## 1: ivreg(formula = Q ~ P + D | D + F + A, data = Kmenta)</span>
+<span class="co">## 2: ivreg(formula = Q ~ P + D | D + F + A, data = Kmenta1)</span>
+<span class="co">## 3: ivreg(formula = Q ~ P + D | D + F + A, data = Kmenta1, subset = -20)</span>
+<span class="co">## </span>
+<span class="co">##             Model 1 Model 2 Model 3</span>
+<span class="co">## (Intercept)   94.63  117.96   92.42</span>
+<span class="co">## SE             7.92   11.64    9.67</span>
+<span class="co">##                                    </span>
+<span class="co">## P           -0.2436 -0.4054 -0.2300</span>
+<span class="co">## SE           0.0965  0.1417  0.1047</span>
+<span class="co">##                                    </span>
+<span class="co">## D            0.3140  0.2351  0.3233</span>
+<span class="co">## SE           0.0469  0.0690  0.0527</span>
+<span class="co">## </span></code></pre>
 <p>The standard errors of the estimated coefficients are larger than they were originally because we now have 19 rather than 20 cases and because the variation of the explanatory variables is reduced.</p>
 <p>It’s of some interest to discover whether the three definitions of hatvaues make a practical difference to this example. A scatterplot matrix for the three kinds of hatvalues suggests that they all produce similar results:</p>
 <div class="sourceCode" id="cb26"><pre class="downlit sourceCode r">
@@ -379,27 +379,27 @@ P &amp;= 85.00 + 0.75 D - 0.50 F - 0.90 A + \nu_2
            <span class="fu"><a href="https://rdrr.io/r/stats/influence.measures.html" class="external-link">hatvalues</a></span><span class="op">(</span><span class="va">deq1</span>, type<span class="op">=</span><span class="st">"maximum"</span><span class="op">)</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/base/colnames.html" class="external-link">colnames</a></span><span class="op">(</span><span class="va">H</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"stage2"</span>, <span class="st">"geom.mean"</span>, <span class="st">"maximum"</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">H</span><span class="op">)</span></code></pre></div>
-<pre><code>##          stage2  geom.mean    maximum
-## 1922 0.10349313 0.05487069 0.10349313
-## 1923 0.11215042 0.05801468 0.11215042
-## 1924 0.08882553 0.04576729 0.08882553
-## 1925 0.09515432 0.04564950 0.09515432
-## 1926 0.06166289 0.03559693 0.06166289
-## 1927 0.05684346 0.03038694 0.05684346</code></pre>
+<pre><code><span class="co">##          stage2  geom.mean    maximum</span>
+<span class="co">## 1922 0.10349313 0.05487069 0.10349313</span>
+<span class="co">## 1923 0.11215042 0.05801468 0.11215042</span>
+<span class="co">## 1924 0.08882553 0.04576729 0.08882553</span>
+<span class="co">## 1925 0.09515432 0.04564950 0.09515432</span>
+<span class="co">## 1926 0.06166289 0.03559693 0.06166289</span>
+<span class="co">## 1927 0.05684346 0.03038694 0.05684346</span></code></pre>
 <div class="sourceCode" id="cb28"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/car/man/scatterplotMatrix.html" class="external-link">scatterplotMatrix</a></span><span class="op">(</span><span class="va">H</span>, smooth<span class="op">=</span><span class="cn">FALSE</span><span class="op">)</span></code></pre></div>
 <p><img src="Diagnostics-for-2SLS-Regression_files/figure-html/unnamed-chunk-14-1.png" width="576"></p>
 <p>Finally, let’s verify that the deletion diagnostics are correctly computed:</p>
 <div class="sourceCode" id="cb29"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/cbind.html" class="external-link">cbind</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/influence.measures.html" class="external-link">dfbeta</a></span><span class="op">(</span><span class="va">deq1</span><span class="op">)</span><span class="op">[</span><span class="fl">20</span>, <span class="op">]</span>, <span class="fu"><a href="https://rdrr.io/r/stats/coef.html" class="external-link">coef</a></span><span class="op">(</span><span class="va">deq1</span><span class="op">)</span> <span class="op">-</span> <span class="fu"><a href="https://rdrr.io/r/stats/coef.html" class="external-link">coef</a></span><span class="op">(</span><span class="va">deq1.20</span><span class="op">)</span><span class="op">)</span></code></pre></div>
-<pre><code>##                    [,1]        [,2]
-## (Intercept) 25.53936742 25.53936742
-## P           -0.17547231 -0.17547231
-## D           -0.08827334 -0.08827334</code></pre>
+<pre><code><span class="co">##                    [,1]        [,2]</span>
+<span class="co">## (Intercept) 25.53936742 25.53936742</span>
+<span class="co">## P           -0.17547231 -0.17547231</span>
+<span class="co">## D           -0.08827334 -0.08827334</span></code></pre>
 <div class="sourceCode" id="cb31"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/lm.influence.html" class="external-link">influence</a></span><span class="op">(</span><span class="va">deq1</span><span class="op">)</span><span class="op">$</span><span class="va">sigma</span><span class="op">[</span><span class="fl">20</span><span class="op">]</span>, <span class="fu"><a href="https://rdrr.io/r/stats/sigma.html" class="external-link">sigma</a></span><span class="op">(</span><span class="va">deq1.20</span><span class="op">)</span><span class="op">)</span></code></pre></div>
-<pre><code>##     1941          
-## 2.028434 2.028434</code></pre>
+<pre><code><span class="co">##     1941          </span>
+<span class="co">## 2.028434 2.028434</span></code></pre>
 </div>
 </div>
 <div class="section level2">
@@ -427,8 +427,8 @@ E(y) = \alpha^\prime + \beta_1^\prime x_1 + \beta_2^\prime x_2 + \cdots + \beta_
 <p><code><a href="https://rdrr.io/pkg/car/man/crPlots.html" class="external-link">crPlots()</a></code> and <code><a href="https://rdrr.io/pkg/car/man/ceresPlots.html" class="external-link">ceresPlots()</a></code> work only for additive models; the <code><a href="https://rdrr.io/pkg/effects/man/predictorEffects.html" class="external-link">predictorEffects()</a></code> function in the <strong>effects</strong> package plots partial residuals for more complex models. In the current example, which is an additive model, we get essentially the same graphs as before, except for the scaling of the <span class="math inline">\(y\)</span> axis:</p>
 <div class="sourceCode" id="cb35"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="st"><a href="https://www.r-project.org" class="external-link">"effects"</a></span><span class="op">)</span></code></pre></div>
-<pre><code>## lattice theme set by effectsTheme()
-## See ?effectsTheme for details.</code></pre>
+<pre><code><span class="co">## lattice theme set by effectsTheme()</span>
+<span class="co">## See ?effectsTheme for details.</span></code></pre>
 <div class="sourceCode" id="cb37"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/effects/man/predictorEffects.html" class="external-link">predictorEffects</a></span><span class="op">(</span><span class="va">deq</span>, residuals<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span>, 
      partial.residuals<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>span<span class="op">=</span><span class="fl">1</span><span class="op">)</span><span class="op">)</span></code></pre></div>
@@ -461,8 +461,8 @@ E(y) = \alpha^\prime + \beta_1^\prime x_1 + \beta_2^\prime x_2 + \cdots + \beta_
 <div class="sourceCode" id="cb41"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/car/man/spreadLevelPlot.html" class="external-link">spreadLevelPlot</a></span><span class="op">(</span><span class="va">deq</span>, smooth<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>span<span class="op">=</span><span class="fl">1</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <p><img src="Diagnostics-for-2SLS-Regression_files/figure-html/unnamed-chunk-23-1.png" width="384"></p>
-<pre><code>## 
-## Suggested power transformation:  -2.44685</code></pre>
+<pre><code><span class="co">## </span>
+<span class="co">## Suggested power transformation:  -2.44685</span></code></pre>
 <p>which suggests a slight tendency of spread to increase with level. The transformation <span class="math inline">\(\lambda = - 2.45\)</span> seems strong, until we notice that the values of <span class="math inline">\(Q\)</span> are far from 0, and that the ratio of the largest to smallest values <span class="math inline">\(Q_{\mathrm{max}}/Q_{\mathrm{min}} = 106.23/92.42 = 1.15\)</span> is close to 1, so that <span class="math inline">\(Q^{-2.45}\)</span> is nearly a linear transformation of <span class="math inline">\(Q\)</span>—that is, effectively no transformation at all:</p>
 <div class="sourceCode" id="cb43"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/with.html" class="external-link">with</a></span><span class="op">(</span><span class="va">Kmenta</span>, <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">Q</span>, <span class="va">Q</span><span class="op">^</span><span class="op">-</span><span class="fl">2.5</span><span class="op">)</span><span class="op">)</span>
@@ -474,14 +474,14 @@ V(\varepsilon) = g(\gamma_0 + \gamma_1 z_1 + \cdots + \gamma_s z_s)
 <p>The Breusch-Pagan/Cook-Weisberg test is easily adaptable to 2SLS regression, as implemented by the <code><a href="https://rdrr.io/pkg/car/man/ncvTest.html" class="external-link">ncvTest()</a></code> function in the <strong>car</strong> package. For Kmenta’s demand equation:</p>
 <div class="sourceCode" id="cb44"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/car/man/ncvTest.html" class="external-link">ncvTest</a></span><span class="op">(</span><span class="va">deq</span><span class="op">)</span></code></pre></div>
-<pre><code>## Non-constant Variance Score Test 
-## Variance formula: ~ fitted.values 
-## Chisquare = 0.2390325, Df = 1, p = 0.62491</code></pre>
+<pre><code><span class="co">## Non-constant Variance Score Test </span>
+<span class="co">## Variance formula: ~ fitted.values </span>
+<span class="co">## Chisquare = 0.2390325, Df = 1, p = 0.62491</span></code></pre>
 <div class="sourceCode" id="cb46"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/car/man/ncvTest.html" class="external-link">ncvTest</a></span><span class="op">(</span><span class="va">deq</span>, var <span class="op">=</span> <span class="op">~</span> <span class="va">P</span> <span class="op">+</span> <span class="va">D</span><span class="op">)</span></code></pre></div>
-<pre><code>## Non-constant Variance Score Test 
-## Variance formula: ~ P + D 
-## Chisquare = 0.2392964, Df = 2, p = 0.88723</code></pre>
+<pre><code><span class="co">## Non-constant Variance Score Test </span>
+<span class="co">## Variance formula: ~ P + D </span>
+<span class="co">## Chisquare = 0.2392964, Df = 2, p = 0.88723</span></code></pre>
 <p>Here, the first test is against the fitted values and the second more general test is against the explanatory variables in the demand equation; the <span class="math inline">\(p\)</span>-values for both tests are large, suggesting little evidence against the hypothesis of constant variance.</p>
 <p>Remedies for nonconstant variance in 2SLS regression are similar to those in least-squares regression:</p>
 <ul>
@@ -492,41 +492,41 @@ V(\varepsilon) = g(\gamma_0 + \gamma_1 z_1 + \cdots + \gamma_s z_s)
 <p>The <strong>ivreg</strong> package supports the <code><a href="https://sandwich.R-Forge.R-project.org//reference/sandwich.html" class="external-link">sandwich()</a></code> function in the <strong>sandwich</strong> package <span class="citation">(Zeileis 2006)</span>. For the Kmenta example, where evidence of nonconstant error variance is slight, the sandwich standard errors are similar to, indeed slightly smaller than, the conventional 2SLS standard errors:</p>
 <div class="sourceCode" id="cb48"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">deq</span>, vcov<span class="op">=</span><span class="fu">sandwich</span><span class="fu">::</span><span class="va"><a href="https://sandwich.R-Forge.R-project.org//reference/sandwich.html" class="external-link">sandwich</a></span><span class="op">)</span></code></pre></div>
-<pre><code>## 
-## Call:
-## ivreg(formula = Q ~ P + D | D + F + A, data = Kmenta)
-## 
-## Residuals:
-##     Min      1Q  Median      3Q     Max 
-## -3.4305 -1.2432 -0.1895  1.5762  2.4920 
-## 
-## Coefficients:
-##             Estimate Std. Error t value Pr(&gt;|t|)    
-## (Intercept) 94.63330    5.14745  18.384 1.18e-12 ***
-## P           -0.24356    0.07590  -3.209  0.00515 ** 
-## D            0.31399    0.04293   7.315 1.21e-06 ***
-## 
-## Diagnostic tests:
-##                  df1 df2 statistic  p-value    
-## Weak instruments   2  16   142.340 6.43e-11 ***
-## Wu-Hausman         1  16    21.898 0.000251 ***
-## Sargan             1  NA     2.983 0.084137 .  
-## ---
-## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
-## 
-## Residual standard error: 1.966 on 17 degrees of freedom
-## Multiple R-Squared: 0.7548,  Adjusted R-squared: 0.726 
-## Wald test: 34.41 on 2 and 17 DF,  p-value: 1.055e-06</code></pre>
+<pre><code><span class="co">## </span>
+<span class="co">## Call:</span>
+<span class="co">## ivreg(formula = Q ~ P + D | D + F + A, data = Kmenta)</span>
+<span class="co">## </span>
+<span class="co">## Residuals:</span>
+<span class="co">##     Min      1Q  Median      3Q     Max </span>
+<span class="co">## -3.4305 -1.2432 -0.1895  1.5762  2.4920 </span>
+<span class="co">## </span>
+<span class="co">## Coefficients:</span>
+<span class="co">##             Estimate Std. Error t value Pr(&gt;|t|)    </span>
+<span class="co">## (Intercept) 94.63330    5.14745  18.384 1.18e-12 ***</span>
+<span class="co">## P           -0.24356    0.07590  -3.209  0.00515 ** </span>
+<span class="co">## D            0.31399    0.04293   7.315 1.21e-06 ***</span>
+<span class="co">## </span>
+<span class="co">## Diagnostic tests:</span>
+<span class="co">##                  df1 df2 statistic  p-value    </span>
+<span class="co">## Weak instruments   2  16   142.340 6.43e-11 ***</span>
+<span class="co">## Wu-Hausman         1  16    21.898 0.000251 ***</span>
+<span class="co">## Sargan             1  NA     2.983 0.084137 .  </span>
+<span class="co">## ---</span>
+<span class="co">## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span>
+<span class="co">## </span>
+<span class="co">## Residual standard error: 1.966 on 17 degrees of freedom</span>
+<span class="co">## Multiple R-Squared: 0.7548,  Adjusted R-squared: 0.726 </span>
+<span class="co">## Wald test: 34.41 on 2 and 17 DF,  p-value: 1.055e-06</span></code></pre>
 <div class="sourceCode" id="cb50"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">SEs</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Round.html" class="external-link">round</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/cbind.html" class="external-link">cbind</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/MathFun.html" class="external-link">sqrt</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/diag.html" class="external-link">diag</a></span><span class="op">(</span><span class="fu">sandwich</span><span class="fu">::</span><span class="fu"><a href="https://sandwich.R-Forge.R-project.org//reference/sandwich.html" class="external-link">sandwich</a></span><span class="op">(</span><span class="va">deq</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>, 
                    <span class="fu"><a href="https://rdrr.io/r/base/MathFun.html" class="external-link">sqrt</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/diag.html" class="external-link">diag</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/vcov.html" class="external-link">vcov</a></span><span class="op">(</span><span class="va">deq</span><span class="op">)</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>, 
              <span class="fl">4</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/base/colnames.html" class="external-link">colnames</a></span><span class="op">(</span><span class="va">SEs</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"sandwich"</span>, <span class="st">"conventional"</span><span class="op">)</span>
 <span class="va">SEs</span></code></pre></div>
-<pre><code>##             sandwich conventional
-## (Intercept)   5.1475       7.9208
-## P             0.0759       0.0965
-## D             0.0429       0.0469</code></pre>
+<pre><code><span class="co">##             sandwich conventional</span>
+<span class="co">## (Intercept)   5.1475       7.9208</span>
+<span class="co">## P             0.0759       0.0965</span>
+<span class="co">## D             0.0429       0.0469</span></code></pre>
 <p>We’ll modify Kmenta’s data to reflect nonconstant error variance, regenerating the data as Kmenta did originally from the reduced-form equations, expressing the endogenous variables <span class="math inline">\(P\)</span> and <span class="math inline">\(Q\)</span> as functions of the exogenous variables <span class="math inline">\(D\)</span>, <span class="math inline">\(F\)</span>, and <span class="math inline">\(A\)</span>, and reduced-form errors <span class="math inline">\(\nu_1\)</span> and <span class="math inline">\(\nu_2\)</span>:</p>
 <div class="sourceCode" id="cb52"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">Kmenta2</span> <span class="op">&lt;-</span> <span class="va">Kmenta</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"D"</span>, <span class="st">"F"</span>, <span class="st">"A"</span><span class="op">)</span><span class="op">]</span>
@@ -551,42 +551,42 @@ V(\varepsilon) = g(\gamma_0 + \gamma_1 z_1 + \cdots + \gamma_s z_s)
 <div class="sourceCode" id="cb54"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">deq2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/update.html" class="external-link">update</a></span><span class="op">(</span><span class="va">deq</span>, data<span class="op">=</span><span class="va">Kmenta2</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">deq2</span><span class="op">)</span></code></pre></div>
-<pre><code>## 
-## Call:
-## ivreg(formula = Q ~ P + D | D + F + A, data = Kmenta2)
-## 
-## Residuals:
-##     Min      1Q  Median      3Q     Max 
-## -8.7805 -1.4920  0.1067  1.9745  5.0629 
-## 
-## Coefficients:
-##              Estimate Std. Error t value Pr(&gt;|t|)    
-## (Intercept) 111.42774   11.36644   9.803 2.07e-08 ***
-## P            -0.39072    0.13979  -2.795  0.01243 *  
-## D             0.28415    0.07965   3.567  0.00237 ** 
-## 
-## Diagnostic tests:
-##                  df1 df2 statistic  p-value    
-## Weak instruments   2  16   122.011 2.06e-10 ***
-## Wu-Hausman         1  16    22.883 0.000203 ***
-## Sargan             1  NA     0.221 0.638221    
-## ---
-## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
-## 
-## Residual standard error: 3.283 on 17 degrees of freedom
-## Multiple R-Squared: 0.521,   Adjusted R-squared: 0.4646 
-## Wald test: 6.695 on 2 and 17 DF,  p-value: 0.007172</code></pre>
+<pre><code><span class="co">## </span>
+<span class="co">## Call:</span>
+<span class="co">## ivreg(formula = Q ~ P + D | D + F + A, data = Kmenta2)</span>
+<span class="co">## </span>
+<span class="co">## Residuals:</span>
+<span class="co">##     Min      1Q  Median      3Q     Max </span>
+<span class="co">## -8.7805 -1.4920  0.1067  1.9745  5.0629 </span>
+<span class="co">## </span>
+<span class="co">## Coefficients:</span>
+<span class="co">##              Estimate Std. Error t value Pr(&gt;|t|)    </span>
+<span class="co">## (Intercept) 111.42774   11.36644   9.803 2.07e-08 ***</span>
+<span class="co">## P            -0.39072    0.13979  -2.795  0.01243 *  </span>
+<span class="co">## D             0.28415    0.07965   3.567  0.00237 ** </span>
+<span class="co">## </span>
+<span class="co">## Diagnostic tests:</span>
+<span class="co">##                  df1 df2 statistic  p-value    </span>
+<span class="co">## Weak instruments   2  16   122.011 2.06e-10 ***</span>
+<span class="co">## Wu-Hausman         1  16    22.883 0.000203 ***</span>
+<span class="co">## Sargan             1  NA     0.221 0.638221    </span>
+<span class="co">## ---</span>
+<span class="co">## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span>
+<span class="co">## </span>
+<span class="co">## Residual standard error: 3.283 on 17 degrees of freedom</span>
+<span class="co">## Multiple R-Squared: 0.521,   Adjusted R-squared: 0.4646 </span>
+<span class="co">## Wald test: 6.695 on 2 and 17 DF,  p-value: 0.007172</span></code></pre>
 <p>and the nonconstant error variance is clearly reflected in diagnostics; for example,</p>
 <div class="sourceCode" id="cb56"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/car/man/spreadLevelPlot.html" class="external-link">spreadLevelPlot</a></span><span class="op">(</span><span class="va">deq2</span><span class="op">)</span></code></pre></div>
 <p><img src="Diagnostics-for-2SLS-Regression_files/figure-html/unnamed-chunk-30-1.png" width="384"></p>
-<pre><code>## 
-## Suggested power transformation:  -22.57328</code></pre>
+<pre><code><span class="co">## </span>
+<span class="co">## Suggested power transformation:  -22.57328</span></code></pre>
 <div class="sourceCode" id="cb58"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/car/man/ncvTest.html" class="external-link">ncvTest</a></span><span class="op">(</span><span class="va">deq2</span><span class="op">)</span></code></pre></div>
-<pre><code>## Non-constant Variance Score Test 
-## Variance formula: ~ fitted.values 
-## Chisquare = 6.690435, Df = 1, p = 0.0096932</code></pre>
+<pre><code><span class="co">## Non-constant Variance Score Test </span>
+<span class="co">## Variance formula: ~ fitted.values </span>
+<span class="co">## Chisquare = 6.690435, Df = 1, p = 0.0096932</span></code></pre>
 <p>The extreme value of the suggested power transformation of <span class="math inline">\(Q\)</span> from the spread-level plot, <span class="math inline">\(\lambda =-23\)</span>, reflects (as we noted previously) the fact that <span class="math inline">\(\max(Q)/\min(Q)\)</span> isn’t much larger than 1.</p>
 <p>In our example, the sandwich standard errors are not very different from the conventional standard errors:</p>
 <div class="sourceCode" id="cb60"><pre class="downlit sourceCode r">
@@ -595,55 +595,55 @@ V(\varepsilon) = g(\gamma_0 + \gamma_1 z_1 + \cdots + \gamma_s z_s)
              <span class="fl">4</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/base/colnames.html" class="external-link">colnames</a></span><span class="op">(</span><span class="va">SEs2</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"sandwich"</span>, <span class="st">"conventional"</span><span class="op">)</span>
 <span class="va">SEs2</span></code></pre></div>
-<pre><code>##             sandwich conventional
-## (Intercept)  13.7782      11.3664
-## P             0.1702       0.1398
-## D             0.0848       0.0797</code></pre>
+<pre><code><span class="co">##             sandwich conventional</span>
+<span class="co">## (Intercept)  13.7782      11.3664</span>
+<span class="co">## P             0.1702       0.1398</span>
+<span class="co">## D             0.0848       0.0797</span></code></pre>
 <p>As mentioned, bootstrapping provides an alternative to sandwich standard errors as a correction for nonconstant error variance, and the <strong>ivreg</strong> package supplies an <code>"ivreg"</code> method for the <code><a href="https://rdrr.io/pkg/car/man/Boot.html" class="external-link">Boot()</a></code> function in the <strong>car</strong> package, implementing the case-resampling bootstrap, and returning an object of class <code>"boot"</code> suitable for use with functions in the <strong>boot</strong> package <span class="citation">(Davison and Hinkley 1997; Canty and Ripley 2020)</span>. By default, <span class="math inline">\(R = 999\)</span> bootstrap replications are generated. For example:</p>
 <div class="sourceCode" id="cb62"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">set.seed</span> <span class="op">&lt;-</span> <span class="fl">869255</span> <span class="co"># for reproducibility</span>
 <span class="va">b.deq2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/car/man/Boot.html" class="external-link">Boot</a></span><span class="op">(</span><span class="va">deq2</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">deq2</span>, vcov.<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/stats/vcov.html" class="external-link">vcov</a></span><span class="op">(</span><span class="va">b.deq2</span><span class="op">)</span><span class="op">)</span></code></pre></div>
-<pre><code>## 
-## Call:
-## ivreg(formula = Q ~ P + D | D + F + A, data = Kmenta2)
-## 
-## Residuals:
-##     Min      1Q  Median      3Q     Max 
-## -8.7805 -1.4920  0.1067  1.9745  5.0629 
-## 
-## Coefficients:
-##              Estimate Std. Error t value Pr(&gt;|t|)    
-## (Intercept) 111.42774   16.70085   6.672 3.93e-06 ***
-## P            -0.39072    0.19678  -1.986  0.06345 .  
-## D             0.28415    0.09762   2.911  0.00974 ** 
-## 
-## Diagnostic tests:
-##                  df1 df2 statistic  p-value    
-## Weak instruments   2  16   122.011 2.06e-10 ***
-## Wu-Hausman         1  16    22.883 0.000203 ***
-## Sargan             1  NA     0.221 0.638221    
-## ---
-## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
-## 
-## Residual standard error: 3.283 on 17 degrees of freedom
-## Multiple R-Squared: 0.521,   Adjusted R-squared: 0.4646 
-## Wald test:  4.32 on 2 and 17 DF,  p-value: 0.03042</code></pre>
+<pre><code><span class="co">## </span>
+<span class="co">## Call:</span>
+<span class="co">## ivreg(formula = Q ~ P + D | D + F + A, data = Kmenta2)</span>
+<span class="co">## </span>
+<span class="co">## Residuals:</span>
+<span class="co">##     Min      1Q  Median      3Q     Max </span>
+<span class="co">## -8.7805 -1.4920  0.1067  1.9745  5.0629 </span>
+<span class="co">## </span>
+<span class="co">## Coefficients:</span>
+<span class="co">##              Estimate Std. Error t value Pr(&gt;|t|)    </span>
+<span class="co">## (Intercept) 111.42774   16.70085   6.672 3.93e-06 ***</span>
+<span class="co">## P            -0.39072    0.19678  -1.986  0.06345 .  </span>
+<span class="co">## D             0.28415    0.09762   2.911  0.00974 ** </span>
+<span class="co">## </span>
+<span class="co">## Diagnostic tests:</span>
+<span class="co">##                  df1 df2 statistic  p-value    </span>
+<span class="co">## Weak instruments   2  16   122.011 2.06e-10 ***</span>
+<span class="co">## Wu-Hausman         1  16    22.883 0.000203 ***</span>
+<span class="co">## Sargan             1  NA     0.221 0.638221    </span>
+<span class="co">## ---</span>
+<span class="co">## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span>
+<span class="co">## </span>
+<span class="co">## Residual standard error: 3.283 on 17 degrees of freedom</span>
+<span class="co">## Multiple R-Squared: 0.521,   Adjusted R-squared: 0.4646 </span>
+<span class="co">## Wald test:  4.32 on 2 and 17 DF,  p-value: 0.03042</span></code></pre>
 <p>The bootstrap standard errors are larger than the conventional or sandwich standard errors for this example.</p>
 <p>Boostrap confidence intervals can also be computed from the object returned by <code><a href="https://rdrr.io/pkg/car/man/Boot.html" class="external-link">Boot()</a></code>, by default reporting <span class="math inline">\(BC_a\)</span> (<em>bias-corrected, accelerated</em>) intervals (see the documentation for <code><a href="https://rdrr.io/pkg/car/man/hist.boot.html" class="external-link">confint.boot()</a></code> in the <strong>car</strong> package):</p>
 <div class="sourceCode" id="cb64"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/confint.html" class="external-link">confint</a></span><span class="op">(</span><span class="va">b.deq2</span><span class="op">)</span></code></pre></div>
-<pre><code>## Bootstrap bca confidence intervals
-## 
-##                   2.5 %      97.5 %
-## (Intercept) 64.38447188 137.8541642
-## P           -0.61242364   0.2463746
-## D            0.05739467   0.4253580</code></pre>
+<pre><code><span class="co">## Bootstrap bca confidence intervals</span>
+<span class="co">## </span>
+<span class="co">##                   2.5 %      97.5 %</span>
+<span class="co">## (Intercept) 64.38447188 137.8541642</span>
+<span class="co">## P           -0.61242364   0.2463746</span>
+<span class="co">## D            0.05739467   0.4253580</span></code></pre>
 </div>
 <div class="section level2">
 <h2 id="weighted-2sls-regession">Weighted 2SLS Regession<a class="anchor" aria-label="anchor" href="#weighted-2sls-regession"></a>
 </h2>
-<p>Suppose that we modify the regression model <span class="math inline">\(y = X \beta + \varepsilon\)</span> so that now <span class="math inline">\(N_n(0, \sigma^2 W^{-1})\)</span> where <span class="math inline">\(W = \mathrm{diag}\{w_i\}\)</span> is an <span class="math inline">\(n \times n\)</span> diagonal matrix of known inverse-variance weights; that is <span class="math inline">\(V(\varepsilon_i) = \sigma^2/w_i\)</span>. As before, some of the columns of <span class="math inline">\(X\)</span> may be correlated with the errors <span class="math inline">\(\varepsilon\)</span>, but we have sufficient instrumental variables <span class="math inline">\(Z\)</span> that are independent of the errors.</p>
+<p>Suppose that we modify the regression model <span class="math inline">\(y = X \beta + \varepsilon\)</span> so that now <span class="math inline">\(\varepsilon \sim N_n(0, \sigma^2 W^{-1})\)</span> where <span class="math inline">\(W = \mathrm{diag}\{w_i\}\)</span> is an <span class="math inline">\(n \times n\)</span> diagonal matrix of known inverse-variance weights; that is <span class="math inline">\(V(\varepsilon_i) = \sigma^2/w_i\)</span>. As before, some of the columns of <span class="math inline">\(X\)</span> may be correlated with the errors <span class="math inline">\(\varepsilon\)</span>, but we have sufficient instrumental variables <span class="math inline">\(Z\)</span> that are independent of the errors.</p>
 <p>Then the <em>weighted 2SLS</em> estimator is <span class="math display">\[
 b_{\mathrm{W2SLS}} = [X^\top W Z(Z^\top W Z)^{-1} Z^\top W X]^{-1} X^\top W Z (Z^\top W Z)^{-1} Z^\top W y
 \]</span> Alternatively, we can treat the two stages of 2SLS as <em>weighted least squares (WLS)</em> problems, in each stage minimizing the weighted sum of squared residuals. The <code><a href="../reference/ivreg.html">ivreg()</a></code> function computes the weighted 2SLS estimator in this manner.</p>
@@ -652,47 +652,47 @@ b_{\mathrm{W2SLS}} = [X^\top W Z(Z^\top W Z)^{-1} Z^\top W X]^{-1} X^\top W Z (Z
 <div class="sourceCode" id="cb66"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">deqw</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/update.html" class="external-link">update</a></span><span class="op">(</span><span class="va">deq</span>, data<span class="op">=</span><span class="va">Kmenta2</span>, weights<span class="op">=</span><span class="fl">1</span><span class="op">/</span><span class="va">w</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">deqw</span><span class="op">)</span></code></pre></div>
-<pre><code>## 
-## Call:
-## ivreg(formula = Q ~ P + D | D + F + A, data = Kmenta2, weights = 1/w)
-## 
-## Residuals:
-##      Min       1Q   Median       3Q      Max 
-## -5.43959 -1.66625 -0.08906  1.81440  3.41694 
-## 
-## Coefficients:
-##              Estimate Std. Error t value Pr(&gt;|t|)    
-## (Intercept) 107.88374   10.23415  10.542 7.11e-09 ***
-## P            -0.33586    0.12240  -2.744   0.0138 *  
-## D             0.26347    0.04405   5.981 1.49e-05 ***
-## 
-## Diagnostic tests:
-##                  df1 df2 statistic  p-value    
-## Weak instruments   2  16   101.172 8.31e-10 ***
-## Wu-Hausman         1  16    20.105 0.000376 ***
-## Sargan             1  NA     0.087 0.767864    
-## ---
-## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
-## 
-## Residual standard error: 2.308 on 17 degrees of freedom
-## Multiple R-Squared: 0.7166,  Adjusted R-squared: 0.6833 
-## Wald test: 18.79 on 2 and 17 DF,  p-value: 4.95e-05</code></pre>
+<pre><code><span class="co">## </span>
+<span class="co">## Call:</span>
+<span class="co">## ivreg(formula = Q ~ P + D | D + F + A, data = Kmenta2, weights = 1/w)</span>
+<span class="co">## </span>
+<span class="co">## Residuals:</span>
+<span class="co">##      Min       1Q   Median       3Q      Max </span>
+<span class="co">## -5.43959 -1.66625 -0.08906  1.81440  3.41694 </span>
+<span class="co">## </span>
+<span class="co">## Coefficients:</span>
+<span class="co">##              Estimate Std. Error t value Pr(&gt;|t|)    </span>
+<span class="co">## (Intercept) 107.88374   10.23415  10.542 7.11e-09 ***</span>
+<span class="co">## P            -0.33586    0.12240  -2.744   0.0138 *  </span>
+<span class="co">## D             0.26347    0.04405   5.981 1.49e-05 ***</span>
+<span class="co">## </span>
+<span class="co">## Diagnostic tests:</span>
+<span class="co">##                  df1 df2 statistic  p-value    </span>
+<span class="co">## Weak instruments   2  16   101.172 8.31e-10 ***</span>
+<span class="co">## Wu-Hausman         1  16    20.105 0.000376 ***</span>
+<span class="co">## Sargan             1  NA     0.087 0.767864    </span>
+<span class="co">## ---</span>
+<span class="co">## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span>
+<span class="co">## </span>
+<span class="co">## Residual standard error: 2.308 on 17 degrees of freedom</span>
+<span class="co">## Multiple R-Squared: 0.7166,  Adjusted R-squared: 0.6833 </span>
+<span class="co">## Wald test: 18.79 on 2 and 17 DF,  p-value: 4.95e-05</span></code></pre>
 <p>Plotting studentized residuals against fitted values and testing for nonconstant error variance don’t indicate a heteroscedasticity problem, but there is a relatively large studentized residual of about <span class="math inline">\(-3\)</span> that stands out somewhat from the other values:</p>
 <div class="sourceCode" id="cb68"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/car/man/ncvTest.html" class="external-link">ncvTest</a></span><span class="op">(</span><span class="va">deqw</span><span class="op">)</span></code></pre></div>
-<pre><code>## Non-constant Variance Score Test 
-## Variance formula: ~ fitted.values 
-## Chisquare = 4.21029, Df = 1, p = 0.040179</code></pre>
+<pre><code><span class="co">## Non-constant Variance Score Test </span>
+<span class="co">## Variance formula: ~ fitted.values </span>
+<span class="co">## Chisquare = 4.21029, Df = 1, p = 0.040179</span></code></pre>
 <div class="sourceCode" id="cb70"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/fitted.values.html" class="external-link">fitted</a></span><span class="op">(</span><span class="va">deqw</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/stats/influence.measures.html" class="external-link">rstudent</a></span><span class="op">(</span><span class="va">deqw</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <p><img src="Diagnostics-for-2SLS-Regression_files/figure-html/unnamed-chunk-36-1.png" width="384"></p>
 <p>A Bonferroni outlier test suggests that the studentized residual isn’t unusually large, and once more we’re in the unusual situation of knowing that the model is correct.</p>
 <div class="sourceCode" id="cb71"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/car/man/outlierTest.html" class="external-link">outlierTest</a></span><span class="op">(</span><span class="va">deqw</span><span class="op">)</span></code></pre></div>
-<pre><code>## No Studentized residuals with Bonferroni p &lt; 0.05
-## Largest |rstudent|:
-##       rstudent unadjusted p-value Bonferroni p
-## 1937 -3.135343          0.0063887      0.12777</code></pre>
+<pre><code><span class="co">## No Studentized residuals with Bonferroni p &lt; 0.05</span>
+<span class="co">## Largest |rstudent|:</span>
+<span class="co">##       rstudent unadjusted p-value Bonferroni p</span>
+<span class="co">## 1937 -3.135343          0.0063887      0.12777</span></code></pre>
 </div>
 <div class="section level2">
 <h2 id="collinearity-diagnostics">Collinearity Diagnostics<a class="anchor" aria-label="anchor" href="#collinearity-diagnostics"></a>
@@ -702,8 +702,8 @@ b_{\mathrm{W2SLS}} = [X^\top W Z(Z^\top W Z)^{-1} Z^\top W X]^{-1} X^\top W Z (Z
 <p>For example, for the demand equation in Kmenta’s model:</p>
 <div class="sourceCode" id="cb73"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/MathFun.html" class="external-link">sqrt</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/car/man/vif.html" class="external-link">vif</a></span><span class="op">(</span><span class="va">deq</span><span class="op">)</span><span class="op">)</span></code></pre></div>
-<pre><code>##        P        D 
-## 1.231124 1.231124</code></pre>
+<pre><code><span class="co">##        P        D </span>
+<span class="co">## 1.231124 1.231124</span></code></pre>
 <p>Taking the square-roots of the VIFs puts them on the coefficient standard-error scale. That is, the standard errors of the coefficients of <span class="math inline">\(P\)</span> and <span class="math inline">\(D\)</span> are 23% larger than they would be if the estimated coefficients were uncorrelated (which is equivalent to the columns of <span class="math inline">\(\widehat{X}\)</span> for <span class="math inline">\(P\)</span> and <span class="math inline">\(D\)</span> in the second-stage regression being uncorrelated). When, as here, each term in the model has just one coefficient, generalized and ordinary variance-inflation factors coincide. The equality of the VIFs for <span class="math inline">\(P\)</span> and <span class="math inline">\(D\)</span> is peculiar to the case of two regressors (beyond the regression constant).</p>
 <p><em>Marginal/conditional</em> plots, produced by the <code><a href="https://rdrr.io/pkg/car/man/mcPlots.html" class="external-link">mcPlots()</a></code> function in the <strong>car</strong> package, superimpose the added-variable plots on corresponding marginal scatterplots for the regressors. These graphs allow us to visualize the reduction in precision of estimation of each coefficient due to collinearity, which reduces the conditional variation of a regressor relative to its marginal variation. for example, for the demand equation:</p>
 <div class="sourceCode" id="cb75"><pre class="downlit sourceCode r">
@@ -721,87 +721,87 @@ b_{\mathrm{W2SLS}} = [X^\top W Z(Z^\top W Z)^{-1} Z^\top W X]^{-1} X^\top W Z (Z
 <div class="sourceCode" id="cb76"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">deq.mm</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/update.html" class="external-link">update</a></span><span class="op">(</span><span class="va">deq1</span>, method <span class="op">=</span> <span class="st">"MM"</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">deq.mm</span><span class="op">)</span></code></pre></div>
-<pre><code>## 
-## Call:
-## ivreg(formula = Q ~ P + D | D + F + A, data = Kmenta1, method = "MM")
-## 
-## Residuals:
-##       Min        1Q    Median        3Q       Max 
-## -13.22380  -1.56688   0.04599   1.12301   2.55786 
-## 
-## Coefficients:
-##             Estimate Std. Error t value Pr(&gt;|t|)    
-## (Intercept) 91.09249   10.62357   8.575 1.40e-07 ***
-## P           -0.23742    0.11353  -2.091   0.0518 .  
-## D            0.34678    0.05688   6.097 1.19e-05 ***
-## 
-## Diagnostic tests:
-##                  df1 df2 statistic  p-value    
-## Weak instruments   2  16    88.025 2.32e-09 ***
-## Wu-Hausman         1  16     0.803  0.38339    
-## Sargan             1  NA    10.330  0.00131 ** 
-## ---
-## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
-## 
-## Residual standard error: 2.08 on 17 degrees of freedom
-## Multiple R-Squared: 0.09864, Adjusted R-squared: -0.007398 
-## Wald test: 18.59 on 2 and 17 DF,  p-value: 5.262e-05</code></pre>
+<pre><code><span class="co">## </span>
+<span class="co">## Call:</span>
+<span class="co">## ivreg(formula = Q ~ P + D | D + F + A, data = Kmenta1, method = "MM")</span>
+<span class="co">## </span>
+<span class="co">## Residuals:</span>
+<span class="co">##       Min        1Q    Median        3Q       Max </span>
+<span class="co">## -13.22380  -1.56688   0.04599   1.12301   2.55786 </span>
+<span class="co">## </span>
+<span class="co">## Coefficients:</span>
+<span class="co">##             Estimate Std. Error t value Pr(&gt;|t|)    </span>
+<span class="co">## (Intercept) 91.09249   10.62357   8.575 1.40e-07 ***</span>
+<span class="co">## P           -0.23742    0.11353  -2.091   0.0518 .  </span>
+<span class="co">## D            0.34678    0.05688   6.097 1.19e-05 ***</span>
+<span class="co">## </span>
+<span class="co">## Diagnostic tests:</span>
+<span class="co">##                  df1 df2 statistic  p-value    </span>
+<span class="co">## Weak instruments   2  16    88.025 2.32e-09 ***</span>
+<span class="co">## Wu-Hausman         1  16     0.803  0.38339    </span>
+<span class="co">## Sargan             1  NA    10.330  0.00131 ** </span>
+<span class="co">## ---</span>
+<span class="co">## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span>
+<span class="co">## </span>
+<span class="co">## Residual standard error: 2.08 on 17 degrees of freedom</span>
+<span class="co">## Multiple R-Squared: 0.09864, Adjusted R-squared: -0.007398 </span>
+<span class="co">## Wald test: 18.59 on 2 and 17 DF,  p-value: 5.262e-05</span></code></pre>
 <div class="sourceCode" id="cb78"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/car/man/compareCoefs.html" class="external-link">compareCoefs</a></span><span class="op">(</span><span class="va">deq</span>, <span class="va">deq1</span>, <span class="va">deq1.20</span>, <span class="va">deq.mm</span><span class="op">)</span></code></pre></div>
-<pre><code>## Calls:
-## 1: ivreg(formula = Q ~ P + D | D + F + A, data = Kmenta)
-## 2: ivreg(formula = Q ~ P + D | D + F + A, data = Kmenta1)
-## 3: ivreg(formula = Q ~ P + D | D + F + A, data = Kmenta1, subset = -20)
-## 4: ivreg(formula = Q ~ P + D | D + F + A, data = Kmenta1, method = "MM")
-## 
-##             Model 1 Model 2 Model 3 Model 4
-## (Intercept)   94.63  117.96   92.42   91.09
-## SE             7.92   11.64    9.67   10.62
-##                                            
-## P           -0.2436 -0.4054 -0.2300 -0.2374
-## SE           0.0965  0.1417  0.1047  0.1135
-##                                            
-## D            0.3140  0.2351  0.3233  0.3468
-## SE           0.0469  0.0690  0.0527  0.0569
-## </code></pre>
+<pre><code><span class="co">## Calls:</span>
+<span class="co">## 1: ivreg(formula = Q ~ P + D | D + F + A, data = Kmenta)</span>
+<span class="co">## 2: ivreg(formula = Q ~ P + D | D + F + A, data = Kmenta1)</span>
+<span class="co">## 3: ivreg(formula = Q ~ P + D | D + F + A, data = Kmenta1, subset = -20)</span>
+<span class="co">## 4: ivreg(formula = Q ~ P + D | D + F + A, data = Kmenta1, method = "MM")</span>
+<span class="co">## </span>
+<span class="co">##             Model 1 Model 2 Model 3 Model 4</span>
+<span class="co">## (Intercept)   94.63  117.96   92.42   91.09</span>
+<span class="co">## SE             7.92   11.64    9.67   10.62</span>
+<span class="co">##                                            </span>
+<span class="co">## P           -0.2436 -0.4054 -0.2300 -0.2374</span>
+<span class="co">## SE           0.0965  0.1417  0.1047  0.1135</span>
+<span class="co">##                                            </span>
+<span class="co">## D            0.3140  0.2351  0.3233  0.3468</span>
+<span class="co">## SE           0.0469  0.0690  0.0527  0.0569</span>
+<span class="co">## </span></code></pre>
 <p>The estimates produced by the robust two-stage estimator are very similar to those for the 2SLS estimator applied to the uncorrupted data and when the bad case is deleted from the corrupted data.</p>
 <p>It’s instructive to look at the robustness weights for the first- and second-stage MM estimators:</p>
 <div class="sourceCode" id="cb80"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/weights.html" class="external-link">weights</a></span><span class="op">(</span><span class="va">deq.mm</span>, type <span class="op">=</span> <span class="st">"robustness"</span><span class="op">)</span></code></pre></div>
-<pre><code>##              P   stage_2
-## 1922 0.9744449 0.9843442
-## 1923 0.9650580 0.9813862
-## 1924 0.9952293 0.8700471
-## 1925 0.9998998 0.9618035
-## 1926 0.9835828 0.8952875
-## 1927 0.9996116 0.9752454
-## 1928 0.9668182 0.9525911
-## 1929 0.6417885 0.5318460
-## 1930 0.8028481 0.9085481
-## 1931 0.8905474 0.7734043
-## 1932 0.9775792 0.9982440
-## 1933 0.9985961 0.9050868
-## 1934 0.9691516 0.9241239
-## 1935 0.8868046 0.9999572
-## 1936 0.7238126 0.8787684
-## 1937 0.8387680 0.5293154
-## 1938 0.9414371 0.9986454
-## 1939 0.5325076 0.6927505
-## 1940 0.9996695 0.9783155
-## 1941 0.9811313 0.0000000</code></pre>
+<pre><code><span class="co">##              P   stage_2</span>
+<span class="co">## 1922 0.9744449 0.9843442</span>
+<span class="co">## 1923 0.9650580 0.9813862</span>
+<span class="co">## 1924 0.9952293 0.8700471</span>
+<span class="co">## 1925 0.9998998 0.9618035</span>
+<span class="co">## 1926 0.9835828 0.8952875</span>
+<span class="co">## 1927 0.9996116 0.9752454</span>
+<span class="co">## 1928 0.9668182 0.9525911</span>
+<span class="co">## 1929 0.6417885 0.5318460</span>
+<span class="co">## 1930 0.8028481 0.9085481</span>
+<span class="co">## 1931 0.8905474 0.7734043</span>
+<span class="co">## 1932 0.9775792 0.9982440</span>
+<span class="co">## 1933 0.9985961 0.9050868</span>
+<span class="co">## 1934 0.9691516 0.9241239</span>
+<span class="co">## 1935 0.8868046 0.9999572</span>
+<span class="co">## 1936 0.7238126 0.8787684</span>
+<span class="co">## 1937 0.8387680 0.5293154</span>
+<span class="co">## 1938 0.9414371 0.9986454</span>
+<span class="co">## 1939 0.5325076 0.6927505</span>
+<span class="co">## 1940 0.9996695 0.9783155</span>
+<span class="co">## 1941 0.9811313 0.0000000</span></code></pre>
 <p>Thus, 1941 is so discrepant in the second stage that it receives 0 weight in the robust fit.</p>
 <p>Most of the diagnostic and other methods for <code>"ivreg"</code> objects also work with robust two-stage regression models. To compute deletion statistics like studentized residuals, dfbeta, and Cook’s <span class="math inline">\(D\)</span>, we use the robustness weights for the M or MM second-stage regression (multiplied by prespecified variance weights, if these are employed) as if they were weights in a 2SLS fit. This is, of course, an approximation: To get exact deletion statistics would require literally omitting each case in turn and recalculating the first- and second-stage robust regressions, an unattractive prospect, because the robust regressions are iterative.</p>
 <p>Here, for example, is a graph of second-stage hatvalues, studentized residuals, and Cook’s distances for the 2SMM estimator applied to the corrupted Kmenta data:</p>
 <div class="sourceCode" id="cb82"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/car/man/influencePlot.html" class="external-link">influencePlot</a></span><span class="op">(</span><span class="va">deq.mm</span><span class="op">)</span></code></pre></div>
 <p><img src="Diagnostics-for-2SLS-Regression_files/figure-html/unnamed-chunk-42-1.png" width="384"></p>
-<pre><code>##         StudRes        Hat      CookD
-## 1931  1.6778245 0.13345298 0.07043221
-## 1932  0.2892163 0.35576176 0.01023249
-## 1933 -1.3354194 0.28104141 0.13365515
-## 1937 -2.7083737 0.09236777 0.06489585
-## 1938 -0.3801649 0.47603246 0.03387451
-## 1941 -7.6841103 0.00000000 0.00000000</code></pre>
+<pre><code><span class="co">##         StudRes        Hat      CookD</span>
+<span class="co">## 1931  1.6778245 0.13345298 0.07043221</span>
+<span class="co">## 1932  0.2892163 0.35576176 0.01023249</span>
+<span class="co">## 1933 -1.3354194 0.28104141 0.13365515</span>
+<span class="co">## 1937 -2.7083737 0.09236777 0.06489585</span>
+<span class="co">## 1938 -0.3801649 0.47603246 0.03387451</span>
+<span class="co">## 1941 -7.6841103 0.00000000 0.00000000</span></code></pre>
 <p>Because the hatvalue for 1941 in the robust second-stage fit is 0, so is the Cook’s <span class="math inline">\(D\)</span> for this case, and the “bubble” for 1941 has 0 area (and is therefore invisible). The bad case, however, have a very large (negative) studentized residual of nearly <span class="math inline">\(-8\)</span>.</p>
 </div>
 <div class="section level2">
@@ -915,7 +915,7 @@ b_{\mathrm{W2SLS}} = [X^\top W Z(Z^\top W Z)^{-1} Z^\top W X]^{-1} X^\top W Z (Z
 
 <div class="pkgdown">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 1.9000.9000.9000.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.1.9000.</p>
 </div>
 
       </footer>

@@ -58,7 +58,7 @@ but using some variables dating back to earlier years."><meta property="og:image
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>U.S. Returns to Schooling Data</h1>
-    <small class="dont-index">Source: <a href="https://github.com/john-d-fox/ivreg/blob/master/R/SchoolingReturns.R" class="external-link"><code>R/SchoolingReturns.R</code></a></small>
+    <small class="dont-index">Source: <a href="https://github.com/john-d-fox/ivreg/blob/HEAD/R/SchoolingReturns.R" class="external-link"><code>R/SchoolingReturns.R</code></a></small>
     <div class="hidden name"><code>SchoolingReturns.Rd</code></div>
     </div>
 
@@ -67,36 +67,80 @@ but using some variables dating back to earlier years."><meta property="og:image
 but using some variables dating back to earlier years.</p>
     </div>
 
-    <div class="ref-usage sourceCode"><pre class="sourceCode r"><code><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="st">"SchoolingReturns"</span>, package <span class="op">=</span> <span class="st">"ivreg"</span><span class="op">)</span></code></pre></div>
+    <div id="ref-usage">
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="st">"SchoolingReturns"</span>, package <span class="op">=</span> <span class="st">"ivreg"</span><span class="op">)</span></code></pre></div>
+    </div>
 
-
-    <div id="ref-sections">
     <div id="format">
     <h2>Format</h2>
-    <p>A data frame with 3010 rows and 22 columns.</p><dl><dt>wage</dt><dd><p>Raw wages in 1976 (in cents per hour).</p></dd>
-  <dt>education</dt><dd><p>Education in 1976 (in years).</p></dd>
-  <dt>experience</dt><dd><p>Years of labor market experience, computed as <code>age - education - 6</code>.</p></dd>
-  <dt>ethnicity</dt><dd><p>Factor indicating ethnicity. Is the individual African-American
+    <p>A data frame with 3010 rows and 22 columns.</p><dl><dt>wage</dt>
+<dd><p>Raw wages in 1976 (in cents per hour).</p></dd>
+
+  <dt>education</dt>
+<dd><p>Education in 1976 (in years).</p></dd>
+
+  <dt>experience</dt>
+<dd><p>Years of labor market experience, computed as <code>age - education - 6</code>.</p></dd>
+
+  <dt>ethnicity</dt>
+<dd><p>Factor indicating ethnicity. Is the individual African-American
     (<code>"afam"</code>) or not (<code>"other"</code>)?</p></dd>
-  <dt>smsa</dt><dd><p>Factor. Does the individual reside in a SMSA (standard metropolitan statistical area) in 1976?</p></dd>
-  <dt>south</dt><dd><p>Factor. Does the individual reside in the South in 1976?</p></dd>
-  <dt>age</dt><dd><p>Age in 1976 (in years).</p></dd>
-  <dt>nearcollege</dt><dd><p>Factor. Did the individual grow up near a 4-year college?</p></dd>
-  <dt>nearcollege2</dt><dd><p>Factor. Did the individual grow up near a 2-year college?</p></dd>
-  <dt>nearcollege4</dt><dd><p>Factor. Did the individual grow up near a 4-year public or private college?</p></dd>
-  <dt>enrolled</dt><dd><p>Factor. Is the individual enrolled in college in 1976?</p></dd>
-  <dt>married</dt><dd><p>factor. Is the individual married in 1976?</p></dd>
-  <dt>education66</dt><dd><p>Education in 1966 (in years).</p></dd>
-  <dt>smsa66</dt><dd><p>Factor. Does the individual reside in a SMSA in 1966?</p></dd>
-  <dt>south66</dt><dd><p>Factor. Does the individual reside in the South in 1966?</p></dd>
-  <dt>feducation</dt><dd><p>Father's educational attainment (in years). Imputed with average if missing.</p></dd>
-  <dt>meducation</dt><dd><p>Mother's educational attainment (in years). Imputed with average if missing.</p></dd>
-  <dt>fameducation</dt><dd><p>Ordered factor coding family education class (from 1 to 9).</p></dd>
-  <dt>kww</dt><dd><p>Knowledge world of work (KWW) score.</p></dd>
-  <dt>iq</dt><dd><p>Normed intelligence quotient (IQ) score</p></dd>
-  <dt>parents14</dt><dd><p>Factor coding living with parents at age 14:
+
+  <dt>smsa</dt>
+<dd><p>Factor. Does the individual reside in a SMSA (standard metropolitan statistical area) in 1976?</p></dd>
+
+  <dt>south</dt>
+<dd><p>Factor. Does the individual reside in the South in 1976?</p></dd>
+
+  <dt>age</dt>
+<dd><p>Age in 1976 (in years).</p></dd>
+
+  <dt>nearcollege</dt>
+<dd><p>Factor. Did the individual grow up near a 4-year college?</p></dd>
+
+  <dt>nearcollege2</dt>
+<dd><p>Factor. Did the individual grow up near a 2-year college?</p></dd>
+
+  <dt>nearcollege4</dt>
+<dd><p>Factor. Did the individual grow up near a 4-year public or private college?</p></dd>
+
+  <dt>enrolled</dt>
+<dd><p>Factor. Is the individual enrolled in college in 1976?</p></dd>
+
+  <dt>married</dt>
+<dd><p>factor. Is the individual married in 1976?</p></dd>
+
+  <dt>education66</dt>
+<dd><p>Education in 1966 (in years).</p></dd>
+
+  <dt>smsa66</dt>
+<dd><p>Factor. Does the individual reside in a SMSA in 1966?</p></dd>
+
+  <dt>south66</dt>
+<dd><p>Factor. Does the individual reside in the South in 1966?</p></dd>
+
+  <dt>feducation</dt>
+<dd><p>Father's educational attainment (in years). Imputed with average if missing.</p></dd>
+
+  <dt>meducation</dt>
+<dd><p>Mother's educational attainment (in years). Imputed with average if missing.</p></dd>
+
+  <dt>fameducation</dt>
+<dd><p>Ordered factor coding family education class (from 1 to 9).</p></dd>
+
+  <dt>kww</dt>
+<dd><p>Knowledge world of work (KWW) score.</p></dd>
+
+  <dt>iq</dt>
+<dd><p>Normed intelligence quotient (IQ) score</p></dd>
+
+  <dt>parents14</dt>
+<dd><p>Factor coding living with parents at age 14:
     both parents, single mother, step parent, other</p></dd>
-  <dt>library14</dt><dd><p>Factor. Was there a library card in home at age 14?</p></dd>
+
+  <dt>library14</dt>
+<dd><p>Factor. Was there a library card in home at age 14?</p></dd>
+
   
 </dl></div>
     <div id="source">
@@ -134,11 +178,10 @@ main coefficients of interest, namely that of years of education.</p>
   University of Toronto Press, Toronto, 201-222.</p>
 <p>Verbeek, M. (2004). <em>A Guide to Modern Econometrics</em>, 2nd ed. John Wiley.</p>
     </div>
-    </div>
 
-    <div id="examples">
+    <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="ref-examples sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="co">## load data</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="co">## load data</span></span>
 <span class="r-in"><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="st">"SchoolingReturns"</span>, package <span class="op">=</span> <span class="st">"ivreg"</span><span class="op">)</span></span>
 <span class="r-in"></span>
 <span class="r-in"><span class="co">## Table 5.1 in Verbeek (2004) / Table 2(1) in Card (1995)</span></span>
@@ -262,7 +305,7 @@ main coefficients of interest, namely that of years of education.</p>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 1.9000.9000.9000.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.1.9000.</p>
 </div>
 
       </footer></div>

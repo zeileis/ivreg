@@ -61,7 +61,7 @@ estimators are also provided, based on M-estimation (2SM) and MM-estimation
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Instrumental-Variable Regression by 2SLS, 2SM, or 2SMM Estimation</h1>
-    <small class="dont-index">Source: <a href="https://github.com/john-d-fox/ivreg/blob/master/R/ivreg.R" class="external-link"><code>R/ivreg.R</code></a></small>
+    <small class="dont-index">Source: <a href="https://github.com/john-d-fox/ivreg/blob/HEAD/R/ivreg.R" class="external-link"><code>R/ivreg.R</code></a></small>
     <div class="hidden name"><code>ivreg.Rd</code></div>
     </div>
 
@@ -73,7 +73,8 @@ estimators are also provided, based on M-estimation (2SM) and MM-estimation
 (2SMM).</p>
     </div>
 
-    <div class="ref-usage sourceCode"><pre class="sourceCode r"><code><span class="fu">ivreg</span><span class="op">(</span>
+    <div id="ref-usage">
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">ivreg</span><span class="op">(</span>
   <span class="va">formula</span>,
   <span class="va">instruments</span>,
   <span class="va">data</span>,
@@ -88,98 +89,134 @@ estimators are also provided, based on M-estimation (2SM) and MM-estimation
   method <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"OLS"</span>, <span class="st">"M"</span>, <span class="st">"MM"</span><span class="op">)</span>,
   <span class="va">...</span>
 <span class="op">)</span></code></pre></div>
+    </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
-    <table class="ref-arguments"><colgroup><col class="name"><col class="desc"></colgroup><tr><th>formula, instruments</th>
-      <td><p>formula specification(s) of the regression
+    <dl><dt>formula, instruments</dt>
+<dd><p>formula specification(s) of the regression
 relationship and the instruments. Either <code>instruments</code> is missing and
 <code>formula</code> has three parts as in <code>y ~ x1 + x2 | z1 + z2 + z3</code>
 (recommended) or <code>formula</code> is <code>y ~ x1 + x2</code> and <code>instruments</code>
 is a one-sided formula <code>~ z1 + z2 + z3</code> (only for backward
-compatibility).</p></td>
-    </tr><tr><th>data</th>
-      <td><p>an optional data frame containing the variables in the model.
+compatibility).</p></dd>
+<dt>data</dt>
+<dd><p>an optional data frame containing the variables in the model.
 By default the variables are taken from the environment of the
-<code>formula</code>.</p></td>
-    </tr><tr><th>subset</th>
-      <td><p>an optional vector specifying a subset of observations to be
-used in fitting the model.</p></td>
-    </tr><tr><th>na.action</th>
-      <td><p>a function that indicates what should happen when the data
-contain <code>NA</code>s. The default is set by the <code>na.action</code> option.</p></td>
-    </tr><tr><th>weights</th>
-      <td><p>an optional vector of weights to be used in the fitting
-process.</p></td>
-    </tr><tr><th>offset</th>
-      <td><p>an optional offset that can be used to specify an a priori
-known component to be included during fitting.</p></td>
-    </tr><tr><th>contrasts</th>
-      <td><p>an optional list. See the <code>contrasts.arg</code> of
-<code><a href="https://rdrr.io/r/stats/model.matrix.html" class="external-link">model.matrix.default</a></code>.</p></td>
-    </tr><tr><th>model, x, y</th>
-      <td><p>logicals.  If <code>TRUE</code> the corresponding components of
+<code>formula</code>.</p></dd>
+<dt>subset</dt>
+<dd><p>an optional vector specifying a subset of observations to be
+used in fitting the model.</p></dd>
+<dt>na.action</dt>
+<dd><p>a function that indicates what should happen when the data
+contain <code>NA</code>s. The default is set by the <code>na.action</code> option.</p></dd>
+<dt>weights</dt>
+<dd><p>an optional vector of weights to be used in the fitting
+process.</p></dd>
+<dt>offset</dt>
+<dd><p>an optional offset that can be used to specify an a priori
+known component to be included during fitting.</p></dd>
+<dt>contrasts</dt>
+<dd><p>an optional list. See the <code>contrasts.arg</code> of
+<code><a href="https://rdrr.io/r/stats/model.matrix.html" class="external-link">model.matrix.default</a></code>.</p></dd>
+<dt>model, x, y</dt>
+<dd><p>logicals.  If <code>TRUE</code> the corresponding components of
 the fit (the model frame, the model matrices, the response) are returned. These
-components are necessary for computing regression diagnostics.</p></td>
-    </tr><tr><th>method</th>
-      <td><p>the method used to fit the stage 1 and 2 regression: 
+components are necessary for computing regression diagnostics.</p></dd>
+<dt>method</dt>
+<dd><p>the method used to fit the stage 1 and 2 regression: 
 <code>"OLS"</code> for traditional 2SLS regression (the default), 
 <code>"M"</code> for M-estimation, or <code>"MM"</code> for MM-estimation, with the
 latter two robust-regression methods implemented via the <code><a href="https://rdrr.io/pkg/MASS/man/rlm.html" class="external-link">rlm</a></code> 
-function in the <span class="pkg">MASS</span> package.</p></td>
-    </tr><tr><th>...</th>
-      <td><p>further arguments passed to <code><a href="ivreg.fit.html">ivreg.fit</a></code>.</p></td>
-    </tr></table></div>
-
-    <div id="ref-sections">
+function in the <span class="pkg">MASS</span> package.</p></dd>
+<dt>...</dt>
+<dd><p>further arguments passed to <code><a href="ivreg.fit.html">ivreg.fit</a></code>.</p></dd>
+</dl></div>
     <div id="value">
     <h2>Value</h2>
     <p><code>ivreg</code> returns an object of class <code>"ivreg"</code> that inherits from
 class <code>"lm"</code>, with the following components:</p>
-<dl><dt>coefficients</dt><dd><p>parameter estimates, from the stage-2 regression.</p></dd>
-</dl><dl><dt>residuals</dt><dd><p>vector of model residuals.</p></dd>
-</dl><dl><dt>residuals1</dt><dd><p>matrix of residuals from the stage-1 regression.</p></dd>
-</dl><dl><dt>residuals2</dt><dd><p>vector of residuals from the stage-2 regression.</p></dd>
-</dl><dl><dt>fitted.values</dt><dd><p>vector of predicted means for the response.</p></dd>
-</dl><dl><dt>weights</dt><dd><p>either the vector of weights used (if any) or <code>NULL</code> (if none).</p></dd>
-</dl><dl><dt>offset</dt><dd><p>either the offset used (if any) or <code>NULL</code> (if none).</p></dd>
-</dl><dl><dt>estfun</dt><dd><p>a matrix containing the empirical estimating functions.</p></dd>
-</dl><dl><dt>n</dt><dd><p>number of observations.</p></dd>
-</dl><dl><dt>nobs</dt><dd><p>number of observations with non-zero weights.</p></dd>
-</dl><dl><dt>p</dt><dd><p>number of columns in the model matrix x of regressors.</p></dd>
-</dl><dl><dt>q</dt><dd><p>number of columns in the instrumental variables model matrix z</p></dd>
-</dl><dl><dt>rank</dt><dd><p>numeric rank of the model matrix for the stage-2 regression.</p></dd>
-</dl><dl><dt>df.residual</dt><dd><p>residual degrees of freedom for fitted model.</p></dd>
-</dl><dl><dt>cov.unscaled</dt><dd><p>unscaled covariance matrix for the coefficients.</p></dd>
-</dl><dl><dt>sigma</dt><dd><p>residual standard deviation.</p></dd>
-</dl><dl><dt>qr</dt><dd><p>QR decomposition for the stage-2 regression.</p></dd>
-</dl><dl><dt>qr1</dt><dd><p>QR decomposition for the stage-1 regression.</p></dd>
-</dl><dl><dt>rank1</dt><dd><p>numeric rank of the model matrix for the stage-1 regression.</p></dd>
-</dl><dl><dt>coefficients1</dt><dd><p>matrix of coefficients from the stage-1 regression.</p></dd>
-</dl><dl><dt>df.residual1</dt><dd><p>residual degrees of freedom for the stage-1 regression.</p></dd>
-</dl><dl><dt>exogenous</dt><dd><p>columns of the <code>"regressors"</code> matrix that are exogenous.</p></dd>
-</dl><dl><dt>endogenous</dt><dd><p>columns of the <code>"regressors"</code> matrix that are endogenous.</p></dd>
-</dl><dl><dt>instruments</dt><dd><p>columns of the <code>"instruments"</code> matrix that are
+<dl><dt>coefficients</dt>
+<dd><p>parameter estimates, from the stage-2 regression.</p></dd>
+<dt>residuals</dt>
+<dd><p>vector of model residuals.</p></dd>
+<dt>residuals1</dt>
+<dd><p>matrix of residuals from the stage-1 regression.</p></dd>
+<dt>residuals2</dt>
+<dd><p>vector of residuals from the stage-2 regression.</p></dd>
+<dt>fitted.values</dt>
+<dd><p>vector of predicted means for the response.</p></dd>
+<dt>weights</dt>
+<dd><p>either the vector of weights used (if any) or <code>NULL</code> (if none).</p></dd>
+<dt>offset</dt>
+<dd><p>either the offset used (if any) or <code>NULL</code> (if none).</p></dd>
+<dt>estfun</dt>
+<dd><p>a matrix containing the empirical estimating functions.</p></dd>
+<dt>n</dt>
+<dd><p>number of observations.</p></dd>
+<dt>nobs</dt>
+<dd><p>number of observations with non-zero weights.</p></dd>
+<dt>p</dt>
+<dd><p>number of columns in the model matrix x of regressors.</p></dd>
+<dt>q</dt>
+<dd><p>number of columns in the instrumental variables model matrix z</p></dd>
+<dt>rank</dt>
+<dd><p>numeric rank of the model matrix for the stage-2 regression.</p></dd>
+<dt>df.residual</dt>
+<dd><p>residual degrees of freedom for fitted model.</p></dd>
+<dt>cov.unscaled</dt>
+<dd><p>unscaled covariance matrix for the coefficients.</p></dd>
+<dt>sigma</dt>
+<dd><p>residual standard deviation.</p></dd>
+<dt>qr</dt>
+<dd><p>QR decomposition for the stage-2 regression.</p></dd>
+<dt>qr1</dt>
+<dd><p>QR decomposition for the stage-1 regression.</p></dd>
+<dt>rank1</dt>
+<dd><p>numeric rank of the model matrix for the stage-1 regression.</p></dd>
+<dt>coefficients1</dt>
+<dd><p>matrix of coefficients from the stage-1 regression.</p></dd>
+<dt>df.residual1</dt>
+<dd><p>residual degrees of freedom for the stage-1 regression.</p></dd>
+<dt>exogenous</dt>
+<dd><p>columns of the <code>"regressors"</code> matrix that are exogenous.</p></dd>
+<dt>endogenous</dt>
+<dd><p>columns of the <code>"regressors"</code> matrix that are endogenous.</p></dd>
+<dt>instruments</dt>
+<dd><p>columns of the <code>"instruments"</code> matrix that are
 instruments for the endogenous variables.</p></dd>
-</dl><dl><dt>method</dt><dd><p>the method used for the stage 1 and 2 regressions, one of <code>"OLS"</code>,
+<dt>method</dt>
+<dd><p>the method used for the stage 1 and 2 regressions, one of <code>"OLS"</code>,
 <code>"M"</code>, or <code>"MM"</code>.</p></dd>
-</dl><dl><dt>rweights</dt><dd><p>a matrix of robustness weights with columns for each of the stage-1
+<dt>rweights</dt>
+<dd><p>a matrix of robustness weights with columns for each of the stage-1
 regressions and for the stage-2 regression (in the last column) if the fitting method is 
 <code>"M"</code> or <code>"MM"</code>, <code>NULL</code> if the fitting method is <code>"OLS"</code>.</p></dd>
-</dl><dl><dt>hatvalues</dt><dd><p>a matrix of hatvalues. For <code>method = "OLS"</code>, the matrix consists of two
+<dt>hatvalues</dt>
+<dd><p>a matrix of hatvalues. For <code>method = "OLS"</code>, the matrix consists of two
 columns, for each of the stage-1 and stage-2 regression; for <code>method = "M"</code> or <code>"MM"</code>,
 there is one column for <em>each</em> stage=1 regression and for the stage-2 regression.</p></dd>
-</dl><dl><dt>df.residual</dt><dd><p>residual degrees of freedom for fitted model.</p></dd>
-</dl><dl><dt>call</dt><dd><p>the original function call.</p></dd>
-</dl><dl><dt>formula</dt><dd><p>the model formula.</p></dd>
-</dl><dl><dt>na.action</dt><dd><p>function applied to missing values in the model fit.</p></dd>
-</dl><dl><dt>terms</dt><dd><p>a list with elements <code>"regressors"</code> and <code>"instruments"</code> 
+<dt>df.residual</dt>
+<dd><p>residual degrees of freedom for fitted model.</p></dd>
+<dt>call</dt>
+<dd><p>the original function call.</p></dd>
+<dt>formula</dt>
+<dd><p>the model formula.</p></dd>
+<dt>na.action</dt>
+<dd><p>function applied to missing values in the model fit.</p></dd>
+<dt>terms</dt>
+<dd><p>a list with elements <code>"regressors"</code> and <code>"instruments"</code> 
 containing the terms objects for the respective components.</p></dd>
-</dl><dl><dt>levels</dt><dd><p>levels of the categorical regressors.</p></dd>
-</dl><dl><dt>contrasts</dt><dd><p>the contrasts used for categorical regressors.</p></dd>
-</dl><dl><dt>model</dt><dd><p>the full model frame (if <code>model = TRUE</code>).</p></dd>
-</dl><dl><dt>y</dt><dd><p>the response vector (if <code>y = TRUE</code>).</p></dd>
-</dl><dl><dt>x</dt><dd><p>a list with elements <code>"regressors"</code>, <code>"instruments"</code>, <code>"projected"</code>,
+<dt>levels</dt>
+<dd><p>levels of the categorical regressors.</p></dd>
+<dt>contrasts</dt>
+<dd><p>the contrasts used for categorical regressors.</p></dd>
+<dt>model</dt>
+<dd><p>the full model frame (if <code>model = TRUE</code>).</p></dd>
+<dt>y</dt>
+<dd><p>the response vector (if <code>y = TRUE</code>).</p></dd>
+<dt>x</dt>
+<dd><p>a list with elements <code>"regressors"</code>, <code>"instruments"</code>, <code>"projected"</code>,
 containing the model matrices from the respective components (if <code>x = TRUE</code>). 
 <code>"projected"</code> is the matrix of regressors projected on the image of the instruments.</p></dd>
 </dl></div>
@@ -220,11 +257,10 @@ on the right-hand side.</p>
     <div class="dont-index"><p><code><a href="ivreg.fit.html">ivreg.fit</a></code>, <code><a href="ivregDiagnostics.html">ivregDiagnostics</a></code>, <code><a href="ivregMethods.html">ivregMethods</a></code>,
 <code><a href="https://rdrr.io/r/stats/lm.html" class="external-link">lm</a></code>, <code>lm.fit</code></p></div>
     </div>
-    </div>
 
-    <div id="examples">
+    <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="ref-examples sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="co">## data</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="co">## data</span></span>
 <span class="r-in"><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="st">"CigaretteDemand"</span>, package <span class="op">=</span> <span class="st">"ivreg"</span><span class="op">)</span></span>
 <span class="r-in"></span>
 <span class="r-in"><span class="co">## model </span></span>
@@ -381,7 +417,7 @@ on the right-hand side.</p>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 1.9000.9000.9000.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.1.9000.</p>
 </div>
 
       </footer></div>

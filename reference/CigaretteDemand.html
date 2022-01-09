@@ -58,7 +58,7 @@ compared between 1995 and 1985."><meta property="og:image" content="https://john
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>U.S. Cigarette Demand Data</h1>
-    <small class="dont-index">Source: <a href="https://github.com/john-d-fox/ivreg/blob/master/R/CigaretteDemand.R" class="external-link"><code>R/CigaretteDemand.R</code></a></small>
+    <small class="dont-index">Source: <a href="https://github.com/john-d-fox/ivreg/blob/HEAD/R/CigaretteDemand.R" class="external-link"><code>R/CigaretteDemand.R</code></a></small>
     <div class="hidden name"><code>CigaretteDemand.Rd</code></div>
     </div>
 
@@ -67,22 +67,42 @@ compared between 1995 and 1985."><meta property="og:image" content="https://john
 compared between 1995 and 1985.</p>
     </div>
 
-    <div class="ref-usage sourceCode"><pre class="sourceCode r"><code><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="st">"CigaretteDemand"</span>, package <span class="op">=</span> <span class="st">"ivreg"</span><span class="op">)</span></code></pre></div>
+    <div id="ref-usage">
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="st">"CigaretteDemand"</span>, package <span class="op">=</span> <span class="st">"ivreg"</span><span class="op">)</span></code></pre></div>
+    </div>
 
-
-    <div id="ref-sections">
     <div id="format">
     <h2>Format</h2>
-    <p>A data frame with 48 rows and 10 columns.</p><dl><dt>packs</dt><dd><p>Number of cigarette packs per capita sold in 1995.</p></dd>
-  <dt>rprice</dt><dd><p>Real price in 1995 (including sales tax).</p></dd>
-  <dt>rincome</dt><dd><p>Real per capita income in 1995.</p></dd>
-  <dt>salestax</dt><dd><p>Sales tax in 1995.</p></dd>
-  <dt>cigtax</dt><dd><p>Cigarette-specific taxes (federal and average local excise taxes) in 1995.</p></dd>
-  <dt>packsdiff</dt><dd><p>Difference in <code>log(packs)</code> (between 1995 and 1985).</p></dd>
-  <dt>pricediff</dt><dd><p>Difference in <code>log(rprice)</code> (between 1995 and 1985).</p></dd>
-  <dt>incomediff</dt><dd><p>Difference in <code>log(rincome)</code> (between 1995 and 1985).</p></dd>
-  <dt>salestaxdiff</dt><dd><p>Difference in <code>salestax</code> (between 1995 and 1985).</p></dd>
-  <dt>cigtaxdiff</dt><dd><p>Difference in <code>cigtax</code> (between 1995 and 1985).</p></dd>
+    <p>A data frame with 48 rows and 10 columns.</p><dl><dt>packs</dt>
+<dd><p>Number of cigarette packs per capita sold in 1995.</p></dd>
+
+  <dt>rprice</dt>
+<dd><p>Real price in 1995 (including sales tax).</p></dd>
+
+  <dt>rincome</dt>
+<dd><p>Real per capita income in 1995.</p></dd>
+
+  <dt>salestax</dt>
+<dd><p>Sales tax in 1995.</p></dd>
+
+  <dt>cigtax</dt>
+<dd><p>Cigarette-specific taxes (federal and average local excise taxes) in 1995.</p></dd>
+
+  <dt>packsdiff</dt>
+<dd><p>Difference in <code>log(packs)</code> (between 1995 and 1985).</p></dd>
+
+  <dt>pricediff</dt>
+<dd><p>Difference in <code>log(rprice)</code> (between 1995 and 1985).</p></dd>
+
+  <dt>incomediff</dt>
+<dd><p>Difference in <code>log(rincome)</code> (between 1995 and 1985).</p></dd>
+
+  <dt>salestaxdiff</dt>
+<dd><p>Difference in <code>salestax</code> (between 1995 and 1985).</p></dd>
+
+  <dt>cigtaxdiff</dt>
+<dd><p>Difference in <code>cigtax</code> (between 1995 and 1985).</p></dd>
+
   
 </dl></div>
     <div id="source">
@@ -111,11 +131,10 @@ is provided by Hanck et al. (2020, Chapter 12).</p>
     <h2>See also</h2>
     <div class="dont-index"><p><code><a href="https://rdrr.io/pkg/AER/man/CigarettesSW.html" class="external-link">CigarettesSW</a></code>.</p></div>
     </div>
-    </div>
 
-    <div id="examples">
+    <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="ref-examples sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="co">## load data</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="co">## load data</span></span>
 <span class="r-in"><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="st">"CigaretteDemand"</span>, package <span class="op">=</span> <span class="st">"ivreg"</span><span class="op">)</span></span>
 <span class="r-in"></span>
 <span class="r-in"><span class="co">## basic price elasticity: OLS vs. IV</span></span>
@@ -216,7 +235,7 @@ is provided by Hanck et al. (2020, Chapter 12).</p>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 1.9000.9000.9000.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.1.9000.</p>
 </div>
 
       </footer></div>

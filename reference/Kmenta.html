@@ -62,7 +62,7 @@ fit in the examples."><meta property="og:image" content="https://john-d-fox.gith
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Partly Artificial Data on the U.S. Economy</h1>
-    <small class="dont-index">Source: <a href="https://github.com/john-d-fox/ivreg/blob/master/R/Kmenta.R" class="external-link"><code>R/Kmenta.R</code></a></small>
+    <small class="dont-index">Source: <a href="https://github.com/john-d-fox/ivreg/blob/HEAD/R/Kmenta.R" class="external-link"><code>R/Kmenta.R</code></a></small>
     <div class="hidden name"><code>Kmenta.Rd</code></div>
     </div>
 
@@ -75,17 +75,27 @@ variables Q and P are simulated according to the linear simultaneous equation mo
 fit in the examples.</p>
     </div>
 
-    <div class="ref-usage sourceCode"><pre class="sourceCode r"><code><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="st">"Kmenta"</span>, package <span class="op">=</span> <span class="st">"ivreg"</span><span class="op">)</span></code></pre></div>
+    <div id="ref-usage">
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="st">"Kmenta"</span>, package <span class="op">=</span> <span class="st">"ivreg"</span><span class="op">)</span></code></pre></div>
+    </div>
 
-
-    <div id="ref-sections">
     <div id="format">
     <h2>Format</h2>
-    <p>A data frame with 20 rows and 5 columns.</p><dl><dt>Q</dt><dd><p>food consumption per capita.</p></dd>
-  <dt>P</dt><dd><p>ratio of food prices to general consumer prices.</p></dd>
-  <dt>D</dt><dd><p>disposible income in constant dollars.</p></dd>
-  <dt>F</dt><dd><p>ratio of preceding year's prices received by farmers to general consumer prices.</p></dd>
-  <dt>A</dt><dd><p>time in years.</p></dd>
+    <p>A data frame with 20 rows and 5 columns.</p><dl><dt>Q</dt>
+<dd><p>food consumption per capita.</p></dd>
+
+  <dt>P</dt>
+<dd><p>ratio of food prices to general consumer prices.</p></dd>
+
+  <dt>D</dt>
+<dd><p>disposible income in constant dollars.</p></dd>
+
+  <dt>F</dt>
+<dd><p>ratio of preceding year's prices received by farmers to general consumer prices.</p></dd>
+
+  <dt>A</dt>
+<dd><p>time in years.</p></dd>
+
   
 </dl></div>
     <div id="source">
@@ -96,11 +106,10 @@ fit in the examples.</p>
     <h2>See also</h2>
     <div class="dont-index"><p><code><a href="ivreg.html">ivreg</a></code>.</p></div>
     </div>
-    </div>
 
-    <div id="examples">
+    <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="ref-examples sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="st">"Kmenta"</span>, package <span class="op">=</span> <span class="st">"ivreg"</span><span class="op">)</span> </span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="st">"Kmenta"</span>, package <span class="op">=</span> <span class="st">"ivreg"</span><span class="op">)</span> </span>
 <span class="r-in"><span class="va">deq</span> <span class="op">&lt;-</span> <span class="fu"><a href="ivreg.html">ivreg</a></span><span class="op">(</span><span class="va">Q</span> <span class="op">~</span> <span class="va">P</span> <span class="op">+</span> <span class="va">D</span>     <span class="op">|</span> <span class="va">D</span> <span class="op">+</span> <span class="cn">F</span> <span class="op">+</span> <span class="va">A</span>, data <span class="op">=</span> <span class="va">Kmenta</span><span class="op">)</span> <span class="co"># demand equation</span></span>
 <span class="r-in"><span class="va">seq</span> <span class="op">&lt;-</span> <span class="fu"><a href="ivreg.html">ivreg</a></span><span class="op">(</span><span class="va">Q</span> <span class="op">~</span> <span class="va">P</span> <span class="op">+</span> <span class="cn">F</span> <span class="op">+</span> <span class="va">A</span> <span class="op">|</span> <span class="va">D</span> <span class="op">+</span> <span class="cn">F</span> <span class="op">+</span> <span class="va">A</span>, data <span class="op">=</span> <span class="va">Kmenta</span><span class="op">)</span> <span class="co"># supply equation</span></span>
 <span class="r-in"><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">deq</span>, tests <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
@@ -172,7 +181,7 @@ fit in the examples.</p>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 1.9000.9000.9000.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.1.9000.</p>
 </div>
 
       </footer></div>

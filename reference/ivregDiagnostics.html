@@ -69,7 +69,7 @@ Diagnostics for 2SLS Regression."><meta property="og:image" content="https://joh
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Deletion and Other Diagnostic Methods for <code>"ivreg"</code> Objects</h1>
-    <small class="dont-index">Source: <a href="https://github.com/john-d-fox/ivreg/blob/master/R/ivregDiagnostics.R" class="external-link"><code>R/ivregDiagnostics.R</code></a></small>
+    <small class="dont-index">Source: <a href="https://github.com/john-d-fox/ivreg/blob/HEAD/R/ivregDiagnostics.R" class="external-link"><code>R/ivregDiagnostics.R</code></a></small>
     <div class="hidden name"><code>ivregDiagnostics.Rd</code></div>
     </div>
 
@@ -89,7 +89,8 @@ independent.</p>
 <a href="../doc/Diagnostics-for-2SLS-Regression.pdf">Diagnostics for 2SLS Regression</a>.</p>
     </div>
 
-    <div class="ref-usage sourceCode"><pre class="sourceCode r"><code><span class="co"># S3 method for ivreg</span>
+    <div id="ref-usage">
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="co"># S3 method for ivreg</span>
 <span class="fu"><a href="https://rdrr.io/r/stats/lm.influence.html" class="external-link">influence</a></span><span class="op">(</span>
   <span class="va">model</span>,
   sigma. <span class="op">=</span> <span class="va">n</span> <span class="op">&lt;=</span> <span class="fl">1000</span>,
@@ -204,63 +205,79 @@ independent.</p>
 
 <span class="co"># S3 method for rivreg</span>
 <span class="fu"><a href="https://rdrr.io/r/stats/lm.influence.html" class="external-link">influence</a></span><span class="op">(</span><span class="va">model</span>, <span class="va">...</span><span class="op">)</span></code></pre></div>
+    </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
-    <table class="ref-arguments"><colgroup><col class="name"><col class="desc"></colgroup><tr><th>model, x, object</th>
-      <td><p>A <code>"ivreg"</code> or <code>"influence.ivreg"</code> object.</p></td>
-    </tr><tr><th>sigma.</th>
-      <td><p>If <code>TRUE</code> (the default for 1000 or fewer cases), the deleted value
+    <dl><dt>model, x, object</dt>
+<dd><p>A <code>"ivreg"</code> or <code>"influence.ivreg"</code> object.</p></dd>
+<dt>sigma.</dt>
+<dd><p>If <code>TRUE</code> (the default for 1000 or fewer cases), the deleted value
 of the residual standard deviation is computed for each case; if <code>FALSE</code>, the
-overall residual standard deviation is used to compute other deletion diagnostics.</p></td>
-    </tr><tr><th>type</th>
-      <td><p>If <code>"stage2"</code> (the default), hatvalues are for the second stage regression;
+overall residual standard deviation is used to compute other deletion diagnostics.</p></dd>
+<dt>type</dt>
+<dd><p>If <code>"stage2"</code> (the default), hatvalues are for the second stage regression;
 if <code>"both"</code>, the hatvalues are the geometric mean of the casewise hatvalues for the
 two stages; if <code>"maximum"</code>, the hatvalues are the larger of the casewise
 hatvalues for the two stages. In computing the geometric mean or casewise maximum hatvalues,
 the hatvalues for each stage are first divided by their average (number of coefficients in
 stage regression/number of cases); the geometric mean or casewise maximum values are then
-multiplied by the average hatvalue from the second stage.</p></td>
-    </tr><tr><th>applyfun</th>
-      <td><p>Optional loop replacement function that should work like
+multiplied by the average hatvalue from the second stage.</p></dd>
+<dt>applyfun</dt>
+<dd><p>Optional loop replacement function that should work like
 <code><a href="https://rdrr.io/r/base/lapply.html" class="external-link">lapply</a></code> with arguments <code>function(X, FUN, ...)</code>. The default
-is to use a loop unless the <code>ncores</code> argument is specified (see below).</p></td>
-    </tr><tr><th>ncores</th>
-      <td><p>Numeric, number of cores to be used in parallel computations. If set
+is to use a loop unless the <code>ncores</code> argument is specified (see below).</p></dd>
+<dt>ncores</dt>
+<dd><p>Numeric, number of cores to be used in parallel computations. If set
 to an integer the <code>applyfun</code> is set to use either <code><a href="https://rdrr.io/r/parallel/clusterApply.html" class="external-link">parLapply</a></code>
 (on Windows) or
 <code><a href="https://rdrr.io/r/parallel/mclapply.html" class="external-link">mclapply</a></code>
-(otherwise) with the desired number of cores.</p></td>
-    </tr><tr><th>...</th>
-      <td><p>arguments to be passed down.</p></td>
-    </tr><tr><th>ylab</th>
-      <td><p>The vertical axis label.</p></td>
-    </tr><tr><th>distribution</th>
-      <td><p><code>"t"</code> (the default) or <code>"norm"</code>.</p></td>
-    </tr><tr><th>terms</th>
-      <td><p>Terms for which added-variable plots are to be constructed; the default,
-if the argument isn't specified, is the <code>"regressors"</code> component of the model formula.</p></td>
-    </tr><tr><th>f, labels, R</th>
-      <td><p>see <code><a href="https://rdrr.io/pkg/car/man/Boot.html" class="external-link">Boot</a></code>.</p></td>
-    </tr><tr><th>method</th>
-      <td><p>only <code>"case"</code> (case resampling) is supported: see <code><a href="https://rdrr.io/pkg/car/man/Boot.html" class="external-link">Boot</a></code>.</p></td>
-    </tr><tr><th>main</th>
-      <td><p>Main title for the graph.</p></td>
-    </tr></table></div>
-
-    <div id="ref-sections">
+(otherwise) with the desired number of cores.</p></dd>
+<dt>...</dt>
+<dd><p>arguments to be passed down.</p></dd>
+<dt>ylab</dt>
+<dd><p>The vertical axis label.</p></dd>
+<dt>distribution</dt>
+<dd><p><code>"t"</code> (the default) or <code>"norm"</code>.</p></dd>
+<dt>terms</dt>
+<dd><p>Terms for which added-variable plots are to be constructed; the default,
+if the argument isn't specified, is the <code>"regressors"</code> component of the model formula.</p></dd>
+<dt>f, labels, R</dt>
+<dd><p>see <code><a href="https://rdrr.io/pkg/car/man/Boot.html" class="external-link">Boot</a></code>.</p></dd>
+<dt>method</dt>
+<dd><p>only <code>"case"</code> (case resampling) is supported: see <code><a href="https://rdrr.io/pkg/car/man/Boot.html" class="external-link">Boot</a></code>.</p></dd>
+<dt>main</dt>
+<dd><p>Main title for the graph.</p></dd>
+</dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>In the case of <code>influence.ivreg</code>, an object of class <code>"influence.ivreg"</code>
-with the following components:</p><dl><dt><code>coefficients</code></dt><dd><p>the estimated regression coefficients</p></dd>
-<dt><code>model</code></dt><dd><p>the model matrix</p></dd>
-<dt><code>dfbeta</code></dt><dd><p>influence on coefficients</p></dd>
-<dt><code>sigma</code></dt><dd><p>deleted values of the residual standard deviation</p></dd>
-<dt><code>dffits</code></dt><dd><p>overall influence on the regression coefficients</p></dd>
-<dt><code>cookd</code></dt><dd><p>Cook's distances</p></dd>
-<dt><code>hatvalues</code></dt><dd><p>hatvalues</p></dd>
-<dt><code>rstudent</code></dt><dd><p>Studentized residuals</p></dd>
-<dt><code>df.residual</code></dt><dd><p>residual degrees of freedom</p></dd>
+    <p>In the case of <code>influence.ivreg</code>, an object of class <code>"influence.ivreg"</code>with the following components:</p><dl><dt><code>coefficients</code></dt>
+<dd><p>the estimated regression coefficients</p></dd>
+
+<dt><code>model</code></dt>
+<dd><p>the model matrix</p></dd>
+
+<dt><code>dfbeta</code></dt>
+<dd><p>influence on coefficients</p></dd>
+
+<dt><code>sigma</code></dt>
+<dd><p>deleted values of the residual standard deviation</p></dd>
+
+<dt><code>dffits</code></dt>
+<dd><p>overall influence on the regression coefficients</p></dd>
+
+<dt><code>cookd</code></dt>
+<dd><p>Cook's distances</p></dd>
+
+<dt><code>hatvalues</code></dt>
+<dd><p>hatvalues</p></dd>
+
+<dt><code>rstudent</code></dt>
+<dd><p>Studentized residuals</p></dd>
+
+<dt><code>df.residual</code></dt>
+<dd><p>residual degrees of freedom</p></dd>
+
 
 </dl><p>In the case of other methods, such as <code>rstudent.ivreg</code> or
 <code>rstudent.influence.ivreg</code>, the corresponding diagnostic statistics.
@@ -276,11 +293,10 @@ draw graphs.</p>
   <code><a href="https://rdrr.io/pkg/car/man/outlierTest.html" class="external-link">outlierTest</a></code>, <code><a href="https://rdrr.io/pkg/car/man/spreadLevelPlot.html" class="external-link">spreadLevelPlot</a></code>,
   <code><a href="https://rdrr.io/pkg/car/man/ncvTest.html" class="external-link">ncvTest</a></code>.</p></div>
     </div>
-    </div>
 
-    <div id="examples">
+    <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="ref-examples sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="va">kmenta.eq1</span> <span class="op">&lt;-</span> <span class="fu"><a href="ivreg.html">ivreg</a></span><span class="op">(</span><span class="va">Q</span> <span class="op">~</span> <span class="va">P</span> <span class="op">+</span> <span class="va">D</span> <span class="op">|</span> <span class="va">D</span> <span class="op">+</span> <span class="cn">F</span> <span class="op">+</span> <span class="va">A</span>, data <span class="op">=</span> <span class="va">Kmenta</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="va">kmenta.eq1</span> <span class="op">&lt;-</span> <span class="fu"><a href="ivreg.html">ivreg</a></span><span class="op">(</span><span class="va">Q</span> <span class="op">~</span> <span class="va">P</span> <span class="op">+</span> <span class="va">D</span> <span class="op">|</span> <span class="va">D</span> <span class="op">+</span> <span class="cn">F</span> <span class="op">+</span> <span class="va">A</span>, data <span class="op">=</span> <span class="va">Kmenta</span><span class="op">)</span></span>
 <span class="r-in"><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">kmenta.eq1</span><span class="op">)</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Call:</span>
@@ -309,15 +325,15 @@ draw graphs.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Wald test: 23.81 on 2 and 17 DF,  p-value: 1.178e-05 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-in"><span class="fu">car</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/car/man/avPlots.html" class="external-link">avPlots</a></span><span class="op">(</span><span class="va">kmenta.eq1</span><span class="op">)</span></span>
-<span class="r-plt"><img src="ivregDiagnostics-1.png" alt="" width="700" height="433"></span>
+<span class="r-plt img"><img src="ivregDiagnostics-1.png" alt="" width="700" height="433"></span>
 <span class="r-in"><span class="fu">car</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/car/man/mcPlots.html" class="external-link">mcPlots</a></span><span class="op">(</span><span class="va">kmenta.eq1</span><span class="op">)</span></span>
-<span class="r-plt"><img src="ivregDiagnostics-2.png" alt="" width="700" height="433"></span>
+<span class="r-plt img"><img src="ivregDiagnostics-2.png" alt="" width="700" height="433"></span>
 <span class="r-in"><span class="fu">car</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/car/man/crPlots.html" class="external-link">crPlots</a></span><span class="op">(</span><span class="va">kmenta.eq1</span><span class="op">)</span></span>
-<span class="r-plt"><img src="ivregDiagnostics-3.png" alt="" width="700" height="433"></span>
+<span class="r-plt img"><img src="ivregDiagnostics-3.png" alt="" width="700" height="433"></span>
 <span class="r-in"><span class="fu">car</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/car/man/ceresPlots.html" class="external-link">ceresPlots</a></span><span class="op">(</span><span class="va">kmenta.eq1</span><span class="op">)</span></span>
-<span class="r-plt"><img src="ivregDiagnostics-4.png" alt="" width="700" height="433"></span>
+<span class="r-plt img"><img src="ivregDiagnostics-4.png" alt="" width="700" height="433"></span>
 <span class="r-in"><span class="fu">car</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/car/man/influencePlot.html" class="external-link">influencePlot</a></span><span class="op">(</span><span class="va">kmenta.eq1</span><span class="op">)</span></span>
-<span class="r-plt"><img src="ivregDiagnostics-5.png" alt="" width="700" height="433"></span>
+<span class="r-plt img"><img src="ivregDiagnostics-5.png" alt="" width="700" height="433"></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>         StudRes        Hat      CookD</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1929 -1.7359357 0.09079703 0.06956671</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1933 -1.3686682 0.26453459 0.21973049</span>
@@ -325,25 +341,25 @@ draw graphs.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1938 -0.2010944 0.39711512 0.01508349</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1941 -0.4505155 0.46498004 0.05257374</span>
 <span class="r-in"><span class="fu">car</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/car/man/infIndexPlot.html" class="external-link">influenceIndexPlot</a></span><span class="op">(</span><span class="va">kmenta.eq1</span><span class="op">)</span></span>
-<span class="r-plt"><img src="ivregDiagnostics-6.png" alt="" width="700" height="433"></span>
+<span class="r-plt img"><img src="ivregDiagnostics-6.png" alt="" width="700" height="433"></span>
 <span class="r-in"><span class="fu">car</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/car/man/qqPlot.html" class="external-link">qqPlot</a></span><span class="op">(</span><span class="va">kmenta.eq1</span><span class="op">)</span></span>
-<span class="r-plt"><img src="ivregDiagnostics-7.png" alt="" width="700" height="433"></span>
+<span class="r-plt img"><img src="ivregDiagnostics-7.png" alt="" width="700" height="433"></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1937 1929 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   16    8 </span>
 <span class="r-in"><span class="fu">car</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/car/man/spreadLevelPlot.html" class="external-link">spreadLevelPlot</a></span><span class="op">(</span><span class="va">kmenta.eq1</span><span class="op">)</span></span>
-<span class="r-plt"><img src="ivregDiagnostics-8.png" alt="" width="700" height="433"></span>
+<span class="r-plt img"><img src="ivregDiagnostics-8.png" alt="" width="700" height="433"></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Suggested power transformation:  -2.44685 </span>
 <span class="r-in"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="fu">effects</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/effects/man/predictorEffects.html" class="external-link">predictorEffects</a></span><span class="op">(</span><span class="va">kmenta.eq1</span>, residuals <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-plt"><img src="ivregDiagnostics-9.png" alt="" width="700" height="433"></span>
+<span class="r-plt img"><img src="ivregDiagnostics-9.png" alt="" width="700" height="433"></span>
 <span class="r-in"><span class="va">set.seed</span> <span class="op">&lt;-</span> <span class="fl">12321</span> <span class="co"># for reproducibility</span></span>
 <span class="r-in"><span class="fu"><a href="https://rdrr.io/r/stats/confint.html" class="external-link">confint</a></span><span class="op">(</span><span class="fu">car</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/car/man/Boot.html" class="external-link">Boot</a></span><span class="op">(</span><span class="va">kmenta.eq1</span>, R <span class="op">=</span> <span class="fl">250</span><span class="op">)</span><span class="op">)</span> <span class="co"># 250 reps for brevity</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Bootstrap bca confidence intervals</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                  2.5 %      97.5 %</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> (Intercept) 76.3295965 106.8699114</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> P           -0.4263332  -0.0440344</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> D            0.1944724   0.3977276</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                  2.5 %       97.5 %</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> (Intercept) 79.7013602 109.17904962</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> P           -0.4436282  -0.06096157</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> D            0.1889655   0.39533326</span>
 <span class="r-in"><span class="fu">car</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/car/man/outlierTest.html" class="external-link">outlierTest</a></span><span class="op">(</span><span class="va">kmenta.eq1</span><span class="op">)</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> No Studentized residuals with Bonferroni p &lt; 0.05</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Largest |rstudent|:</span>
@@ -368,7 +384,7 @@ draw graphs.</p>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 1.9000.9000.9000.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.1.9000.</p>
 </div>
 
       </footer></div>
