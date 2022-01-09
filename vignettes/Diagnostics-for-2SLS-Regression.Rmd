@@ -409,7 +409,7 @@ confint(b.deq2)
 
 ## Weighted 2SLS Regession
 
-Suppose that we modify the regression model $y = X \beta + \varepsilon$ so that now $N_n(0, \sigma^2 W^{-1})$ where $W = \mathrm{diag}\{w_i\}$ is an $n \times n$ diagonal matrix of known inverse-variance weights; that is $V(\varepsilon_i) = \sigma^2/w_i$. As before, some of the columns of $X$ may be correlated with the errors $\varepsilon$, but we have sufficient instrumental variables $Z$ that are independent of the errors.
+Suppose that we modify the regression model $y = X \beta + \varepsilon$ so that now $\varepsilon \sim N_n(0, \sigma^2 W^{-1})$ where $W = \mathrm{diag}\{w_i\}$ is an $n \times n$ diagonal matrix of known inverse-variance weights; that is $V(\varepsilon_i) = \sigma^2/w_i$. As before, some of the columns of $X$ may be correlated with the errors $\varepsilon$, but we have sufficient instrumental variables $Z$ that are independent of the errors.
 
 Then the *weighted 2SLS* estimator is
 $$
