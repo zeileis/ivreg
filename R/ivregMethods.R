@@ -180,9 +180,9 @@ model.matrix.ivreg <- function(object, component = c("regressors", "projected", 
   component <- match.arg(component, c("regressors", "projected", "instruments"))
   if(!is.null(object$x)) rval <- object$x[[component]]
     else if(!is.null(object$model)) {
-      X <- model.matrix(object$terms$regressors, object$model, contrasts = object$contrasts$regressors)
+      X <- model.matrix(object$terms$regressors, object$model, contrasts.arg = object$contrasts$regressors)
       Z <- if(is.null(object$terms$instruments)) NULL
-        else model.matrix(object$terms$instruments, object$model, contrasts = object$contrasts$instruments)
+        else model.matrix(object$terms$instruments, object$model, contrasts.arg = object$contrasts$instruments)
       w <- weights(object)
       XZ <- if(is.null(Z)) {
         X
@@ -228,7 +228,7 @@ predict.ivreg <- function(object, newdata, type = c("response", "terms"), na.act
       mf <- model.frame(delete.response(object$terms$full), newdata,
                         na.action = na.action, xlev = object$levels)
       X <- model.matrix(delete.response(object$terms$regressors), mf,
-                        contrasts = object$contrasts$regressors)
+                        contrasts.arg = object$contrasts$regressors)
       ok <- !is.na(object$coefficients)
       drop(X[, ok, drop = FALSE] %*% object$coefficients[ok])
     } 

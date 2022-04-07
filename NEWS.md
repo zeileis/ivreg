@@ -1,3 +1,9 @@
+# Version 0.6-2
+
+* Avoid partial argument matches by calling `model.matrix(..., contrasts.arg = ...)`
+  rather than just `contrasts` (reported by Kevin Tappe).
+
+
 # Version 0.6-1
 
 * `method` is now an explicit argument to `ivreg()` and not just passed through `...`
