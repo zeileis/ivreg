@@ -122,7 +122,7 @@ estimators are also provided, based on M-estimation (2SM) and MM-estimation
 \code{summary}, \code{vcov}, \code{anova}, \code{predict}, \code{residuals},
 \code{terms}, \code{model.matrix}, \code{bread}, \code{estfun}) is available
 and described in \code{\link{ivregMethods}}. For methods related to regression
-diagnotics, see \code{\link{ivregDiagnostics}}.
+diagnostics, see \code{\link{ivregDiagnostics}}.
 
 Regressors and instruments for \code{ivreg} are most easily specified in a
 formula with two parts on the right-hand side, e.g., \code{y ~ x1 + x2 | z1

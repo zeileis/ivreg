@@ -9,7 +9,7 @@ A data frame with 20 rows and 5 columns.
 \describe{
   \item{Q}{food consumption per capita.}
   \item{P}{ratio of food prices to general consumer prices.}
-  \item{D}{disposible income in constant dollars.}
+  \item{D}{disposable income in constant dollars.}
   \item{F}{ratio of preceding year's prices received by farmers to general consumer prices.}
   \item{A}{time in years.}
   }

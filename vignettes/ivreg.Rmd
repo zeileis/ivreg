@@ -82,7 +82,7 @@ and is described in more detail in a companion vignette.
 
 Regressors and instruments for `ivreg()` are most easily specified in a
 formula with two parts on the right-hand side, for example, `y ~ x1 + x2 | x1 + z1 + z2`,
-where `x1` and `x2` are, repectively, exogenous and endogenous explanatory variables, and `x1`, `z1`, and `z2` are 
+where `x1` and `x2` are, respectively, exogenous and endogenous explanatory variables, and `x1`, `z1`, and `z2` are 
 instrumental variables. Both components on the right-hand side of the model formula include
 an implied intercept, unless, as in a linear model estimated by `lm()`, the intercept is
 explicitly excluded via `-1`. Exogenous explanatory variables, such as `x1` in the example, 
