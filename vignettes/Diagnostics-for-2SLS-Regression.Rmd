@@ -401,7 +401,7 @@ summary(deq2, vcov.=vcov(b.deq2))
 
 The bootstrap standard errors are larger than the conventional or sandwich standard errors for this example.
 
-Boostrap confidence intervals can also be computed from the object returned by `Boot()`, by default reporting $BC_a$ (*bias-corrected, accelerated*) intervals (see the documentation for `confint.boot()` in the **car** package):
+Bootstrap confidence intervals can also be computed from the object returned by `Boot()`, by default reporting $BC_a$ (*bias-corrected, accelerated*) intervals (see the documentation for `confint.boot()` in the **car** package):
 ```{r}
 confint(b.deq2)
 ```
