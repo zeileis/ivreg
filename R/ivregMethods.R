@@ -39,8 +39,8 @@
 #' for \code{\link{linearHypothesis}} for details.
 #' @param formula. To update model.
 #' @param evaluate If \code{TRUE}, the default, the updated model is evaluated; if \code{FALSE} the updated call is returned.
-#' @param complete If \code{TRUE}, the default, the returned coefficient vector (for \code{coef()}) or coefficient-coevariance matrix (for \code{vcov}) includes elements for aliased regressors.
-#' @param parm  parameters for which confidence intervals are to be computed; a vector or numbers or names; the defaiult is all parameters.
+#' @param complete If \code{TRUE}, the default, the returned coefficient vector (for \code{coef()}) or coefficient-covariance matrix (for \code{vcov}) includes elements for aliased regressors.
+#' @param parm  parameters for which confidence intervals are to be computed; a vector or numbers or names; the default is all parameters.
 #' @param level confidence level; the default is \code{0.95}.
 #' @param ... arguments to pass down.
 #'
