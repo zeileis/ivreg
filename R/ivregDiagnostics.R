@@ -21,7 +21,7 @@ diagprod <- function(d, X){
 #' influencePlot.influence.ivreg infIndexPlot.ivreg infIndexPlot.influence.ivreg
 #' model.matrix.influence.ivreg avPlots.ivreg avPlot.ivreg mcPlots.ivreg mcPlot.ivreg Boot.ivreg
 #' crPlots.ivreg crPlot.ivreg ceresPlots.ivreg ceresPlot.ivreg plot.ivreg
-#' outlierTest.ivreg influencePlot.ivreg
+#' outlierTest.ivreg 
 #' spreadLevelPlot.ivreg ncvTest.ivreg deviance.ivreg
 #'
 #' @param model,x,object A \code{"ivreg"} or \code{"influence.ivreg"} object.
@@ -518,15 +518,7 @@ qqPlot.ivreg <- function(x, distribution=c("t", "norm"), ...){
 #' @rdname ivregDiagnostics
 #' @importFrom car outlierTest
 #' @export
-outlierTest.ivreg <- function(x, ...){
-  .Class <- "lm"
-  NextMethod()
-}
-
-#' @rdname ivregDiagnostics
-#' @importFrom car influencePlot
-#' @export
-influencePlot.ivreg <- function(x, ...){
+outlierTest.ivreg <- function(model, ...){
   .Class <- "lm"
   NextMethod()
 }

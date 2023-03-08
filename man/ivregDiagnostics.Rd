@@ -67,7 +67,7 @@
   ...
 )
 
-\method{influencePlot}{ivreg}(x, ...)
+\method{influencePlot}{ivreg}(model, ...)
 
 \method{influencePlot}{influence.ivreg}(model, ...)
 
@@ -107,9 +107,7 @@
 
 \method{qqPlot}{ivreg}(x, distribution = c("t", "norm"), ...)
 
-\method{outlierTest}{ivreg}(x, ...)
-
-\method{influencePlot}{ivreg}(x, ...)
+\method{outlierTest}{ivreg}(model, ...)
 
 \method{spreadLevelPlot}{ivreg}(x, main = "Spread-Level Plot", ...)
 
