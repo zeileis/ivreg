@@ -322,15 +322,15 @@ functions in the <strong>stats</strong> and <strong>car</strong>
 packages; these functions include <code><a href="https://rdrr.io/r/stats/influence.measures.html" class="external-link">cooks.distance()</a></code>,
 <code><a href="https://rdrr.io/r/stats/influence.measures.html" class="external-link">dfbeta()</a></code>, <code><a href="https://rdrr.io/r/stats/influence.measures.html" class="external-link">hatvalues()</a></code>,
 <code><a href="https://rdrr.io/r/stats/lm.influence.html" class="external-link">influence()</a></code>, and <code><a href="https://rdrr.io/r/stats/influence.measures.html" class="external-link">rstudent()</a></code> in
-<strong>stats</strong>, and <code><a href="https://r-forge.r-project.org/projects/car/reference/avPlots.html" class="external-link">avPlot()</a></code> and
-<code><a href="https://r-forge.r-project.org/projects/car/reference/qqPlot.html" class="external-link">qqPlot()</a></code> in <strong>car</strong>. In particular,
+<strong>stats</strong>, and <code><a href="https://rdrr.io/pkg/car/man/avPlots.html" class="external-link">avPlot()</a></code> and
+<code><a href="https://rdrr.io/pkg/car/man/qqPlot.html" class="external-link">qqPlot()</a></code> in <strong>car</strong>. In particular,
 <code><a href="../reference/ivregDiagnostics.html">influence.ivreg()</a></code> returns an object containing several
 diagnostic statistics, and it is thus more efficient to use the
 <code><a href="https://rdrr.io/r/stats/lm.influence.html" class="external-link">influence()</a></code> function than to compute the various
 diagnostics separately. Methods provided for class
 <code>"influence.ivreg"</code> objects include
 <code><a href="https://rdrr.io/r/stats/influence.measures.html" class="external-link">cooks.distance()</a></code>, <code><a href="https://rdrr.io/r/stats/influence.measures.html" class="external-link">dfbeta()</a></code>,
-<code><a href="https://rdrr.io/r/stats/influence.measures.html" class="external-link">hatvalues()</a></code>, <code><a href="https://r-forge.r-project.org/projects/car/reference/qqPlot.html" class="external-link">qqPlot()</a></code>, and
+<code><a href="https://rdrr.io/r/stats/influence.measures.html" class="external-link">hatvalues()</a></code>, <code><a href="https://rdrr.io/pkg/car/man/qqPlot.html" class="external-link">qqPlot()</a></code>, and
 <code><a href="https://rdrr.io/r/stats/influence.measures.html" class="external-link">rstudent()</a></code>.</p>
 <p>The package also provides methods for various standard R
 regression-model generics, including <code><a href="https://rdrr.io/r/stats/anova.html" class="external-link">anova()</a></code> (for model
@@ -536,12 +536,12 @@ cases:</p>
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="st"><a href="https://r-forge.r-project.org/projects/car/" class="external-link">"car"</a></span><span class="op">)</span> <span class="co"># for diagnostic generic functions</span></span></code></pre></div>
 <pre><code><span><span class="co">## Loading required package: carData</span></span></code></pre>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://r-forge.r-project.org/projects/car/reference/qqPlot.html" class="external-link">qqPlot</a></span><span class="op">(</span><span class="va">deq</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/car/man/qqPlot.html" class="external-link">qqPlot</a></span><span class="op">(</span><span class="va">deq</span><span class="op">)</span></span></code></pre></div>
 <p><img src="Diagnostics-for-2SLS-Regression_files/figure-html/unnamed-chunk-5-1.png" width="384"></p>
 <pre><code><span><span class="co">## 1937 1929 </span></span>
 <span><span class="co">##   16    8</span></span></code></pre>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://r-forge.r-project.org/projects/car/reference/influencePlot.html" class="external-link">influencePlot</a></span><span class="op">(</span><span class="va">deq</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/car/man/influencePlot.html" class="external-link">influencePlot</a></span><span class="op">(</span><span class="va">deq</span><span class="op">)</span></span></code></pre></div>
 <p><img src="Diagnostics-for-2SLS-Regression_files/figure-html/unnamed-chunk-6-1.png" width="384"></p>
 <pre><code><span><span class="co">##      StudRes        Hat      CookD</span></span>
 <span><span class="co">## 1 -1.7359357 0.09079703 0.06956671</span></span>
@@ -569,7 +569,7 @@ comparing the results to those for the uncorrupted data reveals
 substantial change in the regression coefficients:</p>
 <div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">deq1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/update.html" class="external-link">update</a></span><span class="op">(</span><span class="va">deq</span>, data<span class="op">=</span><span class="va">Kmenta1</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://r-forge.r-project.org/projects/car/reference/compareCoefs.html" class="external-link">compareCoefs</a></span><span class="op">(</span><span class="va">deq</span>, <span class="va">deq1</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu"><a href="https://rdrr.io/pkg/car/man/compareCoefs.html" class="external-link">compareCoefs</a></span><span class="op">(</span><span class="va">deq</span>, <span class="va">deq1</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## Calls:</span></span>
 <span><span class="co">## 1: ivreg(formula = Q ~ P + D | D + F + A, data = Kmenta)</span></span>
 <span><span class="co">## 2: ivreg(formula = Q ~ P + D | D + F + A, data = Kmenta1)</span></span>
@@ -587,16 +587,16 @@ substantial change in the regression coefficients:</p>
 <p>The problematic 20th case (the year 1941) is clearly revealed by
 unusual-data regression diagnostics:</p>
 <div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://r-forge.r-project.org/projects/car/reference/qqPlot.html" class="external-link">qqPlot</a></span><span class="op">(</span><span class="va">deq1</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/car/man/qqPlot.html" class="external-link">qqPlot</a></span><span class="op">(</span><span class="va">deq1</span><span class="op">)</span></span></code></pre></div>
 <p><img src="Diagnostics-for-2SLS-Regression_files/figure-html/unnamed-chunk-9-1.png" width="384"></p>
 <pre><code><span><span class="co">## 1941 1940 </span></span>
 <span><span class="co">##   20   19</span></span></code></pre>
 <div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://r-forge.r-project.org/projects/car/reference/outlierTest.html" class="external-link">outlierTest</a></span><span class="op">(</span><span class="va">deq1</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/car/man/outlierTest.html" class="external-link">outlierTest</a></span><span class="op">(</span><span class="va">deq1</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">##       rstudent unadjusted p-value Bonferroni p</span></span>
 <span><span class="co">## 1941 -4.599583         0.00029602    0.0059204</span></span></code></pre>
 <div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://r-forge.r-project.org/projects/car/reference/influencePlot.html" class="external-link">influencePlot</a></span><span class="op">(</span><span class="va">deq1</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/car/man/influencePlot.html" class="external-link">influencePlot</a></span><span class="op">(</span><span class="va">deq1</span><span class="op">)</span></span></code></pre></div>
 <p><img src="Diagnostics-for-2SLS-Regression_files/figure-html/unnamed-chunk-11-1.png" width="384"></p>
 <pre><code><span><span class="co">##      StudRes       Hat     CookD</span></span>
 <span><span class="co">## 1 -1.4737565 0.2645346 0.2447875</span></span>
@@ -604,13 +604,13 @@ unusual-data regression diagnostics:</p>
 <span><span class="co">## 3  1.6021281 0.1280020 0.1155278</span></span>
 <span><span class="co">## 4 -4.5995825 0.4649800 2.8361307</span></span></code></pre>
 <div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://r-forge.r-project.org/projects/car/reference/avPlots.html" class="external-link">avPlots</a></span><span class="op">(</span><span class="va">deq1</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/car/man/avPlots.html" class="external-link">avPlots</a></span><span class="op">(</span><span class="va">deq1</span><span class="op">)</span></span></code></pre></div>
 <p><img src="Diagnostics-for-2SLS-Regression_files/figure-html/unnamed-chunk-12-1.png" width="768"></p>
 <p>Removing the 20th case produces estimated coefficients close to those
 for the uncorrupted data:</p>
 <div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">deq1.20</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/update.html" class="external-link">update</a></span><span class="op">(</span><span class="va">deq1</span>, subset <span class="op">=</span> <span class="op">-</span><span class="fl">20</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://r-forge.r-project.org/projects/car/reference/compareCoefs.html" class="external-link">compareCoefs</a></span><span class="op">(</span><span class="va">deq</span>, <span class="va">deq1</span>, <span class="va">deq1.20</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu"><a href="https://rdrr.io/pkg/car/man/compareCoefs.html" class="external-link">compareCoefs</a></span><span class="op">(</span><span class="va">deq</span>, <span class="va">deq1</span>, <span class="va">deq1.20</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## Calls:</span></span>
 <span><span class="co">## 1: ivreg(formula = Q ~ P + D | D + F + A, data = Kmenta)</span></span>
 <span><span class="co">## 2: ivreg(formula = Q ~ P + D | D + F + A, data = Kmenta1)</span></span>
@@ -646,7 +646,7 @@ similar results:</p>
 <span><span class="co">## 1926 0.06166289 0.03559693 0.06166289</span></span>
 <span><span class="co">## 1927 0.05684346 0.03038694 0.05684346</span></span></code></pre>
 <div class="sourceCode" id="cb28"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://r-forge.r-project.org/projects/car/reference/scatterplotMatrix.html" class="external-link">scatterplotMatrix</a></span><span class="op">(</span><span class="va">H</span>, smooth<span class="op">=</span><span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/car/man/scatterplotMatrix.html" class="external-link">scatterplotMatrix</a></span><span class="op">(</span><span class="va">H</span>, smooth<span class="op">=</span><span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
 <p><img src="Diagnostics-for-2SLS-Regression_files/figure-html/unnamed-chunk-14-1.png" width="576"></p>
 <p>Finally, let’s verify that the deletion diagnostics are correctly
 computed:</p>
@@ -703,12 +703,12 @@ linear models fit by 2SLS regression.</p>
 <p>We turn once more to the demand equation for Kmenta’s data and model
 to illustrate component-plus-residual plots, and once more the data are
 well behaved. An <code>"ivreg"</code> method is provided for the
-<code><a href="https://r-forge.r-project.org/projects/car/reference/crPlots.html" class="external-link">crPlot()</a></code> function in the <strong>car</strong> package. In
-particular, <code><a href="https://r-forge.r-project.org/projects/car/reference/crPlots.html" class="external-link">crPlots()</a></code> constructs component-plus-residual
+<code><a href="https://rdrr.io/pkg/car/man/crPlots.html" class="external-link">crPlot()</a></code> function in the <strong>car</strong> package. In
+particular, <code><a href="https://rdrr.io/pkg/car/man/crPlots.html" class="external-link">crPlots()</a></code> constructs component-plus-residual
 plots for all of the numeric explanatory variables in an additive
 regression equation. For example,</p>
 <div class="sourceCode" id="cb33"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://r-forge.r-project.org/projects/car/reference/crPlots.html" class="external-link">crPlots</a></span><span class="op">(</span><span class="va">deq</span>, smooth<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>span<span class="op">=</span><span class="fl">1</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/car/man/crPlots.html" class="external-link">crPlots</a></span><span class="op">(</span><span class="va">deq</span>, smooth<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>span<span class="op">=</span><span class="fl">1</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <p><img src="Diagnostics-for-2SLS-Regression_files/figure-html/unnamed-chunk-17-1.png" width="768"></p>
 <p>We set a large <em>span</em> for the <em>loess smoother</em> <span class="citation">(Cleveland, Grosse, and Shyu 1992)</span> in the plot
 because there are only <span class="math inline">\(n = 20\)</span> cases
@@ -721,16 +721,16 @@ explanatory variable</em>, <span class="math inline">\(P\)</span> on the
 left and <span class="math inline">\(D\)</span> on the right. Both
 partial relationships therefore appear to be linear.</p>
 <p>CERES plots <span class="citation">(Cook 1993)</span>, implemented in
-the <code><a href="https://r-forge.r-project.org/projects/car/reference/ceresPlots.html" class="external-link">ceresPlots()</a></code> function in the <strong>car</strong>
+the <code><a href="https://rdrr.io/pkg/car/man/ceresPlots.html" class="external-link">ceresPlots()</a></code> function in the <strong>car</strong>
 package, are a version of component-plus-residuals plots that use
 smoothers rather than linear regression and that therefore are more
 robust with respect to nonlinear relationships among the predictors. In
 most applications, component-plus-residuals and CERES plots produce
 similar results, and that’s the case here:</p>
 <div class="sourceCode" id="cb34"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://r-forge.r-project.org/projects/car/reference/ceresPlots.html" class="external-link">ceresPlots</a></span><span class="op">(</span><span class="va">deq</span>, smooth<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>span<span class="op">=</span><span class="fl">1</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/car/man/ceresPlots.html" class="external-link">ceresPlots</a></span><span class="op">(</span><span class="va">deq</span>, smooth<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>span<span class="op">=</span><span class="fl">1</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <p><img src="Diagnostics-for-2SLS-Regression_files/figure-html/unnamed-chunk-18-1.png" width="768"></p>
-<p><code><a href="https://r-forge.r-project.org/projects/car/reference/crPlots.html" class="external-link">crPlots()</a></code> and <code><a href="https://r-forge.r-project.org/projects/car/reference/ceresPlots.html" class="external-link">ceresPlots()</a></code> work only for
+<p><code><a href="https://rdrr.io/pkg/car/man/crPlots.html" class="external-link">crPlots()</a></code> and <code><a href="https://rdrr.io/pkg/car/man/ceresPlots.html" class="external-link">ceresPlots()</a></code> work only for
 additive models; the <code><a href="https://rdrr.io/pkg/effects/man/predictorEffects.html" class="external-link">predictorEffects()</a></code> function in the
 <strong>effects</strong> package plots partial residuals for more
 complex models. In the current example, which is an additive model, we
@@ -750,7 +750,7 @@ lines.</p>
 <p>Suppose, however, that we fit the wrong model to the data:</p>
 <div class="sourceCode" id="cb38"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">deq2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/update.html" class="external-link">update</a></span><span class="op">(</span><span class="va">deq</span>, <span class="va">.</span> <span class="op">~</span> <span class="fu"><a href="https://rdrr.io/r/base/AsIs.html" class="external-link">I</a></span><span class="op">(</span><span class="op">(</span><span class="va">P</span> <span class="op">-</span> <span class="fl">85</span><span class="op">)</span><span class="op">^</span><span class="fl">4</span><span class="op">/</span><span class="fl">10</span><span class="op">^</span><span class="fl">5</span><span class="op">)</span> <span class="op">+</span> <span class="va">D</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://r-forge.r-project.org/projects/car/reference/crPlots.html" class="external-link">crPlots</a></span><span class="op">(</span><span class="va">deq2</span>, smooth<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>span<span class="op">=</span><span class="fl">1</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu"><a href="https://rdrr.io/pkg/car/man/crPlots.html" class="external-link">crPlots</a></span><span class="op">(</span><span class="va">deq2</span>, smooth<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>span<span class="op">=</span><span class="fl">1</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <p><img src="Diagnostics-for-2SLS-Regression_files/figure-html/unnamed-chunk-20-1.png" width="768"></p>
 <p>Because the ratio <span class="math inline">\(\max(P)/\min(P) =
 113.49/86.50 = 1.3\)</span> is not much larger than 1, we subtracted a
@@ -798,7 +798,7 @@ and roots, with, for example, <span class="math inline">\(\lambda = 1 -
 b = 1/2\)</span> representing the square-root transformation, <span class="math inline">\(\lambda = 1 - b = 0\)</span> the log
 transformation, and so on. For Kmenta’s model, we have</p>
 <div class="sourceCode" id="cb41"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://r-forge.r-project.org/projects/car/reference/spreadLevelPlot.html" class="external-link">spreadLevelPlot</a></span><span class="op">(</span><span class="va">deq</span>, smooth<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>span<span class="op">=</span><span class="fl">1</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/car/man/spreadLevelPlot.html" class="external-link">spreadLevelPlot</a></span><span class="op">(</span><span class="va">deq</span>, smooth<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>span<span class="op">=</span><span class="fl">1</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <p><img src="Diagnostics-for-2SLS-Regression_files/figure-html/unnamed-chunk-23-1.png" width="384"></p>
 <pre><code><span><span class="co">## </span></span>
 <span><span class="co">## Suggested power transformation:  -2.44685</span></span></code></pre>
@@ -828,15 +828,15 @@ regression sum of squares for this auxiliary regression divided by 2 is
 then asymptotically distributed as <span class="math inline">\(\chi^2_s\)</span> under the null hypothesis of
 constant error variance.</p>
 <p>The Breusch-Pagan/Cook-Weisberg test is easily adaptable to 2SLS
-regression, as implemented by the <code><a href="https://r-forge.r-project.org/projects/car/reference/ncvTest.html" class="external-link">ncvTest()</a></code> function in the
+regression, as implemented by the <code><a href="https://rdrr.io/pkg/car/man/ncvTest.html" class="external-link">ncvTest()</a></code> function in the
 <strong>car</strong> package. For Kmenta’s demand equation:</p>
 <div class="sourceCode" id="cb44"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://r-forge.r-project.org/projects/car/reference/ncvTest.html" class="external-link">ncvTest</a></span><span class="op">(</span><span class="va">deq</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/car/man/ncvTest.html" class="external-link">ncvTest</a></span><span class="op">(</span><span class="va">deq</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## Non-constant Variance Score Test </span></span>
 <span><span class="co">## Variance formula: ~ fitted.values </span></span>
 <span><span class="co">## Chisquare = 0.2390325, Df = 1, p = 0.62491</span></span></code></pre>
 <div class="sourceCode" id="cb46"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://r-forge.r-project.org/projects/car/reference/ncvTest.html" class="external-link">ncvTest</a></span><span class="op">(</span><span class="va">deq</span>, var <span class="op">=</span> <span class="op">~</span> <span class="va">P</span> <span class="op">+</span> <span class="va">D</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/car/man/ncvTest.html" class="external-link">ncvTest</a></span><span class="op">(</span><span class="va">deq</span>, var <span class="op">=</span> <span class="op">~</span> <span class="va">P</span> <span class="op">+</span> <span class="va">D</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## Non-constant Variance Score Test </span></span>
 <span><span class="co">## Variance formula: ~ P + D </span></span>
 <span><span class="co">## Chisquare = 0.2392964, Df = 2, p = 0.88723</span></span></code></pre>
@@ -965,12 +965,12 @@ expectation of <code>Q</code> shows a clear heteroscedastic pattern:</p>
 <p>and the nonconstant error variance is clearly reflected in
 diagnostics; for example,</p>
 <div class="sourceCode" id="cb56"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://r-forge.r-project.org/projects/car/reference/spreadLevelPlot.html" class="external-link">spreadLevelPlot</a></span><span class="op">(</span><span class="va">deq2</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/car/man/spreadLevelPlot.html" class="external-link">spreadLevelPlot</a></span><span class="op">(</span><span class="va">deq2</span><span class="op">)</span></span></code></pre></div>
 <p><img src="Diagnostics-for-2SLS-Regression_files/figure-html/unnamed-chunk-30-1.png" width="384"></p>
 <pre><code><span><span class="co">## </span></span>
 <span><span class="co">## Suggested power transformation:  -22.57328</span></span></code></pre>
 <div class="sourceCode" id="cb58"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://r-forge.r-project.org/projects/car/reference/ncvTest.html" class="external-link">ncvTest</a></span><span class="op">(</span><span class="va">deq2</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/car/man/ncvTest.html" class="external-link">ncvTest</a></span><span class="op">(</span><span class="va">deq2</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## Non-constant Variance Score Test </span></span>
 <span><span class="co">## Variance formula: ~ fitted.values </span></span>
 <span><span class="co">## Chisquare = 6.690435, Df = 1, p = 0.0096932</span></span></code></pre>
@@ -992,7 +992,7 @@ from the conventional standard errors:</p>
 <p>As mentioned, bootstrapping provides an alternative to sandwich
 standard errors as a correction for nonconstant error variance, and the
 <strong>ivreg</strong> package supplies an <code>"ivreg"</code> method
-for the <code><a href="https://r-forge.r-project.org/projects/car/reference/Boot.html" class="external-link">Boot()</a></code> function in the <strong>car</strong>
+for the <code><a href="https://rdrr.io/pkg/car/man/Boot.html" class="external-link">Boot()</a></code> function in the <strong>car</strong>
 package, implementing the case-resampling bootstrap, and returning an
 object of class <code>"boot"</code> suitable for use with functions in
 the <strong>boot</strong> package <span class="citation">(Davison and
@@ -1000,7 +1000,7 @@ Hinkley 1997; Canty and Ripley 2020)</span>. By default, <span class="math inlin
 generated. For example:</p>
 <div class="sourceCode" id="cb62"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">set.seed</span> <span class="op">&lt;-</span> <span class="fl">869255</span> <span class="co"># for reproducibility</span></span>
-<span><span class="va">b.deq2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://r-forge.r-project.org/projects/car/reference/Boot.html" class="external-link">Boot</a></span><span class="op">(</span><span class="va">deq2</span><span class="op">)</span></span>
+<span><span class="va">b.deq2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/car/man/Boot.html" class="external-link">Boot</a></span><span class="op">(</span><span class="va">deq2</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">deq2</span>, vcov.<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/stats/vcov.html" class="external-link">vcov</a></span><span class="op">(</span><span class="va">b.deq2</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## </span></span>
 <span><span class="co">## Call:</span></span>
@@ -1030,7 +1030,7 @@ generated. For example:</p>
 <p>The bootstrap standard errors are larger than the conventional or
 sandwich standard errors for this example.</p>
 <p>Bootstrap confidence intervals can also be computed from the object
-returned by <code><a href="https://r-forge.r-project.org/projects/car/reference/Boot.html" class="external-link">Boot()</a></code>, by default reporting <span class="math inline">\(BC_a\)</span> (<em>bias-corrected,
+returned by <code><a href="https://rdrr.io/pkg/car/man/Boot.html" class="external-link">Boot()</a></code>, by default reporting <span class="math inline">\(BC_a\)</span> (<em>bias-corrected,
 accelerated</em>) intervals (see the documentation for
 <code>confint.boot()</code> in the <strong>car</strong> package):</p>
 <div class="sourceCode" id="cb64"><pre class="downlit sourceCode r">
@@ -1110,7 +1110,7 @@ nonconstant error variance don’t indicate a heteroscedasticity problem,
 but there is a relatively large studentized residual of about <span class="math inline">\(-3\)</span> that stands out somewhat from the
 other values:</p>
 <div class="sourceCode" id="cb68"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://r-forge.r-project.org/projects/car/reference/ncvTest.html" class="external-link">ncvTest</a></span><span class="op">(</span><span class="va">deqw</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/car/man/ncvTest.html" class="external-link">ncvTest</a></span><span class="op">(</span><span class="va">deqw</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## Non-constant Variance Score Test </span></span>
 <span><span class="co">## Variance formula: ~ fitted.values </span></span>
 <span><span class="co">## Chisquare = 4.21029, Df = 1, p = 0.040179</span></span></code></pre>
@@ -1121,7 +1121,7 @@ other values:</p>
 isn’t unusually large, and once more we’re in the unusual situation of
 knowing that the model is correct.</p>
 <div class="sourceCode" id="cb71"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://r-forge.r-project.org/projects/car/reference/outlierTest.html" class="external-link">outlierTest</a></span><span class="op">(</span><span class="va">deqw</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/car/man/outlierTest.html" class="external-link">outlierTest</a></span><span class="op">(</span><span class="va">deqw</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## No Studentized residuals with Bonferroni p &lt; 0.05</span></span>
 <span><span class="co">## Largest |rstudent|:</span></span>
 <span><span class="co">##       rstudent unadjusted p-value Bonferroni p</span></span>
@@ -1143,13 +1143,13 @@ range of the data.</p>
 alternative approach to collinearity diagnostics in linear models fit by
 least squares based on <em>generalized variance-inflation factors</em>.
 The implementation of generalized variance inflation factors in the
-<code><a href="https://r-forge.r-project.org/projects/car/reference/vif.html" class="external-link">vif()</a></code> function in the <strong>car</strong> package, which
+<code><a href="https://rdrr.io/pkg/car/man/vif.html" class="external-link">vif()</a></code> function in the <strong>car</strong> package, which
 employs the estimated covariance matrix of the coefficients, applies in
 general to models with linear predictors, including linear models
 estimated by 2SLS.</p>
 <p>For example, for the demand equation in Kmenta’s model:</p>
 <div class="sourceCode" id="cb73"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/MathFun.html" class="external-link">sqrt</a></span><span class="op">(</span><span class="fu"><a href="https://r-forge.r-project.org/projects/car/reference/vif.html" class="external-link">vif</a></span><span class="op">(</span><span class="va">deq</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/MathFun.html" class="external-link">sqrt</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/car/man/vif.html" class="external-link">vif</a></span><span class="op">(</span><span class="va">deq</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">##        P        D </span></span>
 <span><span class="co">## 1.231124 1.231124</span></span></code></pre>
 <p>Taking the square-roots of the VIFs puts them on the coefficient
@@ -1162,7 +1162,7 @@ coefficient, generalized and ordinary variance-inflation factors
 coincide. The equality of the VIFs for <span class="math inline">\(P\)</span> and <span class="math inline">\(D\)</span> is peculiar to the case of two
 regressors (beyond the regression constant).</p>
 <p><em>Marginal/conditional</em> plots, produced by the
-<code><a href="https://r-forge.r-project.org/projects/car/reference/mcPlots.html" class="external-link">mcPlots()</a></code> function in the <strong>car</strong> package,
+<code><a href="https://rdrr.io/pkg/car/man/mcPlots.html" class="external-link">mcPlots()</a></code> function in the <strong>car</strong> package,
 superimpose the added-variable plots on corresponding marginal
 scatterplots for the regressors. These graphs allow us to visualize the
 reduction in precision of estimation of each coefficient due to
@@ -1170,7 +1170,7 @@ collinearity, which reduces the conditional variation of a regressor
 relative to its marginal variation. for example, for the demand
 equation:</p>
 <div class="sourceCode" id="cb75"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://r-forge.r-project.org/projects/car/reference/mcPlots.html" class="external-link">mcPlots</a></span><span class="op">(</span><span class="va">deq</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/car/man/mcPlots.html" class="external-link">mcPlots</a></span><span class="op">(</span><span class="va">deq</span><span class="op">)</span></span></code></pre></div>
 <p><img src="Diagnostics-for-2SLS-Regression_files/figure-html/unnamed-chunk-39-1.png" width="768"></p>
 <p>The blue points in each panel represent the marginal scatterplot and
 the magenta points represent the (partial) added-variable plot, with the
@@ -1238,7 +1238,7 @@ data, to the 2SLS estimator applied to the corrupted data, and to the
 <span><span class="co">## Multiple R-Squared: 0.09864, Adjusted R-squared: -0.007398 </span></span>
 <span><span class="co">## Wald test: 18.59 on 2 and 17 DF,  p-value: 5.262e-05</span></span></code></pre>
 <div class="sourceCode" id="cb78"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://r-forge.r-project.org/projects/car/reference/compareCoefs.html" class="external-link">compareCoefs</a></span><span class="op">(</span><span class="va">deq</span>, <span class="va">deq1</span>, <span class="va">deq1.20</span>, <span class="va">deq.mm</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/car/man/compareCoefs.html" class="external-link">compareCoefs</a></span><span class="op">(</span><span class="va">deq</span>, <span class="va">deq1</span>, <span class="va">deq1.20</span>, <span class="va">deq.mm</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## Calls:</span></span>
 <span><span class="co">## 1: ivreg(formula = Q ~ P + D | D + F + A, data = Kmenta)</span></span>
 <span><span class="co">## 2: ivreg(formula = Q ~ P + D | D + F + A, data = Kmenta1)</span></span>
@@ -1298,7 +1298,7 @@ because the robust regressions are iterative.</p>
 residuals, and Cook’s distances for the 2SMM estimator applied to the
 corrupted Kmenta data:</p>
 <div class="sourceCode" id="cb82"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://r-forge.r-project.org/projects/car/reference/influencePlot.html" class="external-link">influencePlot</a></span><span class="op">(</span><span class="va">deq.mm</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/car/man/influencePlot.html" class="external-link">influencePlot</a></span><span class="op">(</span><span class="va">deq.mm</span><span class="op">)</span></span></code></pre></div>
 <p><img src="Diagnostics-for-2SLS-Regression_files/figure-html/unnamed-chunk-42-1.png" width="384"></p>
 <pre><code><span><span class="co">##      StudRes        Hat      CookD</span></span>
 <span><span class="co">## 1  1.6778245 0.13345298 0.07043221</span></span>
