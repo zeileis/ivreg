@@ -6,17 +6,17 @@ name: pkgdown
 
 jobs:
   pkgdown:
-    runs-on: macOS-latest
+    runs-on: ubuntu-latest
     env:
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
 
-      - uses: r-lib/actions/setup-r@master
+      - uses: r-lib/actions/setup-r@v2
 
-      - uses: r-lib/actions/setup-pandoc@master
+      - uses: r-lib/actions/setup-pandoc@v2
 
-      - uses: r-lib/actions/setup-tinytex@v1
+      - uses: r-lib/actions/setup-tinytex@v2
 
       - name: Query dependencies
         run: |
@@ -35,14 +35,9 @@ jobs:
       - name: Install dependencies
         run: |
           install.packages("remotes")
-          # To get links for homepage
           remotes::install_cran("devtools")
-          remotes::install_bioc("M3C")
-          # to resolve temporary issues
-          remotes::install_version("clubSandwich", version = "0.5.1")
-          # remotes::install_version("V8", version = "3.2.0")
           remotes::install_deps(dependencies = TRUE, quiet = TRUE)
-          remotes::install_dev("pkgdown")
+          remotes::install_cran("pkgdown")
         shell: Rscript {0}
 
       - name: Install package
