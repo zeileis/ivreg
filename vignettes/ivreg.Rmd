@@ -3,10 +3,9 @@ title: "ivreg: Two-Stage Least-Squares Regression with Diagnostics"
 author: "John Fox, Christian Kleiber, Achim Zeileis"
 date: "last modified: 2020-08-04"
 output:
-  html_document:
+  rmarkdown::html_vignette:
+    highlight: monochrome
     toc: true
-    toc_float: true
-    theme: flatly
 vignette: >
   %\VignetteIndexEntry{ivreg: Two-Stage Least-Squares Regression with Diagnostics}
   %\VignetteEngine{knitr::rmarkdown}

@@ -3,10 +3,9 @@ title: "Diagnostics for 2SLS Regression"
 author: "John Fox, Christian Kleiber, Achim Zeileis"
 date: "last modified: 2020-11-19"
 output:
-  html_document:
+  rmarkdown::html_vignette:
+    highlight: monochrome
     toc: true
-    toc_float: true
-    theme: flatly
 bibliography: ivreg.bib
 biblio-style: "apalike"
 vignette: >
