@@ -43,8 +43,8 @@ among others.
 The package is accompanied by two online vignettes, namely this introduction and an
 article introducing the regression diagnostics and graphics:
 
-* [ivreg: Two-Stage Least-Squares Regression with Diagnostics](https://john-d-fox.github.io/ivreg/articles/ivreg.html)
-* [Diagnostics for 2SLS Regression](https://john-d-fox.github.io/ivreg/articles/Diagnostics-for-2SLS-Regression.html)
+* [ivreg: Two-Stage Least-Squares Regression with Diagnostics](https://zeileis.github.io/ivreg/articles/ivreg.html)
+* [Diagnostics for 2SLS Regression](https://zeileis.github.io/ivreg/articles/Diagnostics-for-2SLS-Regression.html)
 
 
 
@@ -59,12 +59,12 @@ dependencies via
 install.packages("ivreg", dependencies = TRUE)
 ```
 
-The development version of **ivreg** is hosted on GitHub at <https://github.com/john-d-fox/ivreg/>.
+The development version of **ivreg** is hosted on GitHub at <https://github.com/zeileis/ivreg/>.
 It can be conveniently installed installed via the `install_github()` function in the
 [**remotes**](https://CRAN.R-project.org/package=remotes) package:
 
 ```{r installation-rforge, eval=FALSE}
-remotes::install_github("https://github.com/john-d-fox/ivreg/")
+remotes::install_github("https://github.com/zeileis/ivreg/")
 ```
 
 ## Instrumental variables regression

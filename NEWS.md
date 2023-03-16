@@ -1,5 +1,9 @@
 # Version 0.6-2
 
+* Achim Zeileis took over maintenance, both on CRAN and on GitHub. The GitHub
+  source repository is now at <https://github.com/zeileis/ivreg/> with the web
+  page at <https://zeileis.github.io/ivreg/>.
+
 * Avoid partial argument matches by calling `model.matrix(..., contrasts.arg = ...)`
   rather than just `contrasts` (reported by Kevin Tappe).
   
