@@ -68,134 +68,159 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="co"># S3 method for ivreg</span>
-<span class="fu"><a href="https://rdrr.io/r/stats/coef.html" class="external-link">coef</a></span><span class="op">(</span><span class="va">object</span>, component <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"stage2"</span>, <span class="st">"stage1"</span><span class="op">)</span>, complete <span class="op">=</span> <span class="cn">TRUE</span>, <span class="va">...</span><span class="op">)</span>
-
-<span class="co"># S3 method for ivreg</span>
-<span class="fu"><a href="https://rdrr.io/r/stats/vcov.html" class="external-link">vcov</a></span><span class="op">(</span><span class="va">object</span>, component <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"stage2"</span>, <span class="st">"stage1"</span><span class="op">)</span>, complete <span class="op">=</span> <span class="cn">TRUE</span>, <span class="va">...</span><span class="op">)</span>
-
-<span class="co"># S3 method for ivreg</span>
-<span class="fu"><a href="https://rdrr.io/r/stats/confint.html" class="external-link">confint</a></span><span class="op">(</span>
-  <span class="va">object</span>,
-  <span class="va">parm</span>,
-  level <span class="op">=</span> <span class="fl">0.95</span>,
-  component <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"stage2"</span>, <span class="st">"stage1"</span><span class="op">)</span>,
-  complete <span class="op">=</span> <span class="cn">TRUE</span>,
-  vcov. <span class="op">=</span> <span class="cn">NULL</span>,
-  df <span class="op">=</span> <span class="cn">NULL</span>,
-  <span class="va">...</span>
-<span class="op">)</span>
-
-<span class="fu">bread.ivreg</span><span class="op">(</span><span class="va">x</span>, <span class="va">...</span><span class="op">)</span>
-
-<span class="fu">estfun.ivreg</span><span class="op">(</span><span class="va">x</span>, <span class="va">...</span><span class="op">)</span>
-
-<span class="fu">vcovHC.ivreg</span><span class="op">(</span><span class="va">x</span>, <span class="va">...</span><span class="op">)</span>
-
-<span class="co"># S3 method for ivreg</span>
-<span class="fu"><a href="https://rdrr.io/r/stats/terms.html" class="external-link">terms</a></span><span class="op">(</span><span class="va">x</span>, component <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"regressors"</span>, <span class="st">"instruments"</span>, <span class="st">"full"</span><span class="op">)</span>, <span class="va">...</span><span class="op">)</span>
-
-<span class="co"># S3 method for ivreg</span>
-<span class="fu"><a href="https://rdrr.io/r/stats/model.matrix.html" class="external-link">model.matrix</a></span><span class="op">(</span>
-  <span class="va">object</span>,
-  component <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"regressors"</span>, <span class="st">"projected"</span>, <span class="st">"instruments"</span><span class="op">)</span>,
-  <span class="va">...</span>
-<span class="op">)</span>
-
-<span class="co"># S3 method for ivreg_projected</span>
-<span class="fu"><a href="https://rdrr.io/r/stats/model.matrix.html" class="external-link">model.matrix</a></span><span class="op">(</span><span class="va">object</span>, <span class="va">...</span><span class="op">)</span>
-
-<span class="co"># S3 method for ivreg</span>
-<span class="fu"><a href="https://rdrr.io/r/stats/predict.html" class="external-link">predict</a></span><span class="op">(</span>
-  <span class="va">object</span>,
-  <span class="va">newdata</span>,
-  type <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"response"</span>, <span class="st">"terms"</span><span class="op">)</span>,
-  na.action <span class="op">=</span> <span class="va">na.pass</span>,
-  <span class="va">...</span>
-<span class="op">)</span>
-
-<span class="co"># S3 method for ivreg</span>
-<span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">x</span>, digits <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html" class="external-link">max</a></span><span class="op">(</span><span class="fl">3</span>, <span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">getOption</a></span><span class="op">(</span><span class="st">"digits"</span><span class="op">)</span> <span class="op">-</span> <span class="fl">3</span><span class="op">)</span>, <span class="va">...</span><span class="op">)</span>
-
-<span class="co"># S3 method for ivreg</span>
-<span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">object</span>, vcov. <span class="op">=</span> <span class="cn">NULL</span>, df <span class="op">=</span> <span class="cn">NULL</span>, diagnostics <span class="op">=</span> <span class="cn">NULL</span>, <span class="va">...</span><span class="op">)</span>
-
-<span class="co"># S3 method for summary.ivreg</span>
-<span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span>
-  <span class="va">x</span>,
-  digits <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html" class="external-link">max</a></span><span class="op">(</span><span class="fl">3</span>, <span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">getOption</a></span><span class="op">(</span><span class="st">"digits"</span><span class="op">)</span> <span class="op">-</span> <span class="fl">3</span><span class="op">)</span>,
-  signif.stars <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">getOption</a></span><span class="op">(</span><span class="st">"show.signif.stars"</span><span class="op">)</span>,
-  <span class="va">...</span>
-<span class="op">)</span>
-
-<span class="co"># S3 method for ivreg</span>
-<span class="fu"><a href="https://rdrr.io/r/stats/anova.html" class="external-link">anova</a></span><span class="op">(</span><span class="va">object</span>, <span class="va">object2</span>, test <span class="op">=</span> <span class="st">"F"</span>, vcov. <span class="op">=</span> <span class="cn">NULL</span>, <span class="va">...</span><span class="op">)</span>
-
-<span class="co"># S3 method for ivreg</span>
-<span class="fu"><a href="https://rdrr.io/r/stats/update.html" class="external-link">update</a></span><span class="op">(</span><span class="va">object</span>, <span class="va">formula.</span>, <span class="va">...</span>, evaluate <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
-
-<span class="co"># S3 method for ivreg</span>
-<span class="fu"><a href="https://rdrr.io/r/stats/residuals.html" class="external-link">residuals</a></span><span class="op">(</span>
-  <span class="va">object</span>,
-  type <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"response"</span>, <span class="st">"projected"</span>, <span class="st">"regressors"</span>, <span class="st">"working"</span>, <span class="st">"deviance"</span>, <span class="st">"pearson"</span>,
-    <span class="st">"partial"</span>, <span class="st">"stage1"</span><span class="op">)</span>,
-  <span class="va">...</span>
-<span class="op">)</span>
-
-<span class="fu">Effect.ivreg</span><span class="op">(</span><span class="va">focal.predictors</span>, <span class="va">mod</span>, <span class="va">...</span><span class="op">)</span>
-
-<span class="co"># S3 method for ivreg</span>
-<span class="fu"><a href="https://rdrr.io/r/stats/formula.html" class="external-link">formula</a></span><span class="op">(</span><span class="va">x</span>, component <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"complete"</span>, <span class="st">"regressors"</span>, <span class="st">"instruments"</span><span class="op">)</span>, <span class="va">...</span><span class="op">)</span>
-
-<span class="fu">find_formula.ivreg</span><span class="op">(</span><span class="va">x</span>, <span class="va">...</span><span class="op">)</span>
-
-<span class="co"># S3 method for ivreg</span>
-<span class="fu">Anova</span><span class="op">(</span><span class="va">mod</span>, test.statistic <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"F"</span>, <span class="st">"Chisq"</span><span class="op">)</span>, <span class="va">...</span><span class="op">)</span>
-
-<span class="co"># S3 method for ivreg</span>
-<span class="fu">linearHypothesis</span><span class="op">(</span>
-  <span class="va">model</span>,
-  <span class="va">hypothesis.matrix</span>,
-  rhs <span class="op">=</span> <span class="cn">NULL</span>,
-  test <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"F"</span>, <span class="st">"Chisq"</span><span class="op">)</span>,
-  <span class="va">...</span>
-<span class="op">)</span>
-
-<span class="co"># S3 method for ivreg</span>
-<span class="fu"><a href="https://rdrr.io/r/stats/alias.html" class="external-link">alias</a></span><span class="op">(</span><span class="va">object</span>, <span class="va">...</span><span class="op">)</span>
-
-<span class="co"># S3 method for ivreg</span>
-<span class="fu"><a href="https://rdrr.io/r/base/qr.html" class="external-link">qr</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">...</span><span class="op">)</span>
-
-<span class="co"># S3 method for ivreg</span>
-<span class="fu"><a href="https://rdrr.io/r/stats/weights.html" class="external-link">weights</a></span><span class="op">(</span><span class="va">object</span>, type <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"variance"</span>, <span class="st">"robustness"</span><span class="op">)</span>, <span class="va">...</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="co"># S3 method for ivreg</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/stats/coef.html" class="external-link">coef</a></span><span class="op">(</span><span class="va">object</span>, component <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"stage2"</span>, <span class="st">"stage1"</span><span class="op">)</span>, complete <span class="op">=</span> <span class="cn">TRUE</span>, <span class="va">...</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># S3 method for ivreg</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/stats/vcov.html" class="external-link">vcov</a></span><span class="op">(</span><span class="va">object</span>, component <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"stage2"</span>, <span class="st">"stage1"</span><span class="op">)</span>, complete <span class="op">=</span> <span class="cn">TRUE</span>, <span class="va">...</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># S3 method for ivreg</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/stats/confint.html" class="external-link">confint</a></span><span class="op">(</span></span>
+<span>  <span class="va">object</span>,</span>
+<span>  <span class="va">parm</span>,</span>
+<span>  level <span class="op">=</span> <span class="fl">0.95</span>,</span>
+<span>  component <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"stage2"</span>, <span class="st">"stage1"</span><span class="op">)</span>,</span>
+<span>  complete <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  vcov. <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  df <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  <span class="va">...</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># S3 method for ivreg</span></span>
+<span><span class="fu"><a href="https://sandwich.R-Forge.R-project.org/reference/bread.html" class="external-link">bread</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">...</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># S3 method for ivreg</span></span>
+<span><span class="fu"><a href="https://sandwich.R-Forge.R-project.org/reference/estfun.html" class="external-link">estfun</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">...</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># S3 method for ivreg</span></span>
+<span><span class="fu"><a href="https://sandwich.R-Forge.R-project.org/reference/vcovHC.html" class="external-link">vcovHC</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">...</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># S3 method for ivreg</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/stats/terms.html" class="external-link">terms</a></span><span class="op">(</span><span class="va">x</span>, component <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"regressors"</span>, <span class="st">"instruments"</span>, <span class="st">"full"</span><span class="op">)</span>, <span class="va">...</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># S3 method for ivreg</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/stats/model.matrix.html" class="external-link">model.matrix</a></span><span class="op">(</span></span>
+<span>  <span class="va">object</span>,</span>
+<span>  component <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"regressors"</span>, <span class="st">"projected"</span>, <span class="st">"instruments"</span><span class="op">)</span>,</span>
+<span>  <span class="va">...</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># S3 method for ivreg_projected</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/stats/model.matrix.html" class="external-link">model.matrix</a></span><span class="op">(</span><span class="va">object</span>, <span class="va">...</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># S3 method for ivreg</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/stats/predict.html" class="external-link">predict</a></span><span class="op">(</span></span>
+<span>  <span class="va">object</span>,</span>
+<span>  <span class="va">newdata</span>,</span>
+<span>  type <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"response"</span>, <span class="st">"terms"</span><span class="op">)</span>,</span>
+<span>  na.action <span class="op">=</span> <span class="va">na.pass</span>,</span>
+<span>  <span class="va">...</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># S3 method for ivreg</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">x</span>, digits <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html" class="external-link">max</a></span><span class="op">(</span><span class="fl">3</span>, <span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">getOption</a></span><span class="op">(</span><span class="st">"digits"</span><span class="op">)</span> <span class="op">-</span> <span class="fl">3</span><span class="op">)</span>, <span class="va">...</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># S3 method for ivreg</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">object</span>, vcov. <span class="op">=</span> <span class="cn">NULL</span>, df <span class="op">=</span> <span class="cn">NULL</span>, diagnostics <span class="op">=</span> <span class="cn">NULL</span>, <span class="va">...</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># S3 method for summary.ivreg</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span></span>
+<span>  <span class="va">x</span>,</span>
+<span>  digits <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html" class="external-link">max</a></span><span class="op">(</span><span class="fl">3</span>, <span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">getOption</a></span><span class="op">(</span><span class="st">"digits"</span><span class="op">)</span> <span class="op">-</span> <span class="fl">3</span><span class="op">)</span>,</span>
+<span>  signif.stars <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">getOption</a></span><span class="op">(</span><span class="st">"show.signif.stars"</span><span class="op">)</span>,</span>
+<span>  <span class="va">...</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># S3 method for ivreg</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/stats/anova.html" class="external-link">anova</a></span><span class="op">(</span><span class="va">object</span>, <span class="va">object2</span>, test <span class="op">=</span> <span class="st">"F"</span>, vcov. <span class="op">=</span> <span class="cn">NULL</span>, <span class="va">...</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># S3 method for ivreg</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/stats/update.html" class="external-link">update</a></span><span class="op">(</span><span class="va">object</span>, <span class="va">formula.</span>, <span class="va">...</span>, evaluate <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># S3 method for ivreg</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/stats/residuals.html" class="external-link">residuals</a></span><span class="op">(</span></span>
+<span>  <span class="va">object</span>,</span>
+<span>  type <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"response"</span>, <span class="st">"projected"</span>, <span class="st">"regressors"</span>, <span class="st">"working"</span>, <span class="st">"deviance"</span>, <span class="st">"pearson"</span>,</span>
+<span>    <span class="st">"partial"</span>, <span class="st">"stage1"</span><span class="op">)</span>,</span>
+<span>  <span class="va">...</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># S3 method for ivreg</span></span>
+<span><span class="fu">Effect</span><span class="op">(</span><span class="va">focal.predictors</span>, <span class="va">mod</span>, <span class="va">...</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># S3 method for ivreg</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/stats/formula.html" class="external-link">formula</a></span><span class="op">(</span><span class="va">x</span>, component <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"complete"</span>, <span class="st">"regressors"</span>, <span class="st">"instruments"</span><span class="op">)</span>, <span class="va">...</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># S3 method for ivreg</span></span>
+<span><span class="fu">find_formula</span><span class="op">(</span><span class="va">x</span>, <span class="va">...</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># S3 method for ivreg</span></span>
+<span><span class="fu">Anova</span><span class="op">(</span><span class="va">mod</span>, test.statistic <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"F"</span>, <span class="st">"Chisq"</span><span class="op">)</span>, <span class="va">...</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># S3 method for ivreg</span></span>
+<span><span class="fu">linearHypothesis</span><span class="op">(</span></span>
+<span>  <span class="va">model</span>,</span>
+<span>  <span class="va">hypothesis.matrix</span>,</span>
+<span>  rhs <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  test <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"F"</span>, <span class="st">"Chisq"</span><span class="op">)</span>,</span>
+<span>  <span class="va">...</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># S3 method for ivreg</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/stats/alias.html" class="external-link">alias</a></span><span class="op">(</span><span class="va">object</span>, <span class="va">...</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># S3 method for ivreg</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/qr.html" class="external-link">qr</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">...</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># S3 method for ivreg</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/stats/weights.html" class="external-link">weights</a></span><span class="op">(</span><span class="va">object</span>, type <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"variance"</span>, <span class="st">"robustness"</span><span class="op">)</span>, <span class="va">...</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>object, object2, model, mod</dt>
 <dd><p>An object of class <code>"ivreg"</code>.</p></dd>
+
+
 <dt>component</dt>
 <dd><p>For <code><a href="https://rdrr.io/r/stats/terms.html" class="external-link">terms</a></code>, <code>"regressors"</code>, <code>"instruments"</code>, or <code>"full"</code>; 
 for <code><a href="https://rdrr.io/r/stats/model.matrix.html" class="external-link">model.matrix</a></code>, <code>"projected"</code>, <code>"regressors"</code>, or <code>"instruments"</code>;
 for <code><a href="https://rdrr.io/r/stats/formula.html" class="external-link">formula</a></code>, <code>"regressors"</code>, <code>"instruments"</code>,  or <code>"complete"</code>;
 for <code><a href="https://rdrr.io/r/stats/coef.html" class="external-link">coef</a></code> and <code><a href="https://rdrr.io/r/stats/vcov.html" class="external-link">vcov</a></code>, <code>"stage2"</code> or <code>"stage1"</code>.</p></dd>
+
+
 <dt>complete</dt>
 <dd><p>If <code>TRUE</code>, the default, the returned coefficient vector (for <code><a href="https://rdrr.io/r/stats/coef.html" class="external-link">coef()</a></code>) or coefficient-covariance matrix (for <code>vcov</code>) includes elements for aliased regressors.</p></dd>
+
+
 <dt>...</dt>
 <dd><p>arguments to pass down.</p></dd>
+
+
 <dt>parm</dt>
 <dd><p>parameters for which confidence intervals are to be computed; a vector or numbers or names; the default is all parameters.</p></dd>
+
+
 <dt>level</dt>
 <dd><p>confidence level; the default is <code>0.95</code>.</p></dd>
+
+
 <dt>vcov.</dt>
 <dd><p>Optional coefficient covariance matrix, or a function to compute the covariance matrix, to use in computing the model summary.</p></dd>
+
+
 <dt>df</dt>
 <dd><p>Optional residual degrees of freedom to use in computing model summary.</p></dd>
+
+
 <dt>x</dt>
 <dd><p>An object of class <code>"ivreg"</code> or <code>"summary.ivreg"</code>.</p></dd>
+
+
 <dt>newdata</dt>
 <dd><p>Values of predictors for which to obtain predicted values.</p></dd>
+
+
 <dt>type</dt>
 <dd><p>For <code>predict</code>, one of <code>"response"</code> (the default)  or <code>"terms"</code>;
 for <code>residuals</code>, one of <code>"response"</code> (the default), <code>"projected"</code>, <code>"regressors"</code>,
@@ -204,30 +229,49 @@ for <code>residuals</code>, one of <code>"response"</code> (the default), <code>
 <code>type = "deviance"</code> and <code>"pearson"</code>; for <code>weights</code>, <code>"variance"</code> (the default)
 for invariance-variance weights (which is <code>NULL</code> for an unweighted fit) 
 or <code>"robustness"</code> for robustness weights (available for M or MM estimation).</p></dd>
+
+
 <dt>na.action</dt>
 <dd><p><code>na</code> method to apply to predictor values for predictions; default is <code><a href="https://rdrr.io/r/stats/na.fail.html" class="external-link">na.pass</a></code>.</p></dd>
+
+
 <dt>digits</dt>
 <dd><p>For printing.</p></dd>
+
+
 <dt>diagnostics</dt>
 <dd><p>Report 2SLS "diagnostic" tests in model summary (default is <code>TRUE</code>). 
 These tests are not to be confused with the <em>regression diagnostics</em> provided elsewhere in the <span class="pkg">ivreg</span>
 package: see <code><a href="ivregDiagnostics.html">ivregDiagnostics</a></code>.</p></dd>
+
+
 <dt>signif.stars</dt>
 <dd><p>Show "significance stars" in summary output.</p></dd>
+
+
 <dt>test, test.statistic</dt>
 <dd><p>Test statistics for ANOVA table computed by <code><a href="https://rdrr.io/r/stats/anova.html" class="external-link">anova()</a></code>, <code>Anova()</code>,
 or <code>linearHypothesis()</code>. Only <code>test = "F"</code> is supported by <code><a href="https://rdrr.io/r/stats/anova.html" class="external-link">anova()</a></code>; this is also
 the default for <code>Anova()</code> and <code>linearHypothesis()</code>, which also allow <code>test = "Chisq"</code> for
 asymptotic tests.</p></dd>
+
+
 <dt>formula.</dt>
 <dd><p>To update model.</p></dd>
+
+
 <dt>evaluate</dt>
 <dd><p>If <code>TRUE</code>, the default, the updated model is evaluated; if <code>FALSE</code> the updated call is returned.</p></dd>
+
+
 <dt>focal.predictors</dt>
 <dd><p>Focal predictors for effect plot, see <code><a href="https://rdrr.io/pkg/effects/man/effect.html" class="external-link">Effect</a></code>.</p></dd>
+
+
 <dt>hypothesis.matrix, rhs</dt>
 <dd><p>For formulating a linear hypothesis; see the documentation
 for <code>linearHypothesis</code> for details.</p></dd>
+
 </dl></div>
     <div id="see-also">
     <h2>See also</h2>
@@ -246,7 +290,7 @@ for <code>linearHypothesis</code> for details.</p></dd>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.9000.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer></div>

@@ -76,7 +76,7 @@ fit in the examples.</p>
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="st">"Kmenta"</span>, package <span class="op">=</span> <span class="st">"ivreg"</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="st">"Kmenta"</span>, package <span class="op">=</span> <span class="st">"ivreg"</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="format">
@@ -109,10 +109,10 @@ fit in the examples.</p>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="st">"Kmenta"</span>, package <span class="op">=</span> <span class="st">"ivreg"</span><span class="op">)</span> </span>
-<span class="r-in"><span class="va">deq</span> <span class="op">&lt;-</span> <span class="fu"><a href="ivreg.html">ivreg</a></span><span class="op">(</span><span class="va">Q</span> <span class="op">~</span> <span class="va">P</span> <span class="op">+</span> <span class="va">D</span>     <span class="op">|</span> <span class="va">D</span> <span class="op">+</span> <span class="cn">F</span> <span class="op">+</span> <span class="va">A</span>, data <span class="op">=</span> <span class="va">Kmenta</span><span class="op">)</span> <span class="co"># demand equation</span></span>
-<span class="r-in"><span class="va">seq</span> <span class="op">&lt;-</span> <span class="fu"><a href="ivreg.html">ivreg</a></span><span class="op">(</span><span class="va">Q</span> <span class="op">~</span> <span class="va">P</span> <span class="op">+</span> <span class="cn">F</span> <span class="op">+</span> <span class="va">A</span> <span class="op">|</span> <span class="va">D</span> <span class="op">+</span> <span class="cn">F</span> <span class="op">+</span> <span class="va">A</span>, data <span class="op">=</span> <span class="va">Kmenta</span><span class="op">)</span> <span class="co"># supply equation</span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">deq</span>, tests <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="st">"Kmenta"</span>, package <span class="op">=</span> <span class="st">"ivreg"</span><span class="op">)</span> </span></span>
+<span class="r-in"><span><span class="va">deq</span> <span class="op">&lt;-</span> <span class="fu"><a href="ivreg.html">ivreg</a></span><span class="op">(</span><span class="va">Q</span> <span class="op">~</span> <span class="va">P</span> <span class="op">+</span> <span class="va">D</span>     <span class="op">|</span> <span class="va">D</span> <span class="op">+</span> <span class="cn">F</span> <span class="op">+</span> <span class="va">A</span>, data <span class="op">=</span> <span class="va">Kmenta</span><span class="op">)</span> <span class="co"># demand equation</span></span></span>
+<span class="r-in"><span><span class="va">seq</span> <span class="op">&lt;-</span> <span class="fu"><a href="ivreg.html">ivreg</a></span><span class="op">(</span><span class="va">Q</span> <span class="op">~</span> <span class="va">P</span> <span class="op">+</span> <span class="cn">F</span> <span class="op">+</span> <span class="va">A</span> <span class="op">|</span> <span class="va">D</span> <span class="op">+</span> <span class="cn">F</span> <span class="op">+</span> <span class="va">A</span>, data <span class="op">=</span> <span class="va">Kmenta</span><span class="op">)</span> <span class="co"># supply equation</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">deq</span>, tests <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Call:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ivreg(formula = Q ~ P + D | D + F + A, data = Kmenta)</span>
@@ -126,12 +126,6 @@ fit in the examples.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> (Intercept) 94.63330    7.92084  11.947 1.08e-09 ***</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> P           -0.24356    0.09648  -2.524   0.0218 *  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> D            0.31399    0.04694   6.689 3.81e-06 ***</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Diagnostic tests:</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                  df1 df2 statistic  p-value    </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Weak instruments   2  16    88.025 2.32e-09 ***</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Wu-Hausman         1  16    11.422  0.00382 ** </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Sargan             1  NA     2.983  0.08414 .  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ---</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
@@ -139,7 +133,7 @@ fit in the examples.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Multiple R-Squared: 0.7548,	Adjusted R-squared: 0.726 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Wald test: 23.81 on 2 and 17 DF,  p-value: 1.178e-05 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">seq</span>, tests <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">seq</span>, tests <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Call:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ivreg(formula = Q ~ P + F + A | D + F + A, data = Kmenta)</span>
@@ -154,12 +148,6 @@ fit in the examples.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> P            0.24008    0.09993   2.402 0.028785 *  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> F            0.25561    0.04725   5.410 5.79e-05 ***</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> A            0.25292    0.09966   2.538 0.021929 *  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Diagnostic tests:</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                  df1 df2 statistic  p-value    </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Weak instruments   1  16    256.34 2.86e-11 ***</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Wu-Hausman         1  15     36.14 2.38e-05 ***</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Sargan             0  NA        NA       NA    </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ---</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
@@ -181,7 +169,7 @@ fit in the examples.</p>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.9000.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer></div>

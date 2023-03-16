@@ -74,21 +74,21 @@ estimators are also provided, based on M-estimation (2SM) and MM-estimation
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">ivreg</span><span class="op">(</span>
-  <span class="va">formula</span>,
-  <span class="va">instruments</span>,
-  <span class="va">data</span>,
-  <span class="va">subset</span>,
-  <span class="va">na.action</span>,
-  <span class="va">weights</span>,
-  <span class="va">offset</span>,
-  contrasts <span class="op">=</span> <span class="cn">NULL</span>,
-  model <span class="op">=</span> <span class="cn">TRUE</span>,
-  y <span class="op">=</span> <span class="cn">TRUE</span>,
-  x <span class="op">=</span> <span class="cn">FALSE</span>,
-  method <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"OLS"</span>, <span class="st">"M"</span>, <span class="st">"MM"</span><span class="op">)</span>,
-  <span class="va">...</span>
-<span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">ivreg</span><span class="op">(</span></span>
+<span>  <span class="va">formula</span>,</span>
+<span>  <span class="va">instruments</span>,</span>
+<span>  <span class="va">data</span>,</span>
+<span>  <span class="va">subset</span>,</span>
+<span>  <span class="va">na.action</span>,</span>
+<span>  <span class="va">weights</span>,</span>
+<span>  <span class="va">offset</span>,</span>
+<span>  contrasts <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  model <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  y <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  x <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  method <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"OLS"</span>, <span class="st">"M"</span>, <span class="st">"MM"</span><span class="op">)</span>,</span>
+<span>  <span class="va">...</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -100,125 +100,183 @@ relationship and the instruments. Either <code>instruments</code> is missing and
 (recommended) or <code>formula</code> is <code>y ~ x1 + x2</code> and <code>instruments</code>
 is a one-sided formula <code>~ z1 + z2 + z3</code> (only for backward
 compatibility).</p></dd>
+
+
 <dt>data</dt>
 <dd><p>an optional data frame containing the variables in the model.
 By default the variables are taken from the environment of the
 <code>formula</code>.</p></dd>
+
+
 <dt>subset</dt>
 <dd><p>an optional vector specifying a subset of observations to be
 used in fitting the model.</p></dd>
+
+
 <dt>na.action</dt>
 <dd><p>a function that indicates what should happen when the data
 contain <code>NA</code>s. The default is set by the <code>na.action</code> option.</p></dd>
+
+
 <dt>weights</dt>
 <dd><p>an optional vector of weights to be used in the fitting
 process.</p></dd>
+
+
 <dt>offset</dt>
 <dd><p>an optional offset that can be used to specify an a priori
 known component to be included during fitting.</p></dd>
+
+
 <dt>contrasts</dt>
 <dd><p>an optional list. See the <code>contrasts.arg</code> of
 <code><a href="https://rdrr.io/r/stats/model.matrix.html" class="external-link">model.matrix.default</a></code>.</p></dd>
+
+
 <dt>model, x, y</dt>
 <dd><p>logicals.  If <code>TRUE</code> the corresponding components of
 the fit (the model frame, the model matrices, the response) are returned. These
 components are necessary for computing regression diagnostics.</p></dd>
+
+
 <dt>method</dt>
 <dd><p>the method used to fit the stage 1 and 2 regression: 
 <code>"OLS"</code> for traditional 2SLS regression (the default), 
 <code>"M"</code> for M-estimation, or <code>"MM"</code> for MM-estimation, with the
 latter two robust-regression methods implemented via the <code><a href="https://rdrr.io/pkg/MASS/man/rlm.html" class="external-link">rlm</a></code> 
 function in the <span class="pkg">MASS</span> package.</p></dd>
+
+
 <dt>...</dt>
 <dd><p>further arguments passed to <code><a href="ivreg.fit.html">ivreg.fit</a></code>.</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p><code>ivreg</code> returns an object of class <code>"ivreg"</code> that inherits from
+    
+
+<p><code>ivreg</code> returns an object of class <code>"ivreg"</code> that inherits from
 class <code>"lm"</code>, with the following components:</p>
 <dl><dt>coefficients</dt>
 <dd><p>parameter estimates, from the stage-2 regression.</p></dd>
+ 
 <dt>residuals</dt>
 <dd><p>vector of model residuals.</p></dd>
+ 
 <dt>residuals1</dt>
 <dd><p>matrix of residuals from the stage-1 regression.</p></dd>
+
 <dt>residuals2</dt>
 <dd><p>vector of residuals from the stage-2 regression.</p></dd>
+
 <dt>fitted.values</dt>
 <dd><p>vector of predicted means for the response.</p></dd>
+
 <dt>weights</dt>
 <dd><p>either the vector of weights used (if any) or <code>NULL</code> (if none).</p></dd>
+ 
 <dt>offset</dt>
 <dd><p>either the offset used (if any) or <code>NULL</code> (if none).</p></dd>
+ 
 <dt>estfun</dt>
 <dd><p>a matrix containing the empirical estimating functions.</p></dd>
+ 
 <dt>n</dt>
 <dd><p>number of observations.</p></dd>
+ 
 <dt>nobs</dt>
 <dd><p>number of observations with non-zero weights.</p></dd>
+ 
 <dt>p</dt>
 <dd><p>number of columns in the model matrix x of regressors.</p></dd>
+
 <dt>q</dt>
 <dd><p>number of columns in the instrumental variables model matrix z</p></dd>
+
 <dt>rank</dt>
 <dd><p>numeric rank of the model matrix for the stage-2 regression.</p></dd>
+ 
 <dt>df.residual</dt>
 <dd><p>residual degrees of freedom for fitted model.</p></dd>
+ 
 <dt>cov.unscaled</dt>
 <dd><p>unscaled covariance matrix for the coefficients.</p></dd>
+ 
 <dt>sigma</dt>
 <dd><p>residual standard deviation.</p></dd>
+
 <dt>qr</dt>
 <dd><p>QR decomposition for the stage-2 regression.</p></dd>
+
 <dt>qr1</dt>
 <dd><p>QR decomposition for the stage-1 regression.</p></dd>
+
 <dt>rank1</dt>
 <dd><p>numeric rank of the model matrix for the stage-1 regression.</p></dd>
+
 <dt>coefficients1</dt>
 <dd><p>matrix of coefficients from the stage-1 regression.</p></dd>
+
 <dt>df.residual1</dt>
 <dd><p>residual degrees of freedom for the stage-1 regression.</p></dd>
+ 
 <dt>exogenous</dt>
 <dd><p>columns of the <code>"regressors"</code> matrix that are exogenous.</p></dd>
+
 <dt>endogenous</dt>
 <dd><p>columns of the <code>"regressors"</code> matrix that are endogenous.</p></dd>
+
 <dt>instruments</dt>
 <dd><p>columns of the <code>"instruments"</code> matrix that are
 instruments for the endogenous variables.</p></dd>
+
 <dt>method</dt>
 <dd><p>the method used for the stage 1 and 2 regressions, one of <code>"OLS"</code>,
 <code>"M"</code>, or <code>"MM"</code>.</p></dd>
+
 <dt>rweights</dt>
 <dd><p>a matrix of robustness weights with columns for each of the stage-1
 regressions and for the stage-2 regression (in the last column) if the fitting method is 
 <code>"M"</code> or <code>"MM"</code>, <code>NULL</code> if the fitting method is <code>"OLS"</code>.</p></dd>
+
 <dt>hatvalues</dt>
 <dd><p>a matrix of hatvalues. For <code>method = "OLS"</code>, the matrix consists of two
 columns, for each of the stage-1 and stage-2 regression; for <code>method = "M"</code> or <code>"MM"</code>,
 there is one column for <em>each</em> stage=1 regression and for the stage-2 regression.</p></dd>
+
 <dt>df.residual</dt>
 <dd><p>residual degrees of freedom for fitted model.</p></dd>
+ 
 <dt>call</dt>
 <dd><p>the original function call.</p></dd>
+ 
 <dt>formula</dt>
 <dd><p>the model formula.</p></dd>
+
 <dt>na.action</dt>
 <dd><p>function applied to missing values in the model fit.</p></dd>
+
 <dt>terms</dt>
 <dd><p>a list with elements <code>"regressors"</code> and <code>"instruments"</code> 
 containing the terms objects for the respective components.</p></dd>
+ 
 <dt>levels</dt>
 <dd><p>levels of the categorical regressors.</p></dd>
+ 
 <dt>contrasts</dt>
 <dd><p>the contrasts used for categorical regressors.</p></dd>
+ 
 <dt>model</dt>
 <dd><p>the full model frame (if <code>model = TRUE</code>).</p></dd>
+ 
 <dt>y</dt>
 <dd><p>the response vector (if <code>y = TRUE</code>).</p></dd>
+ 
 <dt>x</dt>
 <dd><p>a list with elements <code>"regressors"</code>, <code>"instruments"</code>, <code>"projected"</code>,
 containing the model matrices from the respective components (if <code>x = TRUE</code>). 
 <code>"projected"</code> is the matrix of regressors projected on the image of the instruments.</p></dd>
+
 </dl></div>
     <div id="details">
     <h2>Details</h2>
@@ -260,13 +318,13 @@ on the right-hand side.</p>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="co">## data</span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="st">"CigaretteDemand"</span>, package <span class="op">=</span> <span class="st">"ivreg"</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co">## model </span></span>
-<span class="r-in"><span class="va">m</span> <span class="op">&lt;-</span> <span class="fu">ivreg</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Log.html" class="external-link">log</a></span><span class="op">(</span><span class="va">packs</span><span class="op">)</span> <span class="op">~</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html" class="external-link">log</a></span><span class="op">(</span><span class="va">rprice</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html" class="external-link">log</a></span><span class="op">(</span><span class="va">rincome</span><span class="op">)</span> <span class="op">|</span> <span class="va">salestax</span> <span class="op">+</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html" class="external-link">log</a></span><span class="op">(</span><span class="va">rincome</span><span class="op">)</span>,</span>
-<span class="r-in">  data <span class="op">=</span> <span class="va">CigaretteDemand</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">m</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co">## data</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="st">"CigaretteDemand"</span>, package <span class="op">=</span> <span class="st">"ivreg"</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">## model </span></span></span>
+<span class="r-in"><span><span class="va">m</span> <span class="op">&lt;-</span> <span class="fu">ivreg</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Log.html" class="external-link">log</a></span><span class="op">(</span><span class="va">packs</span><span class="op">)</span> <span class="op">~</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html" class="external-link">log</a></span><span class="op">(</span><span class="va">rprice</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html" class="external-link">log</a></span><span class="op">(</span><span class="va">rincome</span><span class="op">)</span> <span class="op">|</span> <span class="va">salestax</span> <span class="op">+</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html" class="external-link">log</a></span><span class="op">(</span><span class="va">rincome</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  data <span class="op">=</span> <span class="va">CigaretteDemand</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">m</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Call:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ivreg(formula = log(packs) ~ log(rprice) + log(rincome) | salestax + </span>
@@ -281,12 +339,6 @@ on the right-hand side.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> (Intercept)    9.4307     1.3584   6.943 1.24e-08 ***</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> log(rprice)   -1.1434     0.3595  -3.181  0.00266 ** </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> log(rincome)   0.2145     0.2686   0.799  0.42867    </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Diagnostic tests:</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                  df1 df2 statistic  p-value    </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Weak instruments   1  45    45.158 2.65e-08 ***</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Wu-Hausman         1  44     1.102      0.3    </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Sargan             0  NA        NA       NA    </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ---</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
@@ -294,7 +346,7 @@ on the right-hand side.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Multiple R-Squared: 0.4189,	Adjusted R-squared: 0.3931 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Wald test: 6.534 on 2 and 45 DF,  p-value: 0.003227 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">m</span>, vcov <span class="op">=</span> <span class="fu">sandwich</span><span class="fu">::</span><span class="va"><a href="https://sandwich.R-Forge.R-project.org//reference/sandwich.html" class="external-link">sandwich</a></span>, df <span class="op">=</span> <span class="cn">Inf</span><span class="op">)</span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">m</span>, vcov <span class="op">=</span> <span class="fu">sandwich</span><span class="fu">::</span><span class="va"><a href="https://sandwich.R-Forge.R-project.org/reference/sandwich.html" class="external-link">sandwich</a></span>, df <span class="op">=</span> <span class="cn">Inf</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Call:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ivreg(formula = log(packs) ~ log(rprice) + log(rincome) | salestax + </span>
@@ -309,23 +361,17 @@ on the right-hand side.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> (Intercept)    9.4307     1.2194   7.734 1.04e-14 ***</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> log(rprice)   -1.1434     0.3605  -3.172  0.00151 ** </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> log(rincome)   0.2145     0.3018   0.711  0.47729    </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Diagnostic tests:</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                  df1 df2 statistic p-value    </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Weak instruments   1  45    47.713 1.4e-08 ***</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Wu-Hausman         1  44     1.287   0.263    </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Sargan             0  NA        NA      NA    </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ---</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Residual standard error: 0.1896 on Inf degrees of freedom</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Multiple R-Squared: 0.4189,	Adjusted R-squared: 0.3931 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Wald test:     2 on NA DF,  p-value: NA </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Wald test: 17.47 on 2 DF,  p-value: 0.0001605 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co">## ANOVA</span></span>
-<span class="r-in"><span class="va">m2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/update.html" class="external-link">update</a></span><span class="op">(</span><span class="va">m</span>, <span class="va">.</span> <span class="op">~</span> <span class="va">.</span> <span class="op">-</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html" class="external-link">log</a></span><span class="op">(</span><span class="va">rincome</span><span class="op">)</span> <span class="op">|</span> <span class="va">.</span> <span class="op">-</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html" class="external-link">log</a></span><span class="op">(</span><span class="va">rincome</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/stats/anova.html" class="external-link">anova</a></span><span class="op">(</span><span class="va">m</span>, <span class="va">m2</span><span class="op">)</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">## ANOVA</span></span></span>
+<span class="r-in"><span><span class="va">m2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/update.html" class="external-link">update</a></span><span class="op">(</span><span class="va">m</span>, <span class="va">.</span> <span class="op">~</span> <span class="va">.</span> <span class="op">-</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html" class="external-link">log</a></span><span class="op">(</span><span class="va">rincome</span><span class="op">)</span> <span class="op">|</span> <span class="va">.</span> <span class="op">-</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html" class="external-link">log</a></span><span class="op">(</span><span class="va">rincome</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/stats/anova.html" class="external-link">anova</a></span><span class="op">(</span><span class="va">m</span>, <span class="va">m2</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Analysis of Variance Table</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Model 1: log(packs) ~ log(rprice) + log(rincome) | salestax + log(rincome)</span>
@@ -333,7 +379,7 @@ on the right-hand side.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   Res.Df    RSS Df Sum of Sq      F Pr(&gt;F)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1     45 1.6172                           </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 2     46 1.6668 -1 -0.049558 0.6379 0.4287</span>
-<span class="r-in"><span class="fu">car</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/car/man/Anova.html" class="external-link">Anova</a></span><span class="op">(</span><span class="va">m</span><span class="op">)</span></span>
+<span class="r-in"><span><span class="fu">car</span><span class="fu">::</span><span class="fu"><a href="https://r-forge.r-project.org/projects/car/reference/Anova.html" class="external-link">Anova</a></span><span class="op">(</span><span class="va">m</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Analysis of Deviance Table (Type II tests)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Response: log(packs)</span>
@@ -343,9 +389,9 @@ on the right-hand side.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Residuals    45                    </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ---</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1</span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co">## same model specified by formula with three-part right-hand side</span></span>
-<span class="r-in"><span class="fu">ivreg</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Log.html" class="external-link">log</a></span><span class="op">(</span><span class="va">packs</span><span class="op">)</span> <span class="op">~</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html" class="external-link">log</a></span><span class="op">(</span><span class="va">rincome</span><span class="op">)</span> <span class="op">|</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html" class="external-link">log</a></span><span class="op">(</span><span class="va">rprice</span><span class="op">)</span> <span class="op">|</span> <span class="va">salestax</span>, data <span class="op">=</span> <span class="va">CigaretteDemand</span><span class="op">)</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">## same model specified by formula with three-part right-hand side</span></span></span>
+<span class="r-in"><span><span class="fu">ivreg</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Log.html" class="external-link">log</a></span><span class="op">(</span><span class="va">packs</span><span class="op">)</span> <span class="op">~</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html" class="external-link">log</a></span><span class="op">(</span><span class="va">rincome</span><span class="op">)</span> <span class="op">|</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html" class="external-link">log</a></span><span class="op">(</span><span class="va">rprice</span><span class="op">)</span> <span class="op">|</span> <span class="va">salestax</span>, data <span class="op">=</span> <span class="va">CigaretteDemand</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Call:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ivreg(formula = log(packs) ~ log(rincome) | log(rprice) | salestax,     data = CigaretteDemand)</span>
@@ -354,16 +400,16 @@ on the right-hand side.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  (Intercept)   log(rprice)  log(rincome)  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>       9.4307       -1.1434        0.2145  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># Robust 2SLS regression</span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="st">"Kmenta"</span>, package <span class="op">=</span> <span class="st">"ivreg"</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">Kmenta1</span> <span class="op">&lt;-</span> <span class="va">Kmenta</span></span>
-<span class="r-in"><span class="va">Kmenta1</span><span class="op">[</span><span class="fl">20</span>, <span class="st">"Q"</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fl">95</span> <span class="co"># corrupted data</span></span>
-<span class="r-in"><span class="va">deq</span> <span class="op">&lt;-</span> <span class="fu">ivreg</span><span class="op">(</span><span class="va">Q</span> <span class="op">~</span> <span class="va">P</span> <span class="op">+</span> <span class="va">D</span> <span class="op">|</span> <span class="va">D</span> <span class="op">+</span> <span class="cn">F</span> <span class="op">+</span> <span class="va">A</span>, data<span class="op">=</span><span class="va">Kmenta</span><span class="op">)</span> <span class="co"># demand equation, uncorrupted data</span></span>
-<span class="r-in"><span class="va">deq1</span> <span class="op">&lt;-</span> <span class="fu">ivreg</span><span class="op">(</span><span class="va">Q</span> <span class="op">~</span> <span class="va">P</span> <span class="op">+</span> <span class="va">D</span> <span class="op">|</span> <span class="va">D</span> <span class="op">+</span> <span class="cn">F</span> <span class="op">+</span> <span class="va">A</span>, data<span class="op">=</span><span class="va">Kmenta1</span><span class="op">)</span> <span class="co"># standard 2SLS, corrupted data</span></span>
-<span class="r-in"><span class="va">deq2</span> <span class="op">&lt;-</span> <span class="fu">ivreg</span><span class="op">(</span><span class="va">Q</span> <span class="op">~</span> <span class="va">P</span> <span class="op">+</span> <span class="va">D</span> <span class="op">|</span> <span class="va">D</span> <span class="op">+</span> <span class="cn">F</span> <span class="op">+</span> <span class="va">A</span>, data<span class="op">=</span><span class="va">Kmenta1</span>, subset<span class="op">=</span><span class="op">-</span><span class="fl">20</span><span class="op">)</span> <span class="co"># standard 2SLS, removing bad case</span></span>
-<span class="r-in"><span class="va">deq3</span> <span class="op">&lt;-</span> <span class="fu">ivreg</span><span class="op">(</span><span class="va">Q</span> <span class="op">~</span> <span class="va">P</span> <span class="op">+</span> <span class="va">D</span> <span class="op">|</span> <span class="va">D</span> <span class="op">+</span> <span class="cn">F</span> <span class="op">+</span> <span class="va">A</span>, data<span class="op">=</span><span class="va">Kmenta1</span>, method<span class="op">=</span><span class="st">"MM"</span><span class="op">)</span> <span class="co"># 2SLS MM estimation</span></span>
-<span class="r-in"><span class="fu">car</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/car/man/compareCoefs.html" class="external-link">compareCoefs</a></span><span class="op">(</span><span class="va">deq</span>, <span class="va">deq1</span>, <span class="va">deq2</span>, <span class="va">deq3</span><span class="op">)</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Robust 2SLS regression</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="st">"Kmenta"</span>, package <span class="op">=</span> <span class="st">"ivreg"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">Kmenta1</span> <span class="op">&lt;-</span> <span class="va">Kmenta</span></span></span>
+<span class="r-in"><span><span class="va">Kmenta1</span><span class="op">[</span><span class="fl">20</span>, <span class="st">"Q"</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fl">95</span> <span class="co"># corrupted data</span></span></span>
+<span class="r-in"><span><span class="va">deq</span> <span class="op">&lt;-</span> <span class="fu">ivreg</span><span class="op">(</span><span class="va">Q</span> <span class="op">~</span> <span class="va">P</span> <span class="op">+</span> <span class="va">D</span> <span class="op">|</span> <span class="va">D</span> <span class="op">+</span> <span class="cn">F</span> <span class="op">+</span> <span class="va">A</span>, data<span class="op">=</span><span class="va">Kmenta</span><span class="op">)</span> <span class="co"># demand equation, uncorrupted data</span></span></span>
+<span class="r-in"><span><span class="va">deq1</span> <span class="op">&lt;-</span> <span class="fu">ivreg</span><span class="op">(</span><span class="va">Q</span> <span class="op">~</span> <span class="va">P</span> <span class="op">+</span> <span class="va">D</span> <span class="op">|</span> <span class="va">D</span> <span class="op">+</span> <span class="cn">F</span> <span class="op">+</span> <span class="va">A</span>, data<span class="op">=</span><span class="va">Kmenta1</span><span class="op">)</span> <span class="co"># standard 2SLS, corrupted data</span></span></span>
+<span class="r-in"><span><span class="va">deq2</span> <span class="op">&lt;-</span> <span class="fu">ivreg</span><span class="op">(</span><span class="va">Q</span> <span class="op">~</span> <span class="va">P</span> <span class="op">+</span> <span class="va">D</span> <span class="op">|</span> <span class="va">D</span> <span class="op">+</span> <span class="cn">F</span> <span class="op">+</span> <span class="va">A</span>, data<span class="op">=</span><span class="va">Kmenta1</span>, subset<span class="op">=</span><span class="op">-</span><span class="fl">20</span><span class="op">)</span> <span class="co"># standard 2SLS, removing bad case</span></span></span>
+<span class="r-in"><span><span class="va">deq3</span> <span class="op">&lt;-</span> <span class="fu">ivreg</span><span class="op">(</span><span class="va">Q</span> <span class="op">~</span> <span class="va">P</span> <span class="op">+</span> <span class="va">D</span> <span class="op">|</span> <span class="va">D</span> <span class="op">+</span> <span class="cn">F</span> <span class="op">+</span> <span class="va">A</span>, data<span class="op">=</span><span class="va">Kmenta1</span>, method<span class="op">=</span><span class="st">"MM"</span><span class="op">)</span> <span class="co"># 2SLS MM estimation</span></span></span>
+<span class="r-in"><span><span class="fu">car</span><span class="fu">::</span><span class="fu"><a href="https://r-forge.r-project.org/projects/car/reference/compareCoefs.html" class="external-link">compareCoefs</a></span><span class="op">(</span><span class="va">deq</span>, <span class="va">deq1</span>, <span class="va">deq2</span>, <span class="va">deq3</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Calls:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1: ivreg(formula = Q ~ P + D | D + F + A, data = Kmenta)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 2: ivreg(formula = Q ~ P + D | D + F + A, data = Kmenta1)</span>
@@ -380,7 +426,7 @@ on the right-hand side.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> D            0.3140  0.2351  0.3233  0.3468</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> SE           0.0469  0.0690  0.0527  0.0569</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                            </span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/base/Round.html" class="external-link">round</a></span><span class="op">(</span><span class="va">deq3</span><span class="op">$</span><span class="va">rweights</span>, <span class="fl">2</span><span class="op">)</span> <span class="co"># robustness weights</span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/Round.html" class="external-link">round</a></span><span class="op">(</span><span class="va">deq3</span><span class="op">$</span><span class="va">rweights</span>, <span class="fl">2</span><span class="op">)</span> <span class="co"># robustness weights</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>         P stage_2</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1922 0.97    0.98</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1923 0.97    0.98</span>
@@ -402,7 +448,7 @@ on the right-hand side.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1939 0.53    0.69</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1940 1.00    0.98</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1941 0.98    0.00</span>
-<span class="r-in"></span>
+<span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
   </div>
@@ -417,7 +463,7 @@ on the right-hand side.</p>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.9000.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer></div>

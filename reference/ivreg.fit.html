@@ -72,112 +72,157 @@ estimation is also supported, based on M-estimation (22M) or MM-estimation (2SMM
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">ivreg.fit</span><span class="op">(</span>
-  <span class="va">x</span>,
-  <span class="va">y</span>,
-  <span class="va">z</span>,
-  <span class="va">weights</span>,
-  <span class="va">offset</span>,
-  method <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"OLS"</span>, <span class="st">"M"</span>, <span class="st">"MM"</span><span class="op">)</span>,
-  rlm.args <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="op">)</span>,
-  <span class="va">...</span>
-<span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">ivreg.fit</span><span class="op">(</span></span>
+<span>  <span class="va">x</span>,</span>
+<span>  <span class="va">y</span>,</span>
+<span>  <span class="va">z</span>,</span>
+<span>  <span class="va">weights</span>,</span>
+<span>  <span class="va">offset</span>,</span>
+<span>  method <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"OLS"</span>, <span class="st">"M"</span>, <span class="st">"MM"</span><span class="op">)</span>,</span>
+<span>  rlm.args <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  <span class="va">...</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>x</dt>
 <dd><p>regressor matrix.</p></dd>
+
+
 <dt>y</dt>
 <dd><p>vector for the response variable.</p></dd>
+
+
 <dt>z</dt>
 <dd><p>instruments matrix.</p></dd>
+
+
 <dt>weights</dt>
 <dd><p>an optional vector of weights to be used in the fitting
 process.</p></dd>
+
+
 <dt>offset</dt>
 <dd><p>an optional offset that can be used to specify an a priori
 known component to be included during fitting.</p></dd>
+
+
 <dt>method</dt>
 <dd><p>the method used to fit the stage 1 and 2 regression: 
 <code>"OLS"</code> for traditional 2SLS regression (the default), 
 <code>"M"</code> for M-estimation, or <code>"MM"</code> for MM-estimation, with the
 latter two robust-regression methods implemented via the <code><a href="https://rdrr.io/pkg/MASS/man/rlm.html" class="external-link">rlm</a></code> 
 function in the <span class="pkg">MASS</span> package.</p></dd>
+
+
 <dt>rlm.args</dt>
 <dd><p>a list of optional arguments to be passed to the <code><a href="https://rdrr.io/pkg/MASS/man/rlm.html" class="external-link">rlm</a></code> 
 function in the <span class="pkg">MASS</span> package if robust regression is used for the stage 1 and 2 regressions.</p></dd>
+
+
 <dt>...</dt>
 <dd><p>further arguments passed to <code>lm.fit</code>
 or <code>lm.wfit</code>, respectively.</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p><code>ivreg.fit</code> returns an unclassed list with the following
+    
+
+<p><code>ivreg.fit</code> returns an unclassed list with the following
 components:</p>
 <dl><dt>coefficients</dt>
 <dd><p>parameter estimates, from the stage-2 regression.</p></dd>
+ 
 <dt>residuals</dt>
 <dd><p>vector of model residuals.</p></dd>
+ 
 <dt>residuals1</dt>
 <dd><p>matrix of residuals from the stage-1 regression.</p></dd>
+
 <dt>residuals2</dt>
 <dd><p>vector of residuals from the stage-2 regression.</p></dd>
+
 <dt>fitted.values</dt>
 <dd><p>vector of predicted means for the response.</p></dd>
+
 <dt>weights</dt>
 <dd><p>either the vector of weights used (if any) or <code>NULL</code> (if none).</p></dd>
+ 
 <dt>offset</dt>
 <dd><p>either the offset used (if any) or <code>NULL</code> (if none).</p></dd>
+ 
 <dt>estfun</dt>
 <dd><p>a matrix containing the empirical estimating functions.</p></dd>
+ 
 <dt>n</dt>
 <dd><p>number of observations.</p></dd>
+ 
 <dt>nobs</dt>
 <dd><p>number of observations with non-zero weights.</p></dd>
+ 
 <dt>p</dt>
 <dd><p>number of columns in the model matrix x of regressors.</p></dd>
+
 <dt>q</dt>
 <dd><p>number of columns in the instrumental variables model matrix z</p></dd>
+
 <dt>rank</dt>
 <dd><p>numeric rank of the model matrix for the stage-2 regression.</p></dd>
+ 
 <dt>df.residual</dt>
 <dd><p>residual degrees of freedom for fitted model.</p></dd>
+ 
 <dt>cov.unscaled</dt>
 <dd><p>unscaled covariance matrix for the coefficients.</p></dd>
+ 
 <dt>sigma</dt>
 <dd><p>residual standard error; when method is <code>"M"</code> or <code>"MM"</code>, this
 is based on the MAD of the residuals (around 0) --- see <code><a href="https://rdrr.io/r/stats/mad.html" class="external-link">mad</a></code>.</p></dd>
+
 <dt>x</dt>
 <dd><p>projection of x matrix onto span of z.</p></dd>
+
 <dt>qr</dt>
 <dd><p>QR decomposition for the stage-2 regression.</p></dd>
+
 <dt>qr1</dt>
 <dd><p>QR decomposition for the stage-1 regression.</p></dd>
+
 <dt>rank1</dt>
 <dd><p>numeric rank of the model matrix for the stage-1 regression.</p></dd>
+
 <dt>coefficients1</dt>
 <dd><p>matrix of coefficients from the stage-1 regression.</p></dd>
+
 <dt>df.residual1</dt>
 <dd><p>residual degrees of freedom for the stage-1 regression.</p></dd>
+ 
 <dt>exogenous</dt>
 <dd><p>columns of the <code>"regressors"</code> matrix that are exogenous.</p></dd>
+
 <dt>endogenous</dt>
 <dd><p>columns of the <code>"regressors"</code> matrix that are endogenous.</p></dd>
+
 <dt>instruments</dt>
 <dd><p>columns of the <code>"instruments"</code> matrix that are
 instruments for the endogenous variables.</p></dd>
+
 <dt>method</dt>
 <dd><p>the method used for the stage 1 and 2 regressions, one of <code>"OLS"</code>,
 <code>"M"</code>, or <code>"MM"</code>.</p></dd>
+
 <dt>rweights</dt>
 <dd><p>a matrix of robustness weights with columns for each of the stage-1
 regressions and for the stage-2 regression (in the last column) if the fitting method is 
 <code>"M"</code> or <code>"MM"</code>, <code>NULL</code> if the fitting method is <code>"OLS"</code>.</p></dd>
+
 <dt>hatvalues</dt>
 <dd><p>a matrix of hatvalues. For <code>method = "OLS"</code>, the matrix consists of two
 columns, for each of the stage-1 and stage-2 regression; for <code>method = "M"</code> or <code>"MM"</code>,
 there is one column for <em>each</em> stage-1 regression and for the stage-2 regression.</p></dd>
+
 </dl></div>
     <div id="details">
     <h2>Details</h2>
@@ -196,21 +241,21 @@ for first projecting <code>x</code> onto the image of
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="co">## data</span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="st">"CigaretteDemand"</span>, package <span class="op">=</span> <span class="st">"ivreg"</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co">## high-level interface</span></span>
-<span class="r-in"><span class="va">m</span> <span class="op">&lt;-</span> <span class="fu"><a href="ivreg.html">ivreg</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Log.html" class="external-link">log</a></span><span class="op">(</span><span class="va">packs</span><span class="op">)</span> <span class="op">~</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html" class="external-link">log</a></span><span class="op">(</span><span class="va">rprice</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html" class="external-link">log</a></span><span class="op">(</span><span class="va">rincome</span><span class="op">)</span> <span class="op">|</span> <span class="va">salestax</span> <span class="op">+</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html" class="external-link">log</a></span><span class="op">(</span><span class="va">rincome</span><span class="op">)</span>,</span>
-<span class="r-in">  data <span class="op">=</span> <span class="va">CigaretteDemand</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co">## low-level interface</span></span>
-<span class="r-in"><span class="va">y</span> <span class="op">&lt;-</span> <span class="va">m</span><span class="op">$</span><span class="va">y</span></span>
-<span class="r-in"><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/model.matrix.html" class="external-link">model.matrix</a></span><span class="op">(</span><span class="va">m</span>, component <span class="op">=</span> <span class="st">"regressors"</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">z</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/model.matrix.html" class="external-link">model.matrix</a></span><span class="op">(</span><span class="va">m</span>, component <span class="op">=</span> <span class="st">"instruments"</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu">ivreg.fit</span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span>, <span class="va">z</span><span class="op">)</span><span class="op">$</span><span class="va">coefficients</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co">## data</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="st">"CigaretteDemand"</span>, package <span class="op">=</span> <span class="st">"ivreg"</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">## high-level interface</span></span></span>
+<span class="r-in"><span><span class="va">m</span> <span class="op">&lt;-</span> <span class="fu"><a href="ivreg.html">ivreg</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Log.html" class="external-link">log</a></span><span class="op">(</span><span class="va">packs</span><span class="op">)</span> <span class="op">~</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html" class="external-link">log</a></span><span class="op">(</span><span class="va">rprice</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html" class="external-link">log</a></span><span class="op">(</span><span class="va">rincome</span><span class="op">)</span> <span class="op">|</span> <span class="va">salestax</span> <span class="op">+</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html" class="external-link">log</a></span><span class="op">(</span><span class="va">rincome</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  data <span class="op">=</span> <span class="va">CigaretteDemand</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">## low-level interface</span></span></span>
+<span class="r-in"><span><span class="va">y</span> <span class="op">&lt;-</span> <span class="va">m</span><span class="op">$</span><span class="va">y</span></span></span>
+<span class="r-in"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/model.matrix.html" class="external-link">model.matrix</a></span><span class="op">(</span><span class="va">m</span>, component <span class="op">=</span> <span class="st">"regressors"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">z</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/model.matrix.html" class="external-link">model.matrix</a></span><span class="op">(</span><span class="va">m</span>, component <span class="op">=</span> <span class="st">"instruments"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">ivreg.fit</span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span>, <span class="va">z</span><span class="op">)</span><span class="op">$</span><span class="va">coefficients</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  (Intercept)  log(rprice) log(rincome) </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    9.4306583   -1.1433751    0.2145153 </span>
-<span class="r-in"></span>
+<span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
   </div>
@@ -225,7 +270,7 @@ for first projecting <code>x</code> onto the image of
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.9000.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer></div>
