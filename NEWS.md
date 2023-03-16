@@ -3,7 +3,8 @@
 * Avoid partial argument matches by calling `model.matrix(..., contrasts.arg = ...)`
   rather than just `contrasts` (reported by Kevin Tappe).
   
-* Make names of arguments of influencePlot.ivreg() and outlierTest.ivreg() consistent with the corresponding generic functions from the car package.
+* Make names of arguments of `influencePlot.ivreg()` and `outlierTest.ivreg()`
+  consistent with the corresponding generic functions from the car package.
 
 
 # Version 0.6-1
