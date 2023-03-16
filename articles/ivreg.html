@@ -20,7 +20,7 @@
 <script src="../pkgdown.js"></script><link href="../extra.css" rel="stylesheet">
 <meta property="og:title" content="ivreg: Two-Stage Least-Squares Regression with Diagnostics">
 <meta property="og:description" content="ivreg">
-<meta property="og:image" content="https://john-d-fox.github.io/ivreg/logo.png">
+<meta property="og:image" content="https://zeileis.github.io/ivreg/logo.png">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:creator" content="@AchimZeileis">
 <meta name="twitter:site" content="@AchimZeileis">
@@ -74,7 +74,7 @@
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="https://github.com/john-d-fox/ivreg/" class="external-link">
+  <a href="https://github.com/zeileis/ivreg/" class="external-link">
     <span class="fab fa-github fa-lg"></span>
      
   </a>
@@ -101,7 +101,7 @@ Christian Kleiber, Achim Zeileis</h4>
             <h4 data-toc-skip class="date">last modified:
 2020-08-04</h4>
       
-      <small class="dont-index">Source: <a href="https://github.com/john-d-fox/ivreg/blob/HEAD/vignettes/ivreg.Rmd" class="external-link"><code>vignettes/ivreg.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/zeileis/ivreg/blob/HEAD/vignettes/ivreg.Rmd" class="external-link"><code>vignettes/ivreg.Rmd</code></a></small>
       <div class="hidden name"><code>ivreg.Rmd</code></div>
 
     </div>
@@ -135,9 +135,9 @@ packages, among others.</p>
 introduction and an article introducing the regression diagnostics and
 graphics:</p>
 <ul>
-<li><a href="https://john-d-fox.github.io/ivreg/articles/ivreg.html">ivreg:
+<li><a href="https://zeileis.github.io/ivreg/articles/ivreg.html">ivreg:
 Two-Stage Least-Squares Regression with Diagnostics</a></li>
-<li><a href="https://john-d-fox.github.io/ivreg/articles/Diagnostics-for-2SLS-Regression.html">Diagnostics
+<li><a href="https://zeileis.github.io/ivreg/articles/Diagnostics-for-2SLS-Regression.html">Diagnostics
 for 2SLS Regression</a></li>
 </ul>
 </div>
@@ -150,12 +150,12 @@ installed along with all dependencies via</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"ivreg"</span>, dependencies <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
 <p>The development version of <strong>ivreg</strong> is hosted on GitHub
-at <a href="https://github.com/john-d-fox/ivreg/" class="external-link uri">https://github.com/john-d-fox/ivreg/</a>. It can be
+at <a href="https://github.com/zeileis/ivreg/" class="external-link uri">https://github.com/zeileis/ivreg/</a>. It can be
 conveniently installed installed via the <code>install_github()</code>
 function in the <a href="https://CRAN.R-project.org/package=remotes" class="external-link"><strong>remotes</strong></a>
 package:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu">remotes</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"https://github.com/john-d-fox/ivreg/"</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu">remotes</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"https://github.com/zeileis/ivreg/"</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="instrumental-variables-regression">Instrumental variables regression<a class="anchor" aria-label="anchor" href="#instrumental-variables-regression"></a>
@@ -272,7 +272,7 @@ to estimate all of the regression coefficients in the model.</p>
 formula from <code><a href="https://rdrr.io/r/stats/lm.html" class="external-link">lm()</a></code> above, adding a second part after the
 <code>|</code> separator to specify the instrumental variables:</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="st"><a href="https://john-d-fox.github.io/ivreg/">"ivreg"</a></span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="st"><a href="https://zeileis.github.io/ivreg/">"ivreg"</a></span><span class="op">)</span></span>
 <span><span class="va">m_iv</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/ivreg.html">ivreg</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Log.html" class="external-link">log</a></span><span class="op">(</span><span class="va">wage</span><span class="op">)</span> <span class="op">~</span> <span class="va">education</span> <span class="op">+</span> <span class="fu"><a href="https://rdrr.io/r/stats/poly.html" class="external-link">poly</a></span><span class="op">(</span><span class="va">experience</span>, <span class="fl">2</span><span class="op">)</span> <span class="op">+</span> <span class="va">ethnicity</span> <span class="op">+</span> <span class="va">smsa</span> <span class="op">+</span> <span class="va">south</span> <span class="op">|</span></span>
 <span>  <span class="va">nearcollege</span> <span class="op">+</span> <span class="fu"><a href="https://rdrr.io/r/stats/poly.html" class="external-link">poly</a></span><span class="op">(</span><span class="va">age</span>, <span class="fl">2</span><span class="op">)</span> <span class="op">+</span> <span class="va">ethnicity</span> <span class="op">+</span> <span class="va">smsa</span> <span class="op">+</span> <span class="va">south</span>,</span>
 <span>  data <span class="op">=</span> <span class="va">SchoolingReturns</span><span class="op">)</span></span></code></pre></div>
