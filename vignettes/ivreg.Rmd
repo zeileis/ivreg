@@ -9,7 +9,7 @@ output:
 vignette: >
   %\VignetteIndexEntry{ivreg: Two-Stage Least-Squares Regression with Diagnostics}
   %\VignetteEngine{knitr::rmarkdown}
-  %\VignetteDepends{ivreg,car,effects,sandwich,modelsummary}
+  %\VignetteDepends{ivreg,car,effects,sandwich,modelsummary,gt}
   %\VignetteKeywords{two-stage least squares, instrumental variables, diagnostics}
   %\VignettePackage{ivreg}
   %\VignetteEncoding{UTF-8}

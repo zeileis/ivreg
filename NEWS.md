@@ -1,3 +1,10 @@
+# Version 0.6-3
+
+* The `gt` rather than the `kableExtra` package (recently not actively maintained)
+  is used now for the `modelsummary` table shown in the package vignette (contributed
+  by Vincent Arel-Bundock).
+
+
 # Version 0.6-2
 
 * Achim Zeileis took over maintenance, both on CRAN and on GitHub. The GitHub
