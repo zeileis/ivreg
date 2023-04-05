@@ -24,6 +24,7 @@ Suggests:
     sandwich,
     testthat,
     modelsummary,
+    gt,
     ggplot2
 Encoding: UTF-8
 LazyData: true
