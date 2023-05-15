@@ -36,7 +36,7 @@ ivreg(Q ~ P + D | D + F + A, data = Kmenta)
 exams::tex2image("\\begin{eqnarray*}
   y                                  & = & X \\beta + \\varepsilon \\\\
   \\widehat{X}                       & = & Z (Z^\\top Z)^{-1} Z^\\top X \\\\
-  \\widehat{\\beta}_{\\mathrm{2SLS}} & = & (\\widehat{X}^\\top \\widehat{X}) \\widehat{X}^\\top y
+  \\widehat{\\beta}_{\\mathrm{2SLS}} & = & (\\widehat{X}^\\top \\widehat{X})^{-1} \\widehat{X}^\\top y
 \\end{eqnarray*}",
   format = "svg", header = "", pt = 14,
   dir = file.path(getwd(), "man", "figures"), name = "README-2sls")
