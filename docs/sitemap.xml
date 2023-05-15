@@ -1,33 +1,48 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://john-d-fox.github.io/ivreg//index.html</loc>
+    <loc>https://zeileis.github.io/ivreg/404.html</loc>
   </url>
   <url>
-    <loc>https://john-d-fox.github.io/ivreg//reference/CigaretteDemand.html</loc>
+    <loc>https://zeileis.github.io/ivreg/articles/Diagnostics-for-2SLS-Regression.html</loc>
   </url>
   <url>
-    <loc>https://john-d-fox.github.io/ivreg//reference/Kmenta.html</loc>
+    <loc>https://zeileis.github.io/ivreg/articles/index.html</loc>
   </url>
   <url>
-    <loc>https://john-d-fox.github.io/ivreg//reference/SchoolingReturns.html</loc>
+    <loc>https://zeileis.github.io/ivreg/articles/ivreg.html</loc>
   </url>
   <url>
-    <loc>https://john-d-fox.github.io/ivreg//reference/ivreg.html</loc>
+    <loc>https://zeileis.github.io/ivreg/authors.html</loc>
   </url>
   <url>
-    <loc>https://john-d-fox.github.io/ivreg//reference/ivreg.fit.html</loc>
+    <loc>https://zeileis.github.io/ivreg/index.html</loc>
   </url>
   <url>
-    <loc>https://john-d-fox.github.io/ivreg//reference/ivregDiagnostics.html</loc>
+    <loc>https://zeileis.github.io/ivreg/news/index.html</loc>
   </url>
   <url>
-    <loc>https://john-d-fox.github.io/ivreg//reference/ivregMethods.html</loc>
+    <loc>https://zeileis.github.io/ivreg/reference/CigaretteDemand.html</loc>
   </url>
   <url>
-    <loc>https://john-d-fox.github.io/ivreg//articles/Diagnostics-for-2SLS-Regression.html</loc>
+    <loc>https://zeileis.github.io/ivreg/reference/Kmenta.html</loc>
   </url>
   <url>
-    <loc>https://john-d-fox.github.io/ivreg//articles/ivreg.html</loc>
+    <loc>https://zeileis.github.io/ivreg/reference/SchoolingReturns.html</loc>
+  </url>
+  <url>
+    <loc>https://zeileis.github.io/ivreg/reference/index.html</loc>
+  </url>
+  <url>
+    <loc>https://zeileis.github.io/ivreg/reference/ivreg.fit.html</loc>
+  </url>
+  <url>
+    <loc>https://zeileis.github.io/ivreg/reference/ivreg.html</loc>
+  </url>
+  <url>
+    <loc>https://zeileis.github.io/ivreg/reference/ivregDiagnostics.html</loc>
+  </url>
+  <url>
+    <loc>https://zeileis.github.io/ivreg/reference/ivregMethods.html</loc>
   </url>
 </urlset>
