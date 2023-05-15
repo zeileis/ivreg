@@ -57,10 +57,12 @@ plot(predictorEffect("P", deq, residuals = TRUE), partial.residuals = list(span 
 
 ```{r qqplot, echo=FALSE, results="hide", message=FALSE, fig.height=4.7, fig.width=5, fig.show="hide"}
 qqPlot(deq, main = "QQ plot")
+## mtext("QQ plot", line = 1.5, cex = 1.2, font = 2)
 ```
 
 ```{r influenceplot, echo=FALSE, results="hide", message=FALSE, fig.height=4.7, fig.width=5, fig.show="hide"}
-influencePlot(deq, main = "Influence plot")
+influencePlot(deq, main = "")
+mtext("Influence plot", line = 2, cex = 1.2, font = 2)
 ```
 
 <img alt="Effects plot" src="man/figures/README-effects-1.png" width="33%">
