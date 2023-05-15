@@ -4,6 +4,8 @@
   is used now for the `modelsummary` table shown in the package vignette (contributed
   by Vincent Arel-Bundock).
 
+* Further small improvements in the package vignettes.
+
 
 # Version 0.6-2
 
