@@ -1,7 +1,7 @@
 ---
 title: "ivreg: Two-Stage Least-Squares Regression with Diagnostics"
 author: "John Fox, Christian Kleiber, Achim Zeileis"
-date: "last modified: 2020-08-04"
+date: "last modified: 2023-05-16"
 output:
   rmarkdown::html_vignette:
     highlight: monochrome
@@ -61,7 +61,7 @@ install.packages("ivreg", dependencies = TRUE)
 ```
 
 The development version of **ivreg** is hosted on GitHub at <https://github.com/zeileis/ivreg/>.
-It can be conveniently installed installed via the `install_github()` function in the
+It can be conveniently installed via the `install_github()` function in the
 [**remotes**](https://CRAN.R-project.org/package=remotes) package:
 
 ```{r installation-rforge, eval=FALSE}
