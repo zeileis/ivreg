@@ -1,7 +1,7 @@
 ---
 title: "Diagnostics for 2SLS Regression"
 author: "John Fox, Christian Kleiber, Achim Zeileis"
-date: "last modified: 2020-11-19"
+date: "last modified: 2023-05-16"
 output:
   rmarkdown::html_vignette:
     highlight: monochrome
@@ -23,7 +23,7 @@ knitr::opts_chunk$set(echo = TRUE, fig.height=4, fig.width=4)
 
 ## Introduction
 
-The **ivreg** package extends a variety of standard numeric and graphical regression  diagnostics to linear models fit by *two-stage least-squares (2SLS)* regression, a commonly employed method of instrumental-variables estimation for potentially overidentified structural equations in which there are endogenous regressors. The `ivreg.fit()` function in the package computes the 2SLS estimator employing a low-level interface not generally intended for direct use, and returns a list containing quantities that facilitate the computation of various diagnostics. The `ivreg()` function provides a user-friendly formula-based interface to `ivreg.fit()`.
+The **ivreg** package extends a variety of standard numeric and graphical regression  diagnostics to linear models fit by *two-stage least-squares (2SLS)* regression, a commonly employed method of instrumental-variables estimation for potentially overidentified structural equations in which there are endogenous regressors [see e.g., @Greene2003]. The `ivreg.fit()` function in the package computes the 2SLS estimator employing a low-level interface not generally intended for direct use, and returns a list containing quantities that facilitate the computation of various diagnostics. The `ivreg()` function provides a user-friendly formula-based interface to `ivreg.fit()`.
 
 `ivreg()` is derived from and supersedes the `ivreg()` function in the **AER** package [@KleiberZeileis2008], making additional provision for regression diagnostics. The principal subject of this vignette is the rationale for the extension of various standard regression diagnostics to 2SLS and the use of functions in the **ivreg** package to compute them, along with functions in other packages, specifically the base-R **stats** package [@R] and the **car** and **effects** packages [@FoxWeisberg2019], that work with the `"ivreg"` objects produced by `ivreg()`.
 
@@ -40,7 +40,7 @@ The *first stage* of 2SLS regresses all of regressors in the model matrix $X$ on
 
 Because the columns of $\widehat{X}$ are linear combinations of the columns of $Z$, they are (asymptotically) uncorrelated with $\varepsilon$, making them suitable IVs for estimating the regression equation. This IV step is the *second stage* of 2SLS in Theil's approach.
 
-As an alternative, we can obtain exactly the same estimates $b_{\mathrm{2SLS}}$ of $\beta$ by performing an OLS regression of $y$ on $\widehat{X}$, producing $b_{\mathrm{2SLS}} = (\widehat{X}^\top \widehat{X}) \widehat{X}^\top y$. This is Basmann's approach and it motivates the name "2SLS." 
+As an alternative, we can obtain exactly the same estimates $b_{\mathrm{2SLS}}$ of $\beta$ by performing an OLS regression of $y$ on $\widehat{X}$, producing $b_{\mathrm{2SLS}} = (\widehat{X}^\top \widehat{X})^{-1} \widehat{X}^\top y$. This is Basmann's approach and it motivates the name "2SLS." 
 
 Whether we think of the second stage as IV estimation or OLS regression, we can combine the two stages into a single formula:
 $$
@@ -162,7 +162,7 @@ summary(deq)
 seq <- ivreg(Q ~ P + F + A | D + F + A, data=Kmenta) # supply equation
 summary(seq)
 ```
-By default, `summary()` prints the results of three "diagnostic" tests for 2SLS regression. These tests (which can be suppressed by setting the argument `diagnostics=FALSE`) are not the focus of the vignette and so we'll comment on them only briefly:
+By default, `summary()` prints the results of three "diagnostic" tests for 2SLS regression [see e.g., @Greene2003]. These tests (which can be suppressed by setting the argument `diagnostics=FALSE`) are not the focus of the vignette and so we'll comment on them only briefly:
 
 * A good instrumental variable is highly correlated with one or more of the explanatory variables while remaining uncorrelated with the errors. If an endogenous regressor is only weakly related to the instrumental variables, then its coefficient will be estimated imprecisely. We hope for a large test statistic and small $p$-value in the diagnostic test for weak instruments, as is the case for both regression equations in the Kmenta model.
 

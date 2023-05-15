@@ -178,7 +178,7 @@ round(deq3$rweights, 2) # robustness weights
 
 }
 \references{
-Greene, W.H. (1993) \emph{Econometric Analysis}, 2nd ed., Macmillan.
+Greene, W.H. (2003) \emph{Econometric Analysis}, 5th ed., Upper Saddle River: Prentice Hall.
 }
 \seealso{
 \code{\link{ivreg.fit}}, \code{\link{ivregDiagnostics}}, \code{\link{ivregMethods}},

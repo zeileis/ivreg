@@ -116,7 +116,7 @@
 #' \code{"projected"} is the matrix of regressors projected on the image of the instruments.}
 #' @seealso \code{\link{ivreg.fit}}, \code{\link{ivregDiagnostics}}, \code{\link{ivregMethods}},
 #' \code{\link[stats]{lm}}, \code{\link[stats:lmfit]{lm.fit}}
-#' @references Greene, W.H. (1993) \emph{Econometric Analysis}, 2nd ed., Macmillan.
+#' @references Greene, W.H. (2003) \emph{Econometric Analysis}, 5th ed., Upper Saddle River: Prentice Hall.
 #' @keywords regression
 #' @examples
 #' ## data
