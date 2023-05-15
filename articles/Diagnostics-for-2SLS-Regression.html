@@ -97,7 +97,7 @@
 Christian Kleiber, Achim Zeileis</h4>
             
             <h4 data-toc-skip class="date">last modified:
-2020-11-19</h4>
+2023-05-16</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/zeileis/ivreg/blob/HEAD/vignettes/Diagnostics-for-2SLS-Regression.Rmd" class="external-link"><code>vignettes/Diagnostics-for-2SLS-Regression.Rmd</code></a></small>
       <div class="hidden name"><code>Diagnostics-for-2SLS-Regression.Rmd</code></div>
@@ -114,12 +114,13 @@ numeric and graphical regression diagnostics to linear models fit by
 <em>two-stage least-squares (2SLS)</em> regression, a commonly employed
 method of instrumental-variables estimation for potentially
 overidentified structural equations in which there are endogenous
-regressors. The <code><a href="../reference/ivreg.fit.html">ivreg.fit()</a></code> function in the package
-computes the 2SLS estimator employing a low-level interface not
-generally intended for direct use, and returns a list containing
-quantities that facilitate the computation of various diagnostics. The
-<code><a href="../reference/ivreg.html">ivreg()</a></code> function provides a user-friendly formula-based
-interface to <code><a href="../reference/ivreg.fit.html">ivreg.fit()</a></code>.</p>
+regressors <span class="citation">(see e.g., Greene 2003)</span>. The
+<code><a href="../reference/ivreg.fit.html">ivreg.fit()</a></code> function in the package computes the 2SLS
+estimator employing a low-level interface not generally intended for
+direct use, and returns a list containing quantities that facilitate the
+computation of various diagnostics. The <code><a href="../reference/ivreg.html">ivreg()</a></code> function
+provides a user-friendly formula-based interface to
+<code><a href="../reference/ivreg.fit.html">ivreg.fit()</a></code>.</p>
 <p><code><a href="../reference/ivreg.html">ivreg()</a></code> is derived from and supersedes the
 <code><a href="../reference/ivreg.html">ivreg()</a></code> function in the <strong>AER</strong> package <span class="citation">(Kleiber and Zeileis 2008)</span>, making additional
 provision for regression diagnostics. The principal subject of this
@@ -179,9 +180,9 @@ the columns of <span class="math inline">\(Z\)</span>, they are
 estimating the regression equation. This IV step is the <em>second
 stage</em> of 2SLS in Theil’s approach.</p>
 <p>As an alternative, we can obtain exactly the same estimates <span class="math inline">\(b_{\mathrm{2SLS}}\)</span> of <span class="math inline">\(\beta\)</span> by performing an OLS regression of
-<span class="math inline">\(y\)</span> on <span class="math inline">\(\widehat{X}\)</span>, producing <span class="math inline">\(b_{\mathrm{2SLS}} = (\widehat{X}^\top \widehat{X})
-\widehat{X}^\top y\)</span>. This is Basmann’s approach and it motivates
-the name “2SLS.”</p>
+<span class="math inline">\(y\)</span> on <span class="math inline">\(\widehat{X}\)</span>, producing <span class="math inline">\(b_{\mathrm{2SLS}} = (\widehat{X}^\top
+\widehat{X})^{-1} \widehat{X}^\top y\)</span>. This is Basmann’s
+approach and it motivates the name “2SLS.”</p>
 <p>Whether we think of the second stage as IV estimation or OLS
 regression, we can combine the two stages into a single formula: <span class="math display">\[
 b_{\mathrm{2SLS}} = [X^\top Z(Z^\top Z)^{-1} Z^\top X]^{-1} X^\top Z
@@ -481,10 +482,10 @@ P &amp;= 85.00 + 0.75 D - 0.50 F - 0.90 A + \nu_2
 <span><span class="co">## Multiple R-Squared: 0.6396,  Adjusted R-squared: 0.572 </span></span>
 <span><span class="co">## Wald test:  10.7 on 3 and 16 DF,  p-value: 0.0004196</span></span></code></pre>
 <p>By default, <code><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary()</a></code> prints the results of three
-“diagnostic” tests for 2SLS regression. These tests (which can be
-suppressed by setting the argument <code>diagnostics=FALSE</code>) are
-not the focus of the vignette and so we’ll comment on them only
-briefly:</p>
+“diagnostic” tests for 2SLS regression <span class="citation">(see e.g.,
+Greene 2003)</span>. These tests (which can be suppressed by setting the
+argument <code>diagnostics=FALSE</code>) are not the focus of the
+vignette and so we’ll comment on them only briefly:</p>
 <ul>
 <li><p>A good instrumental variable is highly correlated with one or
 more of the explanatory variables while remaining uncorrelated with the
@@ -1393,6 +1394,10 @@ Residuals.”</span> <em>Journal of Statistical Software</em> 87 (9):
 <div id="ref-FoxWeisberg2019" class="csl-entry">
 ———. 2019. <em>An <span>R</span> Companion to Applied Regression</em>.
 3rd ed. Thousand Oaks: Sage.
+</div>
+<div id="ref-Greene2003" class="csl-entry">
+Greene, W. H. 2003. <em>Econometric Analysis</em>. 5th ed. Upper Saddle
+River: Prentice Hall.
 </div>
 <div id="ref-Huber1967" class="csl-entry">
 Huber, P. J. 1967. <span>“The Behavior of Maximum Likelihood Estimation
