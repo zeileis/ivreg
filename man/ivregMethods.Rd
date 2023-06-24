@@ -43,11 +43,11 @@
   ...
 )
 
-\method{bread}{ivreg}(x, ...)
+bread.ivreg(x, ...)
 
-\method{estfun}{ivreg}(x, ...)
+estfun.ivreg(x, ...)
 
-\method{vcovHC}{ivreg}(x, ...)
+vcovHC.ivreg(x, ...)
 
 \method{terms}{ivreg}(x, component = c("regressors", "instruments", "full"), ...)
 
@@ -64,6 +64,11 @@
   newdata,
   type = c("response", "terms"),
   na.action = na.pass,
+  se.fit = FALSE,
+  interval = c("none", "confidence", "prediction"),
+  df = Inf,
+  level = 0.95,
+  weights,
   ...
 )
 
@@ -89,11 +94,11 @@
   ...
 )
 
-\method{Effect}{ivreg}(focal.predictors, mod, ...)
+Effect.ivreg(focal.predictors, mod, ...)
 
 \method{formula}{ivreg}(x, component = c("complete", "regressors", "instruments"), ...)
 
-\method{find_formula}{ivreg}(x, ...)
+find_formula.ivreg(x, ...)
 
 \method{Anova}{ivreg}(mod, test.statistic = c("F", "Chisq"), ...)
 
@@ -125,15 +130,19 @@ for \code{\link{coef}} and \code{\link{vcov}}, \code{"stage2"} or \code{"stage1"
 
 \item{parm}{parameters for which confidence intervals are to be computed; a vector or numbers or names; the default is all parameters.}
 
-\item{level}{confidence level; the default is \code{0.95}.}
+\item{level}{for confidence or prediction intervals, default \code{0.95}.}
 
 \item{vcov.}{Optional coefficient covariance matrix, or a function to compute the covariance matrix, to use in computing the model summary.}
 
-\item{df}{Optional residual degrees of freedom to use in computing model summary.}
+\item{df}{For \code{summary}, optional residual degrees of freedom to use in computing model summary. 
+For \code{predict}, degrees of freedom for computing t-distribution confidence- or prediction-interval limits; the
+default, \code{Inf}, is equivalent to using the normal distribution; if \code{NULL}, 
+\code{df} is taken from the residual degrees of freedom for the model.}
 
 \item{x}{An object of class \code{"ivreg"} or \code{"summary.ivreg"}.}
 
-\item{newdata}{Values of predictors for which to obtain predicted values.}
+\item{newdata}{Values of predictors for which to obtain predicted values; if missing
+predicted (i.e., fitted) values are computed for the data to which the model was fit.}
 
 \item{type}{For \code{predict}, one of \code{"response"} (the default)  or \code{"terms"};
 for \code{residuals}, one of \code{"response"} (the default), \code{"projected"}, \code{"regressors"},
@@ -144,6 +153,16 @@ for invariance-variance weights (which is \code{NULL} for an unweighted fit)
 or \code{"robustness"} for robustness weights (available for M or MM estimation).}
 
 \item{na.action}{\code{na} method to apply to predictor values for predictions; default is \code{\link{na.pass}}.}
+
+\item{se.fit}{Compute standard errors of predicted values (default \code{FALSE}).}
+
+\item{interval}{Type of interval to compute for predicted values: \code{"none"} (the default),
+\code{"confidence"} for confidence intervals for the expected response, or \code{"prediction"} for
+prediction intervals for future observations.}
+
+\item{weights}{Either a numeric vector or a one-sided formula to provide weights for prediction
+intervals when the fit is weighted. If \code{weights} and \code{newdata} are missing, the weights
+are those used for fitting the model.}
 
 \item{digits}{For printing.}
 

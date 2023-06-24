@@ -22,12 +22,16 @@
 #' for \code{\link{model.matrix}}, \code{"projected"}, \code{"regressors"}, or \code{"instruments"};
 #' for \code{\link{formula}}, \code{"regressors"}, \code{"instruments"},  or \code{"complete"};
 #' for \code{\link{coef}} and \code{\link{vcov}}, \code{"stage2"} or \code{"stage1"}.
-#' @param newdata Values of predictors for which to obtain predicted values.
+#' @param newdata Values of predictors for which to obtain predicted values; if missing
+#' predicted (i.e., fitted) values are computed for the data to which the model was fit.
 #' @param na.action \code{na} method to apply to predictor values for predictions; default is \code{\link{na.pass}}.
 #' @param digits For printing.
 #' @param signif.stars Show "significance stars" in summary output.
 #' @param vcov. Optional coefficient covariance matrix, or a function to compute the covariance matrix, to use in computing the model summary.
-#' @param df Optional residual degrees of freedom to use in computing model summary.
+#' @param df For \code{summary}, optional residual degrees of freedom to use in computing model summary. 
+#' For \code{predict}, degrees of freedom for computing t-distribution confidence- or prediction-interval limits; the
+#' default, \code{Inf}, is equivalent to using the normal distribution; if \code{NULL}, 
+#' \code{df} is taken from the residual degrees of freedom for the model.
 #' @param diagnostics Report 2SLS "diagnostic" tests in model summary (default is \code{TRUE}). 
 #' These tests are not to be confused with the \emph{regression diagnostics} provided elsewhere in the \pkg{ivreg}
 #' package: see \code{\link{ivregDiagnostics}}.
@@ -216,27 +220,147 @@ model.matrix.ivreg_projected <- function(object, ...) model.matrix.ivreg(object,
 #' \code{type = "deviance"} and \code{"pearson"}; for \code{weights}, \code{"variance"} (the default)
 #' for invariance-variance weights (which is \code{NULL} for an unweighted fit) 
 #' or \code{"robustness"} for robustness weights (available for M or MM estimation).
+#' @param se.fit Compute standard errors of predicted values (default \code{FALSE}).
+#' @param interval Type of interval to compute for predicted values: \code{"none"} (the default),
+#' \code{"confidence"} for confidence intervals for the expected response, or \code{"prediction"} for
+#' prediction intervals for future observations.
+#' @param level for confidence or prediction intervals, default \code{0.95}.
+#' @param weights Either a numeric vector or a one-sided formula to provide weights for prediction
+#' intervals when the fit is weighted. If \code{weights} and \code{newdata} are missing, the weights
+#' are those used for fitting the model.
 #' 
 #' @importFrom stats fitted
 #' @export
-predict.ivreg <- function(object, newdata, type = c("response", "terms"), na.action = na.pass,  ...)
+predict.ivreg <- function(object, newdata, type = c("response", "terms"), na.action = na.pass,
+                          se.fit = FALSE, interval = c("none", "confidence", "prediction"), 
+                          df = Inf, level = 0.95, weights, ...)
 {
+  ## type of prediction and type of confidence interval (if any)
   type <- match.arg(type, c("response", "terms"))
-  if (type == "response"){
-    if(missing(newdata)) fitted(object)
-    else {
-      mf <- model.frame(delete.response(object$terms$full), newdata,
-                        na.action = na.action, xlev = object$levels)
-      X <- model.matrix(delete.response(object$terms$regressors), mf,
-                        contrasts.arg = object$contrasts$regressors)
-      ok <- !is.na(object$coefficients)
-      drop(X[, ok, drop = FALSE] %*% object$coefficients[ok])
-    } 
+  interval <- match.arg(interval, c("none", "confidence", "prediction"))
+  
+  if (type == "response") {
+    ## stage 2 regressor matrix
+    if (missing(newdata)) {
+      X <- model.matrix(object, component = "regressors")
+    } else {
+      mf <- model.frame(delete.response(terms(object, component = "full")),
+                        data = newdata, na.action = na.action, xlev = object$levels)
+      X <- model.matrix(delete.response(terms(object, component = "regressors")),
+                        data = mf, contrasts.arg = object$contrasts$regressors)
+    }
+    
+    ## coefficients
+    cf <- coef(object, component = "stage2")
+    ok <- !is.na(cf)
+    if (any(!ok)) warning("aliased coefficients in model, dropped\n")
+    
+    ## fitted values
+    yhat <- drop(X[, ok, drop = FALSE] %*% cf[ok])
+    
+    ## standard errors and intervals: none
+    if (!se.fit && interval == "none") {
+      if (missing(newdata)){
+        return(naresid(object$na.action, yhat))
+      } else{ 
+        return(yhat)
+      }
+    } else {
+      X <- X[, ok, drop = FALSE]
+      V <- vcov(object, component = "stage2", complete = FALSE)
+      n <- nrow(X)
+      se <- numeric(n)
+      for (i in 1L:n) se[i] <- X[i,] %*% V %*% X[i,]
+      se <- sqrt(se)
+      result <- if (se.fit) {
+        cbind(fit = yhat, se.fit = se)
+      } else {
+        matrix(yhat, dimnames = list(NULL, "fit"))
+      }
+      if (interval == "none"){
+        if (missing(newdata)){
+          return(naresid(object$na.action, result))
+        } else {
+          return(result)
+        }
+      }
+      if (is.null(df)) df <- df.residual(object)
+      t.crit <- qt((1 - level) / 2, df = df, lower.tail = FALSE)
+      if (interval == "confidence") {
+        lwr <- yhat - t.crit * se
+        upr <- yhat + t.crit * se
+      } else {
+        wts <- 1
+        
+        # ------- the following code adapted from predict.lm() --------#
+        
+        if (missing(newdata)){
+          warning("predictions on current data refer to future responses\n")
+        }
+        if (missing(newdata) && missing(weights)) {
+          w <- weights(object, type = "variance")
+          if (!is.null(w)) {
+            wts <- w
+            warning("assuming prediction variance inversely proportional to weights used for fitting\n")
+          }
+        }
+        if (!missing(newdata) && missing(weights) && !is.null(object$weights)) {
+          warning("assuming constant prediction variance even though model fit is weighted\n")
+        }
+        if (!missing(weights)) {
+          if (inherits(weights, "formula")) {
+            if (length(weights) != 2L){
+              stop("'weights' as formula should be one-sided")
+            }
+            d <- if (missing(newdata)) {
+              model.frame(object)
+            } else {
+              newdata
+            }
+            wts <- eval(weights[[2L]], d, environment(weights))
+          } else {
+            wts <- weights
+          }
+        }
+        
+        # --------------- end of adapted code ----------------#
+        
+        sigma <- sigma(object)
+        se.tot <- sqrt(se^2 + wts * sigma^2)
+        lwr <- yhat - t.crit * se.tot
+        upr <- yhat + t.crit * se.tot
+      }
+      result <- cbind(result, lwr = lwr, upr = upr)
+      if (missing(newdata)){
+        return(naresid(object$na.action, result))
+      } else {
+        return(result)
+      }
+    }
   } else {
-      .Class <- "lm"
-      suppressWarnings(NextMethod())
+    .Class <- "lm"
+    suppressWarnings(NextMethod())
   }
 }
+
+# predict.ivreg <- function(object, newdata, type = c("response", "terms"), na.action = na.pass,  ...)
+# {
+#   type <- match.arg(type, c("response", "terms"))
+#   if (type == "response"){
+#     if(missing(newdata)) fitted(object)
+#     else {
+#       mf <- model.frame(delete.response(object$terms$full), newdata,
+#                         na.action = na.action, xlev = object$levels)
+#       X <- model.matrix(delete.response(object$terms$regressors), mf,
+#                         contrasts.arg = object$contrasts$regressors)
+#       ok <- !is.na(object$coefficients)
+#       drop(X[, ok, drop = FALSE] %*% object$coefficients[ok])
+#     } 
+#   } else {
+#       .Class <- "lm"
+#       suppressWarnings(NextMethod())
+#   }
+# }
 
 #' @rdname ivregMethods
 #' @export
