@@ -1,5 +1,8 @@
 # Version 0.6-3
 
+* Enhanced `predict.ivreg()` method, which optionally provides standard errors,
+  confidence intervals, and prediction intervals for predicted values.
+
 * The `gt` rather than the `kableExtra` package (recently not actively maintained)
   is used now for the `modelsummary` table shown in the package vignette (contributed
   by Vincent Arel-Bundock).
