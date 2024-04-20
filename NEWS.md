@@ -3,11 +3,13 @@
 * Enhanced `predict.ivreg()` method, which optionally provides standard errors,
   confidence intervals, and prediction intervals for predicted values.
 
-* The `gt` rather than the `kableExtra` package (recently not actively maintained)
+* The `tinytable` rather than the `kableExtra` package (recently not actively maintained)
   is used now for the `modelsummary` table shown in the package vignette (contributed
   by Vincent Arel-Bundock).
 
 * Further small improvements in the package vignettes.
+
+* Improve non-anchored links in manual pages (prompted by CRAN).
 
 
 # Version 0.6-2

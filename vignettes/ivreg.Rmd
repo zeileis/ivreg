@@ -1,7 +1,7 @@
 ---
 title: "ivreg: Two-Stage Least-Squares Regression with Diagnostics"
 author: "John Fox, Christian Kleiber, Achim Zeileis"
-date: "last modified: 2023-05-16"
+date: "last modified: 2024-04-20"
 output:
   rmarkdown::html_vignette:
     highlight: monochrome
@@ -9,7 +9,7 @@ output:
 vignette: >
   %\VignetteIndexEntry{ivreg: Two-Stage Least-Squares Regression with Diagnostics}
   %\VignetteEngine{knitr::rmarkdown}
-  %\VignetteDepends{ivreg,car,effects,sandwich,modelsummary,gt}
+  %\VignetteDepends{ivreg,car,effects,sandwich,modelsummary}
   %\VignetteKeywords{two-stage least squares, instrumental variables, diagnostics}
   %\VignettePackage{ivreg}
   %\VignetteEncoding{UTF-8}
@@ -17,7 +17,6 @@ vignette: >
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE, fig.height=4, fig.width=4)
-options(modelsummary_factory_default = "gt")
 ```
 
 ## Overview
@@ -162,7 +161,7 @@ out more clearly when showing coefficients and standard errors side by side, e.g
 `compareCoefs()` function from the **car** package or the `msummary()` function from the
 [**modelsummary**](https://CRAN.R-project.org/package=modelsummary) package:
 
-```{r modelsummary}
+```{r modelsummary, message=FALSE}
 library("modelsummary")
 m_list <- list(OLS = m_ols, IV = m_iv)
 msummary(m_list)
