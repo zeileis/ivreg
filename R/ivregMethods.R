@@ -40,7 +40,7 @@
 #' the default for \code{Anova()} and \code{linearHypothesis()}, which also allow \code{test = "Chisq"} for
 #' asymptotic tests.
 #' @param hypothesis.matrix,rhs For formulating a linear hypothesis; see the documentation
-#' for \code{\link{linearHypothesis}} for details.
+#' for \code{\link[car]{linearHypothesis}} for details.
 #' @param formula. To update model.
 #' @param evaluate If \code{TRUE}, the default, the updated model is evaluated; if \code{FALSE} the updated call is returned.
 #' @param complete If \code{TRUE}, the default, the returned coefficient vector (for \code{coef()}) or coefficient-covariance matrix (for \code{vcov}) includes elements for aliased regressors.
