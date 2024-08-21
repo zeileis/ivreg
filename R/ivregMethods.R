@@ -136,13 +136,13 @@ confint.ivreg <- function (object, parm, level = 0.95,
 }
 
 #' @rdname ivregMethods
-#' @exportS3Method sandwich::bread ivreg
+#' @exportS3Method sandwich::bread
 bread.ivreg <- function (x, ...) 
     x$cov.unscaled * x$nobs
 
 #' @rdname ivregMethods
 #' @importFrom stats weights
-#' @exportS3Method sandwich::estfun ivreg
+#' @exportS3Method sandwich::estfun
 estfun.ivreg <- function (x, ...) 
 {
     xmat <- model.matrix(x, component = "projected")
@@ -157,7 +157,7 @@ estfun.ivreg <- function (x, ...)
 }
 
 #' @rdname ivregMethods
-#' @exportS3Method sandwich::vcovHC ivreg
+#' @exportS3Method sandwich::vcovHC
 vcovHC.ivreg <- function (x, ...) {
     class(x) <- c("ivreg_projected", "ivreg")
     sandwich::vcovHC.default(x, ...)
@@ -659,7 +659,7 @@ residuals.ivreg <- function(object, type=c("response", "projected", "regressors"
 
 #' @rdname ivregMethods
 #' @param focal.predictors Focal predictors for effect plot, see \code{\link[effects:effect]{Effect}}.
-#' @exportS3Method effects::Effect ivreg
+#' @exportS3Method effects::Effect
 Effect.ivreg <- function (focal.predictors, mod, ...) {
   mod$contrasts <- mod$contrasts$regressors
   NextMethod()
@@ -680,7 +680,7 @@ formula.ivreg <- function(x, component = c("complete", "regressors", "instrument
 }
 
 #' @rdname ivregMethods
-#' @exportS3Method insight::find_formula ivreg
+#' @exportS3Method insight::find_formula 
 find_formula.ivreg <- function(x, ...) {
     list(conditional=formula(x, "regressors"), instruments=formula(x, "instruments"))
 }

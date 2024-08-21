@@ -288,7 +288,7 @@ hatvalues.ivreg <- function(model, type = c("stage2", "both", "maximum", "stage1
     #        model$coefficients1)
     # hat1 <- lm.influence(model)$hat/mean1
     hat1 <- if (model$method == "OLS"){
-      hats[, "stage_1"]
+      hats[, "stage_1"]/mean1
     } else {
       nendog <- ncol(hats) - 1
       if (type == "both"){

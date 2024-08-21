@@ -1,3 +1,7 @@
+# Version 0.6-4
+
+* Fixed bug in computing larger of stage-1 and -2 hatvalues in `hatvalues.ivreg()` (reported by Vasilis Syrgkanis).
+
 # Version 0.6-3
 
 * Enhanced `predict.ivreg()` method, which optionally provides standard errors,
