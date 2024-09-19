@@ -1,6 +1,8 @@
 # Version 0.6-4
 
-* Fixed bug in computing larger of stage-1 and -2 hatvalues in `hatvalues.ivreg()` (reported by Vasilis Syrgkanis).
+* Fixed bug in computing larger of stage-1 and -2 hatvalues in
+  `hatvalues.ivreg()` (reported by Vasilis Syrgkanis).
+
 
 # Version 0.6-3
 
