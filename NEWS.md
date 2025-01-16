@@ -1,3 +1,14 @@
+# Version 0.6-5
+
+* Better documentation for summary and inference methods for `ivreg()` objects
+  with a dedicated manual page `?summary.ivreg`. Along with the `summary()`
+  method this also documents the methods for `confint()`, `anova()`,
+  `Anova()`, and `linearHypothesis()`. All of these take an argument `vcov.`
+  so that alternative (e.g., so-called "robust") covariance matrices can be
+  plugged in. The `vcov.` processing is made somewhat more convenient and
+  consistent (suggested by Diogo Ferrari).
+
+
 # Version 0.6-4
 
 * Fixed bug in computing larger of stage-1 and -2 hatvalues in
