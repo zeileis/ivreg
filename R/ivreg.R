@@ -119,6 +119,10 @@
 #' @references Greene, W.H. (2003) \emph{Econometric Analysis}, 5th ed., Upper Saddle River: Prentice Hall.
 #' @keywords regression
 #' @examples
+#' \dontshow{ if(!requireNamespace("sandwich")) {
+#'   if(interactive() || is.na(Sys.getenv("_R_CHECK_PACKAGE_NAME_", NA))) {
+#'     stop("not all packages required for the example are installed")
+#'   } else q() }}
 #' ## data
 #' data("CigaretteDemand", package = "ivreg")
 #' 
