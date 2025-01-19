@@ -1,4 +1,4 @@
-library(testthat)
-library(ivreg)
+library("testthat")
+library("ivreg")
 
 test_check("ivreg")

@@ -10,9 +10,6 @@
 \alias{model.matrix.ivreg}
 \alias{predict.ivreg}
 \alias{print.ivreg}
-\alias{summary.ivreg}
-\alias{print.summary.ivreg}
-\alias{anova.ivreg}
 \alias{update.ivreg}
 \alias{residuals.ivreg}
 \alias{Effect.ivreg}
@@ -20,28 +17,14 @@
 \alias{find_formula.ivreg}
 \alias{alias.ivreg}
 \alias{qr.ivreg}
-\alias{confint.ivreg}
 \alias{vcovHC.ivreg}
 \alias{model.matrix.ivreg_projected}
-\alias{Anova.ivreg}
-\alias{linearHypothesis.ivreg}
 \alias{weights.ivreg}
 \title{Methods for \code{"ivreg"} Objects}
 \usage{
 \method{coef}{ivreg}(object, component = c("stage2", "stage1"), complete = TRUE, ...)
 
 \method{vcov}{ivreg}(object, component = c("stage2", "stage1"), complete = TRUE, ...)
-
-\method{confint}{ivreg}(
-  object,
-  parm,
-  level = 0.95,
-  component = c("stage2", "stage1"),
-  complete = TRUE,
-  vcov. = NULL,
-  df = NULL,
-  ...
-)
 
 \method{bread}{ivreg}(x, ...)
 
@@ -74,17 +57,6 @@
 
 \method{print}{ivreg}(x, digits = max(3, getOption("digits") - 3), ...)
 
-\method{summary}{ivreg}(object, vcov. = NULL, df = NULL, diagnostics = NULL, ...)
-
-\method{print}{summary.ivreg}(
-  x,
-  digits = max(3, getOption("digits") - 3),
-  signif.stars = getOption("show.signif.stars"),
-  ...
-)
-
-\method{anova}{ivreg}(object, object2, test = "F", vcov. = NULL, ...)
-
 \method{update}{ivreg}(object, formula., ..., evaluate = TRUE)
 
 \method{residuals}{ivreg}(
@@ -100,16 +72,6 @@
 
 \method{find_formula}{ivreg}(x, ...)
 
-\method{Anova}{ivreg}(mod, test.statistic = c("F", "Chisq"), ...)
-
-\method{linearHypothesis}{ivreg}(
-  model,
-  hypothesis.matrix,
-  rhs = NULL,
-  test = c("F", "Chisq"),
-  ...
-)
-
 \method{alias}{ivreg}(object, ...)
 
 \method{qr}{ivreg}(x, ...)
@@ -117,29 +79,18 @@
 \method{weights}{ivreg}(object, type = c("variance", "robustness"), ...)
 }
 \arguments{
-\item{object, object2, model, mod}{An object of class \code{"ivreg"}.}
+\item{object, model, mod}{An object of class \code{"ivreg"}.}
 
 \item{component}{For \code{\link{terms}}, \code{"regressors"}, \code{"instruments"}, or \code{"full"}; 
 for \code{\link{model.matrix}}, \code{"projected"}, \code{"regressors"}, or \code{"instruments"};
 for \code{\link{formula}}, \code{"regressors"}, \code{"instruments"},  or \code{"complete"};
 for \code{\link{coef}} and \code{\link{vcov}}, \code{"stage2"} or \code{"stage1"}.}
 
-\item{complete}{If \code{TRUE}, the default, the returned coefficient vector (for \code{coef()}) or coefficient-covariance matrix (for \code{vcov}) includes elements for aliased regressors.}
+\item{complete}{If \code{TRUE}, the default, the returned coefficient vector (for \code{coef}) or coefficient-covariance matrix (for \code{vcov}) includes elements for aliased regressors.}
 
 \item{...}{arguments to pass down.}
 
-\item{parm}{parameters for which confidence intervals are to be computed; a vector or numbers or names; the default is all parameters.}
-
-\item{level}{for confidence or prediction intervals, default \code{0.95}.}
-
-\item{vcov.}{Optional coefficient covariance matrix, or a function to compute the covariance matrix, to use in computing the model summary.}
-
-\item{df}{For \code{summary}, optional residual degrees of freedom to use in computing model summary. 
-For \code{predict}, degrees of freedom for computing t-distribution confidence- or prediction-interval limits; the
-default, \code{Inf}, is equivalent to using the normal distribution; if \code{NULL}, 
-\code{df} is taken from the residual degrees of freedom for the model.}
-
-\item{x}{An object of class \code{"ivreg"} or \code{"summary.ivreg"}.}
+\item{x}{An object of class \code{"ivreg"}.}
 
 \item{newdata}{Values of predictors for which to obtain predicted values; if missing
 predicted (i.e., fitted) values are computed for the data to which the model was fit.}
@@ -160,31 +111,25 @@ or \code{"robustness"} for robustness weights (available for M or MM estimation)
 \code{"confidence"} for confidence intervals for the expected response, or \code{"prediction"} for
 prediction intervals for future observations.}
 
+\item{df}{For \code{predict}, degrees of freedom for computing t-distribution confidence- or prediction-interval limits; the
+default, \code{Inf}, is equivalent to using the normal distribution; if \code{NULL}, 
+\code{df} is taken from the residual degrees of freedom for the model.
+These tests are not to be confused with the \emph{regression diagnostics} provided elsewhere in the \pkg{ivreg}
+package: see \code{\link{ivregDiagnostics}}.}
+
+\item{level}{for confidence or prediction intervals, default \code{0.95}.}
+
 \item{weights}{Either a numeric vector or a one-sided formula to provide weights for prediction
 intervals when the fit is weighted. If \code{weights} and \code{newdata} are missing, the weights
 are those used for fitting the model.}
 
 \item{digits}{For printing.}
 
-\item{diagnostics}{Report 2SLS "diagnostic" tests in model summary (default is \code{TRUE}). 
-These tests are not to be confused with the \emph{regression diagnostics} provided elsewhere in the \pkg{ivreg}
-package: see \code{\link{ivregDiagnostics}}.}
-
-\item{signif.stars}{Show "significance stars" in summary output.}
-
-\item{test, test.statistic}{Test statistics for ANOVA table computed by \code{anova()}, \code{Anova()},
-or \code{linearHypothesis()}. Only \code{test = "F"} is supported by \code{anova()}; this is also
-the default for \code{Anova()} and \code{linearHypothesis()}, which also allow \code{test = "Chisq"} for
-asymptotic tests.}
-
 \item{formula.}{To update model.}
 
 \item{evaluate}{If \code{TRUE}, the default, the updated model is evaluated; if \code{FALSE} the updated call is returned.}
 
 \item{focal.predictors}{Focal predictors for effect plot, see \code{\link[effects:effect]{Effect}}.}
-
-\item{hypothesis.matrix, rhs}{For formulating a linear hypothesis; see the documentation
-for \code{\link[car]{linearHypothesis}} for details.}
 }
 \description{
 Various methods for processing \code{"ivreg"} objects; for diagnostic methods,
