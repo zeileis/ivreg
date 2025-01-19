@@ -18,7 +18,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ivreg</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.6-4</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.6-5</span>
       </span>
     </div>
 
@@ -75,18 +75,6 @@
 <span><span class="fu"><a href="https://rdrr.io/r/stats/vcov.html" class="external-link">vcov</a></span><span class="op">(</span><span class="va">object</span>, component <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"stage2"</span>, <span class="st">"stage1"</span><span class="op">)</span>, complete <span class="op">=</span> <span class="cn">TRUE</span>, <span class="va">...</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># S3 method for class 'ivreg'</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/stats/confint.html" class="external-link">confint</a></span><span class="op">(</span></span>
-<span>  <span class="va">object</span>,</span>
-<span>  <span class="va">parm</span>,</span>
-<span>  level <span class="op">=</span> <span class="fl">0.95</span>,</span>
-<span>  component <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"stage2"</span>, <span class="st">"stage1"</span><span class="op">)</span>,</span>
-<span>  complete <span class="op">=</span> <span class="cn">TRUE</span>,</span>
-<span>  vcov. <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  df <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  <span class="va">...</span></span>
-<span><span class="op">)</span></span>
-<span></span>
-<span><span class="co"># S3 method for class 'ivreg'</span></span>
 <span><span class="fu"><a href="https://sandwich.R-Forge.R-project.org/reference/bread.html" class="external-link">bread</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">...</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># S3 method for class 'ivreg'</span></span>
@@ -126,20 +114,6 @@
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">x</span>, digits <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html" class="external-link">max</a></span><span class="op">(</span><span class="fl">3</span>, <span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">getOption</a></span><span class="op">(</span><span class="st">"digits"</span><span class="op">)</span> <span class="op">-</span> <span class="fl">3</span><span class="op">)</span>, <span class="va">...</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># S3 method for class 'ivreg'</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">object</span>, vcov. <span class="op">=</span> <span class="cn">NULL</span>, df <span class="op">=</span> <span class="cn">NULL</span>, diagnostics <span class="op">=</span> <span class="cn">NULL</span>, <span class="va">...</span><span class="op">)</span></span>
-<span></span>
-<span><span class="co"># S3 method for class 'summary.ivreg'</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span></span>
-<span>  <span class="va">x</span>,</span>
-<span>  digits <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html" class="external-link">max</a></span><span class="op">(</span><span class="fl">3</span>, <span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">getOption</a></span><span class="op">(</span><span class="st">"digits"</span><span class="op">)</span> <span class="op">-</span> <span class="fl">3</span><span class="op">)</span>,</span>
-<span>  signif.stars <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">getOption</a></span><span class="op">(</span><span class="st">"show.signif.stars"</span><span class="op">)</span>,</span>
-<span>  <span class="va">...</span></span>
-<span><span class="op">)</span></span>
-<span></span>
-<span><span class="co"># S3 method for class 'ivreg'</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/stats/anova.html" class="external-link">anova</a></span><span class="op">(</span><span class="va">object</span>, <span class="va">object2</span>, test <span class="op">=</span> <span class="st">"F"</span>, vcov. <span class="op">=</span> <span class="cn">NULL</span>, <span class="va">...</span><span class="op">)</span></span>
-<span></span>
-<span><span class="co"># S3 method for class 'ivreg'</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/stats/update.html" class="external-link">update</a></span><span class="op">(</span><span class="va">object</span>, <span class="va">formula.</span>, <span class="va">...</span>, evaluate <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># S3 method for class 'ivreg'</span></span>
@@ -160,18 +134,6 @@
 <span><span class="fu">find_formula</span><span class="op">(</span><span class="va">x</span>, <span class="va">...</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># S3 method for class 'ivreg'</span></span>
-<span><span class="fu">Anova</span><span class="op">(</span><span class="va">mod</span>, test.statistic <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"F"</span>, <span class="st">"Chisq"</span><span class="op">)</span>, <span class="va">...</span><span class="op">)</span></span>
-<span></span>
-<span><span class="co"># S3 method for class 'ivreg'</span></span>
-<span><span class="fu">linearHypothesis</span><span class="op">(</span></span>
-<span>  <span class="va">model</span>,</span>
-<span>  <span class="va">hypothesis.matrix</span>,</span>
-<span>  rhs <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  test <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"F"</span>, <span class="st">"Chisq"</span><span class="op">)</span>,</span>
-<span>  <span class="va">...</span></span>
-<span><span class="op">)</span></span>
-<span></span>
-<span><span class="co"># S3 method for class 'ivreg'</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/stats/alias.html" class="external-link">alias</a></span><span class="op">(</span><span class="va">object</span>, <span class="va">...</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># S3 method for class 'ivreg'</span></span>
@@ -185,7 +147,7 @@
     <h2>Arguments</h2>
 
 
-<dl><dt id="arg-object-object-model-mod">object, object2, model, mod<a class="anchor" aria-label="anchor" href="#arg-object-object-model-mod"></a></dt>
+<dl><dt id="arg-object-model-mod">object, model, mod<a class="anchor" aria-label="anchor" href="#arg-object-model-mod"></a></dt>
 <dd><p>An object of class <code>"ivreg"</code>.</p></dd>
 
 
@@ -197,34 +159,15 @@ for <code><a href="https://rdrr.io/r/stats/coef.html" class="external-link">coef
 
 
 <dt id="arg-complete">complete<a class="anchor" aria-label="anchor" href="#arg-complete"></a></dt>
-<dd><p>If <code>TRUE</code>, the default, the returned coefficient vector (for <code><a href="https://rdrr.io/r/stats/coef.html" class="external-link">coef()</a></code>) or coefficient-covariance matrix (for <code>vcov</code>) includes elements for aliased regressors.</p></dd>
+<dd><p>If <code>TRUE</code>, the default, the returned coefficient vector (for <code>coef</code>) or coefficient-covariance matrix (for <code>vcov</code>) includes elements for aliased regressors.</p></dd>
 
 
 <dt id="arg--">...<a class="anchor" aria-label="anchor" href="#arg--"></a></dt>
 <dd><p>arguments to pass down.</p></dd>
 
 
-<dt id="arg-parm">parm<a class="anchor" aria-label="anchor" href="#arg-parm"></a></dt>
-<dd><p>parameters for which confidence intervals are to be computed; a vector or numbers or names; the default is all parameters.</p></dd>
-
-
-<dt id="arg-level">level<a class="anchor" aria-label="anchor" href="#arg-level"></a></dt>
-<dd><p>for confidence or prediction intervals, default <code>0.95</code>.</p></dd>
-
-
-<dt id="arg-vcov-">vcov.<a class="anchor" aria-label="anchor" href="#arg-vcov-"></a></dt>
-<dd><p>Optional coefficient covariance matrix, or a function to compute the covariance matrix, to use in computing the model summary.</p></dd>
-
-
-<dt id="arg-df">df<a class="anchor" aria-label="anchor" href="#arg-df"></a></dt>
-<dd><p>For <code>summary</code>, optional residual degrees of freedom to use in computing model summary.
-For <code>predict</code>, degrees of freedom for computing t-distribution confidence- or prediction-interval limits; the
-default, <code>Inf</code>, is equivalent to using the normal distribution; if <code>NULL</code>,
-<code>df</code> is taken from the residual degrees of freedom for the model.</p></dd>
-
-
 <dt id="arg-x">x<a class="anchor" aria-label="anchor" href="#arg-x"></a></dt>
-<dd><p>An object of class <code>"ivreg"</code> or <code>"summary.ivreg"</code>.</p></dd>
+<dd><p>An object of class <code>"ivreg"</code>.</p></dd>
 
 
 <dt id="arg-newdata">newdata<a class="anchor" aria-label="anchor" href="#arg-newdata"></a></dt>
@@ -256,6 +199,18 @@ or <code>"robustness"</code> for robustness weights (available for M or MM estim
 prediction intervals for future observations.</p></dd>
 
 
+<dt id="arg-df">df<a class="anchor" aria-label="anchor" href="#arg-df"></a></dt>
+<dd><p>For <code>predict</code>, degrees of freedom for computing t-distribution confidence- or prediction-interval limits; the
+default, <code>Inf</code>, is equivalent to using the normal distribution; if <code>NULL</code>,
+<code>df</code> is taken from the residual degrees of freedom for the model.
+These tests are not to be confused with the <em>regression diagnostics</em> provided elsewhere in the <span class="pkg">ivreg</span>
+package: see <code><a href="ivregDiagnostics.html">ivregDiagnostics</a></code>.</p></dd>
+
+
+<dt id="arg-level">level<a class="anchor" aria-label="anchor" href="#arg-level"></a></dt>
+<dd><p>for confidence or prediction intervals, default <code>0.95</code>.</p></dd>
+
+
 <dt id="arg-weights">weights<a class="anchor" aria-label="anchor" href="#arg-weights"></a></dt>
 <dd><p>Either a numeric vector or a one-sided formula to provide weights for prediction
 intervals when the fit is weighted. If <code>weights</code> and <code>newdata</code> are missing, the weights
@@ -264,23 +219,6 @@ are those used for fitting the model.</p></dd>
 
 <dt id="arg-digits">digits<a class="anchor" aria-label="anchor" href="#arg-digits"></a></dt>
 <dd><p>For printing.</p></dd>
-
-
-<dt id="arg-diagnostics">diagnostics<a class="anchor" aria-label="anchor" href="#arg-diagnostics"></a></dt>
-<dd><p>Report 2SLS "diagnostic" tests in model summary (default is <code>TRUE</code>).
-These tests are not to be confused with the <em>regression diagnostics</em> provided elsewhere in the <span class="pkg">ivreg</span>
-package: see <code><a href="ivregDiagnostics.html">ivregDiagnostics</a></code>.</p></dd>
-
-
-<dt id="arg-signif-stars">signif.stars<a class="anchor" aria-label="anchor" href="#arg-signif-stars"></a></dt>
-<dd><p>Show "significance stars" in summary output.</p></dd>
-
-
-<dt id="arg-test-test-statistic">test, test.statistic<a class="anchor" aria-label="anchor" href="#arg-test-test-statistic"></a></dt>
-<dd><p>Test statistics for ANOVA table computed by <code><a href="https://rdrr.io/r/stats/anova.html" class="external-link">anova()</a></code>, <code>Anova()</code>,
-or <code>linearHypothesis()</code>. Only <code>test = "F"</code> is supported by <code><a href="https://rdrr.io/r/stats/anova.html" class="external-link">anova()</a></code>; this is also
-the default for <code>Anova()</code> and <code>linearHypothesis()</code>, which also allow <code>test = "Chisq"</code> for
-asymptotic tests.</p></dd>
 
 
 <dt id="arg-formula-">formula.<a class="anchor" aria-label="anchor" href="#arg-formula-"></a></dt>
@@ -293,11 +231,6 @@ asymptotic tests.</p></dd>
 
 <dt id="arg-focal-predictors">focal.predictors<a class="anchor" aria-label="anchor" href="#arg-focal-predictors"></a></dt>
 <dd><p>Focal predictors for effect plot, see <code><a href="https://rdrr.io/pkg/effects/man/effect.html" class="external-link">Effect</a></code>.</p></dd>
-
-
-<dt id="arg-hypothesis-matrix-rhs">hypothesis.matrix, rhs<a class="anchor" aria-label="anchor" href="#arg-hypothesis-matrix-rhs"></a></dt>
-<dd><p>For formulating a linear hypothesis; see the documentation
-for <code><a href="https://rdrr.io/pkg/car/man/linearHypothesis.html" class="external-link">linearHypothesis</a></code> for details.</p></dd>
 
 </dl></div>
     <div id="see-also">

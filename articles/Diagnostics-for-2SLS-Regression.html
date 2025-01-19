@@ -39,7 +39,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ivreg</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.6-4</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.6-5</span>
       </span>
     </div>
 
@@ -1252,6 +1252,9 @@ bootstrap replications are generated. For example:</p>
 <code class="sourceCode R"><span><span class="va">set.seed</span> <span class="op">&lt;-</span> <span class="fl">869255</span> <span class="co"># for reproducibility</span></span>
 <span><span class="va">b.deq2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/car/man/Boot.html" class="external-link">Boot</a></span><span class="op">(</span><span class="va">deq2</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">deq2</span>, vcov.<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/stats/vcov.html" class="external-link">vcov</a></span><span class="op">(</span><span class="va">b.deq2</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">## Warning in summary.ivreg(deq2, vcov. = vcov(b.deq2)): 'vcov.' must be a</span></span>
+<span><span class="co">## function for extracting covariance matrix estimates when using 'diagnostics =</span></span>
+<span><span class="co">## TRUE', using 'vcov. = NULL' instead</span></span></code></pre>
 <pre><code><span><span class="co">## </span></span>
 <span><span class="co">## Call:</span></span>
 <span><span class="co">## ivreg(formula = Q ~ P + D | D + F + A, data = Kmenta2)</span></span>
@@ -1262,9 +1265,9 @@ bootstrap replications are generated. For example:</p>
 <span><span class="co">## </span></span>
 <span><span class="co">## Coefficients:</span></span>
 <span><span class="co">##              Estimate Std. Error t value Pr(&gt;|t|)    </span></span>
-<span><span class="co">## (Intercept) 111.42774   16.70085   6.672 3.93e-06 ***</span></span>
-<span><span class="co">## P            -0.39072    0.19678  -1.986  0.06345 .  </span></span>
-<span><span class="co">## D             0.28415    0.09762   2.911  0.00974 ** </span></span>
+<span><span class="co">## (Intercept) 111.42774   11.36644   9.803 2.07e-08 ***</span></span>
+<span><span class="co">## P            -0.39072    0.13979  -2.795  0.01243 *  </span></span>
+<span><span class="co">## D             0.28415    0.07965   3.567  0.00237 ** </span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">## Diagnostic tests:</span></span>
 <span><span class="co">##                  df1 df2 statistic  p-value    </span></span>
@@ -1276,7 +1279,7 @@ bootstrap replications are generated. For example:</p>
 <span><span class="co">## </span></span>
 <span><span class="co">## Residual standard error: 3.283 on 17 degrees of freedom</span></span>
 <span><span class="co">## Multiple R-Squared: 0.521,   Adjusted R-squared: 0.4646 </span></span>
-<span><span class="co">## Wald test:  4.32 on 2 and 17 DF,  p-value: 0.03042</span></span></code></pre>
+<span><span class="co">## Wald test: 6.695 on 2 and 17 DF,  p-value: 0.007172</span></span></code></pre>
 <p>The bootstrap standard errors are larger than the conventional or
 sandwich standard errors for this example.</p>
 <p>Bootstrap confidence intervals can also be computed from the object
@@ -1285,7 +1288,7 @@ returned by <code><a href="https://rdrr.io/pkg/car/man/Boot.html" class="externa
 (<em>bias-corrected, accelerated</em>) intervals (see the documentation
 for <code>confint.boot()</code> in the <strong>car</strong>
 package):</p>
-<div class="sourceCode" id="cb64"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb65"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/confint.html" class="external-link">confint</a></span><span class="op">(</span><span class="va">b.deq2</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## Bootstrap bca confidence intervals</span></span>
 <span><span class="co">## </span></span>
@@ -1351,7 +1354,7 @@ variances of the errors in the demand equation are inversely
 proportional to the variable <code>w</code>. This is of course
 artificial knowledge, reflecting the manner in which the data were
 constructed. The weighted 2SLS estimator is therefore computed as</p>
-<div class="sourceCode" id="cb66"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb67"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">deqw</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/update.html" class="external-link">update</a></span><span class="op">(</span><span class="va">deq</span>, data<span class="op">=</span><span class="va">Kmenta2</span>, weights<span class="op">=</span><span class="fl">1</span><span class="op">/</span><span class="va">w</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">deqw</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## </span></span>
@@ -1384,18 +1387,18 @@ nonconstant error variance don’t indicate a heteroscedasticity problem,
 but there is a relatively large studentized residual of about
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>−</mo><mn>3</mn></mrow><annotation encoding="application/x-tex">-3</annotation></semantics></math>
 that stands out somewhat from the other values:</p>
-<div class="sourceCode" id="cb68"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb69"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/car/man/ncvTest.html" class="external-link">ncvTest</a></span><span class="op">(</span><span class="va">deqw</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## Non-constant Variance Score Test </span></span>
 <span><span class="co">## Variance formula: ~ fitted.values </span></span>
 <span><span class="co">## Chisquare = 4.21029, Df = 1, p = 0.040179</span></span></code></pre>
-<div class="sourceCode" id="cb70"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb71"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/fitted.values.html" class="external-link">fitted</a></span><span class="op">(</span><span class="va">deqw</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/stats/influence.measures.html" class="external-link">rstudent</a></span><span class="op">(</span><span class="va">deqw</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <p><img src="Diagnostics-for-2SLS-Regression_files/figure-html/unnamed-chunk-36-1.png" width="384"></p>
 <p>A Bonferroni outlier test suggests that the studentized residual
 isn’t unusually large, and once more we’re in the unusual situation of
 knowing that the model is correct.</p>
-<div class="sourceCode" id="cb71"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb72"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/car/man/outlierTest.html" class="external-link">outlierTest</a></span><span class="op">(</span><span class="va">deqw</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## No Studentized residuals with Bonferroni p &lt; 0.05</span></span>
 <span><span class="co">## Largest |rstudent|:</span></span>
@@ -1423,7 +1426,7 @@ employs the estimated covariance matrix of the coefficients, applies in
 general to models with linear predictors, including linear models
 estimated by 2SLS.</p>
 <p>For example, for the demand equation in Kmenta’s model:</p>
-<div class="sourceCode" id="cb73"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb74"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/MathFun.html" class="external-link">sqrt</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/car/man/vif.html" class="external-link">vif</a></span><span class="op">(</span><span class="va">deq</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">##        P        D </span></span>
 <span><span class="co">## 1.231124 1.231124</span></span></code></pre>
@@ -1456,7 +1459,7 @@ reduction in precision of estimation of each coefficient due to
 collinearity, which reduces the conditional variation of a regressor
 relative to its marginal variation. for example, for the demand
 equation:</p>
-<div class="sourceCode" id="cb75"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb76"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/car/man/mcPlots.html" class="external-link">mcPlots</a></span><span class="op">(</span><span class="va">deq</span><span class="op">)</span></span></code></pre></div>
 <p><img src="Diagnostics-for-2SLS-Regression_files/figure-html/unnamed-chunk-39-1.png" width="768"></p>
 <p>The blue points in each panel represent the marginal scatterplot and
@@ -1500,7 +1503,7 @@ of the demand equation in the corrupted Kmenta data, and compare the
 result to the traditional 2SLS estimator applied to the uncorrupted
 data, to the 2SLS estimator applied to the corrupted data, and to the
 2SLS estimator deleting the bad case:</p>
-<div class="sourceCode" id="cb76"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb77"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">deq.mm</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/update.html" class="external-link">update</a></span><span class="op">(</span><span class="va">deq1</span>, method <span class="op">=</span> <span class="st">"MM"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">deq.mm</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## </span></span>
@@ -1528,7 +1531,7 @@ data, to the 2SLS estimator applied to the corrupted data, and to the
 <span><span class="co">## Residual standard error: 2.08 on 17 degrees of freedom</span></span>
 <span><span class="co">## Multiple R-Squared: 0.09864, Adjusted R-squared: -0.007398 </span></span>
 <span><span class="co">## Wald test: 18.59 on 2 and 17 DF,  p-value: 5.262e-05</span></span></code></pre>
-<div class="sourceCode" id="cb78"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb79"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/car/man/compareCoefs.html" class="external-link">compareCoefs</a></span><span class="op">(</span><span class="va">deq</span>, <span class="va">deq1</span>, <span class="va">deq1.20</span>, <span class="va">deq.mm</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## Calls:</span></span>
 <span><span class="co">## 1: ivreg(formula = Q ~ P + D | D + F + A, data = Kmenta)</span></span>
@@ -1551,7 +1554,7 @@ similar to those for the 2SLS estimator applied to the uncorrupted data
 and when the bad case is deleted from the corrupted data.</p>
 <p>It’s instructive to look at the robustness weights for the first- and
 second-stage MM estimators:</p>
-<div class="sourceCode" id="cb80"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb81"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/weights.html" class="external-link">weights</a></span><span class="op">(</span><span class="va">deq.mm</span>, type <span class="op">=</span> <span class="st">"robustness"</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">##              P   stage_2</span></span>
 <span><span class="co">## 1922 0.9744449 0.9843442</span></span>
@@ -1590,7 +1593,7 @@ regressions are iterative.</p>
 <p>Here, for example, is a graph of second-stage hatvalues, studentized
 residuals, and Cook’s distances for the 2SMM estimator applied to the
 corrupted Kmenta data:</p>
-<div class="sourceCode" id="cb82"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb83"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/car/man/influencePlot.html" class="external-link">influencePlot</a></span><span class="op">(</span><span class="va">deq.mm</span><span class="op">)</span></span></code></pre></div>
 <p><img src="Diagnostics-for-2SLS-Regression_files/figure-html/unnamed-chunk-42-1.png" width="384"></p>
 <pre><code><span><span class="co">##      StudRes        Hat      CookD</span></span>
