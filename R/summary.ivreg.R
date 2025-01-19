@@ -42,7 +42,7 @@
 #' ## summary including diagnostics
 #' summary(m)
 #' 
-#' ## replicate global F test (against null model) from summary "by hand"
+#' ## replicate global F test from summary (against null model) "by hand"
 #' m0 <- ivreg(log(packs) ~ 1, data = CigaretteDemand)
 #' anova(m0, m)
 #' 
@@ -56,28 +56,27 @@
 #' library("lmtest")
 #' coeftest(m)
 #' 
-#' ## plug in a heteroscedasticity-consistent HC1 covariance matrix
-#' ## - as a function passing additional arguments through ...
-#' ## - as a function without additional arguments
-#' ## - as a matrix
+#' ## plug in a heteroscedasticity-consistent HC1 covariance matrix (from sandwich)
 #' library("sandwich")
+#' ## - as a function passing additional type argument through ...
 #' coeftest(m, vcov = vcovHC, type = "HC1")
+#' ## - as a function without additional arguments
 #' hc1 <- function(object, ...) vcovHC(object, type = "HC1", ...)
 #' coeftest(m, vcov = hc1)
+#' ## - as a matrix
 #' vc1 <- vcovHC(m, type = "HC1")
 #' coeftest(m, vcov = vc1)
 #' 
 #' ## in summary() with diagnostics = TRUE use one of the function specifications,
 #' ## the matrix is only possible when diagnostics = FALSE
-#' summary(m, vcov = vcovHC, type = "HC1")
-#' summary(m, vcov = hc1)
-#' summary(m, vcov = vc1, diagnostics = FALSE)
-#'
+#' summary(m, vcov = vcovHC, type = "HC1")     ## function + ...
+#' summary(m, vcov = hc1)                      ## function
+#' summary(m, vcov = vc1, diagnostics = FALSE) ## matrix
 #'
 #' ## in confint() and anova() any of the three specifications can be used
-#' anova(m0, m, vcov = vcovHC, type = "HC1")
-#' anova(m0, m, vcov = hc1)
-#' anova(m0, m, vcov = vc1)
+#' anova(m0, m, vcov = vcovHC, type = "HC1")   ## function + ...
+#' anova(m0, m, vcov = hc1)                    ## function
+#' anova(m0, m, vcov = vc1)                    ## matrix
 #'
 #' @importFrom stats model.matrix vcov .vcov.aliased anova quantile weighted.mean lm lm.fit lm.wfit pchisq 
 #' @importFrom lmtest coeftest waldtest waldtest.default lrtest lrtest.default
