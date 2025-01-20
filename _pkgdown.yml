@@ -5,6 +5,7 @@ template:
   opengraph:
     image:
       src: logo.png
+      alt: "ivreg"
     twitter:
       creator: "@AchimZeileis"
       card: summary
