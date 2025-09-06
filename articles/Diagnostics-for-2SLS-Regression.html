@@ -6,12 +6,11 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Diagnostics for 2SLS Regression • ivreg</title>
-<!-- favicons --><link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
-<link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
-<link rel="apple-touch-icon" type="image/png" sizes="180x180" href="../apple-touch-icon.png">
-<link rel="apple-touch-icon" type="image/png" sizes="120x120" href="../apple-touch-icon-120x120.png">
-<link rel="apple-touch-icon" type="image/png" sizes="76x76" href="../apple-touch-icon-76x76.png">
-<link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png">
+<!-- favicons --><link rel="icon" type="image/png" sizes="48x48" href="../favicon-48x48.png">
+<link rel="icon" type="”image/svg+xml”" href="../favicon.svg">
+<link rel="apple-touch-icon" sizes="180x180" href="../apple-touch-icon.png">
+<link rel="icon" sizes="any" href="../favicon.ico">
+<link rel="manifest" href="../site.webmanifest">
 <!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script><!-- Bootstrap --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha256-bZLfwXAP04zRMK2BjiO8iu9pf4FbLqX6zitd+tIvLhE=" crossorigin="anonymous">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script><!-- bootstrap-toc --><link rel="stylesheet" href="../bootstrap-toc.css">
 <script src="../bootstrap-toc.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
@@ -39,7 +38,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ivreg</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.6-5</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.6-6</span>
       </span>
     </div>
 
@@ -601,9 +600,9 @@ and
 <span><span class="co">## </span></span>
 <span><span class="co">## Diagnostic tests:</span></span>
 <span><span class="co">##                  df1 df2 statistic  p-value    </span></span>
-<span><span class="co">## Weak instruments   2  16    88.025 2.32e-09 ***</span></span>
+<span><span class="co">## Weak instruments   3  16    88.944 3.41e-10 ***</span></span>
 <span><span class="co">## Wu-Hausman         1  16    11.422  0.00382 ** </span></span>
-<span><span class="co">## Sargan             1  NA     2.983  0.08414 .  </span></span>
+<span><span class="co">## Sargan             2  NA     2.983  0.22502    </span></span>
 <span><span class="co">## ---</span></span>
 <span><span class="co">## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span></span>
 <span><span class="co">## </span></span>
@@ -630,9 +629,9 @@ and
 <span><span class="co">## </span></span>
 <span><span class="co">## Diagnostic tests:</span></span>
 <span><span class="co">##                  df1 df2 statistic  p-value    </span></span>
-<span><span class="co">## Weak instruments   1  16    256.34 2.86e-11 ***</span></span>
+<span><span class="co">## Weak instruments   2  16    133.42 1.05e-10 ***</span></span>
 <span><span class="co">## Wu-Hausman         1  15     36.14 2.38e-05 ***</span></span>
-<span><span class="co">## Sargan             0  NA        NA       NA    </span></span>
+<span><span class="co">## Sargan             3  NA      0.00        1    </span></span>
 <span><span class="co">## ---</span></span>
 <span><span class="co">## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span></span>
 <span><span class="co">## </span></span>
@@ -939,7 +938,7 @@ get essentially the same graphs as before, except for the scaling of the
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>y</mi><annotation encoding="application/x-tex">y</annotation></semantics></math>
 axis:</p>
 <div class="sourceCode" id="cb35"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="st"><a href="https://www.r-project.org" class="external-link">"effects"</a></span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="st"><a href="https://cran.r-project.org/package=effects" class="external-link">"effects"</a></span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## lattice theme set by effectsTheme()</span></span>
 <span><span class="co">## See ?effectsTheme for details.</span></span></code></pre>
 <div class="sourceCode" id="cb37"><pre class="downlit sourceCode r">
@@ -1124,9 +1123,9 @@ the conventional 2SLS standard errors:</p>
 <span><span class="co">## </span></span>
 <span><span class="co">## Diagnostic tests:</span></span>
 <span><span class="co">##                  df1 df2 statistic  p-value    </span></span>
-<span><span class="co">## Weak instruments   2  16   142.340 6.43e-11 ***</span></span>
+<span><span class="co">## Weak instruments   3  16   179.048 1.61e-12 ***</span></span>
 <span><span class="co">## Wu-Hausman         1  16    21.898 0.000251 ***</span></span>
-<span><span class="co">## Sargan             1  NA     2.983 0.084137 .  </span></span>
+<span><span class="co">## Sargan             2  NA     2.983 0.225021    </span></span>
 <span><span class="co">## ---</span></span>
 <span><span class="co">## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span></span>
 <span><span class="co">## </span></span>
@@ -1198,9 +1197,9 @@ expectation of <code>Q</code> shows a clear heteroscedastic pattern:</p>
 <span><span class="co">## </span></span>
 <span><span class="co">## Diagnostic tests:</span></span>
 <span><span class="co">##                  df1 df2 statistic  p-value    </span></span>
-<span><span class="co">## Weak instruments   2  16   122.011 2.06e-10 ***</span></span>
+<span><span class="co">## Weak instruments   3  16   127.345 2.23e-11 ***</span></span>
 <span><span class="co">## Wu-Hausman         1  16    22.883 0.000203 ***</span></span>
-<span><span class="co">## Sargan             1  NA     0.221 0.638221    </span></span>
+<span><span class="co">## Sargan             2  NA     0.221 0.895352    </span></span>
 <span><span class="co">## ---</span></span>
 <span><span class="co">## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span></span>
 <span><span class="co">## </span></span>
@@ -1271,9 +1270,9 @@ bootstrap replications are generated. For example:</p>
 <span><span class="co">## </span></span>
 <span><span class="co">## Diagnostic tests:</span></span>
 <span><span class="co">##                  df1 df2 statistic  p-value    </span></span>
-<span><span class="co">## Weak instruments   2  16   122.011 2.06e-10 ***</span></span>
+<span><span class="co">## Weak instruments   3  16   127.345 2.23e-11 ***</span></span>
 <span><span class="co">## Wu-Hausman         1  16    22.883 0.000203 ***</span></span>
-<span><span class="co">## Sargan             1  NA     0.221 0.638221    </span></span>
+<span><span class="co">## Sargan             2  NA     0.221 0.895352    </span></span>
 <span><span class="co">## ---</span></span>
 <span><span class="co">## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span></span>
 <span><span class="co">## </span></span>
@@ -1373,9 +1372,9 @@ constructed. The weighted 2SLS estimator is therefore computed as</p>
 <span><span class="co">## </span></span>
 <span><span class="co">## Diagnostic tests:</span></span>
 <span><span class="co">##                  df1 df2 statistic  p-value    </span></span>
-<span><span class="co">## Weak instruments   2  16   101.172 8.31e-10 ***</span></span>
+<span><span class="co">## Weak instruments   3  16   112.365 5.81e-11 ***</span></span>
 <span><span class="co">## Wu-Hausman         1  16    20.105 0.000376 ***</span></span>
-<span><span class="co">## Sargan             1  NA     0.087 0.767864    </span></span>
+<span><span class="co">## Sargan             2  NA     0.087 0.957372    </span></span>
 <span><span class="co">## ---</span></span>
 <span><span class="co">## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span></span>
 <span><span class="co">## </span></span>
@@ -1522,9 +1521,9 @@ data, to the 2SLS estimator applied to the corrupted data, and to the
 <span><span class="co">## </span></span>
 <span><span class="co">## Diagnostic tests:</span></span>
 <span><span class="co">##                  df1 df2 statistic  p-value    </span></span>
-<span><span class="co">## Weak instruments   2  16    88.025 2.32e-09 ***</span></span>
+<span><span class="co">## Weak instruments   3  16    88.944 3.41e-10 ***</span></span>
 <span><span class="co">## Wu-Hausman         1  16     0.803  0.38339    </span></span>
-<span><span class="co">## Sargan             1  NA    10.330  0.00131 ** </span></span>
+<span><span class="co">## Sargan             2  NA    10.330  0.00571 ** </span></span>
 <span><span class="co">## ---</span></span>
 <span><span class="co">## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span></span>
 <span><span class="co">## </span></span>
@@ -1775,7 +1774,7 @@ Estimators.”</span> <em>Journal of Statistical Software</em> 16 (9):
 
 <div class="pkgdown">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.1.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.3.</p>
 </div>
 
       </footer>
