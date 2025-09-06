@@ -124,9 +124,9 @@ estimators are also provided, based on M-estimation (2SM) and MM-estimation
 and described in \code{\link{ivregMethods}}. For methods related to regression
 diagnostics, see \code{\link{ivregDiagnostics}}.
 
-Regressors and instruments for \code{ivreg} are most easily specified in a
-formula with two parts on the right-hand side, e.g., \code{y ~ x1 + x2 | z1
-+ z2 + z3}, where \code{x1} and \code{x2} are the explanatory variables and \code{z1},
+Regressors and instruments for \code{ivreg} are most easily specified in a formula
+with two parts on the right-hand side, e.g., \code{y ~ x1 + x2 | z1 + z2 + z3}, 
+where \code{x1} and \code{x2} are the explanatory variables and \code{z1},
 \code{z2}, and \code{z3} are the instrumental variables. Note that exogenous regressors
 have to be included as instruments for themselves. 
 
@@ -146,6 +146,12 @@ for the instruments (only for backward compatibility with earlier versions):
 
 Internally, all specifications are converted to the version with two parts
 on the right-hand side.
+
+For convenience, to facilitate model comparisons, it is also possible to
+specify a linear regression with a single right-hand side
+\code{ivreg(y ~ x1 + x2, ...)} which treats all regressors as exogenous.
+Thus, this yields simply the results from a standard linear model fitted
+via \code{lm(y ~ x1 + x2, ...)} or \code{rlm(y ~ x1 + x2, ...)}, respectively.
 }
 \examples{
 \dontshow{ if(!requireNamespace("sandwich")) {

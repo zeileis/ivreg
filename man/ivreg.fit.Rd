@@ -83,7 +83,7 @@ there is one column for \emph{each} stage-1 regression and for the stage-2 regre
 Fit instrumental-variable regression by two-stage least squares (2SLS). This is
 equivalent to direct instrumental-variables estimation when the number of
 instruments is equal to the number of predictors. Alternative robust-regression
-estimation is also supported, based on M-estimation (22M) or MM-estimation (2SMM).
+estimation is also supported, based on M-estimation (2SM) or MM-estimation (2SMM).
 }
 \details{
 \code{\link{ivreg}} is the high-level interface to the work-horse function

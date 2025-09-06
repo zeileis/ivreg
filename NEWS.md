@@ -1,3 +1,15 @@
+# Version 0.6-6
+
+* If a model is specified where the instruments perfectly predict all regressors,
+  a warning is now issued that no endogenous variables could be detected and that
+  all regressors appear to be exogenous (raised by Alex Hayes in #23).
+  
+* Additionally, the documentation clarifies that fitting a model with only
+  a single right-hand side (i.e., treating all regressors as exogenous)
+  is possible for convenience, e.g., to facilitate model comparisons. This
+  now also works correctly for M and MM estimation.
+
+
 # Version 0.6-5
 
 * Better documentation for summary and inference methods for `ivreg()` objects
