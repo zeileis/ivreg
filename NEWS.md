@@ -9,6 +9,9 @@
   is possible for convenience, e.g., to facilitate model comparisons. This
   now also works correctly for M and MM estimation.
 
+* The numeric checks of which variables are exogenous/endogenous/instruments
+  have been improved and are a little more rigorous now.
+
 
 # Version 0.6-5
 

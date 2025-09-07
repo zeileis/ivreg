@@ -15,7 +15,7 @@
 #' @aliases ivreg.fit
 #' 
 #' @importFrom MASS rlm
-#' @importFrom stats mad
+#' @importFrom stats mad setNames
 #' 
 #' @param x regressor matrix.
 #' @param y vector for the response variable.
@@ -130,13 +130,15 @@ ivreg.fit <- function(x, y, z, weights, offset, method = c("OLS", "M", "MM"),
   }
   
   ## infer endogenous variables in x and instruments in z
-  
+  rowAbsMaxs <- function(x, ...) apply(abs(as.matrix(x)), 1L, max, ...)
+  colAbsMaxs <- function(x, ...) apply(abs(as.matrix(x)), 2L, max, ...)
   exog <- structure(seq_along(colnames(x)), .Names = colnames(x))
   if(!is.null(auxreg)) {
-    endo <- which(colMeans(as.matrix(auxreg$residuals^2)) > sqrt(.Machine$double.eps))
-    inst <- as.matrix(coef(auxreg)^2)[, -endo, drop = FALSE]
+    endo <- which(colAbsMaxs(auxreg$residuals) > sqrt(.Machine$double.eps))
+    inst <- coef(auxreg)
     if(length(endo) > 0L) inst <- inst[, -endo, drop = FALSE]
-    inst <- which(rowMeans(inst) < sqrt(.Machine$double.eps) | is.nan(inst))
+    inst <- rowAbsMaxs(inst)
+    inst <- which(inst < sqrt(.Machine$double.eps) | is.nan(inst))
     endo <- exog[endo]
     if(length(endo) > 0L) {
       exog <- exog[-endo]
@@ -144,7 +146,7 @@ ivreg.fit <- function(x, y, z, weights, offset, method = c("OLS", "M", "MM"),
       warning("no endogenous variables detected, all regressors appear to be exogenous")
     }
   } else {
-    endo <- inst <- integer()
+    endo <- inst <- setNames(integer(), character())
   }
   
   # robust regression for stage 1
