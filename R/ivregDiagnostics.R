@@ -588,6 +588,7 @@ influence.rivreg <- function(model, ...){
   infl
 }
 
+#' @keywords internal
 hatvalues.rlm <- function(model, ...){
   # this unexported method is necessary because
   # the inherited lm method doesn't take
