@@ -183,7 +183,7 @@ summary.ivreg <- function(object, vcov. = NULL, df = NULL, diagnostics = NULL, .
     call = object$call,
     terms = object$terms,
     residuals = res,
-    weights <- object$weights,
+    weights = object$weights,
     coefficients = cf,
     sigma = object$sigma,
     df = c(object$rank, if(df > 0) df else Inf, object$rank), ## aliasing
