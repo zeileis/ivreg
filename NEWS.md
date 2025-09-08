@@ -2,7 +2,7 @@
 
 * If a model is specified where the instruments perfectly predict all regressors,
   a warning is now issued that no endogenous variables could be detected and that
-  all regressors appear to be exogenous (raised by Alex Hayes in #23).
+  all regressors appear to be exogenous (reported by Alex Hayes in #23).
   
 * Additionally, the documentation clarifies that fitting a model with only
   a single right-hand side (i.e., treating all regressors as exogenous)
@@ -11,6 +11,9 @@
 
 * The numeric checks of which variables are exogenous/endogenous/instruments
   have been improved and are a little more rigorous now.
+
+* The `summary()` method now also works correctly if there are aliased
+  coefficients that are `NA` (reported by Alex Hayes in #24).
 
 
 # Version 0.6-5

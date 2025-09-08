@@ -171,9 +171,10 @@ summary.ivreg <- function(object, vcov. = NULL, df = NULL, diagnostics = NULL, .
   class(cf) <- "matrix"
   
   ## Wald test of all coefficients
+  aliased <- is.na(coef(object))
   Rmat <- if(attr(object$terms$regressors, "intercept"))
-    cbind(0, diag(length(na.omit(coef(object))) - 1)) else diag(length(na.omit(coef(object))))
-  waldtest <- car::linearHypothesis(object, Rmat, vcov. = vc, test = ifelse(df > 0, "F", "Chisq"), singular.ok = TRUE)
+    cbind(0, diag(sum(!aliased) - 1)) else diag(length(coef(object)[!aliased]))
+  waldtest <- car::linearHypothesis(object, Rmat, vcov. = vc[!aliased, !aliased, drop = FALSE], test = ifelse(df > 0, "F", "Chisq"), singular.ok = TRUE)
   waldtest <- c(waldtest[2, "F"], waldtest[2, "Pr(>F)"], waldtest[2, "Df"], if(df > 0) waldtest[2, "Res.Df"] else NULL)
   
   ## diagnostic tests
@@ -191,7 +192,8 @@ summary.ivreg <- function(object, vcov. = NULL, df = NULL, diagnostics = NULL, .
     adj.r.squared = adj.r.squared,
     waldtest = waldtest,
     vcov = vc,
-    diagnostics = diag)
+    diagnostics = diag,
+    aliased = aliased)
     
   class(rval) <- "summary.ivreg"
   return(rval)
