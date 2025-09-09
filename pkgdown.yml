@@ -4,7 +4,7 @@ pkgdown_sha: ~
 articles:
   Diagnostics-for-2SLS-Regression: Diagnostics-for-2SLS-Regression.html
   ivreg: ivreg.html
-last_built: 2025-09-08T00:29Z
+last_built: 2025-09-09T07:36Z
 urls:
   reference: https://zeileis.github.io/ivreg/reference
   article: https://zeileis.github.io/ivreg/articles
