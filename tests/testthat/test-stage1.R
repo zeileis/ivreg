@@ -19,7 +19,7 @@ test_that("stage1 coefficient covariances are computed correctly", {
   expect_equal(vcov(m1, component="stage1"), vcov(ml1))
 })
 
-m2 <- ivreg(y ~ z1 + x1 + x2 + const | z1 + z2 + z3 + const, data=D)
+m2 <- expect_warning(ivreg(y ~ z1 + x1 + x2 + const | z1 + z2 + z3 + const, data=D))
 ml2 <- lm(cbind(x1, x2) ~ z1 + z2 + z3 + const, data=D)
 
 test_that("stage1 rank-deficient coefficients are computed correctly", {
@@ -56,7 +56,7 @@ test_that("stage1 coefficient covariances are computed correctly with one endog 
   expect_equal(vcov(m3, component="stage1"), vcov(ml3))
 })
 
-m4 <- ivreg(y2 ~ z1 + x1 + const | z1 + z2 + z3 + const, data=D)
+m4 <- expect_warning(ivreg(y2 ~ z1 + x1 + const | z1 + z2 + z3 + const, data=D))
 ml4 <- lm(x1 ~ z1 + z2 + z3 + const, data=D)
 
 test_that("stage1 rank-deficient coefficients are computed correctly with one endog x", {

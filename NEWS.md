@@ -1,5 +1,7 @@
 # Version 0.6-6
 
+* A warning is issued now in `ivreg.fit()` if there are any collinear instruments.
+
 * If a model is specified where the instruments perfectly predict all regressors,
   a warning is now issued that no endogenous variables could be detected and that
   all regressors appear to be exogenous (reported by Alex Hayes in #23).

@@ -113,6 +113,7 @@ ivreg.fit <- function(x, y, z, weights, offset, method = c("OLS", "M", "MM"),
   if(!is.null(z)) {
     if(ncol(z) < ncol(x)) warning("more regressors than instruments")
     auxreg <- if(is.null(weights)) lm.fit(z, x, ...) else lm.wfit(z, x, weights, ...)
+    if (anyNA(auxreg$coefficients)) warning("some instrumental variables are collinear")
     xz <- as.matrix(auxreg$fitted.values)
     # pz <- z %*% chol2inv(auxreg$qr$qr) %*% t(z)
     colnames(xz) <- colnames(x)
