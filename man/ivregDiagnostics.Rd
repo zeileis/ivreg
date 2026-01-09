@@ -195,7 +195,7 @@ freedom for the model and so are approximate, because the studentized residuals 
 independent.
 
 For additional information, see the vignette
-\href{../doc/Diagnostics-for-2SLS-Regression.pdf}{Diagnostics for 2SLS Regression}.
+\href{../doc/Diagnostics-for-2SLS-Regression.html}{Diagnostics for 2SLS Regression}.
 }
 \examples{
 kmenta.eq1 <- ivreg(Q ~ P + D | D + F + A, data = Kmenta)
