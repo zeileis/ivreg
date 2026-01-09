@@ -684,7 +684,7 @@ here for the 2SLS fit for the demand equation in Kmenta’s model:</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html" class="external-link">par</a></span><span class="op">(</span>mfrow<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">2</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">deq</span><span class="op">)</span></span></code></pre></div>
-<p><img src="Diagnostics-for-2SLS-Regression_files/figure-html/unnamed-chunk-4-1.png" width="768"></p>
+<p><img src="Diagnostics-for-2SLS-Regression_files/figure-html/unnamed-chunk-4-1.png" class="r-plt" alt="" width="768"></p>
 <p>In this case, however, we prefer the versions of these diagnostic
 graphs described below, in this and subsequent sections.</p>
 <p>As we mentioned, the <code>Kmenta</code> data are partly contrived by
@@ -699,12 +699,12 @@ cases:</p>
 <pre><code><span><span class="co">## Loading required package: carData</span></span></code></pre>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/car/man/qqPlot.html" class="external-link">qqPlot</a></span><span class="op">(</span><span class="va">deq</span><span class="op">)</span></span></code></pre></div>
-<p><img src="Diagnostics-for-2SLS-Regression_files/figure-html/unnamed-chunk-5-1.png" width="384"></p>
+<p><img src="Diagnostics-for-2SLS-Regression_files/figure-html/unnamed-chunk-5-1.png" class="r-plt" alt="" width="384"></p>
 <pre><code><span><span class="co">## 1937 1929 </span></span>
 <span><span class="co">##   16    8</span></span></code></pre>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/car/man/influencePlot.html" class="external-link">influencePlot</a></span><span class="op">(</span><span class="va">deq</span><span class="op">)</span></span></code></pre></div>
-<p><img src="Diagnostics-for-2SLS-Regression_files/figure-html/unnamed-chunk-6-1.png" width="384"></p>
+<p><img src="Diagnostics-for-2SLS-Regression_files/figure-html/unnamed-chunk-6-1.png" class="r-plt" alt="" width="384"></p>
 <pre><code><span><span class="co">##      StudRes        Hat      CookD</span></span>
 <span><span class="co">## 1 -1.7359357 0.09079703 0.06956671</span></span>
 <span><span class="co">## 2 -1.3686682 0.26453459 0.21973049</span></span>
@@ -758,7 +758,7 @@ substantial change in the regression coefficients:</p>
 unusual-data regression diagnostics:</p>
 <div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/car/man/qqPlot.html" class="external-link">qqPlot</a></span><span class="op">(</span><span class="va">deq1</span><span class="op">)</span></span></code></pre></div>
-<p><img src="Diagnostics-for-2SLS-Regression_files/figure-html/unnamed-chunk-9-1.png" width="384"></p>
+<p><img src="Diagnostics-for-2SLS-Regression_files/figure-html/unnamed-chunk-9-1.png" class="r-plt" alt="" width="384"></p>
 <pre><code><span><span class="co">## 1941 1940 </span></span>
 <span><span class="co">##   20   19</span></span></code></pre>
 <div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
@@ -767,7 +767,7 @@ unusual-data regression diagnostics:</p>
 <span><span class="co">## 1941 -4.599583         0.00029602    0.0059204</span></span></code></pre>
 <div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/car/man/influencePlot.html" class="external-link">influencePlot</a></span><span class="op">(</span><span class="va">deq1</span><span class="op">)</span></span></code></pre></div>
-<p><img src="Diagnostics-for-2SLS-Regression_files/figure-html/unnamed-chunk-11-1.png" width="384"></p>
+<p><img src="Diagnostics-for-2SLS-Regression_files/figure-html/unnamed-chunk-11-1.png" class="r-plt" alt="" width="384"></p>
 <pre><code><span><span class="co">##      StudRes       Hat     CookD</span></span>
 <span><span class="co">## 1 -1.4737565 0.2645346 0.2447875</span></span>
 <span><span class="co">## 2 -0.9139638 0.3971151 0.2269833</span></span>
@@ -775,7 +775,7 @@ unusual-data regression diagnostics:</p>
 <span><span class="co">## 4 -4.5995825 0.4649800 2.8361307</span></span></code></pre>
 <div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/car/man/avPlots.html" class="external-link">avPlots</a></span><span class="op">(</span><span class="va">deq1</span><span class="op">)</span></span></code></pre></div>
-<p><img src="Diagnostics-for-2SLS-Regression_files/figure-html/unnamed-chunk-12-1.png" width="768"></p>
+<p><img src="Diagnostics-for-2SLS-Regression_files/figure-html/unnamed-chunk-12-1.png" class="r-plt" alt="" width="768"></p>
 <p>Removing the 20th case produces estimated coefficients close to those
 for the uncorrupted data:</p>
 <div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
@@ -817,7 +817,7 @@ similar results:</p>
 <span><span class="co">## 1927 0.05684346 0.06794727 0.08122009</span></span></code></pre>
 <div class="sourceCode" id="cb28"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/car/man/scatterplotMatrix.html" class="external-link">scatterplotMatrix</a></span><span class="op">(</span><span class="va">H</span>, smooth<span class="op">=</span><span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
-<p><img src="Diagnostics-for-2SLS-Regression_files/figure-html/unnamed-chunk-14-1.png" width="576"></p>
+<p><img src="Diagnostics-for-2SLS-Regression_files/figure-html/unnamed-chunk-14-1.png" class="r-plt" alt="" width="576"></p>
 <p>Finally, let’s verify that the deletion diagnostics are correctly
 computed:</p>
 <div class="sourceCode" id="cb29"><pre class="downlit sourceCode r">
@@ -904,7 +904,7 @@ plots for all of the numeric explanatory variables in an additive
 regression equation. For example,</p>
 <div class="sourceCode" id="cb33"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/car/man/crPlots.html" class="external-link">crPlots</a></span><span class="op">(</span><span class="va">deq</span>, smooth<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>span<span class="op">=</span><span class="fl">1</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<p><img src="Diagnostics-for-2SLS-Regression_files/figure-html/unnamed-chunk-17-1.png" width="768"></p>
+<p><img src="Diagnostics-for-2SLS-Regression_files/figure-html/unnamed-chunk-17-1.png" class="r-plt" alt="" width="768"></p>
 <p>We set a large <em>span</em> for the <em>loess smoother</em> <span class="citation">(Cleveland, Grosse, and Shyu 1992)</span> in the plot
 because there are only
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mo>=</mo><mn>20</mn></mrow><annotation encoding="application/x-tex">n = 20</annotation></semantics></math>
@@ -929,7 +929,7 @@ most applications, component-plus-residuals and CERES plots produce
 similar results, and that’s the case here:</p>
 <div class="sourceCode" id="cb34"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/car/man/ceresPlots.html" class="external-link">ceresPlots</a></span><span class="op">(</span><span class="va">deq</span>, smooth<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>span<span class="op">=</span><span class="fl">1</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<p><img src="Diagnostics-for-2SLS-Regression_files/figure-html/unnamed-chunk-18-1.png" width="768"></p>
+<p><img src="Diagnostics-for-2SLS-Regression_files/figure-html/unnamed-chunk-18-1.png" class="r-plt" alt="" width="768"></p>
 <p><code><a href="https://rdrr.io/pkg/car/man/crPlots.html" class="external-link">crPlots()</a></code> and <code><a href="https://rdrr.io/pkg/car/man/ceresPlots.html" class="external-link">ceresPlots()</a></code> work only for
 additive models; the <code><a href="https://rdrr.io/pkg/effects/man/predictorEffects.html" class="external-link">predictorEffects()</a></code> function in the
 <strong>effects</strong> package plots partial residuals for more
@@ -944,7 +944,7 @@ axis:</p>
 <div class="sourceCode" id="cb37"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/effects/man/predictorEffects.html" class="external-link">predictorEffects</a></span><span class="op">(</span><span class="va">deq</span>, residuals<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span>, </span>
 <span>     partial.residuals<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>span<span class="op">=</span><span class="fl">1</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<p><img src="Diagnostics-for-2SLS-Regression_files/figure-html/unnamed-chunk-19-1.png" width="768"></p>
+<p><img src="Diagnostics-for-2SLS-Regression_files/figure-html/unnamed-chunk-19-1.png" class="r-plt" alt="" width="768"></p>
 <p>The shaded blue regions in the predictor effect plots represent
 pointwise 95% confidence envelopes around the fitted partial-regression
 lines.</p>
@@ -952,7 +952,7 @@ lines.</p>
 <div class="sourceCode" id="cb38"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">deq2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/update.html" class="external-link">update</a></span><span class="op">(</span><span class="va">deq</span>, <span class="va">.</span> <span class="op">~</span> <span class="fu"><a href="https://rdrr.io/r/base/AsIs.html" class="external-link">I</a></span><span class="op">(</span><span class="op">(</span><span class="va">P</span> <span class="op">-</span> <span class="fl">85</span><span class="op">)</span><span class="op">^</span><span class="fl">4</span><span class="op">/</span><span class="fl">10</span><span class="op">^</span><span class="fl">5</span><span class="op">)</span> <span class="op">+</span> <span class="va">D</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/pkg/car/man/crPlots.html" class="external-link">crPlots</a></span><span class="op">(</span><span class="va">deq2</span>, smooth<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>span<span class="op">=</span><span class="fl">1</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<p><img src="Diagnostics-for-2SLS-Regression_files/figure-html/unnamed-chunk-20-1.png" width="768"></p>
+<p><img src="Diagnostics-for-2SLS-Regression_files/figure-html/unnamed-chunk-20-1.png" class="r-plt" alt="" width="768"></p>
 <p>Because the ratio
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>max</mo><mrow><mo stretchy="true" form="prefix">(</mo><mi>P</mi><mo stretchy="true" form="postfix">)</mo></mrow><mi>/</mi><mo>min</mo><mrow><mo stretchy="true" form="prefix">(</mo><mi>P</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><mn>113.49</mn><mi>/</mi><mn>86.50</mn><mo>=</mo><mn>1.3</mn></mrow><annotation encoding="application/x-tex">\max(P)/\min(P) = 113.49/86.50 = 1.3</annotation></semantics></math>
 is not much larger than 1, we subtracted a number slightly smaller than
@@ -974,7 +974,7 @@ linear pattern of the data:</p>
 <div class="sourceCode" id="cb39"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/effects/man/predictorEffects.html" class="external-link">predictorEffects</a></span><span class="op">(</span><span class="va">deq2</span>, residuals<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span>, </span>
 <span>     partial.residuals<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>span<span class="op">=</span><span class="fl">1</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<p><img src="Diagnostics-for-2SLS-Regression_files/figure-html/unnamed-chunk-21-1.png" width="768"></p>
+<p><img src="Diagnostics-for-2SLS-Regression_files/figure-html/unnamed-chunk-21-1.png" class="r-plt" alt="" width="768"></p>
 <p>Recall that the blue lines represent the fitted model and the magenta
 lines are for the smoothed partial residuals; discrepancy between the
 two lines is indicative of lack of fit.</p>
@@ -992,7 +992,7 @@ Kmenta’s model,</p>
 <div class="sourceCode" id="cb40"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/fitted.values.html" class="external-link">fitted</a></span><span class="op">(</span><span class="va">deq</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/stats/influence.measures.html" class="external-link">rstudent</a></span><span class="op">(</span><span class="va">deq</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/abline.html" class="external-link">abline</a></span><span class="op">(</span>h<span class="op">=</span><span class="fl">0</span><span class="op">)</span></span></code></pre></div>
-<p><img src="Diagnostics-for-2SLS-Regression_files/figure-html/unnamed-chunk-22-1.png" width="384"></p>
+<p><img src="Diagnostics-for-2SLS-Regression_files/figure-html/unnamed-chunk-22-1.png" class="r-plt" alt="" width="384"></p>
 <p>which seems unproblematic.</p>
 <p>A variation of this graph, suggested by <span class="citation">Fox
 (2016)</span>, adapts Tukey’s <em>spread-level plot</em> <span class="citation">(Tukey 1977)</span> to graph the log of the absolute
@@ -1011,7 +1011,7 @@ representing the square-root transformation,
 the log transformation, and so on. For Kmenta’s model, we have</p>
 <div class="sourceCode" id="cb41"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/car/man/spreadLevelPlot.html" class="external-link">spreadLevelPlot</a></span><span class="op">(</span><span class="va">deq</span>, smooth<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>span<span class="op">=</span><span class="fl">1</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<p><img src="Diagnostics-for-2SLS-Regression_files/figure-html/unnamed-chunk-23-1.png" width="384"></p>
+<p><img src="Diagnostics-for-2SLS-Regression_files/figure-html/unnamed-chunk-23-1.png" class="r-plt" alt="" width="384"></p>
 <pre><code><span><span class="co">## </span></span>
 <span><span class="co">## Suggested power transformation:  -2.44685</span></span></code></pre>
 <p>which suggests a slight tendency of spread to increase with level.
@@ -1029,7 +1029,7 @@ is, effectively no transformation at all:</p>
 <div class="sourceCode" id="cb43"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/with.html" class="external-link">with</a></span><span class="op">(</span><span class="va">Kmenta</span>, <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">Q</span>, <span class="va">Q</span><span class="op">^</span><span class="op">-</span><span class="fl">2.5</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/abline.html" class="external-link">abline</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/lm.html" class="external-link">lm</a></span><span class="op">(</span><span class="va">Q</span><span class="op">^</span><span class="op">-</span><span class="fl">2.5</span> <span class="op">~</span> <span class="va">Q</span>, data<span class="op">=</span><span class="va">Kmenta</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<p><img src="Diagnostics-for-2SLS-Regression_files/figure-html/unnamed-chunk-24-1.png" width="384"></p>
+<p><img src="Diagnostics-for-2SLS-Regression_files/figure-html/unnamed-chunk-24-1.png" class="r-plt" alt="" width="384"></p>
 <p>A common score test for nonconstant error variance in least-squares
 regression, suggested by <span class="citation">Breusch and Pagan
 (1979)</span>, is based on the model
@@ -1176,7 +1176,7 @@ and
 expectation of <code>Q</code> shows a clear heteroscedastic pattern:</p>
 <div class="sourceCode" id="cb53"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/with.html" class="external-link">with</a></span><span class="op">(</span><span class="va">Kmenta2</span>, <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">EQ</span>, <span class="va">v1</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<p><img src="Diagnostics-for-2SLS-Regression_files/figure-html/unnamed-chunk-28-1.png" width="384"></p>
+<p><img src="Diagnostics-for-2SLS-Regression_files/figure-html/unnamed-chunk-28-1.png" class="r-plt" alt="" width="384"></p>
 <p>Then refitting the demand equation to the new data set, we get</p>
 <div class="sourceCode" id="cb54"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">deq2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/update.html" class="external-link">update</a></span><span class="op">(</span><span class="va">deq</span>, data<span class="op">=</span><span class="va">Kmenta2</span><span class="op">)</span></span>
@@ -1210,7 +1210,7 @@ expectation of <code>Q</code> shows a clear heteroscedastic pattern:</p>
 diagnostics; for example,</p>
 <div class="sourceCode" id="cb56"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/car/man/spreadLevelPlot.html" class="external-link">spreadLevelPlot</a></span><span class="op">(</span><span class="va">deq2</span><span class="op">)</span></span></code></pre></div>
-<p><img src="Diagnostics-for-2SLS-Regression_files/figure-html/unnamed-chunk-30-1.png" width="384"></p>
+<p><img src="Diagnostics-for-2SLS-Regression_files/figure-html/unnamed-chunk-30-1.png" class="r-plt" alt="" width="384"></p>
 <pre><code><span><span class="co">## </span></span>
 <span><span class="co">## Suggested power transformation:  -22.57328</span></span></code></pre>
 <div class="sourceCode" id="cb58"><pre class="downlit sourceCode r">
@@ -1393,7 +1393,7 @@ that stands out somewhat from the other values:</p>
 <span><span class="co">## Chisquare = 4.21029, Df = 1, p = 0.040179</span></span></code></pre>
 <div class="sourceCode" id="cb71"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/fitted.values.html" class="external-link">fitted</a></span><span class="op">(</span><span class="va">deqw</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/stats/influence.measures.html" class="external-link">rstudent</a></span><span class="op">(</span><span class="va">deqw</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<p><img src="Diagnostics-for-2SLS-Regression_files/figure-html/unnamed-chunk-36-1.png" width="384"></p>
+<p><img src="Diagnostics-for-2SLS-Regression_files/figure-html/unnamed-chunk-36-1.png" class="r-plt" alt="" width="384"></p>
 <p>A Bonferroni outlier test suggests that the studentized residual
 isn’t unusually large, and once more we’re in the unusual situation of
 knowing that the model is correct.</p>
@@ -1460,7 +1460,7 @@ relative to its marginal variation. for example, for the demand
 equation:</p>
 <div class="sourceCode" id="cb76"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/car/man/mcPlots.html" class="external-link">mcPlots</a></span><span class="op">(</span><span class="va">deq</span><span class="op">)</span></span></code></pre></div>
-<p><img src="Diagnostics-for-2SLS-Regression_files/figure-html/unnamed-chunk-39-1.png" width="768"></p>
+<p><img src="Diagnostics-for-2SLS-Regression_files/figure-html/unnamed-chunk-39-1.png" class="r-plt" alt="" width="768"></p>
 <p>The blue points in each panel represent the marginal scatterplot and
 the magenta points represent the (partial) added-variable plot, with the
 arrows showing the relationship between the two sets of points.</p>
@@ -1594,7 +1594,7 @@ residuals, and Cook’s distances for the 2SMM estimator applied to the
 corrupted Kmenta data:</p>
 <div class="sourceCode" id="cb83"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/car/man/influencePlot.html" class="external-link">influencePlot</a></span><span class="op">(</span><span class="va">deq.mm</span><span class="op">)</span></span></code></pre></div>
-<p><img src="Diagnostics-for-2SLS-Regression_files/figure-html/unnamed-chunk-42-1.png" width="384"></p>
+<p><img src="Diagnostics-for-2SLS-Regression_files/figure-html/unnamed-chunk-42-1.png" class="r-plt" alt="" width="384"></p>
 <pre><code><span><span class="co">##      StudRes        Hat      CookD</span></span>
 <span><span class="co">## 1  1.6778245 0.13345298 0.07043221</span></span>
 <span><span class="co">## 2  0.2892163 0.35576176 0.01023249</span></span>
@@ -1774,7 +1774,7 @@ Estimators.”</span> <em>Journal of Statistical Software</em> 16 (9):
 
 <div class="pkgdown">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.3.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.0.</p>
 </div>
 
       </footer>
