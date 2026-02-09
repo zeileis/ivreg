@@ -21,6 +21,11 @@
   because currently only `"stage2"` (the default) is supported (reported in #26
   by Matthew Bhagat-Conway).
 
+* Now `weights(..., type = "working")` also works for `ivreg` objects. These
+  are simply the weights already available previously as
+  `weights(..., type = "variance")` as these are now used in computations of
+  `lm.influence()`, e.g., `dffits()`.
+
 
 # Version 0.6-5
 

@@ -76,7 +76,7 @@
 
 \method{qr}{ivreg}(x, ...)
 
-\method{weights}{ivreg}(object, type = c("variance", "robustness"), ...)
+\method{weights}{ivreg}(object, type = c("working", "variance", "robustness"), ...)
 }
 \arguments{
 \item{object, model, mod}{An object of class \code{"ivreg"}.}
@@ -99,8 +99,8 @@ predicted (i.e., fitted) values are computed for the data to which the model was
 for \code{residuals}, one of \code{"response"} (the default), \code{"projected"}, \code{"regressors"},
 \code{"working"}, \code{"deviance"}, \code{"pearson"}, or \code{"partial"}; 
 \code{type = "working"} and \code{"response"} are equivalent, as are 
-\code{type = "deviance"} and \code{"pearson"}; for \code{weights}, \code{"variance"} (the default)
-for invariance-variance weights (which is \code{NULL} for an unweighted fit) 
+\code{type = "deviance"} and \code{"pearson"}; for \code{weights}, \code{"working"} (or equivalently
+\code{"variance"}, the default) for invariance-variance weights (which is \code{NULL} for an unweighted fit) 
 or \code{"robustness"} for robustness weights (available for M or MM estimation).}
 
 \item{na.action}{\code{na} method to apply to predictor values for predictions; default is \code{\link{na.pass}}.}
