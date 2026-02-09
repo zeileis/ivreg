@@ -17,6 +17,10 @@
 * The `summary()` method now also works correctly if there are aliased
   coefficients that are `NA` (reported by Alex Hayes in #24).
 
+* An error is issued now if `vcovHC(..., component = "stage1")` is requested
+  because currently only `"stage2"` (the default) is supported (reported in #26
+  by Matthew Bhagat-Conway).
+
 
 # Version 0.6-5
 
