@@ -30,7 +30,7 @@
 
 \method{estfun}{ivreg}(x, ...)
 
-\method{vcovHC}{ivreg}(x, ...)
+\method{vcovHC}{ivreg}(x, component = "stage2", ...)
 
 \method{terms}{ivreg}(x, component = c("regressors", "instruments", "full"), ...)
 

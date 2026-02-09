@@ -115,7 +115,9 @@ estfun.ivreg <- function (x, ...)
 
 #' @rdname ivregMethods
 #' @exportS3Method sandwich::vcovHC
-vcovHC.ivreg <- function (x, ...) {
+vcovHC.ivreg <- function (x, component = "stage2", ...) {
+    component <- match.arg(component, c("stage2", "stage1"))
+    if(component == "stage1") stop("vcovHC() is not yet implemented for stage1 component")
     class(x) <- c("ivreg_projected", "ivreg")
     sandwich::vcovHC.default(x, ...)
 }
