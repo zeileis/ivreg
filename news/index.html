@@ -68,6 +68,7 @@
 <li><p>The numeric checks of which variables are exogenous/endogenous/instruments have been improved and are a little more rigorous now.</p></li>
 <li><p>The <code><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary()</a></code> method now also works correctly if there are aliased coefficients that are <code>NA</code> (reported by Alex Hayes in <a href="https://github.com/zeileis/ivreg/issues/24" class="external-link">#24</a>).</p></li>
 <li><p>An error is issued now if <code>vcovHC(..., component = "stage1")</code> is requested because currently only <code>"stage2"</code> (the default) is supported (reported in <a href="https://github.com/zeileis/ivreg/issues/26" class="external-link">#26</a> by Matthew Bhagat-Conway).</p></li>
+<li><p>Now <code>weights(..., type = "working")</code> also works for <code>ivreg</code> objects. These are simply the weights already available previously as <code>weights(..., type = "variance")</code> as these are now used in computations of <code><a href="https://rdrr.io/r/stats/lm.influence.html" class="external-link">lm.influence()</a></code>, e.g., <code><a href="https://rdrr.io/r/stats/influence.measures.html" class="external-link">dffits()</a></code>.</p></li>
 </ul></div>
     <div class="section level2">
 <h2 class="page-header" data-toc-text="0.6-5" id="version-06-5">Version 0.6-5<small>2025-01-19</small><a class="anchor" aria-label="anchor" href="#version-06-5"></a></h2>
