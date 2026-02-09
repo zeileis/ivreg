@@ -4,7 +4,11 @@ test_that("dfbeta computed correctly 1", {
   expect_equal(dfbeta(m)[1, ], coef(m) - coef(m1))
 })
 
-m.ivreg <- expect_warning(ivreg(Q ~ P + D | P + D, data=Kmenta)) # OLS
+test_that("a warning is issued when all regressors are exogenous", {
+  expect_warning(ivreg(Q ~ P + D | P + D, data=Kmenta)) # OLS
+})
+
+m.ivreg <- suppressWarnings(ivreg(Q ~ P + D | P + D, data=Kmenta)) # OLS
 m.lm <- lm(Q ~ P + D, data=Kmenta)
 
 test_that("hatvalues computed correctly", {
@@ -45,7 +49,11 @@ test_that("rownames of deletion statistics preserved with na.omit", {
   expect_equal(rownames(dfbeta(m.miss.2)), nms)
 })
 
-m.ivreg.w <- expect_warning(ivreg(Q ~ P + D | P + D, weights=Q, data=Kmenta)) # WLS
+test_that("a warning is issued when all regressors are exogenous (with weights)", {
+  expect_warning(ivreg(Q ~ P + D | P + D, weights=Q, data=Kmenta)) # WLS
+})
+
+m.ivreg.w <- suppressWarnings(ivreg(Q ~ P + D | P + D, weights=Q, data=Kmenta)) # WLS
 m.lm.w <- lm(Q ~ P + D, data=Kmenta, weights=Q)
 
 test_that("hatvalues computed correctly with weights", {
@@ -67,6 +75,7 @@ test_that("dfbeta computed correctly with weights", {
 })
 
 test_that("rstudent computed correctly with weights", {
+  m.ivreg.w <- suppressWarnings(ivreg(Q ~ P + D | P + D, weights=Q, data=Kmenta)) # WLS
   expect_equal(rstudent(m.ivreg.w), rstudent(m.lm.w))
 })
 
