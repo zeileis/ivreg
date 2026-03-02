@@ -1,3 +1,13 @@
+# Version 0.6-7
+
+* New methods for `dffits()` generic in R-devel (to be 4.6.0) for `ivreg` and
+  `influence.ivreg` objects. Internally, these just call `influece(...)$dffits`
+  which is the recommended usage for earlier versions of R.
+  
+* The test scripts have been updated accordingly to avoid errors in the CRAN
+  checks using R-devel.
+
+
 # Version 0.6-6
 
 * A warning is issued now in `ivreg.fit()` if there are any collinear instruments.

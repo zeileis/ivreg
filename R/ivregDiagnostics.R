@@ -126,6 +126,7 @@ influence.ivreg <- function(model, sigma. = n <= 1e3, type = c("stage2", "both",
   y <- model$y
   vcov_unscaled <- model$cov.unscaled
   if (is.null(y)) stop("response variable not in model object")
+  if (is.null(Z)) stop("no instruments, use influence() on lm model instead")
   b <- coef(model) # model$coefficients
   res <- na.remove(residuals(model)) # na.remove(model$residuals)
   # Residuals of first stage and the projection
@@ -260,6 +261,17 @@ dfbeta.influence.ivreg <- function(model, ...) {
 #' @export
 dfbeta.ivreg <- function(model, ...) {
   influence(model)$dfbeta
+}
+
+#' @importFrom stats dffits
+#' @rawNamespace if (getRversion() >= "4.6.0") S3method(dffits,influence.ivreg)
+dffits.influence.ivreg <- function(model, ...) {
+  model$dffits
+}
+
+#' @rawNamespace if (getRversion() >= "4.6.0") S3method(dffits,ivreg)
+dffits.ivreg <- function(model, ...) {
+  influence(model)$dffits
 }
 
 #' @rdname ivregDiagnostics
