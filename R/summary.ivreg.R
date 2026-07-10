@@ -327,9 +327,9 @@ ivdiag <- function(obj, vcov. = NULL) {
     } else {
       if(NCOL(obj0$coefficients) > 1L) {
         cf0 <- structure(as.vector(obj0$coefficients),
-	  .Names = c(outer(rownames(obj0$coefficients), colnames(obj0$coefficients), paste, sep = ":")))
+	  names = c(outer(rownames(obj0$coefficients), colnames(obj0$coefficients), paste, sep = ":")))
         cf1 <- structure(as.vector(obj1$coefficients),
-	  .Names = c(outer(rownames(obj1$coefficients), colnames(obj1$coefficients), paste, sep = ":")))
+	  names = c(outer(rownames(obj1$coefficients), colnames(obj1$coefficients), paste, sep = ":")))
       } else {
         cf0 <- obj0$coefficients
         cf1 <- obj1$coefficients

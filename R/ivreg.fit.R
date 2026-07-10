@@ -133,7 +133,7 @@ ivreg.fit <- function(x, y, z, weights, offset, method = c("OLS", "M", "MM"),
   ## infer endogenous variables in x and instruments in z
   rowAbsMaxs <- function(x, ...) apply(abs(as.matrix(x)), 1L, max, ...)
   colAbsMaxs <- function(x, ...) apply(abs(as.matrix(x)), 2L, max, ...)
-  exog <- structure(seq_along(colnames(x)), .Names = colnames(x))
+  exog <- structure(seq_along(colnames(x)), names = colnames(x))
   if(!is.null(auxreg)) {
     endo <- which(colAbsMaxs(auxreg$residuals) > sqrt(.Machine$double.eps))
     inst <- coef(auxreg)
