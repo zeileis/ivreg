@@ -38,7 +38,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ivreg</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.6-7</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.6-8</span>
       </span>
     </div>
 
@@ -155,7 +155,7 @@ vector of regression coefficients to be estimated from the data, and
 is an
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mo>×</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">n \times 1</annotation></semantics></math>
 vector of errors assumed to be distributed
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>N</mi><mi>n</mi></msub><mrow><mo stretchy="true" form="prefix">(</mo><mn>0</mn><mo>,</mo><msup><mi>σ</mi><mn>2</mn></msup><msub><mi>I</mi><mi>n</mi></msub><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">N_n(0, \sigma^2 I_n)</annotation></semantics></math>
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>N</mi><mi>n</mi></msub><mo stretchy="false" form="prefix">(</mo><mn>0</mn><mo>,</mo><msup><mi>σ</mi><mn>2</mn></msup><msub><mi>I</mi><mi>n</mi></msub><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">N_n(0, \sigma^2 I_n)</annotation></semantics></math>
 where
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>N</mi><mi>n</mi></msub><annotation encoding="application/x-tex">N_n</annotation></semantics></math>
 is the multivariate-normal distribution,
@@ -172,7 +172,7 @@ are <em>endogenous</em>, in the sense that they are thought not to be
 independent of
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>ε</mi><annotation encoding="application/x-tex">\varepsilon</annotation></semantics></math>.
 As a consequence, the <em>ordinary least-squares (OLS)</em> estimator
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>b</mi><mrow><mi mathvariant="normal">O</mi><mi mathvariant="normal">L</mi><mi mathvariant="normal">S</mi></mrow></msub><mo>=</mo><msup><mrow><mo stretchy="true" form="prefix">(</mo><msup><mi>X</mi><mi>⊤</mi></msup><mi>X</mi><mo stretchy="true" form="postfix">)</mo></mrow><mrow><mo>−</mo><mn>1</mn></mrow></msup><msup><mi>X</mi><mi>⊤</mi></msup><mi>y</mi></mrow><annotation encoding="application/x-tex">b_{\mathrm{OLS}} = (X^\top X)^{-1} X^\top y</annotation></semantics></math>
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>b</mi><mrow><mi mathvariant="normal">O</mi><mi mathvariant="normal">L</mi><mi mathvariant="normal">S</mi></mrow></msub><mo>=</mo><mo stretchy="false" form="prefix">(</mo><msup><mi>X</mi><mi>⊤</mi></msup><mi>X</mi><msup><mo stretchy="false" form="postfix">)</mo><mrow><mi>−</mi><mn>1</mn></mrow></msup><msup><mi>X</mi><mi>⊤</mi></msup><mi>y</mi></mrow><annotation encoding="application/x-tex">b_{\mathrm{OLS}} = (X^\top X)^{-1} X^\top y</annotation></semantics></math>
 of
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>β</mi><annotation encoding="application/x-tex">\beta</annotation></semantics></math>
 is generally biased and inconsistent.</p>
@@ -202,7 +202,7 @@ on the IVs
 by multivariate ordinary least squares, obtaining the
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>q</mi><mo>×</mo><mi>p</mi></mrow><annotation encoding="application/x-tex">q \times p</annotation></semantics></math>
 matrix of regression coefficients
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>B</mi><mo>=</mo><msup><mrow><mo stretchy="true" form="prefix">(</mo><msup><mi>Z</mi><mi>⊤</mi></msup><mi>Z</mi><mo stretchy="true" form="postfix">)</mo></mrow><mrow><mo>−</mo><mn>1</mn></mrow></msup><msup><mi>Z</mi><mi>⊤</mi></msup><mi>X</mi></mrow><annotation encoding="application/x-tex">B = (Z^\top Z)^{-1} Z^\top X</annotation></semantics></math>,
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>B</mi><mo>=</mo><mo stretchy="false" form="prefix">(</mo><msup><mi>Z</mi><mi>⊤</mi></msup><mi>Z</mi><msup><mo stretchy="false" form="postfix">)</mo><mrow><mi>−</mi><mn>1</mn></mrow></msup><msup><mi>Z</mi><mi>⊤</mi></msup><mi>X</mi></mrow><annotation encoding="application/x-tex">B = (Z^\top Z)^{-1} Z^\top X</annotation></semantics></math>,
 and the fitted values
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mover><mi>X</mi><mo accent="true">̂</mo></mover><mo>=</mo><mi>Z</mi><mi>B</mi></mrow><annotation encoding="application/x-tex">\widehat{X} = Z B</annotation></semantics></math>.
 The columns of
@@ -238,27 +238,28 @@ by performing an OLS regression of
 on
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mover><mi>X</mi><mo accent="true">̂</mo></mover><annotation encoding="application/x-tex">\widehat{X}</annotation></semantics></math>,
 producing
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>b</mi><mrow><mn mathvariant="normal">2</mn><mi mathvariant="normal">S</mi><mi mathvariant="normal">L</mi><mi mathvariant="normal">S</mi></mrow></msub><mo>=</mo><msup><mrow><mo stretchy="true" form="prefix">(</mo><msup><mover><mi>X</mi><mo accent="true">̂</mo></mover><mi>⊤</mi></msup><mover><mi>X</mi><mo accent="true">̂</mo></mover><mo stretchy="true" form="postfix">)</mo></mrow><mrow><mo>−</mo><mn>1</mn></mrow></msup><msup><mover><mi>X</mi><mo accent="true">̂</mo></mover><mi>⊤</mi></msup><mi>y</mi></mrow><annotation encoding="application/x-tex">b_{\mathrm{2SLS}} = (\widehat{X}^\top \widehat{X})^{-1} \widehat{X}^\top y</annotation></semantics></math>.
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>b</mi><mrow><mn mathvariant="normal">2</mn><mi mathvariant="normal">S</mi><mi mathvariant="normal">L</mi><mi mathvariant="normal">S</mi></mrow></msub><mo>=</mo><mo stretchy="false" form="prefix">(</mo><msup><mover><mi>X</mi><mo accent="true">̂</mo></mover><mi>⊤</mi></msup><mover><mi>X</mi><mo accent="true">̂</mo></mover><msup><mo stretchy="false" form="postfix">)</mo><mrow><mi>−</mi><mn>1</mn></mrow></msup><msup><mover><mi>X</mi><mo accent="true">̂</mo></mover><mi>⊤</mi></msup><mi>y</mi></mrow><annotation encoding="application/x-tex">b_{\mathrm{2SLS}} = (\widehat{X}^\top \widehat{X})^{-1} \widehat{X}^\top y</annotation></semantics></math>.
 This is Basmann’s approach and it motivates the name “2SLS.”</p>
 <p>Whether we think of the second stage as IV estimation or OLS
 regression, we can combine the two stages into a single formula:
-<math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>b</mi><mrow><mn mathvariant="normal">2</mn><mi mathvariant="normal">S</mi><mi mathvariant="normal">L</mi><mi mathvariant="normal">S</mi></mrow></msub><mo>=</mo><msup><mrow><mo stretchy="true" form="prefix">[</mo><msup><mi>X</mi><mi>⊤</mi></msup><mi>Z</mi><msup><mrow><mo stretchy="true" form="prefix">(</mo><msup><mi>Z</mi><mi>⊤</mi></msup><mi>Z</mi><mo stretchy="true" form="postfix">)</mo></mrow><mrow><mo>−</mo><mn>1</mn></mrow></msup><msup><mi>Z</mi><mi>⊤</mi></msup><mi>X</mi><mo stretchy="true" form="postfix">]</mo></mrow><mrow><mo>−</mo><mn>1</mn></mrow></msup><msup><mi>X</mi><mi>⊤</mi></msup><mi>Z</mi><msup><mrow><mo stretchy="true" form="prefix">(</mo><msup><mi>Z</mi><mi>⊤</mi></msup><mi>Z</mi><mo stretchy="true" form="postfix">)</mo></mrow><mrow><mo>−</mo><mn>1</mn></mrow></msup><msup><mi>Z</mi><mi>⊤</mi></msup><mi>y</mi></mrow><annotation encoding="application/x-tex">
+<math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>b</mi><mrow><mn mathvariant="normal">2</mn><mi mathvariant="normal">S</mi><mi mathvariant="normal">L</mi><mi mathvariant="normal">S</mi></mrow></msub><mo>=</mo><mo stretchy="false" form="prefix">[</mo><msup><mi>X</mi><mi>⊤</mi></msup><mi>Z</mi><mo stretchy="false" form="prefix">(</mo><msup><mi>Z</mi><mi>⊤</mi></msup><mi>Z</mi><msup><mo stretchy="false" form="postfix">)</mo><mrow><mi>−</mi><mn>1</mn></mrow></msup><msup><mi>Z</mi><mi>⊤</mi></msup><mi>X</mi><msup><mo stretchy="false" form="postfix">]</mo><mrow><mi>−</mi><mn>1</mn></mrow></msup><msup><mi>X</mi><mi>⊤</mi></msup><mi>Z</mi><mo stretchy="false" form="prefix">(</mo><msup><mi>Z</mi><mi>⊤</mi></msup><mi>Z</mi><msup><mo stretchy="false" form="postfix">)</mo><mrow><mi>−</mi><mn>1</mn></mrow></msup><msup><mi>Z</mi><mi>⊤</mi></msup><mi>y</mi></mrow><annotation encoding="application/x-tex">
 b_{\mathrm{2SLS}} = [X^\top Z(Z^\top Z)^{-1} Z^\top X]^{-1} X^\top Z (Z^\top Z)^{-1} Z^\top y
 </annotation></semantics></math> This is what the <code>tsls()</code>
-function in the <strong>sem</strong> package <span class="citation">(Fox, Nie, and Byrnes 2020)</span> does, but from the
-point of view of developing regression diagnostics, it’s advantageous to
-compute the 2SLS estimator by two distinct OLS regressions, which is the
-approach taken by <code><a href="../reference/ivreg.html">ivreg()</a></code>.</p>
+function in the <strong>sem</strong> package <span class="citation">(Fox
+et al. 2020)</span> does, but from the point of view of developing
+regression diagnostics, it’s advantageous to compute the 2SLS estimator
+by two distinct OLS regressions, which is the approach taken by
+<code><a href="../reference/ivreg.html">ivreg()</a></code>.</p>
 </div>
 <div class="section level2">
 <h2 id="unusual-data-diagnostics-for-2sls-regression">Unusual-Data Diagnostics for 2SLS Regression<a class="anchor" aria-label="anchor" href="#unusual-data-diagnostics-for-2sls-regression"></a>
 </h2>
 <p>As far as we can tell, diagnostics for regression models fit by 2SLS
-are a relatively neglected topic, but were addressed briefly by <span class="citation">Belsley, Kuh, and Welsch (1980, 266–68)</span>.
-Deletion diagnostics directly assess the influence of each case on a
-fitted regression model by removing the case, refitting the model, and
-noting how the regression coefficients or other regression outputs, such
-as the residual standard deviation, change.</p>
+are a relatively neglected topic, but were addressed briefly by <span class="citation">Belsley et al. (1980, 266–68)</span>. Deletion
+diagnostics directly assess the influence of each case on a fitted
+regression model by removing the case, refitting the model, and noting
+how the regression coefficients or other regression outputs, such as the
+residual standard deviation, change.</p>
 <p>Case-deletion diagnostics for influential data can always be obtained
 by brute-force computation, literally refitting the model with each case
 removed in turn, but this approach is inefficient and consequently
@@ -267,8 +268,8 @@ such as generalized linear models <span class="citation">(e.g., Pregibon
 1981)</span>, computationally less demanding approximations to
 case-deletion diagnostics are available, and for linear models efficient
 “updating” formulas are available <span class="citation">(as described,
-e.g., by Belsley, Kuh, and Welsch 1980)</span> that permit the exact
-computation of case-deletion diagnostics.</p>
+e.g., by Belsley et al. 1980)</span> that permit the exact computation
+of case-deletion diagnostics.</p>
 <p>As it turns out, and as Belsley, Kuh, and Welsch note, exact updating
 formulas for 2SLS regression permitting the efficient computation of
 case-deletion statistics were given by <span class="citation">Phillips
@@ -276,14 +277,14 @@ case-deletion statistics were given by <span class="citation">Phillips
 in our notation (and fixing a couple of small typos in the original),
 are used in the case-deletion statistics computed in the
 <strong>ivreg</strong> package:
-<math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>b</mi><mrow><mrow><mn mathvariant="normal">2</mn><mi mathvariant="normal">S</mi><mi mathvariant="normal">L</mi><mi mathvariant="normal">S</mi></mrow><mo>−</mo><mi>i</mi></mrow></msub><mo>=</mo><msub><mi>b</mi><mrow><mn mathvariant="normal">2</mn><mi mathvariant="normal">S</mi><mi mathvariant="normal">L</mi><mi mathvariant="normal">S</mi></mrow></msub><mo>+</mo><msup><mi>A</mi><mrow><mo>−</mo><mn>1</mn></mrow></msup><msub><mi>g</mi><mi>i</mi></msub></mrow><annotation encoding="application/x-tex">
+<math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>b</mi><mrow><mrow><mn mathvariant="normal">2</mn><mi mathvariant="normal">S</mi><mi mathvariant="normal">L</mi><mi mathvariant="normal">S</mi></mrow><mo>−</mo><mi>i</mi></mrow></msub><mo>=</mo><msub><mi>b</mi><mrow><mn mathvariant="normal">2</mn><mi mathvariant="normal">S</mi><mi mathvariant="normal">L</mi><mi mathvariant="normal">S</mi></mrow></msub><mo>+</mo><msup><mi>A</mi><mrow><mi>−</mi><mn>1</mn></mrow></msup><msub><mi>g</mi><mi>i</mi></msub></mrow><annotation encoding="application/x-tex">
 b_{\mathrm{2SLS}-i} = b_{\mathrm{2SLS}} +A^{-1}g_i
 </annotation></semantics></math> where
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>b</mi><mrow><mrow><mn mathvariant="normal">2</mn><mi mathvariant="normal">S</mi><mi mathvariant="normal">L</mi><mi mathvariant="normal">S</mi></mrow><mo>−</mo><mi>i</mi></mrow></msub><annotation encoding="application/x-tex">b_{\mathrm{2SLS}-i}</annotation></semantics></math>
 is the 2SLS vector of regression coefficients with the
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>i</mi><annotation encoding="application/x-tex">i</annotation></semantics></math>-th
 case removed, and</p>
-<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mtable><mtr><mtd columnalign="right" style="text-align: right"><mi>A</mi></mtd><mtd columnalign="left" style="text-align: left"><mo>=</mo><msup><mi>X</mi><mi>⊤</mi></msup><mi>Z</mi><msup><mrow><mo stretchy="true" form="prefix">(</mo><msup><mi>Z</mi><mi>⊤</mi></msup><mi>Z</mi><mo stretchy="true" form="postfix">)</mo></mrow><mrow><mo>−</mo><mn>1</mn></mrow></msup><msup><mi>Z</mi><mi>⊤</mi></msup><mi>X</mi></mtd></mtr><mtr><mtd columnalign="right" style="text-align: right"><msub><mi>g</mi><mi>i</mi></msub></mtd><mtd columnalign="left" style="text-align: left"><mo>=</mo><msub><mi>u</mi><mi>i</mi></msub><mrow><mo stretchy="true" form="prefix">[</mo><mrow><mo stretchy="true" form="prefix">(</mo><msub><mi>y</mi><mi>i</mi></msub><mo>−</mo><msubsup><mi>z</mi><mi>i</mi><mi>⊤</mi></msubsup><mi>a</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>−</mo><mrow><mo stretchy="true" form="prefix">(</mo><msub><mi>y</mi><mi>i</mi></msub><mo>−</mo><msubsup><mi>r</mi><mi>i</mi><mi>⊤</mi></msubsup><msub><mi>b</mi><mrow><mn mathvariant="normal">2</mn><mi mathvariant="normal">S</mi><mi mathvariant="normal">L</mi><mi mathvariant="normal">S</mi></mrow></msub><mo stretchy="true" form="postfix">)</mo></mrow><mo stretchy="true" form="postfix">]</mo></mrow><mo>+</mo><mrow><mo stretchy="true" form="prefix">(</mo><msub><mi>u</mi><mi>i</mi></msub><mo>+</mo><msub><mi>j</mi><mi>i</mi></msub><mo stretchy="true" form="postfix">)</mo></mrow><mrow><mo stretchy="true" form="prefix">(</mo><msub><mi>y</mi><mi>i</mi></msub><mo>−</mo><msubsup><mi>x</mi><mi>i</mi><mi>⊤</mi></msubsup><msub><mi>b</mi><mrow><mn mathvariant="normal">2</mn><mi mathvariant="normal">S</mi><mi mathvariant="normal">L</mi><mi mathvariant="normal">S</mi></mrow></msub><mo stretchy="true" form="postfix">)</mo></mrow></mtd></mtr><mtr><mtd columnalign="right" style="text-align: right"><msub><mi>u</mi><mi>i</mi></msub></mtd><mtd columnalign="left" style="text-align: left"><mo>=</mo><mfrac><mrow><mn>1</mn><mo>−</mo><msubsup><mi>x</mi><mi>i</mi><mi>⊤</mi></msubsup><msup><mi>A</mi><mrow><mo>−</mo><mn>1</mn></mrow></msup><msub><mi>x</mi><mi>i</mi></msub></mrow><mrow><mrow><mo stretchy="true" form="prefix">[</mo><mn>1</mn><mo>−</mo><msub><mi>c</mi><mi>i</mi></msub><mo>+</mo><msup><mrow><mo stretchy="true" form="prefix">(</mo><msub><mi>x</mi><mi>i</mi></msub><mo>−</mo><msub><mi>r</mi><mi>i</mi></msub><mo stretchy="true" form="postfix">)</mo></mrow><mi>⊤</mi></msup><msup><mi>A</mi><mrow><mo>−</mo><mn>1</mn></mrow></msup><mrow><mo stretchy="true" form="prefix">(</mo><msub><mi>x</mi><mi>i</mi></msub><mo>−</mo><msub><mi>r</mi><mi>i</mi></msub><mo stretchy="true" form="postfix">)</mo></mrow><mo stretchy="true" form="postfix">]</mo></mrow><msub><mi>D</mi><mi>i</mi></msub></mrow></mfrac><mrow><mo stretchy="true" form="prefix">(</mo><msub><mi>x</mi><mi>i</mi></msub><mo>−</mo><msub><mi>r</mi><mi>i</mi></msub><mo stretchy="true" form="postfix">)</mo></mrow><mo>+</mo><mfrac><mrow><msup><mrow><mo stretchy="true" form="prefix">(</mo><msub><mi>x</mi><mi>i</mi></msub><mo>−</mo><msub><mi>r</mi><mi>i</mi></msub><mo stretchy="true" form="postfix">)</mo></mrow><mi>⊤</mi></msup><msup><mi>A</mi><mrow><mo>−</mo><mn>1</mn></mrow></msup><msub><mi>x</mi><mi>i</mi></msub></mrow><mrow><mrow><mo stretchy="true" form="prefix">[</mo><mn>1</mn><mo>−</mo><msub><mi>c</mi><mi>i</mi></msub><mo>+</mo><msup><mrow><mo stretchy="true" form="prefix">(</mo><msub><mi>x</mi><mi>i</mi></msub><mo>−</mo><msub><mi>r</mi><mi>i</mi></msub><mo stretchy="true" form="postfix">)</mo></mrow><mi>⊤</mi></msup><msup><mi>A</mi><mrow><mo>−</mo><mn>1</mn></mrow></msup><mrow><mo stretchy="true" form="prefix">(</mo><msub><mi>x</mi><mi>i</mi></msub><mo>−</mo><msub><mi>r</mi><mi>i</mi></msub><mo stretchy="true" form="postfix">)</mo></mrow><mo stretchy="true" form="postfix">]</mo></mrow><msub><mi>D</mi><mi>i</mi></msub></mrow></mfrac><msub><mi>x</mi><mi>i</mi></msub></mtd></mtr><mtr><mtd columnalign="right" style="text-align: right"><msub><mi>j</mi><mi>i</mi></msub></mtd><mtd columnalign="left" style="text-align: left"><mo>=</mo><mfrac><mrow><msup><mrow><mo stretchy="true" form="prefix">(</mo><msub><mi>x</mi><mi>i</mi></msub><mo>−</mo><msub><mi>r</mi><mi>i</mi></msub><mo stretchy="true" form="postfix">)</mo></mrow><mi>⊤</mi></msup><msup><mi>A</mi><mrow><mo>−</mo><mn>1</mn></mrow></msup><msub><mi>x</mi><mi>i</mi></msub></mrow><mrow><mrow><mo stretchy="true" form="prefix">[</mo><mn>1</mn><mo>−</mo><msub><mi>c</mi><mi>i</mi></msub><mo>+</mo><msup><mrow><mo stretchy="true" form="prefix">(</mo><msub><mi>x</mi><mi>i</mi></msub><mo>−</mo><msub><mi>r</mi><mi>i</mi></msub><mo stretchy="true" form="postfix">)</mo></mrow><mi>⊤</mi></msup><msup><mi>A</mi><mrow><mo>−</mo><mn>1</mn></mrow></msup><mrow><mo stretchy="true" form="prefix">(</mo><msub><mi>x</mi><mi>i</mi></msub><mo>−</mo><msub><mi>r</mi><mi>i</mi></msub><mo stretchy="true" form="postfix">)</mo></mrow><mo stretchy="true" form="postfix">]</mo></mrow><msub><mi>D</mi><mi>i</mi></msub></mrow></mfrac><mrow><mo stretchy="true" form="prefix">(</mo><msub><mi>x</mi><mi>i</mi></msub><mo>−</mo><msub><mi>r</mi><mi>i</mi></msub><mo stretchy="true" form="postfix">)</mo></mrow><mo>−</mo><mfrac><mn>1</mn><msub><mi>D</mi><mi>i</mi></msub></mfrac><msub><mi>x</mi><mi>i</mi></msub></mtd></mtr><mtr><mtd columnalign="right" style="text-align: right"><msub><mi>r</mi><mi>i</mi></msub></mtd><mtd columnalign="left" style="text-align: left"><mo>=</mo><msup><mi>X</mi><mi>⊤</mi></msup><mi>Z</mi><msup><mrow><mo stretchy="true" form="prefix">(</mo><msup><mi>Z</mi><mi>⊤</mi></msup><mi>Z</mi><mo stretchy="true" form="postfix">)</mo></mrow><mrow><mo>−</mo><mn>1</mn></mrow></msup><msub><mi>z</mi><mi>i</mi></msub></mtd></mtr><mtr><mtd columnalign="right" style="text-align: right"><msub><mi>c</mi><mi>i</mi></msub></mtd><mtd columnalign="left" style="text-align: left"><mo>=</mo><msubsup><mi>z</mi><mi>i</mi><mi>⊤</mi></msubsup><msup><mrow><mo stretchy="true" form="prefix">(</mo><msup><mi>Z</mi><mi>⊤</mi></msup><mi>Z</mi><mo stretchy="true" form="postfix">)</mo></mrow><mrow><mo>−</mo><mn>1</mn></mrow></msup><msub><mi>z</mi><mi>i</mi></msub></mtd></mtr><mtr><mtd columnalign="right" style="text-align: right"><msub><mi>D</mi><mi>i</mi></msub></mtd><mtd columnalign="left" style="text-align: left"><mo>=</mo><mn>1</mn><mo>−</mo><msubsup><mi>x</mi><mi>i</mi><mi>⊤</mi></msubsup><msup><mi>A</mi><mrow><mo>−</mo><mn>1</mn></mrow></msup><msub><mi>x</mi><mi>i</mi></msub><mo>+</mo><mfrac><msup><mrow><mo stretchy="true" form="prefix">[</mo><msup><mrow><mo stretchy="true" form="prefix">(</mo><msub><mi>x</mi><mi>i</mi></msub><mo>−</mo><msub><mi>r</mi><mi>i</mi></msub><mo stretchy="true" form="postfix">)</mo></mrow><mi>⊤</mi></msup><msup><mi>A</mi><mrow><mo>−</mo><mn>1</mn></mrow></msup><msub><mi>x</mi><mi>i</mi></msub><mo stretchy="true" form="postfix">]</mo></mrow><mn>2</mn></msup><mrow><mn>1</mn><mo>−</mo><msub><mi>c</mi><mi>i</mi></msub><mo>+</mo><msup><mrow><mo stretchy="true" form="prefix">(</mo><msub><mi>x</mi><mi>i</mi></msub><mo>−</mo><msub><mi>r</mi><mi>i</mi></msub><mo stretchy="true" form="postfix">)</mo></mrow><mi>⊤</mi></msup><msup><mi>A</mi><mrow><mo>−</mo><mn>1</mn></mrow></msup><mrow><mo stretchy="true" form="prefix">(</mo><msub><mi>x</mi><mi>i</mi></msub><mo>−</mo><msub><mi>r</mi><mi>i</mi></msub><mo stretchy="true" form="postfix">)</mo></mrow></mrow></mfrac></mtd></mtr><mtr><mtd columnalign="right" style="text-align: right"><mi>a</mi></mtd><mtd columnalign="left" style="text-align: left"><mo>=</mo><msup><mrow><mo stretchy="true" form="prefix">(</mo><msup><mi>Z</mi><mi>⊤</mi></msup><mi>Z</mi><mo stretchy="true" form="postfix">)</mo></mrow><mrow><mo>−</mo><mn>1</mn></mrow></msup><msup><mi>Z</mi><mi>⊤</mi></msup><mi>y</mi></mtd></mtr></mtable><annotation encoding="application/x-tex">\begin{align}
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mtable><mtr><mtd columnalign="right" style="text-align: right; padding-right: 0"><mi>A</mi></mtd><mtd columnalign="left" style="text-align: left; padding-left: 0"><mo>=</mo><msup><mi>X</mi><mi>⊤</mi></msup><mi>Z</mi><mo stretchy="false" form="prefix">(</mo><msup><mi>Z</mi><mi>⊤</mi></msup><mi>Z</mi><msup><mo stretchy="false" form="postfix">)</mo><mrow><mi>−</mi><mn>1</mn></mrow></msup><msup><mi>Z</mi><mi>⊤</mi></msup><mi>X</mi></mtd></mtr><mtr><mtd columnalign="right" style="text-align: right; padding-right: 0"><msub><mi>g</mi><mi>i</mi></msub></mtd><mtd columnalign="left" style="text-align: left; padding-left: 0"><mo>=</mo><msub><mi>u</mi><mi>i</mi></msub><mo stretchy="false" form="prefix">[</mo><mo stretchy="false" form="prefix">(</mo><msub><mi>y</mi><mi>i</mi></msub><mo>−</mo><msubsup><mi>z</mi><mi>i</mi><mi>⊤</mi></msubsup><mi>a</mi><mo stretchy="false" form="postfix">)</mo><mo>−</mo><mo stretchy="false" form="prefix">(</mo><msub><mi>y</mi><mi>i</mi></msub><mo>−</mo><msubsup><mi>r</mi><mi>i</mi><mi>⊤</mi></msubsup><msub><mi>b</mi><mrow><mn mathvariant="normal">2</mn><mi mathvariant="normal">S</mi><mi mathvariant="normal">L</mi><mi mathvariant="normal">S</mi></mrow></msub><mo stretchy="false" form="postfix">)</mo><mo stretchy="false" form="postfix">]</mo><mo>+</mo><mo stretchy="false" form="prefix">(</mo><msub><mi>u</mi><mi>i</mi></msub><mo>+</mo><msub><mi>j</mi><mi>i</mi></msub><mo stretchy="false" form="postfix">)</mo><mo stretchy="false" form="prefix">(</mo><msub><mi>y</mi><mi>i</mi></msub><mo>−</mo><msubsup><mi>x</mi><mi>i</mi><mi>⊤</mi></msubsup><msub><mi>b</mi><mrow><mn mathvariant="normal">2</mn><mi mathvariant="normal">S</mi><mi mathvariant="normal">L</mi><mi mathvariant="normal">S</mi></mrow></msub><mo stretchy="false" form="postfix">)</mo></mtd></mtr><mtr><mtd columnalign="right" style="text-align: right; padding-right: 0"><msub><mi>u</mi><mi>i</mi></msub></mtd><mtd columnalign="left" style="text-align: left; padding-left: 0"><mo>=</mo><mfrac><mrow><mn>1</mn><mo>−</mo><msubsup><mi>x</mi><mi>i</mi><mi>⊤</mi></msubsup><msup><mi>A</mi><mrow><mi>−</mi><mn>1</mn></mrow></msup><msub><mi>x</mi><mi>i</mi></msub></mrow><mrow><mo stretchy="false" form="prefix">[</mo><mn>1</mn><mo>−</mo><msub><mi>c</mi><mi>i</mi></msub><mo>+</mo><mo stretchy="false" form="prefix">(</mo><msub><mi>x</mi><mi>i</mi></msub><mo>−</mo><msub><mi>r</mi><mi>i</mi></msub><msup><mo stretchy="false" form="postfix">)</mo><mi>⊤</mi></msup><msup><mi>A</mi><mrow><mi>−</mi><mn>1</mn></mrow></msup><mo stretchy="false" form="prefix">(</mo><msub><mi>x</mi><mi>i</mi></msub><mo>−</mo><msub><mi>r</mi><mi>i</mi></msub><mo stretchy="false" form="postfix">)</mo><mo stretchy="false" form="postfix">]</mo><msub><mi>D</mi><mi>i</mi></msub></mrow></mfrac><mo stretchy="false" form="prefix">(</mo><msub><mi>x</mi><mi>i</mi></msub><mo>−</mo><msub><mi>r</mi><mi>i</mi></msub><mo stretchy="false" form="postfix">)</mo><mo>+</mo><mfrac><mrow><mo stretchy="false" form="prefix">(</mo><msub><mi>x</mi><mi>i</mi></msub><mo>−</mo><msub><mi>r</mi><mi>i</mi></msub><msup><mo stretchy="false" form="postfix">)</mo><mi>⊤</mi></msup><msup><mi>A</mi><mrow><mi>−</mi><mn>1</mn></mrow></msup><msub><mi>x</mi><mi>i</mi></msub></mrow><mrow><mo stretchy="false" form="prefix">[</mo><mn>1</mn><mo>−</mo><msub><mi>c</mi><mi>i</mi></msub><mo>+</mo><mo stretchy="false" form="prefix">(</mo><msub><mi>x</mi><mi>i</mi></msub><mo>−</mo><msub><mi>r</mi><mi>i</mi></msub><msup><mo stretchy="false" form="postfix">)</mo><mi>⊤</mi></msup><msup><mi>A</mi><mrow><mi>−</mi><mn>1</mn></mrow></msup><mo stretchy="false" form="prefix">(</mo><msub><mi>x</mi><mi>i</mi></msub><mo>−</mo><msub><mi>r</mi><mi>i</mi></msub><mo stretchy="false" form="postfix">)</mo><mo stretchy="false" form="postfix">]</mo><msub><mi>D</mi><mi>i</mi></msub></mrow></mfrac><msub><mi>x</mi><mi>i</mi></msub></mtd></mtr><mtr><mtd columnalign="right" style="text-align: right; padding-right: 0"><msub><mi>j</mi><mi>i</mi></msub></mtd><mtd columnalign="left" style="text-align: left; padding-left: 0"><mo>=</mo><mfrac><mrow><mo stretchy="false" form="prefix">(</mo><msub><mi>x</mi><mi>i</mi></msub><mo>−</mo><msub><mi>r</mi><mi>i</mi></msub><msup><mo stretchy="false" form="postfix">)</mo><mi>⊤</mi></msup><msup><mi>A</mi><mrow><mi>−</mi><mn>1</mn></mrow></msup><msub><mi>x</mi><mi>i</mi></msub></mrow><mrow><mo stretchy="false" form="prefix">[</mo><mn>1</mn><mo>−</mo><msub><mi>c</mi><mi>i</mi></msub><mo>+</mo><mo stretchy="false" form="prefix">(</mo><msub><mi>x</mi><mi>i</mi></msub><mo>−</mo><msub><mi>r</mi><mi>i</mi></msub><msup><mo stretchy="false" form="postfix">)</mo><mi>⊤</mi></msup><msup><mi>A</mi><mrow><mi>−</mi><mn>1</mn></mrow></msup><mo stretchy="false" form="prefix">(</mo><msub><mi>x</mi><mi>i</mi></msub><mo>−</mo><msub><mi>r</mi><mi>i</mi></msub><mo stretchy="false" form="postfix">)</mo><mo stretchy="false" form="postfix">]</mo><msub><mi>D</mi><mi>i</mi></msub></mrow></mfrac><mo stretchy="false" form="prefix">(</mo><msub><mi>x</mi><mi>i</mi></msub><mo>−</mo><msub><mi>r</mi><mi>i</mi></msub><mo stretchy="false" form="postfix">)</mo><mo>−</mo><mfrac><mn>1</mn><msub><mi>D</mi><mi>i</mi></msub></mfrac><msub><mi>x</mi><mi>i</mi></msub></mtd></mtr><mtr><mtd columnalign="right" style="text-align: right; padding-right: 0"><msub><mi>r</mi><mi>i</mi></msub></mtd><mtd columnalign="left" style="text-align: left; padding-left: 0"><mo>=</mo><msup><mi>X</mi><mi>⊤</mi></msup><mi>Z</mi><mo stretchy="false" form="prefix">(</mo><msup><mi>Z</mi><mi>⊤</mi></msup><mi>Z</mi><msup><mo stretchy="false" form="postfix">)</mo><mrow><mi>−</mi><mn>1</mn></mrow></msup><msub><mi>z</mi><mi>i</mi></msub></mtd></mtr><mtr><mtd columnalign="right" style="text-align: right; padding-right: 0"><msub><mi>c</mi><mi>i</mi></msub></mtd><mtd columnalign="left" style="text-align: left; padding-left: 0"><mo>=</mo><msubsup><mi>z</mi><mi>i</mi><mi>⊤</mi></msubsup><mo stretchy="false" form="prefix">(</mo><msup><mi>Z</mi><mi>⊤</mi></msup><mi>Z</mi><msup><mo stretchy="false" form="postfix">)</mo><mrow><mi>−</mi><mn>1</mn></mrow></msup><msub><mi>z</mi><mi>i</mi></msub></mtd></mtr><mtr><mtd columnalign="right" style="text-align: right; padding-right: 0"><msub><mi>D</mi><mi>i</mi></msub></mtd><mtd columnalign="left" style="text-align: left; padding-left: 0"><mo>=</mo><mn>1</mn><mo>−</mo><msubsup><mi>x</mi><mi>i</mi><mi>⊤</mi></msubsup><msup><mi>A</mi><mrow><mi>−</mi><mn>1</mn></mrow></msup><msub><mi>x</mi><mi>i</mi></msub><mo>+</mo><mfrac><mrow><mo stretchy="false" form="prefix">[</mo><mo stretchy="false" form="prefix">(</mo><msub><mi>x</mi><mi>i</mi></msub><mo>−</mo><msub><mi>r</mi><mi>i</mi></msub><msup><mo stretchy="false" form="postfix">)</mo><mi>⊤</mi></msup><msup><mi>A</mi><mrow><mi>−</mi><mn>1</mn></mrow></msup><msub><mi>x</mi><mi>i</mi></msub><msup><mo stretchy="false" form="postfix">]</mo><mn>2</mn></msup></mrow><mrow><mn>1</mn><mo>−</mo><msub><mi>c</mi><mi>i</mi></msub><mo>+</mo><mo stretchy="false" form="prefix">(</mo><msub><mi>x</mi><mi>i</mi></msub><mo>−</mo><msub><mi>r</mi><mi>i</mi></msub><msup><mo stretchy="false" form="postfix">)</mo><mi>⊤</mi></msup><msup><mi>A</mi><mrow><mi>−</mi><mn>1</mn></mrow></msup><mo stretchy="false" form="prefix">(</mo><msub><mi>x</mi><mi>i</mi></msub><mo>−</mo><msub><mi>r</mi><mi>i</mi></msub><mo stretchy="false" form="postfix">)</mo></mrow></mfrac></mtd></mtr><mtr><mtd columnalign="right" style="text-align: right; padding-right: 0"><mi>a</mi></mtd><mtd columnalign="left" style="text-align: left; padding-left: 0"><mo>=</mo><mo stretchy="false" form="prefix">(</mo><msup><mi>Z</mi><mi>⊤</mi></msup><mi>Z</mi><msup><mo stretchy="false" form="postfix">)</mo><mrow><mi>−</mi><mn>1</mn></mrow></msup><msup><mi>Z</mi><mi>⊤</mi></msup><mi>y</mi></mtd></mtr></mtable><annotation encoding="application/x-tex">\begin{align}
 A   &amp;= X^\top Z(Z^\top Z)^{-1}Z^\top X \\
 g_i &amp;= u_i[(y_i - z_i^\top a) - (y_i - r_i^\top b_{\mathrm{2SLS}})] + (u_i + j_i)(y_i - x_i^\top b_{\mathrm{2SLS}}) \\
 u_i &amp;= \frac{1 - x_i^\top A^{-1} x_i}{[1 - c_i + (x_i - r_i)^\top A^{-1} (x_i - r_i)]D_i}(x_i - r_i) 
@@ -315,11 +316,11 @@ values of
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mrow><mi mathvariant="normal">d</mi><mi mathvariant="normal">f</mi><mi mathvariant="normal">b</mi><mi mathvariant="normal">e</mi><mi mathvariant="normal">t</mi><mi mathvariant="normal">a</mi></mrow><mi>i</mi></msub><mo>=</mo><msub><mi>b</mi><mrow><mn mathvariant="normal">2</mn><mi mathvariant="normal">S</mi><mi mathvariant="normal">L</mi><mi mathvariant="normal">S</mi></mrow></msub><mo>−</mo><msub><mi>b</mi><mrow><mrow><mn mathvariant="normal">2</mn><mi mathvariant="normal">S</mi><mi mathvariant="normal">L</mi><mi mathvariant="normal">S</mi></mrow><mo>−</mo><mi>i</mi></mrow></msub></mrow><annotation encoding="application/x-tex">\mathrm{dfbeta}_i = b_{\mathrm{2SLS}} - b_{\mathrm{2SLS}-i}</annotation></semantics></math>.
 They discuss as well the deleted values of the residual standard
 deviation
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>s</mi><mrow><mo>−</mo><mi>i</mi></mrow></msub><annotation encoding="application/x-tex">s_{-i}</annotation></semantics></math>.
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>s</mi><mrow><mi>−</mi><mi>i</mi></mrow></msub><annotation encoding="application/x-tex">s_{-i}</annotation></semantics></math>.
 (Belsley, Kuh, and Welsch define the residual variances
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msup><mi>s</mi><mn>2</mn></msup><annotation encoding="application/x-tex">s^2</annotation></semantics></math>
 and
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msubsup><mi>s</mi><mrow><mo>−</mo><mi>i</mi></mrow><mn>2</mn></msubsup><annotation encoding="application/x-tex">s_{-i}^2</annotation></semantics></math>
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msubsup><mi>s</mi><mrow><mi>−</mi><mi>i</mi></mrow><mn>2</mn></msubsup><annotation encoding="application/x-tex">s_{-i}^2</annotation></semantics></math>
 respectively as the full-sample and deleted residual sums of squares
 divided by
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>;
@@ -335,7 +336,7 @@ for the case-deleted values.)</p>
 influence on the fitted values (and regression coefficients)
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi mathvariant="normal">d</mi><mi mathvariant="normal">f</mi><mi mathvariant="normal">f</mi><mi mathvariant="normal">i</mi><mi mathvariant="normal">t</mi><mi mathvariant="normal">s</mi></mrow><annotation encoding="application/x-tex">\mathrm{dffits}</annotation></semantics></math>
 as
-<math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mrow><mi mathvariant="normal">d</mi><mi mathvariant="normal">f</mi><mi mathvariant="normal">f</mi><mi mathvariant="normal">i</mi><mi mathvariant="normal">t</mi><mi mathvariant="normal">s</mi></mrow><mi>i</mi></msub><mo>=</mo><mfrac><mrow><msubsup><mi>x</mi><mi>i</mi><mi>⊤</mi></msubsup><mrow><mi mathvariant="normal">d</mi><mi mathvariant="normal">f</mi><mi mathvariant="normal">b</mi><mi mathvariant="normal">e</mi><mi mathvariant="normal">t</mi><msub><mi mathvariant="normal">a</mi><mi mathvariant="normal">i</mi></msub></mrow></mrow><mrow><msub><mi>s</mi><mrow><mo>−</mo><mi>i</mi></mrow></msub><msqrt><mrow><msubsup><mi>x</mi><mi>i</mi><mi>⊤</mi></msubsup><msup><mrow><mo stretchy="true" form="prefix">(</mo><msup><mover><mi>X</mi><mo accent="true">̂</mo></mover><mi>⊤</mi></msup><mover><mi>X</mi><mo accent="true">̂</mo></mover><mo stretchy="true" form="postfix">)</mo></mrow><mrow><mo>−</mo><mn>1</mn></mrow></msup><msub><mi>x</mi><mi>i</mi></msub></mrow></msqrt></mrow></mfrac></mrow><annotation encoding="application/x-tex">
+<math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mrow><mi mathvariant="normal">d</mi><mi mathvariant="normal">f</mi><mi mathvariant="normal">f</mi><mi mathvariant="normal">i</mi><mi mathvariant="normal">t</mi><mi mathvariant="normal">s</mi></mrow><mi>i</mi></msub><mo>=</mo><mfrac><mrow><msubsup><mi>x</mi><mi>i</mi><mi>⊤</mi></msubsup><mrow><mi mathvariant="normal">d</mi><mi mathvariant="normal">f</mi><mi mathvariant="normal">b</mi><mi mathvariant="normal">e</mi><mi mathvariant="normal">t</mi><msub><mi mathvariant="normal">a</mi><mi mathvariant="normal">i</mi></msub></mrow></mrow><mrow><msub><mi>s</mi><mrow><mi>−</mi><mi>i</mi></mrow></msub><msqrt><mrow><msubsup><mi>x</mi><mi>i</mi><mi>⊤</mi></msubsup><mo stretchy="false" form="prefix">(</mo><msup><mover><mi>X</mi><mo accent="true">̂</mo></mover><mi>⊤</mi></msup><mover><mi>X</mi><mo accent="true">̂</mo></mover><msup><mo stretchy="false" form="postfix">)</mo><mrow><mi>−</mi><mn>1</mn></mrow></msup><msub><mi>x</mi><mi>i</mi></msub></mrow></msqrt></mrow></mfrac></mrow><annotation encoding="application/x-tex">
 \mathrm{dffits}_i = \frac{x_i^\top \mathrm{dfbeta_{i}}}{s_{-i} \sqrt{x_i^\top (\widehat{X}^\top \widehat{X})^{-1} x_i}}
 </annotation></semantics></math> where (as before)
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msubsup><mi>x</mi><mi>i</mi><mi>⊤</mi></msubsup><annotation encoding="application/x-tex">x_i^\top</annotation></semantics></math>
@@ -347,7 +348,7 @@ and
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mover><mi>X</mi><mo accent="true">̂</mo></mover><annotation encoding="application/x-tex">\widehat{X}</annotation></semantics></math>
 is the model matrix of second-stage regressors.</p>
 <p>Let
-<math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mi>H</mi><mo>*</mo></msup><mo>=</mo><mi>X</mi><msup><mrow><mo stretchy="true" form="prefix">[</mo><msup><mi>X</mi><mi>⊤</mi></msup><mi>Z</mi><msup><mrow><mo stretchy="true" form="prefix">(</mo><msup><mi>Z</mi><mi>⊤</mi></msup><mi>Z</mi><mo stretchy="true" form="postfix">)</mo></mrow><mrow><mo>−</mo><mn>1</mn></mrow></msup><msup><mi>Z</mi><mi>⊤</mi></msup><mi>X</mi><mo stretchy="true" form="postfix">]</mo></mrow><mrow><mo>−</mo><mn>1</mn></mrow></msup><msup><mi>X</mi><mi>⊤</mi></msup><mi>Z</mi><msup><mrow><mo stretchy="true" form="prefix">(</mo><msup><mi>Z</mi><mi>⊤</mi></msup><mi>Z</mi><mo stretchy="true" form="postfix">)</mo></mrow><mrow><mo>−</mo><mn>1</mn></mrow></msup><msup><mi>Z</mi><mi>⊤</mi></msup></mrow><annotation encoding="application/x-tex">
+<math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mi>H</mi><mo>*</mo></msup><mo>=</mo><mi>X</mi><mo stretchy="false" form="prefix">[</mo><msup><mi>X</mi><mi>⊤</mi></msup><mi>Z</mi><mo stretchy="false" form="prefix">(</mo><msup><mi>Z</mi><mi>⊤</mi></msup><mi>Z</mi><msup><mo stretchy="false" form="postfix">)</mo><mrow><mi>−</mi><mn>1</mn></mrow></msup><msup><mi>Z</mi><mi>⊤</mi></msup><mi>X</mi><msup><mo stretchy="false" form="postfix">]</mo><mrow><mi>−</mi><mn>1</mn></mrow></msup><msup><mi>X</mi><mi>⊤</mi></msup><mi>Z</mi><mo stretchy="false" form="prefix">(</mo><msup><mi>Z</mi><mi>⊤</mi></msup><mi>Z</mi><msup><mo stretchy="false" form="postfix">)</mo><mrow><mi>−</mi><mn>1</mn></mrow></msup><msup><mi>Z</mi><mi>⊤</mi></msup></mrow><annotation encoding="application/x-tex">
 H^* = X[X^\top Z(Z^\top Z)^{-1} Z^\top X]^{-1} X^\top Z (Z^\top Z)^{-1} Z^\top
 </annotation></semantics></math> represent the
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mo>×</mo><mi>n</mi></mrow><annotation encoding="application/x-tex">n \times n</annotation></semantics></math>
@@ -356,7 +357,7 @@ matrix that transforms
 into the fitted values,
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mover><mi>y</mi><mo accent="true">̂</mo></mover><mo>=</mo><msup><mi>H</mi><mo>*</mo></msup><mi>y</mi></mrow><annotation encoding="application/x-tex">\widehat{y} = H^* y</annotation></semantics></math>.
 In OLS regression, the analogous quantity is the <em>hat-matrix</em>
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>H</mi><mo>=</mo><mi>X</mi><msup><mrow><mo stretchy="true" form="prefix">(</mo><msup><mi>X</mi><mi>⊤</mi></msup><mi>X</mi><mo stretchy="true" form="postfix">)</mo></mrow><mrow><mo>−</mo><mn>1</mn></mrow></msup><msup><mi>X</mi><mi>⊤</mi></msup></mrow><annotation encoding="application/x-tex">H = X(X^\top X)^{-1}X^\top</annotation></semantics></math>.
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>H</mi><mo>=</mo><mi>X</mi><mo stretchy="false" form="prefix">(</mo><msup><mi>X</mi><mi>⊤</mi></msup><mi>X</mi><msup><mo stretchy="false" form="postfix">)</mo><mrow><mi>−</mi><mn>1</mn></mrow></msup><msup><mi>X</mi><mi>⊤</mi></msup></mrow><annotation encoding="application/x-tex">H = X(X^\top X)^{-1}X^\top</annotation></semantics></math>.
 Belsley, Kuh, and Welsch note that
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msup><mi>H</mi><mo>*</mo></msup><annotation encoding="application/x-tex">H^*</annotation></semantics></math>,
 unlike
@@ -379,7 +380,7 @@ like
 is idempotent
 (<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mi>H</mi><mo>*</mo></msup><mo>=</mo><msup><mi>H</mi><mo>*</mo></msup><msup><mi>H</mi><mo>*</mo></msup></mrow><annotation encoding="application/x-tex">H^* = H^* H^*</annotation></semantics></math>)
 and
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mrow><mi mathvariant="normal">t</mi><mi mathvariant="normal">r</mi><mi mathvariant="normal">a</mi><mi mathvariant="normal">c</mi><mi mathvariant="normal">e</mi></mrow><mrow><mo stretchy="true" form="prefix">(</mo><msup><mi>H</mi><mo>*</mo></msup><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><mi>p</mi></mrow><annotation encoding="application/x-tex">\mathrm{trace}(H^*) = p</annotation></semantics></math>,
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mrow><mi mathvariant="normal">t</mi><mi mathvariant="normal">r</mi><mi mathvariant="normal">a</mi><mi mathvariant="normal">c</mi><mi mathvariant="normal">e</mi></mrow><mo stretchy="false" form="prefix">(</mo><msup><mi>H</mi><mo>*</mo></msup><mo stretchy="false" form="postfix">)</mo><mo>=</mo><mi>p</mi></mrow><annotation encoding="application/x-tex">\mathrm{trace}(H^*) = p</annotation></semantics></math>,
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msup><mi>H</mi><mo>*</mo></msup><annotation encoding="application/x-tex">H^*</annotation></semantics></math>,
 unlike
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>H</mi><annotation encoding="application/x-tex">H</annotation></semantics></math>,
@@ -389,11 +390,11 @@ summary measures of leverage, that is, as <em>hatvalues</em>.</p>
 second-stage regression. These are the diagonal entries
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>h</mi><mi>i</mi></msub><mo>=</mo><msub><mi>h</mi><mrow><mi>i</mi><mi>i</mi></mrow></msub></mrow><annotation encoding="application/x-tex">h_i = h_{ii}</annotation></semantics></math>
 of
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>H</mi><mn>2</mn></msub><mo>=</mo><mover><mi>X</mi><mo accent="true">̂</mo></mover><msup><mrow><mo stretchy="true" form="prefix">(</mo><msup><mover><mi>X</mi><mo accent="true">̂</mo></mover><mi>⊤</mi></msup><mover><mi>X</mi><mo accent="true">̂</mo></mover><mo stretchy="true" form="postfix">)</mo></mrow><mrow><mo>−</mo><mn>1</mn></mrow></msup><msup><mover><mi>X</mi><mo accent="true">̂</mo></mover><mi>⊤</mi></msup></mrow><annotation encoding="application/x-tex">H_2 = \widehat{X}(\widehat{X}^\top \widehat{X})^{-1} \widehat{X}^\top</annotation></semantics></math>.
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>H</mi><mn>2</mn></msub><mo>=</mo><mover><mi>X</mi><mo accent="true">̂</mo></mover><mo stretchy="false" form="prefix">(</mo><msup><mover><mi>X</mi><mo accent="true">̂</mo></mover><mi>⊤</mi></msup><mover><mi>X</mi><mo accent="true">̂</mo></mover><msup><mo stretchy="false" form="postfix">)</mo><mrow><mi>−</mi><mn>1</mn></mrow></msup><msup><mover><mi>X</mi><mo accent="true">̂</mo></mover><mi>⊤</mi></msup></mrow><annotation encoding="application/x-tex">H_2 = \widehat{X}(\widehat{X}^\top \widehat{X})^{-1} \widehat{X}^\top</annotation></semantics></math>.
 We discuss some alternatives below.</p>
 <p>In addition to hatvalues,
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi mathvariant="normal">d</mi><mi mathvariant="normal">f</mi><mi mathvariant="normal">b</mi><mi mathvariant="normal">e</mi><mi mathvariant="normal">t</mi><mi mathvariant="normal">a</mi></mrow><annotation encoding="application/x-tex">\mathrm{dfbeta}</annotation></semantics></math>,
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>s</mi><mrow><mo>−</mo><mi>i</mi></mrow></msub><annotation encoding="application/x-tex">s_{-i}</annotation></semantics></math>,
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>s</mi><mrow><mi>−</mi><mi>i</mi></mrow></msub><annotation encoding="application/x-tex">s_{-i}</annotation></semantics></math>,
 and
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi mathvariant="normal">d</mi><mi mathvariant="normal">f</mi><mi mathvariant="normal">f</mi><mi mathvariant="normal">i</mi><mi mathvariant="normal">t</mi><mi mathvariant="normal">s</mi></mrow><annotation encoding="application/x-tex">\mathrm{dffits}</annotation></semantics></math>,
 the <strong>ivreg</strong> packages calculates <em>Cook’s distances</em>
@@ -403,8 +404,8 @@ which are essentially a slightly differently scaled version of
 that uses the overall residual standard deviation
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>s</mi><annotation encoding="application/x-tex">s</annotation></semantics></math>
 in place of the deleted standard deviations
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>s</mi><mrow><mo>−</mo><mi>i</mi></mrow></msub><annotation encoding="application/x-tex">s_{-i}</annotation></semantics></math>:
-<math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>D</mi><mi>i</mi></msub><mo>=</mo><mfrac><msubsup><mi>s</mi><mrow><mo>−</mo><mi>i</mi></mrow><mn>2</mn></msubsup><msup><mi>s</mi><mn>2</mn></msup></mfrac><mo>×</mo><mfrac><msubsup><mrow><mi mathvariant="normal">d</mi><mi mathvariant="normal">f</mi><mi mathvariant="normal">f</mi><mi mathvariant="normal">i</mi><mi mathvariant="normal">t</mi><mi mathvariant="normal">s</mi></mrow><mi>i</mi><mn>2</mn></msubsup><mi>p</mi></mfrac></mrow><annotation encoding="application/x-tex">
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>s</mi><mrow><mi>−</mi><mi>i</mi></mrow></msub><annotation encoding="application/x-tex">s_{-i}</annotation></semantics></math>:
+<math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>D</mi><mi>i</mi></msub><mo>=</mo><mfrac><msubsup><mi>s</mi><mrow><mi>−</mi><mi>i</mi></mrow><mn>2</mn></msubsup><msup><mi>s</mi><mn>2</mn></msup></mfrac><mo>×</mo><mfrac><msubsup><mrow><mi mathvariant="normal">d</mi><mi mathvariant="normal">f</mi><mi mathvariant="normal">f</mi><mi mathvariant="normal">i</mi><mi mathvariant="normal">t</mi><mi mathvariant="normal">s</mi></mrow><mi>i</mi><mn>2</mn></msubsup><mi>p</mi></mfrac></mrow><annotation encoding="application/x-tex">
 D_i = \frac{s_{-i}^2}{s^2} \times \frac{\mathrm{dffits}_i^2}{p}
 </annotation></semantics></math></p>
 <p>Because they have equal variances and are approximately
@@ -413,22 +414,21 @@ under the normal linear model, <em>studentized residuals</em> are useful
 for detecting outliers and for addressing the assumption of normally
 distributed errors. The <strong>ivreg</strong> package defines
 studentized residuals in analogy to OLS regression as
-<math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mrow><mi mathvariant="normal">r</mi><mi mathvariant="normal">s</mi><mi mathvariant="normal">t</mi><mi mathvariant="normal">u</mi><mi mathvariant="normal">d</mi><mi mathvariant="normal">e</mi><mi mathvariant="normal">n</mi><mi mathvariant="normal">t</mi></mrow><mi>i</mi></msub><mo>=</mo><mfrac><msub><mi>e</mi><mi>i</mi></msub><mrow><msub><mi>s</mi><mrow><mo>−</mo><mi>i</mi></mrow></msub><msqrt><mrow><mn>1</mn><mo>−</mo><msub><mi>h</mi><mi>i</mi></msub></mrow></msqrt></mrow></mfrac></mrow><annotation encoding="application/x-tex">
+<math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mrow><mi mathvariant="normal">r</mi><mi mathvariant="normal">s</mi><mi mathvariant="normal">t</mi><mi mathvariant="normal">u</mi><mi mathvariant="normal">d</mi><mi mathvariant="normal">e</mi><mi mathvariant="normal">n</mi><mi mathvariant="normal">t</mi></mrow><mi>i</mi></msub><mo>=</mo><mfrac><msub><mi>e</mi><mi>i</mi></msub><mrow><msub><mi>s</mi><mrow><mi>−</mi><mi>i</mi></mrow></msub><msqrt><mrow><mn>1</mn><mo>−</mo><msub><mi>h</mi><mi>i</mi></msub></mrow></msqrt></mrow></mfrac></mrow><annotation encoding="application/x-tex">
 \mathrm{rstudent}_i = \frac{e_i}{s_{-i} \sqrt{1 - h_i}}
 </annotation></semantics></math> where
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>e</mi><mi>i</mi></msub><mo>=</mo><msub><mi>y</mi><mi>i</mi></msub><mo>−</mo><msubsup><mi>x</mi><mi>i</mi><mi>⊤</mi></msubsup><msub><mi>b</mi><mrow><mn>2</mn><mi>S</mi><mi>L</mi><mi>S</mi></mrow></msub></mrow><annotation encoding="application/x-tex">e_i = y_i - x_i^\top b_{2SLS}</annotation></semantics></math>
 is the <em>response residual</em> for the
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>i</mi><annotation encoding="application/x-tex">i</annotation></semantics></math>-th
 case.</p>
-<p>As mentioned, <span class="citation">Belsley, Kuh, and Welsch
-(1980)</span> recommend using hatvalues from the second-stage
-regression. That’s a reasonable choice and the default in the
-<strong>ivreg</strong> package, but it risks missing cases that have
-high leverage in the first-stage but not the second-stage regression.
-Let
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msubsup><mi>h</mi><mi>i</mi><mrow><mo stretchy="true" form="prefix">(</mo><mn>1</mn><mo stretchy="true" form="postfix">)</mo></mrow></msubsup><annotation encoding="application/x-tex">h_i^{(1)}</annotation></semantics></math>
+<p>As mentioned, <span class="citation">Belsley et al. (1980)</span>
+recommend using hatvalues from the second-stage regression. That’s a
+reasonable choice and the default in the <strong>ivreg</strong> package,
+but it risks missing cases that have high leverage in the first-stage
+but not the second-stage regression. Let
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msubsup><mi>h</mi><mi>i</mi><mrow><mo stretchy="false" form="prefix">(</mo><mn>1</mn><mo stretchy="false" form="postfix">)</mo></mrow></msubsup><annotation encoding="application/x-tex">h_i^{(1)}</annotation></semantics></math>
 represent the hatvalues from the first stage and
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msubsup><mi>h</mi><mi>i</mi><mrow><mo stretchy="true" form="prefix">(</mo><mn>2</mn><mo stretchy="true" form="postfix">)</mo></mrow></msubsup><annotation encoding="application/x-tex">h_i^{(2)}</annotation></semantics></math>
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msubsup><mi>h</mi><mi>i</mi><mrow><mo stretchy="false" form="prefix">(</mo><mn>2</mn><mo stretchy="false" form="postfix">)</mo></mrow></msubsup><annotation encoding="application/x-tex">h_i^{(2)}</annotation></semantics></math>
 those from the second stage. If the model includes an intercept, both
 sets of hatvalues are bounded by
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>1</mn><mi>/</mi><mi>n</mi></mrow><annotation encoding="application/x-tex">1/n</annotation></semantics></math>
@@ -440,14 +440,14 @@ while the average in the second stage is
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>p</mi><mi>/</mi><mi>n</mi></mrow><annotation encoding="application/x-tex">p/n</annotation></semantics></math>.
 To make the hatvalues from the two stages comparable, we divide each by
 its average,
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msubsup><mi>h</mi><mi>i</mi><mrow><mo stretchy="true" form="prefix">(</mo><mn>1</mn><mo>*</mo><mo stretchy="true" form="postfix">)</mo></mrow></msubsup><mo>=</mo><mfrac><msubsup><mi>h</mi><mi>i</mi><mrow><mo stretchy="true" form="prefix">(</mo><mn>1</mn><mo stretchy="true" form="postfix">)</mo></mrow></msubsup><mrow><mi>q</mi><mi>/</mi><mi>n</mi></mrow></mfrac></mrow><annotation encoding="application/x-tex">h^{(1*)}_i = \frac{h_i^{(1)}}{q/n}</annotation></semantics></math>
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msubsup><mi>h</mi><mi>i</mi><mrow><mo stretchy="false" form="prefix">(</mo><mn>1</mn><mi>*</mi><mo stretchy="false" form="postfix">)</mo></mrow></msubsup><mo>=</mo><mfrac><msubsup><mi>h</mi><mi>i</mi><mrow><mo stretchy="false" form="prefix">(</mo><mn>1</mn><mo stretchy="false" form="postfix">)</mo></mrow></msubsup><mrow><mi>q</mi><mi>/</mi><mi>n</mi></mrow></mfrac></mrow><annotation encoding="application/x-tex">h^{(1*)}_i = \frac{h_i^{(1)}}{q/n}</annotation></semantics></math>
 and
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msubsup><mi>h</mi><mi>i</mi><mrow><mo stretchy="true" form="prefix">(</mo><mn>2</mn><mo>*</mo><mo stretchy="true" form="postfix">)</mo></mrow></msubsup><mo>=</mo><mfrac><msubsup><mi>h</mi><mi>i</mi><mrow><mo stretchy="true" form="prefix">(</mo><mn>2</mn><mo stretchy="true" form="postfix">)</mo></mrow></msubsup><mrow><mi>p</mi><mi>/</mi><mi>n</mi></mrow></mfrac></mrow><annotation encoding="application/x-tex">h^{(2*)}_i = \frac{h_i^{(2)}}{p/n}</annotation></semantics></math>.
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msubsup><mi>h</mi><mi>i</mi><mrow><mo stretchy="false" form="prefix">(</mo><mn>2</mn><mi>*</mi><mo stretchy="false" form="postfix">)</mo></mrow></msubsup><mo>=</mo><mfrac><msubsup><mi>h</mi><mi>i</mi><mrow><mo stretchy="false" form="prefix">(</mo><mn>2</mn><mo stretchy="false" form="postfix">)</mo></mrow></msubsup><mrow><mi>p</mi><mi>/</mi><mi>n</mi></mrow></mfrac></mrow><annotation encoding="application/x-tex">h^{(2*)}_i = \frac{h_i^{(2)}}{p/n}</annotation></semantics></math>.
 Then we can define the two-stages hatvalue either as the (rescaled)
 larger of the two for each case,
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>h</mi><mi>i</mi></msub><mo>=</mo><mrow><mo stretchy="true" form="prefix">(</mo><mi>p</mi><mi>/</mi><mi>n</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>×</mo><mo>max</mo><mrow><mo stretchy="true" form="prefix">(</mo><msubsup><mi>h</mi><mi>i</mi><mrow><mo stretchy="true" form="prefix">(</mo><mn>1</mn><mo>*</mo><mo stretchy="true" form="postfix">)</mo></mrow></msubsup><mo>,</mo><msubsup><mi>h</mi><mi>i</mi><mrow><mo stretchy="true" form="prefix">(</mo><mn>2</mn><mo>*</mo><mo stretchy="true" form="postfix">)</mo></mrow></msubsup><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">h_i = (p/n) \times \max \left( h^{(1*)}_i, h^{(2*)}_i \right)</annotation></semantics></math>,
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>h</mi><mi>i</mi></msub><mo>=</mo><mo stretchy="false" form="prefix">(</mo><mi>p</mi><mi>/</mi><mi>n</mi><mo stretchy="false" form="postfix">)</mo><mo>×</mo><mrow><mi mathvariant="normal">max</mi><mo>⁡</mo></mrow><mrow><mo stretchy="true" form="prefix">(</mo><msubsup><mi>h</mi><mi>i</mi><mrow><mo stretchy="false" form="prefix">(</mo><mn>1</mn><mi>*</mi><mo stretchy="false" form="postfix">)</mo></mrow></msubsup><mo>,</mo><msubsup><mi>h</mi><mi>i</mi><mrow><mo stretchy="false" form="prefix">(</mo><mn>2</mn><mi>*</mi><mo stretchy="false" form="postfix">)</mo></mrow></msubsup><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">h_i = (p/n) \times \max \left( h^{(1*)}_i, h^{(2*)}_i \right)</annotation></semantics></math>,
 or as their (rescaled) geometric mean,
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>h</mi><mi>i</mi></msub><mo>=</mo><mrow><mo stretchy="true" form="prefix">(</mo><mi>p</mi><mi>/</mi><mi>n</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>×</mo><msqrt><mrow><msubsup><mi>h</mi><mi>i</mi><mrow><mo stretchy="true" form="prefix">(</mo><mn>1</mn><mo>*</mo><mo stretchy="true" form="postfix">)</mo></mrow></msubsup><mo>×</mo><msubsup><mi>h</mi><mi>i</mi><mrow><mo stretchy="true" form="prefix">(</mo><mn>2</mn><mo>*</mo><mo stretchy="true" form="postfix">)</mo></mrow></msubsup></mrow></msqrt></mrow><annotation encoding="application/x-tex">h_i = (p/n) \times \sqrt{h^{(1*)}_i \times  h^{(2*)}_i}</annotation></semantics></math>.
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>h</mi><mi>i</mi></msub><mo>=</mo><mo stretchy="false" form="prefix">(</mo><mi>p</mi><mi>/</mi><mi>n</mi><mo stretchy="false" form="postfix">)</mo><mo>×</mo><msqrt><mrow><msubsup><mi>h</mi><mi>i</mi><mrow><mo stretchy="false" form="prefix">(</mo><mn>1</mn><mi>*</mi><mo stretchy="false" form="postfix">)</mo></mrow></msubsup><mo>×</mo><msubsup><mi>h</mi><mi>i</mi><mrow><mo stretchy="false" form="prefix">(</mo><mn>2</mn><mi>*</mi><mo stretchy="false" form="postfix">)</mo></mrow></msubsup></mrow></msqrt></mrow><annotation encoding="application/x-tex">h_i = (p/n) \times \sqrt{h^{(1*)}_i \times  h^{(2*)}_i}</annotation></semantics></math>.
 The <strong>ivreg</strong> package provides both of these options.</p>
 <div class="section level3">
 <h3 id="unusual-data-diagnostics-in-the-ivreg-package">Unusual-Data Diagnostics in the <strong>ivreg</strong> Package<a class="anchor" aria-label="anchor" href="#unusual-data-diagnostics-in-the-ivreg-package"></a>
@@ -533,7 +533,7 @@ to general consumer prices</li>
 <span><span class="co">## 1941 106.232 113.490 127.1  93.0 20</span></span></code></pre>
 <p>Kmenta estimated the following two-equation model, with the first
 equation representing demand and the second supply:
-<math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mtable><mtr><mtd columnalign="right" style="text-align: right"><mi>Q</mi></mtd><mtd columnalign="left" style="text-align: left"><mo>=</mo><msub><mi>β</mi><mn>10</mn></msub><mo>+</mo><msub><mi>β</mi><mn>11</mn></msub><mi>P</mi><mo>+</mo><msub><mi>β</mi><mn>12</mn></msub><mi>D</mi><mo>+</mo><msub><mi>ε</mi><mn>1</mn></msub></mtd></mtr><mtr><mtd columnalign="right" style="text-align: right"><mi>Q</mi></mtd><mtd columnalign="left" style="text-align: left"><mo>=</mo><msub><mi>β</mi><mn>20</mn></msub><mo>+</mo><msub><mi>β</mi><mn>21</mn></msub><mi>P</mi><mo>+</mo><msub><mi>β</mi><mn>22</mn></msub><mi>F</mi><mo>+</mo><msub><mi>β</mi><mn>23</mn></msub><mi>A</mi><mo>+</mo><msub><mi>ε</mi><mn>2</mn></msub></mtd></mtr></mtable><annotation encoding="application/x-tex">\begin{align}
+<math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mtable><mtr><mtd columnalign="right" style="text-align: right; padding-right: 0"><mi>Q</mi></mtd><mtd columnalign="left" style="text-align: left; padding-left: 0"><mo>=</mo><msub><mi>β</mi><mn>10</mn></msub><mo>+</mo><msub><mi>β</mi><mn>11</mn></msub><mi>P</mi><mo>+</mo><msub><mi>β</mi><mn>12</mn></msub><mi>D</mi><mo>+</mo><msub><mi>ε</mi><mn>1</mn></msub></mtd></mtr><mtr><mtd columnalign="right" style="text-align: right; padding-right: 0"><mi>Q</mi></mtd><mtd columnalign="left" style="text-align: left; padding-left: 0"><mo>=</mo><msub><mi>β</mi><mn>20</mn></msub><mo>+</mo><msub><mi>β</mi><mn>21</mn></msub><mi>P</mi><mo>+</mo><msub><mi>β</mi><mn>22</mn></msub><mi>F</mi><mo>+</mo><msub><mi>β</mi><mn>23</mn></msub><mi>A</mi><mo>+</mo><msub><mi>ε</mi><mn>2</mn></msub></mtd></mtr></mtable><annotation encoding="application/x-tex">\begin{align}
 Q &amp;= \beta_{10} + \beta_{11} P + \beta_{12} D + \varepsilon_1 \\
 Q &amp;= \beta_{20} + \beta_{21} P + \beta_{22} F + \beta_{23} A + \varepsilon_2
 \end{align}</annotation></semantics></math> The variables
@@ -555,7 +555,7 @@ just-identified.</p>
 endogenous variables were generated (i.e., simulated) by Kmenta
 according to the model, with the following assumed values of the
 parameters:</p>
-<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mtable><mtr><mtd columnalign="right" style="text-align: right"><mi>Q</mi></mtd><mtd columnalign="left" style="text-align: left"><mo>=</mo><mn>96.5</mn><mo>−</mo><mn>0.25</mn><mi>P</mi><mo>+</mo><mn>0.30</mn><mi>D</mi><mo>+</mo><msub><mi>ε</mi><mn>1</mn></msub></mtd></mtr><mtr><mtd columnalign="right" style="text-align: right"><mi>Q</mi></mtd><mtd columnalign="left" style="text-align: left"><mo>=</mo><mn>62.5</mn><mo>+</mo><mn>0.15</mn><mi>P</mi><mo>+</mo><mn>0.20</mn><mi>F</mi><mo>+</mo><mn>0.36</mn><mi>A</mi><mo>+</mo><msub><mi>ε</mi><mn>2</mn></msub></mtd></mtr></mtable><annotation encoding="application/x-tex">\begin{align}
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mtable><mtr><mtd columnalign="right" style="text-align: right; padding-right: 0"><mi>Q</mi></mtd><mtd columnalign="left" style="text-align: left; padding-left: 0"><mo>=</mo><mn>96.5</mn><mo>−</mo><mn>0.25</mn><mi>P</mi><mo>+</mo><mn>0.30</mn><mi>D</mi><mo>+</mo><msub><mi>ε</mi><mn>1</mn></msub></mtd></mtr><mtr><mtd columnalign="right" style="text-align: right; padding-right: 0"><mi>Q</mi></mtd><mtd columnalign="left" style="text-align: left; padding-left: 0"><mo>=</mo><mn>62.5</mn><mo>+</mo><mn>0.15</mn><mi>P</mi><mo>+</mo><mn>0.20</mn><mi>F</mi><mo>+</mo><mn>0.36</mn><mi>A</mi><mo>+</mo><msub><mi>ε</mi><mn>2</mn></msub></mtd></mtr></mtable><annotation encoding="application/x-tex">\begin{align}
 Q &amp;= 96.5 - 0.25 P + 0.30 D + \varepsilon_1 \\
 Q &amp;= 62.5 + 0.15 P + 0.20 F + 0.36 A + \varepsilon_2
 \end{align}</annotation></semantics></math></p>
@@ -564,7 +564,7 @@ Q &amp;= 62.5 + 0.15 P + 0.20 F + 0.36 A + \varepsilon_2
 and
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>Q</mi><annotation encoding="application/x-tex">Q</annotation></semantics></math>
 produces the <em>reduced form</em> of the model</p>
-<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mtable><mtr><mtd columnalign="right" style="text-align: right"><mi>Q</mi></mtd><mtd columnalign="left" style="text-align: left"><mo>=</mo><mn>75.25</mn><mo>+</mo><mn>11.25</mn><mi>D</mi><mo>+</mo><mn>0.125</mn><mi>F</mi><mo>+</mo><mn>0.225</mn><mi>A</mi><mo>+</mo><msub><mi>ν</mi><mn>1</mn></msub></mtd></mtr><mtr><mtd columnalign="right" style="text-align: right"><mi>P</mi></mtd><mtd columnalign="left" style="text-align: left"><mo>=</mo><mn>85.00</mn><mo>+</mo><mn>0.75</mn><mi>D</mi><mo>−</mo><mn>0.50</mn><mi>F</mi><mo>−</mo><mn>0.90</mn><mi>A</mi><mo>+</mo><msub><mi>ν</mi><mn>2</mn></msub></mtd></mtr></mtable><annotation encoding="application/x-tex">\begin{align}
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mtable><mtr><mtd columnalign="right" style="text-align: right; padding-right: 0"><mi>Q</mi></mtd><mtd columnalign="left" style="text-align: left; padding-left: 0"><mo>=</mo><mn>75.25</mn><mo>+</mo><mn>11.25</mn><mi>D</mi><mo>+</mo><mn>0.125</mn><mi>F</mi><mo>+</mo><mn>0.225</mn><mi>A</mi><mo>+</mo><msub><mi>ν</mi><mn>1</mn></msub></mtd></mtr><mtr><mtd columnalign="right" style="text-align: right; padding-right: 0"><mi>P</mi></mtd><mtd columnalign="left" style="text-align: left; padding-left: 0"><mo>=</mo><mn>85.00</mn><mo>+</mo><mn>0.75</mn><mi>D</mi><mo>−</mo><mn>0.50</mn><mi>F</mi><mo>−</mo><mn>0.90</mn><mi>A</mi><mo>+</mo><msub><mi>ν</mi><mn>2</mn></msub></mtd></mtr></mtable><annotation encoding="application/x-tex">\begin{align}
 Q &amp;= 75.25 + 11.25 D + 0.125 F + 0.225 A + \nu_1\\
 P &amp;= 85.00 + 0.75 D - 0.50 F - 0.90 A + \nu_2
 \end{align}</annotation></semantics></math></p>
@@ -573,11 +573,11 @@ P &amp;= 85.00 + 0.75 D - 0.50 F - 0.90 A + \nu_2
 and
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>δ</mi><mn>2</mn></msub><annotation encoding="application/x-tex">\delta_2</annotation></semantics></math>,
 each from
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>N</mi><mrow><mo stretchy="true" form="prefix">(</mo><mn>0</mn><mo>,</mo><mn>1</mn><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">N(0, 1)</annotation></semantics></math>,
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>N</mi><mo stretchy="false" form="prefix">(</mo><mn>0</mn><mo>,</mo><mn>1</mn><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">N(0, 1)</annotation></semantics></math>,
 and then set
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>ν</mi><mn>1</mn></msub><mo>=</mo><mn>2</mn><msub><mi>δ</mi><mn>1</mn></msub></mrow><annotation encoding="application/x-tex">\nu_1 = 2 \delta_1</annotation></semantics></math>
 and
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>ν</mi><mn>2</mn></msub><mo>=</mo><mo>−</mo><mn>0.5</mn><msub><mi>ν</mi><mn>1</mn></msub><mo>+</mo><msub><mi>δ</mi><mn>2</mn></msub></mrow><annotation encoding="application/x-tex">\nu_2 = -0.5 \nu_1 + \delta_2</annotation></semantics></math>.</p>
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>ν</mi><mn>2</mn></msub><mo>=</mo><mi>−</mi><mn>0.5</mn><msub><mi>ν</mi><mn>1</mn></msub><mo>+</mo><msub><mi>δ</mi><mn>2</mn></msub></mrow><annotation encoding="application/x-tex">\nu_2 = -0.5 \nu_1 + \delta_2</annotation></semantics></math>.</p>
 <p>The structural equations are estimated as follows by the
 <code><a href="../reference/ivreg.html">ivreg()</a></code> function <span class="citation">(compare Kmenta
 1986, 686)</span>:</p>
@@ -713,7 +713,7 @@ cases:</p>
 <span><span class="co">## 5 -0.4505155 0.46498004 0.05257374</span></span></code></pre>
 <p>The circles in the influence plot have areas proportional to Cook’s
 D, the horizontal lines are drawn at 0 and
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>±</mo><mn>2</mn></mrow><annotation encoding="application/x-tex">\pm 2</annotation></semantics></math>
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>±</mi><mn>2</mn></mrow><annotation encoding="application/x-tex">\pm 2</annotation></semantics></math>
 on the studentized residuals scale (the horizontal line at
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mrow><mi mathvariant="normal">r</mi><mi mathvariant="normal">s</mi><mi mathvariant="normal">t</mi><mi mathvariant="normal">u</mi><mi mathvariant="normal">d</mi><mi mathvariant="normal">e</mi><mi mathvariant="normal">n</mi><mi mathvariant="normal">t</mi></mrow><mo>=</mo><mn>2</mn></mrow><annotation encoding="application/x-tex">\mathrm{rstudent} = 2</annotation></semantics></math>
 is off the graph), and the vertical lines are at
@@ -846,19 +846,19 @@ to
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>x</mi><mn>1</mn></msub><annotation encoding="application/x-tex">x_1</annotation></semantics></math>
 is potentially nonlinear, as represented by the partial regression
 function
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>f</mi><mrow><mo stretchy="true" form="prefix">(</mo><msub><mi>x</mi><mn>1</mn></msub><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">f(x_1)</annotation></semantics></math>,
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>f</mi><mo stretchy="false" form="prefix">(</mo><msub><mi>x</mi><mn>1</mn></msub><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">f(x_1)</annotation></semantics></math>,
 and that the partial relationships of
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>y</mi><annotation encoding="application/x-tex">y</annotation></semantics></math>
 to the other
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>x</mi><annotation encoding="application/x-tex">x</annotation></semantics></math>s
 are linear, so that an accurate model for the data is:
-<math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>E</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>y</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><mi>α</mi><mo>+</mo><mi>f</mi><mrow><mo stretchy="true" form="prefix">(</mo><msub><mi>x</mi><mn>1</mn></msub><mo stretchy="true" form="postfix">)</mo></mrow><mo>+</mo><msub><mi>β</mi><mn>2</mn></msub><msub><mi>x</mi><mn>2</mn></msub><mo>+</mo><mi>⋯</mi><mo>+</mo><msub><mi>β</mi><mi>k</mi></msub><msub><mi>x</mi><mi>k</mi></msub></mrow><annotation encoding="application/x-tex">
+<math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>E</mi><mo stretchy="false" form="prefix">(</mo><mi>y</mi><mo stretchy="false" form="postfix">)</mo><mo>=</mo><mi>α</mi><mo>+</mo><mi>f</mi><mo stretchy="false" form="prefix">(</mo><msub><mi>x</mi><mn>1</mn></msub><mo stretchy="false" form="postfix">)</mo><mo>+</mo><msub><mi>β</mi><mn>2</mn></msub><msub><mi>x</mi><mn>2</mn></msub><mo>+</mo><mi>⋯</mi><mo>+</mo><msub><mi>β</mi><mi>k</mi></msub><msub><mi>x</mi><mi>k</mi></msub></mrow><annotation encoding="application/x-tex">
 E(y) = \alpha + f(x_1) + \beta_2 x_2 + \cdots + \beta_k x_k 
 </annotation></semantics></math></p>
 <p>We don’t know
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>f</mi><mrow><mo stretchy="true" form="prefix">(</mo><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">f()</annotation></semantics></math>
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>f</mi><mo stretchy="false" form="prefix">(</mo><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">f()</annotation></semantics></math>
 and so instead fit the <em>working model</em>
-<math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>E</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>y</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><msup><mi>α</mi><mi>′</mi></msup><mo>+</mo><msubsup><mi>β</mi><mn>1</mn><mi>′</mi></msubsup><msub><mi>x</mi><mn>1</mn></msub><mo>+</mo><msubsup><mi>β</mi><mn>2</mn><mi>′</mi></msubsup><msub><mi>x</mi><mn>2</mn></msub><mo>+</mo><mi>⋯</mi><mo>+</mo><msubsup><mi>β</mi><mi>k</mi><mi>′</mi></msubsup><msub><mi>x</mi><mi>k</mi></msub></mrow><annotation encoding="application/x-tex">
+<math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>E</mi><mo stretchy="false" form="prefix">(</mo><mi>y</mi><mo stretchy="false" form="postfix">)</mo><mo>=</mo><msup><mi>α</mi><mi>′</mi></msup><mo>+</mo><msubsup><mi>β</mi><mn>1</mn><mi>′</mi></msubsup><msub><mi>x</mi><mn>1</mn></msub><mo>+</mo><msubsup><mi>β</mi><mn>2</mn><mi>′</mi></msubsup><msub><mi>x</mi><mn>2</mn></msub><mo>+</mo><mi>⋯</mi><mo>+</mo><msubsup><mi>β</mi><mi>k</mi><mi>′</mi></msubsup><msub><mi>x</mi><mi>k</mi></msub></mrow><annotation encoding="application/x-tex">
 E(y) = \alpha^\prime + \beta_1^\prime x_1 + \beta_2^\prime x_2 + \cdots + \beta_k^\prime x_k 
 </annotation></semantics></math> in our case by 2SLS regression,
 obtaining estimated regression coefficients
@@ -871,12 +871,12 @@ are linearly related, the partial residuals
 can be plotted and smoothed against
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>x</mi><mn>1</mn></msub><annotation encoding="application/x-tex">x_1</annotation></semantics></math>
 to visualize an estimate of
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>f</mi><mrow><mo stretchy="true" form="prefix">(</mo><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">f()</annotation></semantics></math>,
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>f</mi><mo stretchy="false" form="prefix">(</mo><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">f()</annotation></semantics></math>,
 where
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>e</mi><mo>=</mo><mi>y</mi><mo>−</mo><mrow><mo stretchy="true" form="prefix">(</mo><msup><mi>a</mi><mi>′</mi></msup><mo>+</mo><msubsup><mi>b</mi><mn>1</mn><mi>′</mi></msubsup><msub><mi>x</mi><mn>1</mn></msub><mo>+</mo><msubsup><mi>b</mi><mn>2</mn><mi>′</mi></msubsup><msub><mi>x</mi><mn>2</mn></msub><mo>+</mo><mi>⋯</mi><msubsup><mi>b</mi><mi>k</mi><mi>′</mi></msubsup><msub><mi>x</mi><mi>k</mi></msub><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">e = y - (a^\prime + b_1^\prime x_1 + b_2^\prime x_2 + \cdots b_k^\prime x_k)</annotation></semantics></math>
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>e</mi><mo>=</mo><mi>y</mi><mo>−</mo><mo stretchy="false" form="prefix">(</mo><msup><mi>a</mi><mi>′</mi></msup><mo>+</mo><msubsup><mi>b</mi><mn>1</mn><mi>′</mi></msubsup><msub><mi>x</mi><mn>1</mn></msub><mo>+</mo><msubsup><mi>b</mi><mn>2</mn><mi>′</mi></msubsup><msub><mi>x</mi><mn>2</mn></msub><mo>+</mo><mi>⋯</mi><msubsup><mi>b</mi><mi>k</mi><mi>′</mi></msubsup><msub><mi>x</mi><mi>k</mi></msub><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">e = y - (a^\prime + b_1^\prime x_1 + b_2^\prime x_2 + \cdots b_k^\prime x_k)</annotation></semantics></math>
 are the response residuals. In practice, the component-plus-residual
 plot can break down as an accurate representation of
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>f</mi><mrow><mo stretchy="true" form="prefix">(</mo><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">f()</annotation></semantics></math>
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>f</mi><mo stretchy="false" form="prefix">(</mo><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">f()</annotation></semantics></math>
 if there are strong nonlinear relationships between
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>x</mi><mn>1</mn></msub><annotation encoding="application/x-tex">x_1</annotation></semantics></math>
 and the other
@@ -905,8 +905,8 @@ regression equation. For example,</p>
 <div class="sourceCode" id="cb33"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/car/man/crPlots.html" class="external-link">crPlots</a></span><span class="op">(</span><span class="va">deq</span>, smooth<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>span<span class="op">=</span><span class="fl">1</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <p><img src="Diagnostics-for-2SLS-Regression_files/figure-html/unnamed-chunk-17-1.png" class="r-plt" alt="" width="768"></p>
-<p>We set a large <em>span</em> for the <em>loess smoother</em> <span class="citation">(Cleveland, Grosse, and Shyu 1992)</span> in the plot
-because there are only
+<p>We set a large <em>span</em> for the <em>loess smoother</em> <span class="citation">(Cleveland et al. 1992)</span> in the plot because
+there are only
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mo>=</mo><mn>20</mn></mrow><annotation encoding="application/x-tex">n = 20</annotation></semantics></math>
 cases in the <code>Kmenta</code> data set. The default value of the span
 is
@@ -939,9 +939,12 @@ get essentially the same graphs as before, except for the scaling of the
 axis:</p>
 <div class="sourceCode" id="cb35"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="st"><a href="https://cran.r-project.org/package=effects" class="external-link">"effects"</a></span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">## Registered S3 method overwritten by 'lme4':</span></span>
+<span><span class="co">##   method           from</span></span>
+<span><span class="co">##   na.action.merMod car</span></span></code></pre>
 <pre><code><span><span class="co">## lattice theme set by effectsTheme()</span></span>
 <span><span class="co">## See ?effectsTheme for details.</span></span></code></pre>
-<div class="sourceCode" id="cb37"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb38"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/effects/man/predictorEffects.html" class="external-link">predictorEffects</a></span><span class="op">(</span><span class="va">deq</span>, residuals<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span>, </span>
 <span>     partial.residuals<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>span<span class="op">=</span><span class="fl">1</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <p><img src="Diagnostics-for-2SLS-Regression_files/figure-html/unnamed-chunk-19-1.png" class="r-plt" alt="" width="768"></p>
@@ -949,14 +952,14 @@ axis:</p>
 pointwise 95% confidence envelopes around the fitted partial-regression
 lines.</p>
 <p>Suppose, however, that we fit the wrong model to the data:</p>
-<div class="sourceCode" id="cb38"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb39"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">deq2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/update.html" class="external-link">update</a></span><span class="op">(</span><span class="va">deq</span>, <span class="va">.</span> <span class="op">~</span> <span class="fu"><a href="https://rdrr.io/r/base/AsIs.html" class="external-link">I</a></span><span class="op">(</span><span class="op">(</span><span class="va">P</span> <span class="op">-</span> <span class="fl">85</span><span class="op">)</span><span class="op">^</span><span class="fl">4</span><span class="op">/</span><span class="fl">10</span><span class="op">^</span><span class="fl">5</span><span class="op">)</span> <span class="op">+</span> <span class="va">D</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/pkg/car/man/crPlots.html" class="external-link">crPlots</a></span><span class="op">(</span><span class="va">deq2</span>, smooth<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>span<span class="op">=</span><span class="fl">1</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <p><img src="Diagnostics-for-2SLS-Regression_files/figure-html/unnamed-chunk-20-1.png" class="r-plt" alt="" width="768"></p>
 <p>Because the ratio
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>max</mo><mrow><mo stretchy="true" form="prefix">(</mo><mi>P</mi><mo stretchy="true" form="postfix">)</mo></mrow><mi>/</mi><mo>min</mo><mrow><mo stretchy="true" form="prefix">(</mo><mi>P</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><mn>113.49</mn><mi>/</mi><mn>86.50</mn><mo>=</mo><mn>1.3</mn></mrow><annotation encoding="application/x-tex">\max(P)/\min(P) = 113.49/86.50 = 1.3</annotation></semantics></math>
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mrow><mi mathvariant="normal">max</mi><mo>⁡</mo></mrow><mo stretchy="false" form="prefix">(</mo><mi>P</mi><mo stretchy="false" form="postfix">)</mo><mi>/</mi><mrow><mi mathvariant="normal">min</mi><mo>⁡</mo></mrow><mo stretchy="false" form="prefix">(</mo><mi>P</mi><mo stretchy="false" form="postfix">)</mo><mo>=</mo><mn>113.49</mn><mi>/</mi><mn>86.50</mn><mo>=</mo><mn>1.3</mn></mrow><annotation encoding="application/x-tex">\max(P)/\min(P) = 113.49/86.50 = 1.3</annotation></semantics></math>
 is not much larger than 1, we subtracted a number slightly smaller than
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>min</mo><mrow><mo stretchy="true" form="prefix">(</mo><mi>P</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\min(P)</annotation></semantics></math>
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mrow><mi mathvariant="normal">min</mi><mo>⁡</mo></mrow><mo stretchy="false" form="prefix">(</mo><mi>P</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">\min(P)</annotation></semantics></math>
 from
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>P</mi><annotation encoding="application/x-tex">P</annotation></semantics></math>
 prior to raising the variable to the 4th power to induce substantial
@@ -971,7 +974,7 @@ of the same situation by placing <code>P</code> rather than the
 transformed <code>P</code> on the horizontal axis, and revealing that
 the fitted nonlinear partial regression function fails to capture the
 linear pattern of the data:</p>
-<div class="sourceCode" id="cb39"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb40"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/effects/man/predictorEffects.html" class="external-link">predictorEffects</a></span><span class="op">(</span><span class="va">deq2</span>, residuals<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span>, </span>
 <span>     partial.residuals<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>span<span class="op">=</span><span class="fl">1</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <p><img src="Diagnostics-for-2SLS-Regression_files/figure-html/unnamed-chunk-21-1.png" class="r-plt" alt="" width="768"></p>
@@ -989,7 +992,7 @@ example, plot studentized residuals versus fitted values to discern a
 tendency for the variability of the former to change (typically to
 increase) with the level of the latter. For the demand equation in
 Kmenta’s model,</p>
-<div class="sourceCode" id="cb40"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb41"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/fitted.values.html" class="external-link">fitted</a></span><span class="op">(</span><span class="va">deq</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/stats/influence.measures.html" class="external-link">rstudent</a></span><span class="op">(</span><span class="va">deq</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/abline.html" class="external-link">abline</a></span><span class="op">(</span>h<span class="op">=</span><span class="fl">0</span><span class="op">)</span></span></code></pre></div>
 <p><img src="Diagnostics-for-2SLS-Regression_files/figure-html/unnamed-chunk-22-1.png" class="r-plt" alt="" width="384"></p>
@@ -1009,34 +1012,34 @@ and roots, with, for example,
 representing the square-root transformation,
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>λ</mi><mo>=</mo><mn>1</mn><mo>−</mo><mi>b</mi><mo>=</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">\lambda = 1 - b = 0</annotation></semantics></math>
 the log transformation, and so on. For Kmenta’s model, we have</p>
-<div class="sourceCode" id="cb41"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb42"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/car/man/spreadLevelPlot.html" class="external-link">spreadLevelPlot</a></span><span class="op">(</span><span class="va">deq</span>, smooth<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>span<span class="op">=</span><span class="fl">1</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <p><img src="Diagnostics-for-2SLS-Regression_files/figure-html/unnamed-chunk-23-1.png" class="r-plt" alt="" width="384"></p>
 <pre><code><span><span class="co">## </span></span>
 <span><span class="co">## Suggested power transformation:  -2.44685</span></span></code></pre>
 <p>which suggests a slight tendency of spread to increase with level.
 The transformation
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>λ</mi><mo>=</mo><mo>−</mo><mn>2.45</mn></mrow><annotation encoding="application/x-tex">\lambda = - 2.45</annotation></semantics></math>
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>λ</mi><mo>=</mo><mi>−</mi><mn>2.45</mn></mrow><annotation encoding="application/x-tex">\lambda = - 2.45</annotation></semantics></math>
 seems strong, until we notice that the values of
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>Q</mi><annotation encoding="application/x-tex">Q</annotation></semantics></math>
 are far from 0, and that the ratio of the largest to smallest values
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>Q</mi><mrow><mi mathvariant="normal">m</mi><mi mathvariant="normal">a</mi><mi mathvariant="normal">x</mi></mrow></msub><mi>/</mi><msub><mi>Q</mi><mrow><mi mathvariant="normal">m</mi><mi mathvariant="normal">i</mi><mi mathvariant="normal">n</mi></mrow></msub><mo>=</mo><mn>106.23</mn><mi>/</mi><mn>92.42</mn><mo>=</mo><mn>1.15</mn></mrow><annotation encoding="application/x-tex">Q_{\mathrm{max}}/Q_{\mathrm{min}} = 106.23/92.42 = 1.15</annotation></semantics></math>
 is close to 1, so that
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msup><mi>Q</mi><mrow><mo>−</mo><mn>2.45</mn></mrow></msup><annotation encoding="application/x-tex">Q^{-2.45}</annotation></semantics></math>
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msup><mi>Q</mi><mrow><mi>−</mi><mn>2.45</mn></mrow></msup><annotation encoding="application/x-tex">Q^{-2.45}</annotation></semantics></math>
 is nearly a linear transformation of
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>Q</mi><annotation encoding="application/x-tex">Q</annotation></semantics></math>—that
 is, effectively no transformation at all:</p>
-<div class="sourceCode" id="cb43"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb44"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/with.html" class="external-link">with</a></span><span class="op">(</span><span class="va">Kmenta</span>, <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">Q</span>, <span class="va">Q</span><span class="op">^</span><span class="op">-</span><span class="fl">2.5</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/abline.html" class="external-link">abline</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/lm.html" class="external-link">lm</a></span><span class="op">(</span><span class="va">Q</span><span class="op">^</span><span class="op">-</span><span class="fl">2.5</span> <span class="op">~</span> <span class="va">Q</span>, data<span class="op">=</span><span class="va">Kmenta</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <p><img src="Diagnostics-for-2SLS-Regression_files/figure-html/unnamed-chunk-24-1.png" class="r-plt" alt="" width="384"></p>
 <p>A common score test for nonconstant error variance in least-squares
 regression, suggested by <span class="citation">Breusch and Pagan
 (1979)</span>, is based on the model
-<math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>V</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>ε</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><mi>g</mi><mrow><mo stretchy="true" form="prefix">(</mo><msub><mi>γ</mi><mn>0</mn></msub><mo>+</mo><msub><mi>γ</mi><mn>1</mn></msub><msub><mi>z</mi><mn>1</mn></msub><mo>+</mo><mi>⋯</mi><mo>+</mo><msub><mi>γ</mi><mi>s</mi></msub><msub><mi>z</mi><mi>s</mi></msub><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">
+<math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>V</mi><mo stretchy="false" form="prefix">(</mo><mi>ε</mi><mo stretchy="false" form="postfix">)</mo><mo>=</mo><mi>g</mi><mo stretchy="false" form="prefix">(</mo><msub><mi>γ</mi><mn>0</mn></msub><mo>+</mo><msub><mi>γ</mi><mn>1</mn></msub><msub><mi>z</mi><mn>1</mn></msub><mo>+</mo><mi>⋯</mi><mo>+</mo><msub><mi>γ</mi><mi>s</mi></msub><msub><mi>z</mi><mi>s</mi></msub><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">
 V(\varepsilon) = g(\gamma_0 + \gamma_1 z_1 + \cdots + \gamma_s z_s) 
 </annotation></semantics></math> where the function
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>g</mi><mrow><mo stretchy="true" form="prefix">(</mo><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">g()</annotation></semantics></math>
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>g</mi><mo stretchy="false" form="prefix">(</mo><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">g()</annotation></semantics></math>
 is unspecified and the variables
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>z</mi><mn>1</mn></msub><mo>,</mo><mi>…</mi><mo>,</mo><msub><mi>z</mi><mi>s</mi></msub></mrow><annotation encoding="application/x-tex">z_1, \ldots, z_s</annotation></semantics></math>
 are predictors of the error variance. In the most common application,
@@ -1062,12 +1065,12 @@ under the null hypothesis of constant error variance.</p>
 <p>The Breusch-Pagan/Cook-Weisberg test is easily adaptable to 2SLS
 regression, as implemented by the <code><a href="https://rdrr.io/pkg/car/man/ncvTest.html" class="external-link">ncvTest()</a></code> function in the
 <strong>car</strong> package. For Kmenta’s demand equation:</p>
-<div class="sourceCode" id="cb44"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb45"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/car/man/ncvTest.html" class="external-link">ncvTest</a></span><span class="op">(</span><span class="va">deq</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## Non-constant Variance Score Test </span></span>
 <span><span class="co">## Variance formula: ~ fitted.values </span></span>
 <span><span class="co">## Chisquare = 0.2390325, Df = 1, p = 0.62491</span></span></code></pre>
-<div class="sourceCode" id="cb46"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb47"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/car/man/ncvTest.html" class="external-link">ncvTest</a></span><span class="op">(</span><span class="va">deq</span>, var <span class="op">=</span> <span class="op">~</span> <span class="va">P</span> <span class="op">+</span> <span class="va">D</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## Non-constant Variance Score Test </span></span>
 <span><span class="co">## Variance formula: ~ P + D </span></span>
@@ -1095,9 +1098,9 @@ next section).</p></li>
 coefficient covariance matrix in 2SLS <span class="citation">(or the
 <em>bootstrap</em>: see, e.g., Davison and Hinkley 1997)</span> to
 correct standard errors for nonconstant error variance, much as in
-least-squares regression as proposed by <span class="citation">P. J.
-Huber (1967)</span> and <span class="citation">White (1980; also see
-Long and Ervin 2000)</span>.</p></li>
+least-squares regression as proposed by <span class="citation">Huber
+(1967)</span> and <span class="citation">White (1980; also see Long and
+Ervin 2000)</span>.</p></li>
 </ul>
 <p>The <strong>ivreg</strong> package supports the
 <code><a href="https://sandwich.R-Forge.R-project.org/reference/sandwich.html" class="external-link">sandwich()</a></code> function in the <strong>sandwich</strong>
@@ -1105,7 +1108,7 @@ package <span class="citation">(Zeileis 2006)</span>. For the Kmenta
 example, where evidence of nonconstant error variance is slight, the
 sandwich standard errors are similar to, indeed slightly smaller than,
 the conventional 2SLS standard errors:</p>
-<div class="sourceCode" id="cb48"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb49"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">deq</span>, vcov<span class="op">=</span><span class="fu">sandwich</span><span class="fu">::</span><span class="va"><a href="https://sandwich.R-Forge.R-project.org/reference/sandwich.html" class="external-link">sandwich</a></span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## </span></span>
 <span><span class="co">## Call:</span></span>
@@ -1132,7 +1135,7 @@ the conventional 2SLS standard errors:</p>
 <span><span class="co">## Residual standard error: 1.966 on 17 degrees of freedom</span></span>
 <span><span class="co">## Multiple R-Squared: 0.7548,  Adjusted R-squared: 0.726 </span></span>
 <span><span class="co">## Wald test: 34.41 on 2 and 17 DF,  p-value: 1.055e-06</span></span></code></pre>
-<div class="sourceCode" id="cb50"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb51"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">SEs</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Round.html" class="external-link">round</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/cbind.html" class="external-link">cbind</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/MathFun.html" class="external-link">sqrt</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/diag.html" class="external-link">diag</a></span><span class="op">(</span><span class="fu">sandwich</span><span class="fu">::</span><span class="fu"><a href="https://sandwich.R-Forge.R-project.org/reference/sandwich.html" class="external-link">sandwich</a></span><span class="op">(</span><span class="va">deq</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>, </span>
 <span>                   <span class="fu"><a href="https://rdrr.io/r/base/MathFun.html" class="external-link">sqrt</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/diag.html" class="external-link">diag</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/vcov.html" class="external-link">vcov</a></span><span class="op">(</span><span class="va">deq</span><span class="op">)</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>, </span>
 <span>             <span class="fl">4</span><span class="op">)</span></span>
@@ -1157,7 +1160,7 @@ and reduced-form errors
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>ν</mi><mn>1</mn></msub><annotation encoding="application/x-tex">\nu_1</annotation></semantics></math>
 and
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>ν</mi><mn>2</mn></msub><annotation encoding="application/x-tex">\nu_2</annotation></semantics></math>:</p>
-<div class="sourceCode" id="cb52"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb53"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">Kmenta2</span> <span class="op">&lt;-</span> <span class="va">Kmenta</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"D"</span>, <span class="st">"F"</span>, <span class="st">"A"</span><span class="op">)</span><span class="op">]</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">492365</span><span class="op">)</span> <span class="co"># for reproducibility</span></span>
 <span><span class="va">Kmenta2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/with.html" class="external-link">within</a></span><span class="op">(</span><span class="va">Kmenta2</span>, <span class="op">{</span></span>
@@ -1174,11 +1177,11 @@ and
 <span><span class="op">}</span><span class="op">)</span></span></code></pre></div>
 <p>Plotting the sampled reduced-form errors <code>v1</code> against the
 expectation of <code>Q</code> shows a clear heteroscedastic pattern:</p>
-<div class="sourceCode" id="cb53"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb54"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/with.html" class="external-link">with</a></span><span class="op">(</span><span class="va">Kmenta2</span>, <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">EQ</span>, <span class="va">v1</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <p><img src="Diagnostics-for-2SLS-Regression_files/figure-html/unnamed-chunk-28-1.png" class="r-plt" alt="" width="384"></p>
 <p>Then refitting the demand equation to the new data set, we get</p>
-<div class="sourceCode" id="cb54"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb55"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">deq2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/update.html" class="external-link">update</a></span><span class="op">(</span><span class="va">deq</span>, data<span class="op">=</span><span class="va">Kmenta2</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">deq2</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## </span></span>
@@ -1208,12 +1211,12 @@ expectation of <code>Q</code> shows a clear heteroscedastic pattern:</p>
 <span><span class="co">## Wald test: 6.695 on 2 and 17 DF,  p-value: 0.007172</span></span></code></pre>
 <p>and the nonconstant error variance is clearly reflected in
 diagnostics; for example,</p>
-<div class="sourceCode" id="cb56"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb57"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/car/man/spreadLevelPlot.html" class="external-link">spreadLevelPlot</a></span><span class="op">(</span><span class="va">deq2</span><span class="op">)</span></span></code></pre></div>
 <p><img src="Diagnostics-for-2SLS-Regression_files/figure-html/unnamed-chunk-30-1.png" class="r-plt" alt="" width="384"></p>
 <pre><code><span><span class="co">## </span></span>
 <span><span class="co">## Suggested power transformation:  -22.57328</span></span></code></pre>
-<div class="sourceCode" id="cb58"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb59"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/car/man/ncvTest.html" class="external-link">ncvTest</a></span><span class="op">(</span><span class="va">deq2</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## Non-constant Variance Score Test </span></span>
 <span><span class="co">## Variance formula: ~ fitted.values </span></span>
@@ -1221,13 +1224,13 @@ diagnostics; for example,</p>
 <p>The extreme value of the suggested power transformation of
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>Q</mi><annotation encoding="application/x-tex">Q</annotation></semantics></math>
 from the spread-level plot,
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>λ</mi><mo>=</mo><mo>−</mo><mn>23</mn></mrow><annotation encoding="application/x-tex">\lambda =-23</annotation></semantics></math>,
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>λ</mi><mo>=</mo><mi>−</mi><mn>23</mn></mrow><annotation encoding="application/x-tex">\lambda =-23</annotation></semantics></math>,
 reflects (as we noted previously) the fact that
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>max</mo><mrow><mo stretchy="true" form="prefix">(</mo><mi>Q</mi><mo stretchy="true" form="postfix">)</mo></mrow><mi>/</mi><mo>min</mo><mrow><mo stretchy="true" form="prefix">(</mo><mi>Q</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\max(Q)/\min(Q)</annotation></semantics></math>
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mrow><mi mathvariant="normal">max</mi><mo>⁡</mo></mrow><mo stretchy="false" form="prefix">(</mo><mi>Q</mi><mo stretchy="false" form="postfix">)</mo><mi>/</mi><mrow><mi mathvariant="normal">min</mi><mo>⁡</mo></mrow><mo stretchy="false" form="prefix">(</mo><mi>Q</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">\max(Q)/\min(Q)</annotation></semantics></math>
 isn’t much larger than 1.</p>
 <p>In our example, the sandwich standard errors are not very different
 from the conventional standard errors:</p>
-<div class="sourceCode" id="cb60"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb61"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">SEs2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Round.html" class="external-link">round</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/cbind.html" class="external-link">cbind</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/MathFun.html" class="external-link">sqrt</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/diag.html" class="external-link">diag</a></span><span class="op">(</span><span class="fu">sandwich</span><span class="fu">::</span><span class="fu"><a href="https://sandwich.R-Forge.R-project.org/reference/sandwich.html" class="external-link">sandwich</a></span><span class="op">(</span><span class="va">deq2</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>, </span>
 <span>                   <span class="fu"><a href="https://rdrr.io/r/base/MathFun.html" class="external-link">sqrt</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/diag.html" class="external-link">diag</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/vcov.html" class="external-link">vcov</a></span><span class="op">(</span><span class="va">deq2</span><span class="op">)</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>, </span>
 <span>             <span class="fl">4</span><span class="op">)</span></span>
@@ -1247,7 +1250,7 @@ the <strong>boot</strong> package <span class="citation">(Davison and
 Hinkley 1997; Canty and Ripley 2020)</span>. By default,
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>R</mi><mo>=</mo><mn>999</mn></mrow><annotation encoding="application/x-tex">R = 999</annotation></semantics></math>
 bootstrap replications are generated. For example:</p>
-<div class="sourceCode" id="cb62"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb63"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">set.seed</span> <span class="op">&lt;-</span> <span class="fl">869255</span> <span class="co"># for reproducibility</span></span>
 <span><span class="va">b.deq2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/car/man/Boot.html" class="external-link">Boot</a></span><span class="op">(</span><span class="va">deq2</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">deq2</span>, vcov.<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/stats/vcov.html" class="external-link">vcov</a></span><span class="op">(</span><span class="va">b.deq2</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
@@ -1287,7 +1290,7 @@ returned by <code><a href="https://rdrr.io/pkg/car/man/Boot.html" class="externa
 (<em>bias-corrected, accelerated</em>) intervals (see the documentation
 for <code>confint.boot()</code> in the <strong>car</strong>
 package):</p>
-<div class="sourceCode" id="cb65"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb66"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/confint.html" class="external-link">confint</a></span><span class="op">(</span><span class="va">b.deq2</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## Bootstrap bca confidence intervals</span></span>
 <span><span class="co">## </span></span>
@@ -1302,13 +1305,13 @@ package):</p>
 <p>Suppose that we modify the regression model
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>y</mi><mo>=</mo><mi>X</mi><mi>β</mi><mo>+</mo><mi>ε</mi></mrow><annotation encoding="application/x-tex">y = X \beta + \varepsilon</annotation></semantics></math>
 so that now
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>ε</mi><mo>∼</mo><msub><mi>N</mi><mi>n</mi></msub><mrow><mo stretchy="true" form="prefix">(</mo><mn>0</mn><mo>,</mo><msup><mi>σ</mi><mn>2</mn></msup><msup><mi>W</mi><mrow><mo>−</mo><mn>1</mn></mrow></msup><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\varepsilon \sim N_n(0, \sigma^2 W^{-1})</annotation></semantics></math>
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>ε</mi><mo>∼</mo><msub><mi>N</mi><mi>n</mi></msub><mo stretchy="false" form="prefix">(</mo><mn>0</mn><mo>,</mo><msup><mi>σ</mi><mn>2</mn></msup><msup><mi>W</mi><mrow><mi>−</mi><mn>1</mn></mrow></msup><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">\varepsilon \sim N_n(0, \sigma^2 W^{-1})</annotation></semantics></math>
 where
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>W</mi><mo>=</mo><mrow><mi mathvariant="normal">d</mi><mi mathvariant="normal">i</mi><mi mathvariant="normal">a</mi><mi mathvariant="normal">g</mi></mrow><mo stretchy="false" form="prefix">{</mo><msub><mi>w</mi><mi>i</mi></msub><mo stretchy="false" form="postfix">}</mo></mrow><annotation encoding="application/x-tex">W = \mathrm{diag}\{w_i\}</annotation></semantics></math>
 is an
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mo>×</mo><mi>n</mi></mrow><annotation encoding="application/x-tex">n \times n</annotation></semantics></math>
 diagonal matrix of known inverse-variance weights; that is
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>V</mi><mrow><mo stretchy="true" form="prefix">(</mo><msub><mi>ε</mi><mi>i</mi></msub><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><msup><mi>σ</mi><mn>2</mn></msup><mi>/</mi><msub><mi>w</mi><mi>i</mi></msub></mrow><annotation encoding="application/x-tex">V(\varepsilon_i) = \sigma^2/w_i</annotation></semantics></math>.
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>V</mi><mo stretchy="false" form="prefix">(</mo><msub><mi>ε</mi><mi>i</mi></msub><mo stretchy="false" form="postfix">)</mo><mo>=</mo><msup><mi>σ</mi><mn>2</mn></msup><mi>/</mi><msub><mi>w</mi><mi>i</mi></msub></mrow><annotation encoding="application/x-tex">V(\varepsilon_i) = \sigma^2/w_i</annotation></semantics></math>.
 As before, some of the columns of
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>X</mi><annotation encoding="application/x-tex">X</annotation></semantics></math>
 may be correlated with the errors
@@ -1317,7 +1320,7 @@ but we have sufficient instrumental variables
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>Z</mi><annotation encoding="application/x-tex">Z</annotation></semantics></math>
 that are independent of the errors.</p>
 <p>Then the <em>weighted 2SLS</em> estimator is
-<math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>b</mi><mrow><mi mathvariant="normal">W</mi><mn mathvariant="normal">2</mn><mi mathvariant="normal">S</mi><mi mathvariant="normal">L</mi><mi mathvariant="normal">S</mi></mrow></msub><mo>=</mo><msup><mrow><mo stretchy="true" form="prefix">[</mo><msup><mi>X</mi><mi>⊤</mi></msup><mi>W</mi><mi>Z</mi><msup><mrow><mo stretchy="true" form="prefix">(</mo><msup><mi>Z</mi><mi>⊤</mi></msup><mi>W</mi><mi>Z</mi><mo stretchy="true" form="postfix">)</mo></mrow><mrow><mo>−</mo><mn>1</mn></mrow></msup><msup><mi>Z</mi><mi>⊤</mi></msup><mi>W</mi><mi>X</mi><mo stretchy="true" form="postfix">]</mo></mrow><mrow><mo>−</mo><mn>1</mn></mrow></msup><msup><mi>X</mi><mi>⊤</mi></msup><mi>W</mi><mi>Z</mi><msup><mrow><mo stretchy="true" form="prefix">(</mo><msup><mi>Z</mi><mi>⊤</mi></msup><mi>W</mi><mi>Z</mi><mo stretchy="true" form="postfix">)</mo></mrow><mrow><mo>−</mo><mn>1</mn></mrow></msup><msup><mi>Z</mi><mi>⊤</mi></msup><mi>W</mi><mi>y</mi></mrow><annotation encoding="application/x-tex">
+<math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>b</mi><mrow><mi mathvariant="normal">W</mi><mn mathvariant="normal">2</mn><mi mathvariant="normal">S</mi><mi mathvariant="normal">L</mi><mi mathvariant="normal">S</mi></mrow></msub><mo>=</mo><mo stretchy="false" form="prefix">[</mo><msup><mi>X</mi><mi>⊤</mi></msup><mi>W</mi><mi>Z</mi><mo stretchy="false" form="prefix">(</mo><msup><mi>Z</mi><mi>⊤</mi></msup><mi>W</mi><mi>Z</mi><msup><mo stretchy="false" form="postfix">)</mo><mrow><mi>−</mi><mn>1</mn></mrow></msup><msup><mi>Z</mi><mi>⊤</mi></msup><mi>W</mi><mi>X</mi><msup><mo stretchy="false" form="postfix">]</mo><mrow><mi>−</mi><mn>1</mn></mrow></msup><msup><mi>X</mi><mi>⊤</mi></msup><mi>W</mi><mi>Z</mi><mo stretchy="false" form="prefix">(</mo><msup><mi>Z</mi><mi>⊤</mi></msup><mi>W</mi><mi>Z</mi><msup><mo stretchy="false" form="postfix">)</mo><mrow><mi>−</mi><mn>1</mn></mrow></msup><msup><mi>Z</mi><mi>⊤</mi></msup><mi>W</mi><mi>y</mi></mrow><annotation encoding="application/x-tex">
 b_{\mathrm{W2SLS}} = [X^\top W Z(Z^\top W Z)^{-1} Z^\top W X]^{-1} X^\top W Z (Z^\top W Z)^{-1} Z^\top W y
 </annotation></semantics></math> Alternatively, we can treat the two
 stages of 2SLS as <em>weighted least squares (WLS)</em> problems, in
@@ -1353,7 +1356,7 @@ variances of the errors in the demand equation are inversely
 proportional to the variable <code>w</code>. This is of course
 artificial knowledge, reflecting the manner in which the data were
 constructed. The weighted 2SLS estimator is therefore computed as</p>
-<div class="sourceCode" id="cb67"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb68"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">deqw</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/update.html" class="external-link">update</a></span><span class="op">(</span><span class="va">deq</span>, data<span class="op">=</span><span class="va">Kmenta2</span>, weights<span class="op">=</span><span class="fl">1</span><span class="op">/</span><span class="va">w</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">deqw</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## </span></span>
@@ -1384,20 +1387,20 @@ constructed. The weighted 2SLS estimator is therefore computed as</p>
 <p>Plotting studentized residuals against fitted values and testing for
 nonconstant error variance don’t indicate a heteroscedasticity problem,
 but there is a relatively large studentized residual of about
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>−</mo><mn>3</mn></mrow><annotation encoding="application/x-tex">-3</annotation></semantics></math>
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>−</mi><mn>3</mn></mrow><annotation encoding="application/x-tex">-3</annotation></semantics></math>
 that stands out somewhat from the other values:</p>
-<div class="sourceCode" id="cb69"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb70"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/car/man/ncvTest.html" class="external-link">ncvTest</a></span><span class="op">(</span><span class="va">deqw</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## Non-constant Variance Score Test </span></span>
 <span><span class="co">## Variance formula: ~ fitted.values </span></span>
 <span><span class="co">## Chisquare = 4.21029, Df = 1, p = 0.040179</span></span></code></pre>
-<div class="sourceCode" id="cb71"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb72"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/fitted.values.html" class="external-link">fitted</a></span><span class="op">(</span><span class="va">deqw</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/stats/influence.measures.html" class="external-link">rstudent</a></span><span class="op">(</span><span class="va">deqw</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <p><img src="Diagnostics-for-2SLS-Regression_files/figure-html/unnamed-chunk-36-1.png" class="r-plt" alt="" width="384"></p>
 <p>A Bonferroni outlier test suggests that the studentized residual
 isn’t unusually large, and once more we’re in the unusual situation of
 knowing that the model is correct.</p>
-<div class="sourceCode" id="cb72"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb73"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/car/man/outlierTest.html" class="external-link">outlierTest</a></span><span class="op">(</span><span class="va">deqw</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## No Studentized residuals with Bonferroni p &lt; 0.05</span></span>
 <span><span class="co">## Largest |rstudent|:</span></span>
@@ -1407,12 +1410,12 @@ knowing that the model is correct.</p>
 <div class="section level2">
 <h2 id="collinearity-diagnostics">Collinearity Diagnostics<a class="anchor" aria-label="anchor" href="#collinearity-diagnostics"></a>
 </h2>
-<p>In addition to unusual-data diagnostics, <span class="citation">Belsley, Kuh, and Welsch (1980)</span> briefly extend
-their approach to collinearity diagnostics to 2SLS regression. We
-believe that this approach, which assimilates collinearity to numerical
-instability, is flawed, in that it takes into account “collinearity with
-the intercept.” That is, regressors with values far from 0 have large
-sums of products with the constant regressor, producing a large standard
+<p>In addition to unusual-data diagnostics, <span class="citation">Belsley et al. (1980)</span> briefly extend their
+approach to collinearity diagnostics to 2SLS regression. We believe that
+this approach, which assimilates collinearity to numerical instability,
+is flawed, in that it takes into account “collinearity with the
+intercept.” That is, regressors with values far from 0 have large sums
+of products with the constant regressor, producing a large standard
 error of the intercept, and simply reflecting the fact that the
 intercept extrapolates the fitted regression surface far beyond the
 range of the data.</p>
@@ -1425,7 +1428,7 @@ employs the estimated covariance matrix of the coefficients, applies in
 general to models with linear predictors, including linear models
 estimated by 2SLS.</p>
 <p>For example, for the demand equation in Kmenta’s model:</p>
-<div class="sourceCode" id="cb74"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb75"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/MathFun.html" class="external-link">sqrt</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/car/man/vif.html" class="external-link">vif</a></span><span class="op">(</span><span class="va">deq</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">##        P        D </span></span>
 <span><span class="co">## 1.231124 1.231124</span></span></code></pre>
@@ -1458,7 +1461,7 @@ reduction in precision of estimation of each coefficient due to
 collinearity, which reduces the conditional variation of a regressor
 relative to its marginal variation. for example, for the demand
 equation:</p>
-<div class="sourceCode" id="cb76"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb77"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/car/man/mcPlots.html" class="external-link">mcPlots</a></span><span class="op">(</span><span class="va">deq</span><span class="op">)</span></span></code></pre></div>
 <p><img src="Diagnostics-for-2SLS-Regression_files/figure-html/unnamed-chunk-39-1.png" class="r-plt" alt="" width="768"></p>
 <p>The blue points in each panel represent the marginal scatterplot and
@@ -1469,7 +1472,7 @@ arrows showing the relationship between the two sets of points.</p>
 <h2 id="robust-two-stage-instrumental-variables-regression">Robust Two-Stage Instrumental-Variables Regression<a class="anchor" aria-label="anchor" href="#robust-two-stage-instrumental-variables-regression"></a>
 </h2>
 <p>The <code><a href="../reference/ivreg.html">ivreg()</a></code> function also implements robust two-stage
-regression with M and MM estimators <span class="citation">(P. Huber and
+regression with M and MM estimators <span class="citation">(Huber and
 Ronchetti 2009)</span> for both stages, via the <code>rlm()</code>
 function in the <strong>MASS</strong> package <span class="citation">(Venables and Ripley 2002)</span>, by specifying,
 respectively, the argument <code>type = "M"</code> or
@@ -1493,16 +1496,16 @@ is multiplied by 1.4826 to provide a properly scaled estimate of
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>σ</mi><annotation encoding="application/x-tex">\sigma</annotation></semantics></math>
 when the error distribution is normal: That is, the MAD estimates the
 0.75 quantile of the error distribution, and
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>1</mn><mi>/</mi><msup><mi>Φ</mi><mrow><mo>−</mo><mn>1</mn></mrow></msup><mrow><mo stretchy="true" form="prefix">(</mo><mn>0.75</mn><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><mn>1.4825</mn></mrow><annotation encoding="application/x-tex">1/\Phi^{-1}(0.75) = 1.4825</annotation></semantics></math>,
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>1</mn><mi>/</mi><msup><mi mathvariant="normal">Φ</mi><mrow><mi>−</mi><mn>1</mn></mrow></msup><mo stretchy="false" form="prefix">(</mo><mn>0.75</mn><mo stretchy="false" form="postfix">)</mo><mo>=</mo><mn>1.4825</mn></mrow><annotation encoding="application/x-tex">1/\Phi^{-1}(0.75) = 1.4825</annotation></semantics></math>,
 where
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mi>Φ</mi><mrow><mo>−</mo><mn>1</mn></mrow></msup><mrow><mo stretchy="true" form="prefix">(</mo><mo>⋅</mo><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\Phi^{-1}(\cdot)</annotation></semantics></math>
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mi mathvariant="normal">Φ</mi><mrow><mi>−</mi><mn>1</mn></mrow></msup><mo stretchy="false" form="prefix">(</mo><mi>⋅</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">\Phi^{-1}(\cdot)</annotation></semantics></math>
 is the quantile function of the standard-normal distribution.</p>
 <p>To illustrate, we apply a two-stage MM regression to the estimation
 of the demand equation in the corrupted Kmenta data, and compare the
 result to the traditional 2SLS estimator applied to the uncorrupted
 data, to the 2SLS estimator applied to the corrupted data, and to the
 2SLS estimator deleting the bad case:</p>
-<div class="sourceCode" id="cb77"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb78"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">deq.mm</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/update.html" class="external-link">update</a></span><span class="op">(</span><span class="va">deq1</span>, method <span class="op">=</span> <span class="st">"MM"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">deq.mm</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## </span></span>
@@ -1530,7 +1533,7 @@ data, to the 2SLS estimator applied to the corrupted data, and to the
 <span><span class="co">## Residual standard error: 2.08 on 17 degrees of freedom</span></span>
 <span><span class="co">## Multiple R-Squared: 0.09864, Adjusted R-squared: -0.007398 </span></span>
 <span><span class="co">## Wald test: 18.59 on 2 and 17 DF,  p-value: 5.262e-05</span></span></code></pre>
-<div class="sourceCode" id="cb79"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb80"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/car/man/compareCoefs.html" class="external-link">compareCoefs</a></span><span class="op">(</span><span class="va">deq</span>, <span class="va">deq1</span>, <span class="va">deq1.20</span>, <span class="va">deq.mm</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## Calls:</span></span>
 <span><span class="co">## 1: ivreg(formula = Q ~ P + D | D + F + A, data = Kmenta)</span></span>
@@ -1553,7 +1556,7 @@ similar to those for the 2SLS estimator applied to the uncorrupted data
 and when the bad case is deleted from the corrupted data.</p>
 <p>It’s instructive to look at the robustness weights for the first- and
 second-stage MM estimators:</p>
-<div class="sourceCode" id="cb81"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb82"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/weights.html" class="external-link">weights</a></span><span class="op">(</span><span class="va">deq.mm</span>, type <span class="op">=</span> <span class="st">"robustness"</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">##              P   stage_2</span></span>
 <span><span class="co">## 1922 0.9744449 0.9843442</span></span>
@@ -1592,7 +1595,7 @@ regressions are iterative.</p>
 <p>Here, for example, is a graph of second-stage hatvalues, studentized
 residuals, and Cook’s distances for the 2SMM estimator applied to the
 corrupted Kmenta data:</p>
-<div class="sourceCode" id="cb83"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb84"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/car/man/influencePlot.html" class="external-link">influencePlot</a></span><span class="op">(</span><span class="va">deq.mm</span><span class="op">)</span></span></code></pre></div>
 <p><img src="Diagnostics-for-2SLS-Regression_files/figure-html/unnamed-chunk-42-1.png" class="r-plt" alt="" width="384"></p>
 <pre><code><span><span class="co">##      StudRes        Hat      CookD</span></span>
@@ -1608,7 +1611,7 @@ is the Cook’s
 for this case, and the “bubble” for 1941 has 0 area (and is therefore
 invisible). The bad case, however, have a very large (negative)
 studentized residual of nearly
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>−</mo><mn>8</mn></mrow><annotation encoding="application/x-tex">-8</annotation></semantics></math>.</p>
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>−</mi><mn>8</mn></mrow><annotation encoding="application/x-tex">-8</annotation></semantics></math>.</p>
 </div>
 <div class="section level2">
 <h2 id="concluding-remarks">Concluding Remarks<a class="anchor" aria-label="anchor" href="#concluding-remarks"></a>
@@ -1625,7 +1628,7 @@ improvements to the model or perhaps corrections to the data.</p>
 <div class="section level2 unnumbered">
 <h2 class="unnumbered" id="references">References<a class="anchor" aria-label="anchor" href="#references"></a>
 </h2>
-<div id="refs" class="references csl-bib-body hanging-indent" entry-spacing="0">
+<div id="refs" class="references csl-bib-body hanging-indent">
 <div id="ref-Basmann1957" class="csl-entry">
 Basmann, R. L. 1957. <span>“A Generalized Classical Method of Linear
 Estimation of Coefficients in a Structural Equation.”</span>
@@ -1634,7 +1637,7 @@ Estimation of Coefficients in a Structural Equation.”</span>
 <div id="ref-BelsleyKuhWelsch1980" class="csl-entry">
 Belsley, D. A., E. Kuh, and R. E. Welsch. 1980. <em>Regression
 Diagnostics: Identifying Influential Data and Sources of
-Collinearity</em>. New York: John Wiley &amp; Sons. <a href="https://doi.org/10.1002/0471725153" class="external-link">https://doi.org/10.1002/0471725153</a>.
+Collinearity</em>. John Wiley &amp; Sons. <a href="https://doi.org/10.1002/0471725153" class="external-link">https://doi.org/10.1002/0471725153</a>.
 </div>
 <div id="ref-BreuschPagan1979" class="csl-entry">
 Breusch, T. S., and A. R. Pagan. 1979. <span>“A Simple Test for
@@ -1648,8 +1651,8 @@ Canty, Angelo, and Brian D. Ripley. 2020. <em>: Bootstrap <span>R</span>
 <div id="ref-ClevelandGrosseShyu1992" class="csl-entry">
 Cleveland, W. S., E. Grosse, and W. M. Shyu. 1992. <span>“Local
 Regression Models.”</span> In <em>Statistical Models in
-<span>S</span></em>, edited by J. M. Chambers and T. J. Hastie, 309–76.
-Pacific Grove <span>CA</span>: Wadsworth &amp; Brooks/Cole.
+<span>S</span></em>, edited by J. M. Chambers and T. J. Hastie.
+Wadsworth &amp; Brooks/Cole.
 </div>
 <div id="ref-Cook1993" class="csl-entry">
 Cook, R. D. 1993. <span>“Exploring Partial Residual Plots.”</span>
@@ -1667,11 +1670,11 @@ Heteroscedasticity in Regression.”</span> <em>Biometrika</em> 70: 1–10.
 </div>
 <div id="ref-DavisonHinkley1997" class="csl-entry">
 Davison, A. C., and D. V. Hinkley. 1997. <em>Bootstrap Methods and Their
-Applications</em>. Cambridge: Cambridge University Press.
+Applications</em>. Cambridge University Press.
 </div>
 <div id="ref-Fox2016" class="csl-entry">
 Fox, J. 2016. <em>Applied Regression Analysis and Generalized Linear
-Models</em>. 3rd ed. Thousand Oaks: Sage.
+Models</em>. 3rd ed. Sage.
 </div>
 <div id="ref-FoxMonette1992" class="csl-entry">
 Fox, J., and G. Monette. 1992. <span>“Generalized Collinearity
@@ -1688,31 +1691,30 @@ Residuals.”</span> <em>Journal of Statistical Software</em> 87 (9):
 1–27. <a href="https://doi.org/10.18637/jss.v087.i09" class="external-link">https://doi.org/10.18637/jss.v087.i09</a>.
 </div>
 <div id="ref-FoxWeisberg2019" class="csl-entry">
-———. 2019. <em>An <span>R</span> Companion to Applied Regression</em>.
-3rd ed. Thousand Oaks: Sage.
+Fox, J., and S. Weisberg. 2019. <em>An <span>R</span> Companion to
+Applied Regression</em>. 3rd ed. Sage.
 </div>
 <div id="ref-Greene2003" class="csl-entry">
-Greene, W. H. 2003. <em>Econometric Analysis</em>. 5th ed. Upper Saddle
-River: Prentice Hall.
+Greene, W. H. 2003. <em>Econometric Analysis</em>. 5th ed. Prentice
+Hall.
 </div>
 <div id="ref-Huber1967" class="csl-entry">
 Huber, P. J. 1967. <span>“The Behavior of Maximum Likelihood Estimation
 Under Nonstandard Conditions.”</span> In <em>Proceedings of the Fifth
 <span>B</span>erkeley Symposium on Mathematical Statistics and
-Probability</em>, edited by L. M. LeCam and J. Neyman. Berkeley:
-University of California Press.
+Probability</em>, edited by L. M. LeCam and J. Neyman. University of
+California Press.
 </div>
 <div id="ref-HuberRonchetti2009" class="csl-entry">
 Huber, P., and E. M. Ronchetti. 2009. <em>Robust Statistics</em>. 2nd
-ed. Hoboken <span>NJ</span>: Wiley.
+ed. Wiley.
 </div>
 <div id="ref-KleiberZeileis2008" class="csl-entry">
 Kleiber, C., and A. Zeileis. 2008. <em>Applied Econometrics with
-<span>R</span></em>. New York: Springer-Verlag.
+<span>R</span></em>. Springer-Verlag.
 </div>
 <div id="ref-Kmenta1986" class="csl-entry">
-Kmenta, J. 1986. <em>Elements of Econometrics</em>. 2nd ed. New York:
-Macmillan.
+Kmenta, J. 1986. <em>Elements of Econometrics</em>. 2nd ed. Macmillan.
 </div>
 <div id="ref-LongErvin2000" class="csl-entry">
 Long, J. S., and L. H. Ervin. 2000. <span>“Using Heteroscedasticity
@@ -1730,20 +1732,18 @@ Pregibon, D. 1981. <span>“Logistic Regression Diagnostics.”</span>
 </div>
 <div id="ref-R" class="csl-entry">
 R Core Team. 2020. <em><span>R</span>: A Language and Environment for
-Statistical Computing</em>. Vienna, Austria: R Foundation for
-Statistical Computing. <a href="https://www.R-project.org/" class="external-link">https://www.R-project.org/</a>.
+Statistical Computing</em>. R Foundation for Statistical Computing. <a href="https://www.R-project.org/" class="external-link">https://www.R-project.org/</a>.
 </div>
 <div id="ref-Theil1971" class="csl-entry">
-Theil, H. 1971. <em>Principles of Econometrics</em>. New York: John
-Wiley &amp; Sons.
+Theil, H. 1971. <em>Principles of Econometrics</em>. John Wiley &amp;
+Sons.
 </div>
 <div id="ref-Tukey1977" class="csl-entry">
-Tukey, J. W. 1977. <em>Exploratory Data Analysis</em>. Reading:
-Addison-Wesley.
+Tukey, J. W. 1977. <em>Exploratory Data Analysis</em>. Addison-Wesley.
 </div>
 <div id="ref-VenablesRipley2002" class="csl-entry">
 Venables, W. N., and B. D. Ripley. 2002. <em>Modern Applied Statistics
-with s</em>. Fourth. New York: Springer. <a href="http://www.stats.ox.ac.uk/pub/MASS4/" class="external-link">http://www.stats.ox.ac.uk/pub/MASS4/</a>.
+with s</em>. Fourth. Springer. <a href="http://www.stats.ox.ac.uk/pub/MASS4/" class="external-link">http://www.stats.ox.ac.uk/pub/MASS4/</a>.
 </div>
 <div id="ref-White1980" class="csl-entry">
 White, H. 1980. <span>“A Heteroskedasticity-Consistent Covariance Matrix
@@ -1774,7 +1774,7 @@ Estimators.”</span> <em>Journal of Statistical Software</em> 16 (9):
 
 <div class="pkgdown">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.0.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.1.</p>
 </div>
 
       </footer>
