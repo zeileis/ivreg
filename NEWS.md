@@ -1,3 +1,8 @@
+# Version 0.6-8
+
+* Updated `structure()` calls to use `names = ...` instead of `.Names = ...` etc.
+
+
 # Version 0.6-7
 
 * New methods for `dffits()` generic in R-devel (to be 4.6.0) for `ivreg` and

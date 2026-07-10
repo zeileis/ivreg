@@ -53,7 +53,7 @@ coef.ivreg <- function(object, component = c("stage2", "stage1"), complete = TRU
   } else {
   ## or: stage 1 with multiple endogenous variables
     cf <- object$coefficients1[, object$endogenous, drop = FALSE]
-    cf <- structure(as.vector(cf), .Names = as.vector(t(outer(colnames(cf), rownames(cf), paste, sep = ":"))))
+    cf <- structure(as.vector(cf), names = as.vector(t(outer(colnames(cf), rownames(cf), paste, sep = ":"))))
   }
   if (!complete) cf <- cf[!is.na(cf)]
   return(cf)
@@ -80,12 +80,12 @@ vcov.ivreg <- function(object, component = c("stage2", "stage1"), complete = TRU
     } else {
       sigma2 <- structure(
         crossprod(object$residuals1[, endo])/object$df.residual1,
-        .Dimnames = rep.int(list(colnames(object$residuals1)[endo]), 2L)
+        dimnames = rep.int(list(colnames(object$residuals1)[endo]), 2L)
       )
       vc <- kronecker(sigma2, ucov, make.dimnames = TRUE)
       ok <- structure(
         rep.int(ok, length(endo)),
-        .Names = as.vector(t(outer(colnames(cf)[endo], rownames(cf), paste, sep = ":"))))
+        names = as.vector(t(outer(colnames(cf)[endo], rownames(cf), paste, sep = ":"))))
     }
   }
   vc <- .vcov.aliased(!ok, vc, complete = complete)
